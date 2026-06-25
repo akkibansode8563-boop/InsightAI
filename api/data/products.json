@@ -1,0 +1,2642 @@
+[
+  {
+    "id": "hp-victus-15-rtx3050",
+    "brand": "HP",
+    "model": "Victus 15 FA1327TX",
+    "category": "laptop",
+    "subcategory": "gaming",
+    "specs": {
+      "processor": "Intel Core i5-13420H",
+      "gpu": "NVIDIA GeForce RTX 3050 6GB GDDR6",
+      "ram": "16GB DDR4 3200MHz",
+      "storage": "512GB NVMe PCIe Gen4 SSD",
+      "display": "15.6-inch FHD IPS 144Hz"
+    },
+    "pricing": {
+      "mrp": 79990,
+      "street_price_approx": 72000
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 1,
+      "categories": ["gaming", "content_creation", "student"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["logitech-m170", "logitech-mk295-combo", "logitech-h390-usb", "apc-bx600c-in", "lg-24mr400"]
+    },
+    "knowledge": {
+      "target_persona": ["gamer", "content_creator", "engineering_student"],
+      "use_cases": ["casual_gaming", "video_editing", "3d_modelling"],
+      "selling_points": [
+        "Dedicated NVIDIA RTX 3050 6GB graphics for smooth gaming & CUDA acceleration",
+        "Fluid 144Hz high-refresh rate display for competitive gameplay",
+        "Excellent price-to-performance ratio in the Pune student market"
+      ],
+      "common_objections": ["price_too_high", "battery_life"],
+      "objection_responses": {
+        "price_too_high": "At ₹72,000 street price, this is the most cost-effective 6GB VRAM gaming laptop in Maharashtra. Others at this price only offer 4GB VRAM.",
+        "battery_life": "Gaming laptops prioritize CPU/GPU performance. For college use, putting it on battery saver gives 4-5 hours of battery life."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "DCC Catalogue + HP Specs"
+    }
+  },
+  {
+    "id": "hp-victus-15-rtx4050",
+    "brand": "HP",
+    "model": "Victus 15 FA1085TX",
+    "category": "laptop",
+    "subcategory": "gaming",
+    "specs": {
+      "processor": "Intel Core i5-13420H",
+      "gpu": "NVIDIA GeForce RTX 4050 6GB GDDR6",
+      "ram": "16GB DDR4 3200MHz",
+      "storage": "512GB NVMe PCIe Gen4 SSD",
+      "display": "15.6-inch FHD IPS 144Hz"
+    },
+    "pricing": {
+      "mrp": 92990,
+      "street_price_approx": 85000
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 1,
+      "categories": ["gaming", "premium_performance"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["logitech-mx-master-3", "logitech-h390-usb", "apc-bx1100c-in", "dell-p2422h"]
+    },
+    "knowledge": {
+      "target_persona": ["hardcore_gamer", "ai_developer", "pro_editor"],
+      "use_cases": ["AAA_gaming", "DLSS_3_supported_games", "machine_learning"],
+      "selling_points": [
+        "RTX 4050 with DLSS 3 frame generation for huge frame rate boosts",
+        "Upgradable RAM & storage slots for long-term usability",
+        "Sleek finish suitable for both office meetings and gaming setups"
+      ],
+      "common_objections": ["price_too_high", "no_ddr5"],
+      "objection_responses": {
+        "price_too_high": "The RTX 4050 is 40% faster than the 3050 and supports DLSS 3, which triples FPS. It's a much more future-proof investment.",
+        "no_ddr5": "DDR4 3200MHz keeps the laptop price affordable while delivering 95% of DDR5's real-world gaming performance."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "DCC Catalogue + HP Specs"
+    }
+  },
+  {
+    "id": "hp-14-intel-i3",
+    "brand": "HP",
+    "model": "HP 14s-dq5113TU",
+    "category": "laptop",
+    "subcategory": "budget",
+    "specs": {
+      "processor": "Intel Core i3-1215U",
+      "gpu": "Intel UHD Graphics",
+      "ram": "8GB DDR4 3200MHz",
+      "storage": "512GB NVMe PCIe SSD",
+      "display": "14-inch FHD IPS micro-edge"
+    },
+    "pricing": {
+      "mrp": 42990,
+      "street_price_approx": 38000
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 1,
+      "categories": ["budget", "office", "student"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["logitech-m170", "logitech-mk295-combo", "apc-bx600c-in"]
+    },
+    "knowledge": {
+      "target_persona": ["school_student", "tally_user", "daily_office_worker"],
+      "use_cases": ["online_classes", "accounting_tally", "web_browsing"],
+      "selling_points": [
+        "Lightweight 14-inch thin design, weighs only 1.4kg",
+        "FHD IPS display reduces eye strain during long hours",
+        "Full-sized keyboard with responsive keys for fast typing"
+      ],
+      "common_objections": ["processor_too_slow", "ram_is_low"],
+      "objection_responses": {
+        "processor_too_slow": "The 12th Gen i3-1215U has 6 cores and is actually faster than older 10th Gen Core i5 processors. It handles office tasks easily.",
+        "ram_is_low": "8GB is plenty for regular office work and online classes. We can also upgrade it to 16GB if your workload increases."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "DCC Catalogue"
+    }
+  },
+  {
+    "id": "hp-elitebook-840-g9",
+    "brand": "HP",
+    "model": "HP EliteBook 840 G9",
+    "category": "laptop",
+    "subcategory": "business",
+    "specs": {
+      "processor": "Intel Core i5-1235U",
+      "gpu": "Intel Iris Xe Graphics",
+      "ram": "16GB DDR5 4800MHz",
+      "storage": "512GB NVMe PCIe Gen4 SSD",
+      "display": "14-inch WUXGA IPS anti-glare"
+    },
+    "pricing": {
+      "mrp": 115000,
+      "street_price_approx": 98000
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 3,
+      "categories": ["enterprise", "premium_performance", "business"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["logitech-mx-master-3", "logitech-h390-usb", "dell-p2422h"]
+    },
+    "knowledge": {
+      "target_persona": ["corporate_executive", "it_manager", "software_developer"],
+      "use_cases": ["enterprise_workloads", "software_development", "client_meetings"],
+      "selling_points": [
+        "Enterprise-grade security with HP Sure Start and HP Wolf Security",
+        "Durable aluminum chassis with military-grade testing",
+        "3-year onsite warranty for absolute business peace of mind"
+      ],
+      "common_objections": ["price_too_high", "no_dedicated_gpu"],
+      "objection_responses": {
+        "price_too_high": "This is an enterprise laptop with a 3-year onsite warranty, military-grade build, and corporate security. It saves IT overhead costs.",
+        "no_dedicated_gpu": "This is designed for business productivity and coding. The Intel Iris Xe graphics are optimized for battery savings and drive dual 4K monitors."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "HP Enterprise Catalog"
+    }
+  },
+  {
+    "id": "dell-inspiron-3530-i5",
+    "brand": "Dell",
+    "model": "Inspiron 15 3530",
+    "category": "laptop",
+    "subcategory": "premium",
+    "specs": {
+      "processor": "Intel Core i5-1335U",
+      "gpu": "Intel Iris Xe Graphics",
+      "ram": "16GB DDR4 3200MHz",
+      "storage": "512GB NVMe SSD",
+      "display": "15.6-inch FHD 120Hz ComfortView"
+    },
+    "pricing": {
+      "mrp": 67990,
+      "street_price_approx": 61500
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 1,
+      "categories": ["office", "student", "home"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["logitech-m170", "logitech-mk295-combo", "lg-24mr400", "apc-bx600c-in"]
+    },
+    "knowledge": {
+      "target_persona": ["college_student", "home_user", "office_executive"],
+      "use_cases": ["coding", "movie_watching", "office_docs"],
+      "selling_points": [
+        "13th Gen Intel Core i5 processor for smooth multitasking",
+        "120Hz refresh rate screen for incredibly smooth scrolling",
+        "Dell ComfortView software reduces blue light emissions"
+      ],
+      "common_objections": ["plastic_body", "battery_size"],
+      "objection_responses": {
+        "plastic_body": "Dell uses high-quality post-consumer recycled plastics, making it environmentally friendly and durable against daily wear.",
+        "battery_size": "With ExpressCharge, you can charge the battery up to 80% in 60 minutes, minimizing time spent plugged into a wall."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "Dell Specs"
+    }
+  },
+  {
+    "id": "dell-vostro-3520-i5",
+    "brand": "Dell",
+    "model": "Vostro 15 3520",
+    "category": "laptop",
+    "subcategory": "business",
+    "specs": {
+      "processor": "Intel Core i5-1235U",
+      "gpu": "Intel UHD Graphics",
+      "ram": "8GB DDR4 3200MHz",
+      "storage": "512GB NVMe SSD",
+      "display": "15.6-inch FHD 120Hz anti-glare"
+    },
+    "pricing": {
+      "mrp": 55990,
+      "street_price_approx": 49000
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 1,
+      "categories": ["business", "office", "budget"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["logitech-m170", "logitech-mk295-combo", "apc-bx600c-in", "dell-e2224h"]
+    },
+    "knowledge": {
+      "target_persona": ["small_business_owner", "accountant", "corporate_employee"],
+      "use_cases": ["tally_erp", "excel_sheets", "business_reporting"],
+      "selling_points": [
+        "Affordable business laptop with TPM 2.0 security chip",
+        "ExpressCharge charges the laptop up to 80% in an hour",
+        "Designed to withstand daily business use with spill-resistant keyboard"
+      ],
+      "common_objections": ["only_8gb_ram", "intel_uhd_graphics"],
+      "objection_responses": {
+        "only_8gb_ram": "This laptop has dual slots. DCC can upgrade the RAM to 16GB at the time of purchase for a nominal charge.",
+        "intel_uhd_graphics": "Intel UHD graphics are more than enough for office software, Tally, accounting, and basic video streaming."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "Dell Business Specs"
+    }
+  },
+  {
+    "id": "dell-latitude-3440",
+    "brand": "Dell",
+    "model": "Latitude 3440",
+    "category": "laptop",
+    "subcategory": "business",
+    "specs": {
+      "processor": "Intel Core i5-1335U",
+      "gpu": "Intel Iris Xe Graphics",
+      "ram": "16GB DDR4 3200MHz",
+      "storage": "512GB NVMe PCIe SSD",
+      "display": "14-inch FHD WVA anti-glare"
+    },
+    "pricing": {
+      "mrp": 82000,
+      "street_price_approx": 72500
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 3,
+      "categories": ["enterprise", "business"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["logitech-mx-master-3", "logitech-h390-usb", "dell-p2422h"]
+    },
+    "knowledge": {
+      "target_persona": ["corporate_employee", "software_engineer", "it_admin"],
+      "use_cases": ["corporate_workflows", "coding", "virtual_meetings"],
+      "selling_points": [
+        "Reliable 3-year onsite ProSupport warranty from Dell",
+        "Compact 14-inch format perfect for frequent travelers",
+        "Intelligent Audio filters out background noise during calls"
+      ],
+      "common_objections": ["screen_is_only_14_inch", "price_is_higher_than_inspiron"],
+      "objection_responses": {
+        "screen_is_only_14_inch": "14-inch is the corporate standard because it's lighter and fits easily on plane/train trays. We can link it to a 24\" monitor for desk use.",
+        "price_is_higher_than_inspiron": "Latitude is Dell's premium enterprise line. It features a stronger motherboard, better thermal design, and 3-year ProSupport warranty."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "Dell Enterprise"
+    }
+  },
+  {
+    "id": "lenovo-ideapad-slim-3-i5",
+    "brand": "Lenovo",
+    "model": "IdeaPad Slim 3 15IRU8",
+    "category": "laptop",
+    "subcategory": "budget",
+    "specs": {
+      "processor": "Intel Core i5-1335U",
+      "gpu": "Intel Integrated Graphics",
+      "ram": "8GB LPDDR5 4800MHz",
+      "storage": "512GB NVMe PCIe SSD",
+      "display": "15.6-inch FHD TN anti-glare"
+    },
+    "pricing": {
+      "mrp": 59990,
+      "street_price_approx": 51000
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 1,
+      "categories": ["budget", "office", "student"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["logitech-m170", "logitech-mk295-combo", "lg-22mp410"]
+    },
+    "knowledge": {
+      "target_persona": ["student", "casual_user", "retail_shop_billing"],
+      "use_cases": ["assignment_writing", "billing", "netflix_streaming"],
+      "selling_points": [
+        "Fast LPDDR5 RAM for lag-free application switching",
+        "Military-grade shockproof durability (MIL-STD-810H)",
+        "Physical webcam privacy shutter for enhanced security"
+      ],
+      "common_objections": ["tn_panel_viewing_angles", "soldered_ram"],
+      "objection_responses": {
+        "tn_panel_viewing_angles": "The TN panel keeps the price affordable while offering excellent response times and battery efficiency. It's perfect for direct-view use.",
+        "soldered_ram": "The RAM runs in dual-channel mode at high speed (4800MHz LPDDR5) which handles standard Windows 11 tasks and multitasking perfectly."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "Lenovo Specs"
+    }
+  },
+  {
+    "id": "lenovo-loq-15-rtx4050",
+    "brand": "Lenovo",
+    "model": "LOQ 15IRH8",
+    "category": "laptop",
+    "subcategory": "gaming",
+    "specs": {
+      "processor": "Intel Core i5-12450H",
+      "gpu": "NVIDIA GeForce RTX 4050 6GB GDDR6",
+      "ram": "16GB DDR5 4800MHz",
+      "storage": "512GB NVMe Gen4 SSD",
+      "display": "15.6-inch FHD IPS 144Hz G-Sync"
+    },
+    "pricing": {
+      "mrp": 95990,
+      "street_price_approx": 83000
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 1,
+      "categories": ["gaming", "content_creation"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["logitech-mx-master-3", "logitech-h390-usb", "apc-bx1100c-in", "lg-24mr400"]
+    },
+    "knowledge": {
+      "target_persona": ["serious_gamer", "video_editor", "engineering_student"],
+      "use_cases": ["AAA_gaming", "4k_video_editing", "cad_rendering"],
+      "selling_points": [
+        "Dual-channel high-speed DDR5 RAM for maximum processing bandwidth",
+        "Lenovo LA1 AI chip dynamically optimizes frame rates on the fly",
+        "Robust dual-fan cooling layout keeps keyboard cool under pressure"
+      ],
+      "common_objections": ["heavy_weight", "bulky_power_brick"],
+      "objection_responses": {
+        "heavy_weight": "This laptop weighs 2.4kg because of its advanced thermal pipes and cooling fans. This prevents thermal throttling and keeps performance high.",
+        "bulky_power_brick": "The 170W adapter supports Super Rapid Charge, which charges the laptop from 0% to 80% in just 30 minutes."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "Lenovo Gaming Catalog"
+    }
+  },
+  {
+    "id": "lenovo-thinkpad-e14-i5",
+    "brand": "Lenovo",
+    "model": "ThinkPad E14 Gen 5",
+    "category": "laptop",
+    "subcategory": "business",
+    "specs": {
+      "processor": "Intel Core i5-1335U",
+      "gpu": "Intel Iris Xe Graphics",
+      "ram": "16GB DDR4 3200MHz",
+      "storage": "512GB NVMe PCIe SSD",
+      "display": "14-inch WUXGA IPS anti-glare"
+    },
+    "pricing": {
+      "mrp": 89000,
+      "street_price_approx": 76000
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 3,
+      "categories": ["enterprise", "business"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["logitech-mx-master-3", "logitech-h390-usb", "dell-p2422h"]
+    },
+    "knowledge": {
+      "target_persona": ["corporate_executive", "programmer", "financial_analyst"],
+      "use_cases": ["software_development", "financial_modelling", "database_queries"],
+      "selling_points": [
+        "Legendary ThinkPad spill-resistant keyboard with Red TrackPoint",
+        "Passed 12 military-grade durability certifications (MIL-STD-810H)",
+        "3-year comprehensive onsite warranty standard in DCC stock"
+      ],
+      "common_objections": ["boring_black_design", "no_card_reader"],
+      "objection_responses": {
+        "boring_black_design": "The classic matte black finish is the global corporate standard. It hides scratches, doesn't reflect light, and looks highly professional.",
+        "no_card_reader": "Most professional data transfer is done over USB-C or cloud storage. We can bundle a cheap multi-port USB hub if you need a card reader."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "Lenovo Enterprise"
+    }
+  },
+  {
+    "id": "acer-aspire-5-i5",
+    "brand": "Acer",
+    "model": "Aspire 5 A515-57",
+    "category": "laptop",
+    "subcategory": "budget",
+    "specs": {
+      "processor": "Intel Core i5-1235U",
+      "gpu": "Intel Integrated Graphics",
+      "ram": "8GB DDR4 3200MHz",
+      "storage": "512GB NVMe PCIe Gen4 SSD",
+      "display": "15.6-inch FHD IPS anti-glare"
+    },
+    "pricing": {
+      "mrp": 54990,
+      "street_price_approx": 46500
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 1,
+      "categories": ["budget", "office", "student"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["logitech-m170", "logitech-mk295-combo", "aoc-22b2h"]
+    },
+    "knowledge": {
+      "target_persona": ["student", "office_clerk", "home_user"],
+      "use_cases": ["general_browsing", "word_excel", "multimedia"],
+      "selling_points": [
+        "FHD IPS screen with wide viewing angles and thin bezels",
+        "Aluminum top cover for a premium metallic feel at a budget price",
+        "Dual exhaust fans and elevated hinge design for cooling"
+      ],
+      "common_objections": ["only_8gb_ram", "average_battery_life"],
+      "objection_responses": {
+        "only_8gb_ram": "This laptop has dual slots and supports expansion up to 32GB RAM. Upgrading is easy and doesn't void the warranty.",
+        "average_battery_life": "It gives 5-6 hours of video playback. Fast charging charges up to 60% in 45 minutes to offset this."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "Acer Specs"
+    }
+  },
+  {
+    "id": "acer-predator-helios-neo-16",
+    "brand": "Acer",
+    "model": "Predator Helios Neo 16",
+    "category": "laptop",
+    "subcategory": "gaming",
+    "specs": {
+      "processor": "Intel Core i7-13700HX",
+      "gpu": "NVIDIA GeForce RTX 4060 8GB GDDR6",
+      "ram": "16GB DDR5 4800MHz",
+      "storage": "1TB NVMe PCIe Gen4 SSD",
+      "display": "16-inch WQXGA IPS 165Hz G-Sync"
+    },
+    "pricing": {
+      "mrp": 139990,
+      "street_price_approx": 122000
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 1,
+      "categories": ["gaming", "premium_performance"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["logitech-mx-master-3", "logitech-h390-usb", "apc-bx1100c-in", "dell-p2422h"]
+    },
+    "knowledge": {
+      "target_persona": ["pro_gamer", "video_producer", "data_scientist"],
+      "use_cases": ["AAA_gaming_ultra", "4k_raw_video_editing", "deep_learning_training"],
+      "selling_points": [
+        "Flagship 16-core Intel HX processor delivers workstation performance",
+        "High-end RTX 4060 8GB GPU handles all games on Ultra at 1440p",
+        "Liquid metal cooling interface for maximum heat dissipation"
+      ],
+      "common_objections": ["very_heavy", "loud_fans"],
+      "objection_responses": {
+        "very_heavy": "At 2.6kg, it is heavy, but the thick chassis allows massive heat sinks that keep the Core i7-13700HX running at full speed without throttling.",
+        "loud_fans": "In Turbo mode, fans run fast to cool the 140W GPU. For normal work, selecting Silent mode makes it whisper-quiet."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "Acer Predator Official"
+    }
+  },
+  {
+    "id": "asus-vivobook-15-i5",
+    "brand": "Asus",
+    "model": "Vivobook 15 X1502ZA",
+    "category": "laptop",
+    "subcategory": "premium",
+    "specs": {
+      "processor": "Intel Core i5-12500H",
+      "gpu": "Intel Iris Xe Graphics",
+      "ram": "16GB DDR4 3200MHz",
+      "storage": "512GB NVMe PCIe SSD",
+      "display": "15.6-inch FHD anti-glare"
+    },
+    "pricing": {
+      "mrp": 64990,
+      "street_price_approx": 56000
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 1,
+      "categories": ["office", "student", "home"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["logitech-m170", "logitech-mk295-combo", "lg-24mr400"]
+    },
+    "knowledge": {
+      "target_persona": ["college_student", "work_from_home_professional"],
+      "use_cases": ["programming", "online_meetings", "excel_data"],
+      "selling_points": [
+        "12th Gen H-series high performance CPU (typically for gaming laptops)",
+        "Pre-installed 16GB dual-channel RAM for heavy multitasking",
+        "Lay-flat 180-degree hinge makes sharing screen easy during discussions"
+      ],
+      "common_objections": ["plastic_build", "no_backlit_keyboard"],
+      "objection_responses": {
+        "plastic_build": "It uses military-grade certified materials and is coated with Asus Antimicrobial Guard to prevent bacteria growth.",
+        "no_backlit_keyboard": "The silver keys have high-contrast black lettering which provides excellent visibility under standard room lighting."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "Asus Catalog"
+    }
+  },
+  {
+    "id": "apple-macbook-air-m3-13",
+    "brand": "Apple",
+    "model": "MacBook Air 13\" M3",
+    "category": "laptop",
+    "subcategory": "premium",
+    "specs": {
+      "processor": "Apple M3 Chip (8-core CPU)",
+      "gpu": "10-core Integrated GPU",
+      "ram": "8GB Unified Memory",
+      "storage": "256GB Superfast SSD",
+      "display": "13.6-inch Liquid Retina Display"
+    },
+    "pricing": {
+      "mrp": 114900,
+      "street_price_approx": 104500
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 1,
+      "categories": ["premium_performance", "business", "student"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["logitech-mx-master-3", "logitech-h390-usb", "dell-p2422h"]
+    },
+    "knowledge": {
+      "target_persona": ["designer", "ios_developer", "premium_buyer"],
+      "use_cases": ["video_editing", "app_development", "presentation_creation"],
+      "selling_points": [
+        "Incredible M3 performance with up to 18 hours of real-world battery life",
+        "Completely silent fanless design, never gets hot or noisy",
+        "Stunning Liquid Retina display with 500 nits brightness"
+      ],
+      "common_objections": ["only_8gb_unified_memory", "expensive_storage_upgrades"],
+      "objection_responses": {
+        "only_8gb_unified_memory": "Apple's unified memory uses high bandwidth and direct CPU access. 8GB unified memory is equivalent to 16GB RAM on Windows.",
+        "expensive_storage_upgrades": "You can connect high-speed external NVMe SSDs via Thunderbolt 4 ports to expand storage cheaply at 10Gbps speeds."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "Apple India Retail"
+    }
+  },
+  {
+    "id": "lenovo-ideapad-slim-3-ryzen5",
+    "brand": "Lenovo",
+    "model": "IdeaPad Slim 3 15AMN8",
+    "category": "laptop",
+    "subcategory": "budget",
+    "specs": {
+      "processor": "AMD Ryzen 5 7520U",
+      "gpu": "AMD Radeon 610M Graphics",
+      "ram": "8GB LPDDR5 5500MHz",
+      "storage": "512GB NVMe PCIe SSD",
+      "display": "15.6-inch FHD IPS anti-glare"
+    },
+    "pricing": {
+      "mrp": 52990,
+      "street_price_approx": 43500
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 1,
+      "categories": ["budget", "office", "student"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["logitech-m170", "logitech-mk295-combo", "lg-22mp410"]
+    },
+    "knowledge": {
+      "target_persona": ["online_tutor", "college_student", "store_billing"],
+      "use_cases": ["zoom_calls", "web_browsing", "tally_billing"],
+      "selling_points": [
+        "Ryzen 5 processor offers class-leading energy efficiency and battery life",
+        "FHD IPS screen with wide angles is much better than TN screens at this price",
+        "Rapid Charge Boost gives 2 hours of use with a 15-minute charge"
+      ],
+      "common_objections": ["ram_not_upgradable", "basic_graphics"],
+      "objection_responses": {
+        "ram_not_upgradable": "The 8GB LPDDR5 runs at a very fast 5500MHz frequency, ensuring Windows 11 operates smoothly without lag.",
+        "basic_graphics": "The Radeon 610M handles 4K video playback and basic design software (Photoshop) with ease, though it's not a gaming GPU."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "Lenovo Specs"
+    }
+  },
+  {
+    "id": "hp-pavilion-s01",
+    "brand": "HP",
+    "model": "Pavilion Slim S01-pF2043in",
+    "category": "desktop",
+    "subcategory": "budget",
+    "specs": {
+      "processor": "Intel Core i3-12100",
+      "gpu": "Intel UHD Graphics 730",
+      "ram": "8GB DDR4 3200MHz",
+      "storage": "512GB NVMe M.2 SSD",
+      "display": "None (Requires external monitor)"
+    },
+    "pricing": {
+      "mrp": 39990,
+      "street_price_approx": 33500
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 1,
+      "categories": ["budget", "office"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["dell-e2224h", "lg-22mp410", "logitech-mk295-combo", "apc-bx600c-in"]
+    },
+    "knowledge": {
+      "target_persona": ["billing_counter", "accountant", "school_lab"],
+      "use_cases": ["tally_accounting", "retail_billing", "school_computer_class"],
+      "selling_points": [
+        "Ultra-slim space-saving design, fits anywhere on billing counters",
+        "Desktop-grade 12th Gen Intel Core i3 is much faster than laptop CPUs",
+        "DCC bundles keyboard and mouse in the box for ready-to-run use"
+      ],
+      "common_objections": ["no_monitor_included", "limited_expansion_ports"],
+      "objection_responses": {
+        "no_monitor_included": "This lets you choose the exact monitor size you need (e.g. 21.5\" Dell for ₹6,500), keeping total package under ₹40,000.",
+        "limited_expansion_ports": "It has 4 front-facing USB ports, 4 rear ports, HDMI, VGA, and Ethernet, which is ample for retail billing setups."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "HP Desktop Docs"
+    }
+  },
+  {
+    "id": "dell-vostro-3030-mt",
+    "brand": "Dell",
+    "model": "Vostro 3030 Tower",
+    "category": "desktop",
+    "subcategory": "business",
+    "specs": {
+      "processor": "Intel Core i5-14400",
+      "gpu": "Intel Graphics 730",
+      "ram": "16GB DDR5 4800MHz",
+      "storage": "512GB NVMe SSD + 1TB HDD",
+      "display": "None (Tower Only)"
+    },
+    "pricing": {
+      "mrp": 69990,
+      "street_price_approx": 59000
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 3,
+      "categories": ["business", "enterprise", "premium_performance"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["dell-p2422h", "logitech-mk295-combo", "apc-bx600c-in", "wd-sn580-1tb"]
+    },
+    "knowledge": {
+      "target_persona": ["corporate_office_user", "data_entry_clerk", "it_head"],
+      "use_cases": ["heavy_excel_macros", "office_networking", "crm_management"],
+      "selling_points": [
+        "14th Gen 10-core Intel Core i5 processor for top-tier desktop speed",
+        "Dual drive storage: 512GB SSD for Windows speed + 1TB HDD for archiving",
+        "3-year Dell onsite business warranty guarantees business continuity"
+      ],
+      "common_objections": ["no_dedicated_graphics", "price_seems_high"],
+      "objection_responses": {
+        "no_dedicated_graphics": "The integrated Intel graphics easily power two FHD monitors. A dedicated GPU slot is available if you need to add one later.",
+        "price_seems_high": "Vostro Tower features a commercial-grade motherboard, dual-drive storage, DDR5 RAM, and a full 3-year onsite support warranty."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "Dell Tower Catalog"
+    }
+  },
+  {
+    "id": "lenovo-ideacentre-3",
+    "brand": "Lenovo",
+    "model": "IdeaCentre 3 07IRH8",
+    "category": "desktop",
+    "subcategory": "budget",
+    "specs": {
+      "processor": "Intel Core i3-13100",
+      "gpu": "Intel Integrated Graphics",
+      "ram": "8GB DDR4 3200MHz",
+      "storage": "512GB NVMe SSD",
+      "display": "None (Tower Only)"
+    },
+    "pricing": {
+      "mrp": 38990,
+      "street_price_approx": 31000
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 1,
+      "categories": ["budget", "office", "student"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["lg-22mp410", "logitech-mk295-combo", "apc-bx600c-in"]
+    },
+    "knowledge": {
+      "target_persona": ["school_student", "tally_billing_user", "home_office"],
+      "use_cases": ["homework", "tally_billing", "casual_browsing"],
+      "selling_points": [
+        "Compact 7L cabinet occupies minimal desk space",
+        "13th Gen Intel Core i3 quad-core processor handles all daily software",
+        "Front-facing ports include USB-C for quick mobile phone transfers"
+      ],
+      "common_objections": ["basic_keyboard_mouse", "no_optical_drive"],
+      "objection_responses": {
+        "basic_keyboard_mouse": "The boxed keyboard and mouse are durable. We can upgrade them to a wireless Logitech bundle for just ₹1,200.",
+        "no_optical_drive": "Most modern software and backups are downloaded online or run off pen drives. USB DVD writers can be connected if needed."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "Lenovo Specs"
+    }
+  },
+  {
+    "id": "acer-veriton-m200",
+    "brand": "Acer",
+    "model": "Veriton M200 H610",
+    "category": "desktop",
+    "subcategory": "budget",
+    "specs": {
+      "processor": "Intel Core i3-12100",
+      "gpu": "Intel UHD Graphics",
+      "ram": "8GB DDR4 3200MHz",
+      "storage": "256GB M.2 SSD + 1TB HDD",
+      "display": "None (Tower Only)"
+    },
+    "pricing": {
+      "mrp": 35990,
+      "street_price_approx": 29500
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 3,
+      "categories": ["budget", "office", "education"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["aoc-22b2h", "logitech-mk295-combo", "artis-600va"]
+    },
+    "knowledge": {
+      "target_persona": ["government_department", "school_lab", "small_shop_billing"],
+      "use_cases": ["office_administration", "school_computer_lab", "billing"],
+      "selling_points": [
+        "Highly durable commercial PC built for continuous 24/7 operations",
+        "Includes a 3-year commercial warranty, highly popular in government tenders",
+        "Dual-drive hybrid storage offers both boot speed and bulk archiving"
+      ],
+      "common_objections": ["only_256gb_ssd", "no_built_in_wifi"],
+      "objection_responses": {
+        "only_256gb_ssd": "The 256GB SSD runs the Windows OS and billing software instantly, while the 1TB HDD stores massive amounts of data.",
+        "no_built_in_wifi": "This tower connects via Gigabit Ethernet. We can bundle a TP-Link USB Wi-Fi receiver for just ₹450 if you need Wi-Fi."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "Acer Veriton Datasheet"
+    }
+  },
+  {
+    "id": "dell-e2224h",
+    "brand": "Dell",
+    "model": "E2224H 21.5\"",
+    "category": "monitor",
+    "subcategory": "budget",
+    "specs": {
+      "processor": "None (Display Only)",
+      "gpu": "None",
+      "ram": "None",
+      "storage": "None",
+      "display": "21.5-inch FHD (1920x1080) VA panel, 60Hz"
+    },
+    "pricing": {
+      "mrp": 9500,
+      "street_price_approx": 6500
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 3,
+      "categories": ["budget", "office", "education"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["hp-pavilion-s01", "dell-vostro-3030-mt", "lenovo-ideacentre-3", "acer-veriton-m200"]
+    },
+    "knowledge": {
+      "target_persona": ["billing_executive", "student", "office_admin"],
+      "use_cases": ["excel_spreadsheets", "data_entry", "cctv_monitoring"],
+      "selling_points": [
+        "Consistent VA contrast panel offers deeper black levels for text readability",
+        "Compact 21.5-inch footprint fits on narrow counters and office cubicles",
+        "3-year Dell advanced exchange warranty ensures zero business downtime"
+      ],
+      "common_objections": ["no_hdmi_cable_in_box", "only_60hz"],
+      "objection_responses": {
+        "no_hdmi_cable_in_box": "Dell bundles a DP-to-DP cable. For PCs with HDMI only, DCC provides a high-quality gold-plated HDMI cable for ₹250.",
+        "only_60hz": "60Hz is the standard refresh rate for office tasks and is perfectly comfortable for spreadsheets, emails, and browsing."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "Dell Monitor Specs"
+    }
+  },
+  {
+    "id": "dell-p2422h",
+    "brand": "Dell",
+    "model": "P2422H 23.8\"",
+    "category": "monitor",
+    "subcategory": "premium",
+    "specs": {
+      "processor": "None (Display Only)",
+      "gpu": "None",
+      "ram": "None",
+      "storage": "None",
+      "display": "23.8-inch FHD (1920x1080) IPS panel, Height-Adjustable, Pivot"
+    },
+    "pricing": {
+      "mrp": 18500,
+      "street_price_approx": 13900
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 3,
+      "categories": ["business", "premium_performance"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["hp-elitebook-840-g9", "dell-latitude-3440", "lenovo-thinkpad-e14-i5", "apple-macbook-air-m3-13"]
+    },
+    "knowledge": {
+      "target_persona": ["software_developer", "graphic_designer", "financial_analyst"],
+      "use_cases": ["coding", "multi_monitor_setup", "ui_design"],
+      "selling_points": [
+        "IPS panel with wide viewing angles and accurate color reproduction",
+        "Fully adjustable stand: height, tilt, swivel, and 90-degree pivot (portrait)",
+        "Ultra-thin bezel design looks premium and is perfect for dual-screen setups"
+      ],
+      "common_objections": ["not_4k_resolution", "price_is_higher"],
+      "objection_responses": {
+        "not_4k_resolution": "At 23.8 inches, Full HD provides a very crisp pixel density. 4K at this size makes text too small to read without heavy scaling.",
+        "price_is_higher": "The price reflects the premium IPS panel, fully adjustable ergonomic stand, USB hub ports, and 3-year replacement warranty."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "Dell Monitor Specs"
+    }
+  },
+  {
+    "id": "lg-22mp410",
+    "brand": "LG",
+    "model": "22MP410-B 21.5\"",
+    "category": "monitor",
+    "subcategory": "budget",
+    "specs": {
+      "processor": "None",
+      "gpu": "None",
+      "ram": "None",
+      "storage": "None",
+      "display": "21.45-inch FHD (1920x1080) VA panel, 75Hz, AMD FreeSync"
+    },
+    "pricing": {
+      "mrp": 8900,
+      "street_price_approx": 5900
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 3,
+      "categories": ["budget", "office"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["hp-pavilion-s01", "lenovo-ideacentre-3", "lenovo-ideapad-slim-3-i5"]
+    },
+    "knowledge": {
+      "target_persona": ["budget_shopper", "shop_owner", "cctv_operator"],
+      "use_cases": ["cctv_monitoring", "tally_billing", "online_learning"],
+      "selling_points": [
+        "Highly affordable Full HD display under ₹6,000",
+        "75Hz refresh rate reduces motion blur compared to standard 60Hz panels",
+        "Anti-glare screen treatment avoids reflections in bright shop environments"
+      ],
+      "common_objections": ["no_displayport", "basic_tilt_stand"],
+      "objection_responses": {
+        "no_displayport": "It features HDMI and VGA ports, which covers 99% of budget desktops and billing terminals.",
+        "basic_tilt_stand": "The stand tilts back and forth. It also supports standard VESA 75x75mm wall mounting for billing desks."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "LG Monitor Specifications"
+    }
+  },
+  {
+    "id": "lg-24mr400",
+    "brand": "LG",
+    "model": "24MR400-B 23.8\"",
+    "category": "monitor",
+    "subcategory": "budget",
+    "specs": {
+      "processor": "None",
+      "gpu": "None",
+      "ram": "None",
+      "storage": "None",
+      "display": "23.8-inch FHD (1920x1080) IPS panel, 100Hz, AMD FreeSync"
+    },
+    "pricing": {
+      "mrp": 12500,
+      "street_price_approx": 8000
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 3,
+      "categories": ["budget", "student", "gaming"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["hp-victus-15-rtx3050", "lenovo-loq-15-rtx4050", "dell-inspiron-3530-i5"]
+    },
+    "knowledge": {
+      "target_persona": ["college_student", "indie_gamer", "remote_worker"],
+      "use_cases": ["casual_gaming", "wfh_setup", "movie_watching"],
+      "selling_points": [
+        "Smooth 100Hz refresh rate reduces visual lag in games and UI scrolling",
+        "IPS panel ensures colors look bright and consistent from any angle",
+        "Flicker Safe and Reader Mode protect your eyes during long sessions"
+      ],
+      "common_objections": ["no_height_adjustment", "no_built_in_speakers"],
+      "objection_responses": {
+        "no_height_adjustment": "The stand tilts. If height is needed, you can use a cheap desktop monitor stand or VESA arm.",
+        "no_built_in_speakers": "Standard monitor speakers are poor. We recommend bundling it with external desktop speakers for best sound."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "LG Monitors"
+    }
+  },
+  {
+    "id": "aoc-22b2h",
+    "brand": "AOC",
+    "model": "22B2H 21.5\"",
+    "category": "monitor",
+    "subcategory": "budget",
+    "specs": {
+      "processor": "None",
+      "gpu": "None",
+      "ram": "None",
+      "storage": "None",
+      "display": "21.5-inch FHD (1920x1080) VA panel, 75Hz, Slim Bezels"
+    },
+    "pricing": {
+      "mrp": 7990,
+      "street_price_approx": 5600
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 3,
+      "categories": ["budget", "office"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["acer-veriton-m200", "hp-pavilion-s01", "lenovo-ideacentre-3"]
+    },
+    "knowledge": {
+      "target_persona": ["retailer", "cost_conscious_buyer", "school_setup"],
+      "use_cases": ["billing_terminal", "general_data_entry", "basic_browsing"],
+      "selling_points": [
+        "Super slim frameless border design looks great on modern desks",
+        "Affordable pricing under ₹5,600 with full 3-year warranty protection",
+        "LowBlue mode filtering software protects eyes from harmful blue light"
+      ],
+      "common_objections": ["external_power_adapter", "no_dp_port"],
+      "objection_responses": {
+        "external_power_adapter": "The external adapter makes the monitor chassis ultra-thin and lightweight, and is cheap to replace if damaged by voltage surges.",
+        "no_dp_port": "The HDMI and VGA inputs provide full compatibility with both older and newer generation desktop PCs."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "AOC Datasheet"
+    }
+  },
+  {
+    "id": "hp-laserjet-tank-2606sdw",
+    "brand": "HP",
+    "model": "LaserJet Tank 2606sdw",
+    "category": "printer",
+    "subcategory": "business",
+    "specs": {
+      "processor": "None",
+      "gpu": "None",
+      "ram": "None",
+      "storage": "None",
+      "display": "Print, Scan, Copy, WiFi, Auto-Duplex Laser Printer"
+    },
+    "pricing": {
+      "mrp": 28990,
+      "street_price_approx": 24200
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 2,
+      "categories": ["business", "office"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["hp-elitebook-840-g9", "dell-latitude-3440", "lenovo-thinkpad-e14-i5"]
+    },
+    "knowledge": {
+      "target_persona": ["chartered_accountant", "school_admin", "small_office_manager"],
+      "use_cases": ["bulk_document_printing", "duplex_invoice_printing", "wireless_scanning"],
+      "selling_points": [
+        "Revolutionary refillable laser toner tank cuts cost-per-page to 29 paise",
+        "Prints up to 5,000 pages right out of the box with included toner",
+        "Automatic two-sided printing saves up to 50% on paper costs"
+      ],
+      "common_objections": ["high_initial_cost", "monochrome_only"],
+      "objection_responses": {
+        "high_initial_cost": "Although expensive upfront, the ultra-low running cost (29p/page) means it pays for itself within 6 months of active office printing.",
+        "monochrome_only": "For offices printing bills, contracts, and reports, color is rarely needed. B&W printing is faster and much cheaper."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "HP Printer Guide"
+    }
+  },
+  {
+    "id": "hp-smart-tank-585",
+    "brand": "HP",
+    "model": "Smart Tank 585 All-in-One",
+    "category": "printer",
+    "subcategory": "budget",
+    "specs": {
+      "processor": "None",
+      "gpu": "None",
+      "ram": "None",
+      "storage": "None",
+      "display": "Color Print, Scan, Copy, WiFi Ink Tank Printer"
+    },
+    "pricing": {
+      "mrp": 16990,
+      "street_price_approx": 13900
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 1,
+      "categories": ["budget", "student", "home"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["hp-14-intel-i3", "dell-inspiron-3530-i5", "lenovo-ideapad-slim-3-i5"]
+    },
+    "knowledge": {
+      "target_persona": ["school_student_parents", "work_from_home_employee", "retailer"],
+      "use_cases": ["school_project_printing", "color_photo_printing", "occasional_scanning"],
+      "selling_points": [
+        "Incredibly cheap color printing: 20 paise black and 40 paise color per page",
+        "Includes ink bottles in the box that print up to 6,000 black pages",
+        "HP Smart App support allows direct printing from Android or iOS mobiles"
+      ],
+      "common_objections": ["ink_heads_dry_out", "slower_than_laser"],
+      "objection_responses": {
+        "ink_heads_dry_out": "HP's smart printhead technology automatically runs minor cleaning cycles to prevent clogging if left plugged into power.",
+        "slower_than_laser": "Laser printers are faster, but the Smart Tank 585 gives you high-quality color photos and charts at a fraction of the cost."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "HP Retail Catalog"
+    }
+  },
+  {
+    "id": "canon-g3010",
+    "brand": "Canon",
+    "model": "Pixma G3010",
+    "category": "printer",
+    "subcategory": "budget",
+    "specs": {
+      "processor": "None",
+      "gpu": "None",
+      "ram": "None",
+      "storage": "None",
+      "display": "Color Print, Scan, Copy, WiFi Ink Tank Printer"
+    },
+    "pricing": {
+      "mrp": 15990,
+      "street_price_approx": 12800
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 1,
+      "categories": ["budget", "student", "home"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["lenovo-ideapad-slim-3-ryzen5", "acer-aspire-5-i5", "dell-vostro-3520-i5"]
+    },
+    "knowledge": {
+      "target_persona": ["family", "small_shop_owner", "photographer"],
+      "use_cases": ["school_assignments", "xerox_copying", "borderless_photo_prints"],
+      "selling_points": [
+        "Built-in integrated ink tanks allow visual monitoring of ink levels",
+        "Supports borderless photo printing up to A4 size with rich photo inks",
+        "Highly reliable feed mechanism rarely jams even with cheaper papers"
+      ],
+      "common_objections": ["setup_is_slightly_complex", "mac_support_is_limited"],
+      "objection_responses": {
+        "setup_is_slightly_complex": "DCC provides a free WhatsApp setup video and Canon offers free technician installation support.",
+        "mac_support_is_limited": "The G3010 is optimized for Windows and Android. For Mac users, we recommend the Canon G3020 instead."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "Canon India Specs"
+    }
+  },
+  {
+    "id": "epson-l3250",
+    "brand": "Epson",
+    "model": "EcoTank L3250",
+    "category": "printer",
+    "subcategory": "budget",
+    "specs": {
+      "processor": "None",
+      "gpu": "None",
+      "ram": "None",
+      "storage": "None",
+      "display": "Print, Scan, Copy, WiFi Ink Tank Printer, Heat-Free Tech"
+    },
+    "pricing": {
+      "mrp": 17999,
+      "street_price_approx": 14500
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 1,
+      "categories": ["budget", "office", "student"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["dell-inspiron-3530-i5", "hp-14-intel-i3", "lenovo-ideapad-slim-3-i5"]
+    },
+    "knowledge": {
+      "target_persona": ["student", "office_admin", "cyber_cafe_owner"],
+      "use_cases": ["project_reports", "color_document_copying", "mobile_wireless_printing"],
+      "selling_points": [
+        "Epson Heat-Free Technology reduces power draw and prints instantly",
+        "Spill-free, error-free ink refilling with unique key-slotted bottles",
+        "Extremely popular model in Pune, meaning cheap spare parts and local service"
+      ],
+      "common_objections": ["no_auto_duplex", "no_lcd_screen"],
+      "objection_responses": {
+        "no_auto_duplex": "Auto duplex is rare under ₹15,000. You can print odd pages, flip, and print even pages via software.",
+        "no_lcd_screen": "Status LEDs indicate alerts. The Epson Smart Panel app on your mobile provides a full visual screen interface."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "Epson India Specs"
+    }
+  },
+  {
+    "id": "epson-l6490",
+    "brand": "Epson",
+    "model": "EcoTank L6490",
+    "category": "printer",
+    "subcategory": "business",
+    "specs": {
+      "processor": "None",
+      "gpu": "None",
+      "ram": "None",
+      "storage": "None",
+      "display": "Duplex Print, Scan, Copy, Fax, WiFi, ADF Ink Tank Business Printer"
+    },
+    "pricing": {
+      "mrp": 38990,
+      "street_price_approx": 32500
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 2,
+      "categories": ["business", "enterprise"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["hp-elitebook-840-g9", "dell-latitude-3440", "lenovo-thinkpad-e14-i5"]
+    },
+    "knowledge": {
+      "target_persona": ["corporate_department", "hospital_reception", "law_firm"],
+      "use_cases": ["bulk_duplex_printing", "multi_page_adf_scanning", "faxing_contracts"],
+      "selling_points": [
+        "Automatic Document Feeder (ADF) handles 35 sheets for fast unattended scanning",
+        "Durabrite ET pigment inks create smudge, fade, and water-resistant prints",
+        "Ultra-fast print speeds up to 17 ipm (images per minute) for black text"
+      ],
+      "common_objections": ["high_price_tag", "complex_lcd_menu"],
+      "objection_responses": {
+        "high_price_tag": "This is a heavy-duty business machine. The cost savings on ink and paper (duplex) make it far cheaper than laser in the long run.",
+        "complex_lcd_menu": "The 2.4-inch color touchscreen makes setting up network WiFi and managing functions very simple."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "Epson Commercial Guide"
+    }
+  },
+  {
+    "id": "brother-dcp-t820dw",
+    "brand": "Brother",
+    "model": "DCP-T820DW",
+    "category": "printer",
+    "subcategory": "business",
+    "specs": {
+      "processor": "None",
+      "gpu": "None",
+      "ram": "None",
+      "storage": "None",
+      "display": "Auto Duplex Print, Scan, Copy, WiFi, ADF, Ink Tank Printer"
+    },
+    "pricing": {
+      "mrp": 24990,
+      "street_price_approx": 20800
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 1,
+      "categories": ["business", "office"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["dell-vostro-3520-i5", "asus-vivobook-15-i5", "lenovo-ideapad-slim-3-i5"]
+    },
+    "knowledge": {
+      "target_persona": ["small_office_owner", "coaching_class_teacher", "retail_distributor"],
+      "use_cases": ["printing_study_material", "multi_page_invoice_scanning", "wireless_office_printing"],
+      "selling_points": [
+        "Automatic 2-sided duplex printing plus a 20-sheet Auto Document Feeder",
+        "High-capacity 150-sheet paper drawer prevents dust and keeps paper flat",
+        "Durable printhead designed in Japan, famous for high duty-cycles"
+      ],
+      "common_objections": ["slightly_larger_footprint", "no_color_touchscreen"],
+      "objection_responses": {
+        "slightly_larger_footprint": "The internal paper tray keeps the machine compact. It fits on a standard file cabinet easily.",
+        "no_color_touchscreen": "The 1-line LCD panel is extremely durable and easy to understand, reducing accidental configuration changes by staff."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "Brother Official Datasheet"
+    }
+  },
+  {
+    "id": "tp-link-archer-c6",
+    "brand": "TP-Link",
+    "model": "Archer C6 AC1200",
+    "category": "router",
+    "subcategory": "budget",
+    "specs": {
+      "processor": "Single-Core CPU",
+      "gpu": "None",
+      "ram": "None",
+      "storage": "None",
+      "display": "Dual Band AC1200 WiFi Router, 4 external antennas"
+    },
+    "pricing": {
+      "mrp": 3499,
+      "street_price_approx": 2200
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 3,
+      "categories": ["budget", "networking"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["hp-14-intel-i3", "dell-inspiron-3530-i5", "lenovo-ideapad-slim-3-i5", "tp-link-tapo-c200"]
+    },
+    "knowledge": {
+      "target_persona": ["home_user", "small_shop_owner", "student_pg"],
+      "use_cases": ["fiber_broadband_sharing", "cctv_wifi_connection", "casual_streaming"],
+      "selling_points": [
+        "AC1200 dual-band speeds: 867Mbps on 5GHz for streaming, 300Mbps on 2.4GHz for range",
+        "4 external antennas with beamforming technology for strong wall penetration",
+        "Supports Access Point mode to extend your existing office router network"
+      ],
+      "common_objections": ["no_wifi_6", "only_gigabit_wan_ports"],
+      "objection_responses": {
+        "no_wifi_6": "WiFi 5 AC1200 is more than enough for broadband plans up to 300Mbps, which covers most homes and small shops.",
+        "only_gigabit_wan_ports": "Gigabit ports are excellent. Older routers had 100Mbps ports. This router handles high-speed fiber feeds easily."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "TP-Link India Catalog"
+    }
+  },
+  {
+    "id": "tp-link-ax1800",
+    "brand": "TP-Link",
+    "model": "Archer AX23 AX1800",
+    "category": "router",
+    "subcategory": "premium",
+    "specs": {
+      "processor": "Dual-Core CPU",
+      "gpu": "None",
+      "ram": "None",
+      "storage": "None",
+      "display": "Dual Band WiFi 6 Router, 4 Gigabit LAN ports"
+    },
+    "pricing": {
+      "mrp": 6999,
+      "street_price_approx": 4200
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 3,
+      "categories": ["premium_performance", "networking"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["hp-elitebook-840-g9", "apple-macbook-air-m3-13", "lenovo-loq-15-rtx4050", "ubiquiti-unifi-u6-plus"]
+    },
+    "knowledge": {
+      "target_persona": ["tech_enthusiast", "wfh_programmer", "small_office_it"],
+      "use_cases": ["wi_fi_6_lan", "multiple_device_streaming", "low_latency_gaming"],
+      "selling_points": [
+        "WiFi 6 technology offers up to 4x capacity to connect more devices smoothly",
+        "OFDMA and MU-MIMO reduce congestion and network response lag",
+        "WPA3 security encryption protocol safeguards private office networks"
+      ],
+      "common_objections": ["price_higher_than_ac1200", "setup_app_requirement"],
+      "objection_responses": {
+        "price_higher_than_ac1200": "WiFi 6 AX1800 handles up to 60 smart devices without speed drops, whereas AC routers lag with more than 15 devices.",
+        "setup_app_requirement": "You can configure it via the TP-Link Tether Android app in 3 minutes or use a standard web browser on a PC."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "TP-Link Official Specs"
+    }
+  },
+  {
+    "id": "asus-rt-ax53u",
+    "brand": "Asus",
+    "model": "RT-AX53U AX1800",
+    "category": "router",
+    "subcategory": "premium",
+    "specs": {
+      "processor": "Dual-Core CPU",
+      "gpu": "None",
+      "ram": "None",
+      "storage": "None",
+      "display": "WiFi 6 Dual Band Router, USB Port for 4G backup dongle"
+    },
+    "pricing": {
+      "mrp": 7999,
+      "street_price_approx": 4800
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 3,
+      "categories": ["premium_performance", "networking"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["hp-elitebook-840-g9", "dell-latitude-3440", "lenovo-thinkpad-e14-i5"]
+    },
+    "knowledge": {
+      "target_persona": ["wfh_engineer", "critical_office_it", "gamer"],
+      "use_cases": ["failover_4g_broadband", "network_security", "high_speed_nas_sharing"],
+      "selling_points": [
+        "ASUS AiProtection antivirus security software included free for life",
+        "USB port supports 3G/4G dongles for automatic internet backup if fiber cuts",
+        "Advanced parental and content controls for home and office staff filtering"
+      ],
+      "common_objections": ["slightly_higher_cost", "bulky_antennas"],
+      "objection_responses": {
+        "slightly_higher_cost": "The USB failover backup and lifetime enterprise security software make it extremely cheap compared to standalone firewalls.",
+        "bulky_antennas": "The 4 high-gain antennas are fixed to maximize signal strength. They can be rotated to direct signals to different floors."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "Asus Networking Catalog"
+    }
+  },
+  {
+    "id": "d-link-dir-615",
+    "brand": "D-Link",
+    "model": "DIR-615 N300",
+    "category": "router",
+    "subcategory": "budget",
+    "specs": {
+      "processor": "Single-Core",
+      "gpu": "None",
+      "ram": "None",
+      "storage": "None",
+      "display": "N300 Wireless Router, 2 antennas"
+    },
+    "pricing": {
+      "mrp": 1599,
+      "street_price_approx": 950
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 3,
+      "categories": ["budget", "networking"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["logitech-m170", "tp-link-tapo-c200", "acer-veriton-m200"]
+    },
+    "knowledge": {
+      "target_persona": ["kirana_shop_owner", "budget_buyer", "cctv_installer"],
+      "use_cases": ["credit_card_machine_wifi", "basic_home_internet", "cctv_dvr_online"],
+      "selling_points": [
+        "India's highest selling entry-level router, under ₹1,000",
+        "Easy setup wizard allows quick configuration on any mobile browser",
+        "Compact design fits inside standard CCTV metal server boxes"
+      ],
+      "common_objections": ["no_5ghz_band", "only_100mbps_ports"],
+      "objection_responses": {
+        "no_5ghz_band": "For basic billing machines, CCTV systems, and mobile phones, the 2.4GHz band is perfectly adequate.",
+        "only_100mbps_ports": "If your internet connection is under 50Mbps (common for billing & security), gigabit ports won't offer any extra speed."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "D-Link Catalog"
+    }
+  },
+  {
+    "id": "ubiquiti-unifi-u6-plus",
+    "brand": "Ubiquiti",
+    "model": "UniFi U6+",
+    "category": "router",
+    "subcategory": "premium",
+    "specs": {
+      "processor": "Dual-Core",
+      "gpu": "None",
+      "ram": "None",
+      "storage": "None",
+      "display": "WiFi 6 Enterprise Access Point, Ceiling Mount, PoE"
+    },
+    "pricing": {
+      "mrp": 15999,
+      "street_price_approx": 12500
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 1,
+      "categories": ["enterprise", "networking"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["tp-link-ax1800", "dell-vostro-3030-mt", "hp-elitebook-840-g9"]
+    },
+    "knowledge": {
+      "target_persona": ["it_head", "co_working_space_owner", "large_hotel_admin"],
+      "use_cases": ["enterprise_wi_fi", "high_density_device_areas", "office_mesh_networking"],
+      "selling_points": [
+        "Enterprise-grade ceiling-mount WiFi 6 AP, supports 300+ active devices",
+        "Seamless roaming: users move across office floors without dropouts",
+        "Power-over-Ethernet (PoE) allows power and data over a single LAN cable"
+      ],
+      "common_objections": ["requires_poe_switch", "requires_controller_software"],
+      "objection_responses": {
+        "requires_poe_switch": "PoE is standard for professional networking. If you don't have a PoE switch, we can supply a PoE injector for ₹950.",
+        "requires_controller_software": "You can configure it easily using the UniFi mobile app on Android without needing a dedicated controller server."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "Ubiquiti UniFi Datasheet"
+    }
+  },
+  {
+    "id": "logitech-m170",
+    "brand": "Logitech",
+    "model": "M170 Wireless Mouse",
+    "category": "mouse",
+    "subcategory": "budget",
+    "specs": {
+      "processor": "None",
+      "gpu": "None",
+      "ram": "None",
+      "storage": "None",
+      "display": "Wireless USB Mouse, 12-month battery life"
+    },
+    "pricing": {
+      "mrp": 995,
+      "street_price_approx": 650
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 3,
+      "categories": ["budget", "peripheral"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["hp-14-intel-i3", "dell-vostro-3520-i5", "lenovo-ideapad-slim-3-i5", "hp-pavilion-s01"]
+    },
+    "knowledge": {
+      "target_persona": ["laptop_user", "office_staff", "student"],
+      "use_cases": ["everyday_office_work", "school_projects"],
+      "selling_points": [
+        "Long 12-month battery life on a single AA battery (included)",
+        "Strong wireless USB connection up to 10 meters (33 feet)",
+        "Ambidextrous design is comfortable for both left and right-handed users"
+      ],
+      "common_objections": ["no_bluetooth", "small_size"],
+      "objection_responses": {
+        "no_bluetooth": "It uses a USB plug-and-play receiver. This is more reliable than Bluetooth and doesn't require pairing.",
+        "small_size": "Its compact size makes it highly portable, fitting easily into any laptop bag pocket."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "Logitech Catalogue"
+    }
+  },
+  {
+    "id": "logitech-mk295-combo",
+    "brand": "Logitech",
+    "model": "MK295 Silent Wireless Combo",
+    "category": "keyboard",
+    "subcategory": "budget",
+    "specs": {
+      "processor": "None",
+      "gpu": "None",
+      "ram": "None",
+      "storage": "None",
+      "display": "Silent Wireless Keyboard and Mouse combo"
+    },
+    "pricing": {
+      "mrp": 2995,
+      "street_price_approx": 1950
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 3,
+      "categories": ["office", "peripheral"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["hp-pavilion-s01", "dell-vostro-3030-mt", "lenovo-ideacentre-3", "acer-veriton-m200", "hp-14-intel-i3"]
+    },
+    "knowledge": {
+      "target_persona": ["writer", "office_data_entry", "home_office_worker"],
+      "use_cases": ["typing_heavy_work", "silent_office_environment"],
+      "selling_points": [
+        "SilentTouch technology reduces 90% of typing click noise",
+        "Spill-resistant full-size keyboard with hotkeys and number pad",
+        "Incredibly long battery: 36 months for keyboard, 18 months for mouse"
+      ],
+      "common_objections": ["no_caps_lock_indicator_led", "mushy_key_feel"],
+      "objection_responses": {
+        "no_caps_lock_indicator_led": "To save battery and achieve the 36-month lifespan, Logitech omitted the LED. Windows shows caps lock notifications.",
+        "mushy_key_feel": "Silent keys use a rubber dome for noise reduction, providing a soft but highly tactile typing response."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "Logitech Specs"
+    }
+  },
+  {
+    "id": "logitech-mx-master-3",
+    "brand": "Logitech",
+    "model": "MX Master 3S",
+    "category": "mouse",
+    "subcategory": "premium",
+    "specs": {
+      "processor": "None",
+      "gpu": "None",
+      "ram": "None",
+      "storage": "None",
+      "display": "Premium Wireless Mouse, MagSpeed Scroll, USB-C"
+    },
+    "pricing": {
+      "mrp": 10995,
+      "street_price_approx": 9200
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 1,
+      "categories": ["premium_performance", "peripheral"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["apple-macbook-air-m3-13", "hp-elitebook-840-g9", "dell-latitude-3440", "acer-predator-helios-neo-16"]
+    },
+    "knowledge": {
+      "target_persona": ["excel_power_user", "programmer", "video_editor"],
+      "use_cases": ["multitasking", "horizontal_timeline_scrolling", "precision_design"],
+      "selling_points": [
+        "MagSpeed electromagnetic scroll wheel scrolls 1,000 lines in 1 second",
+        "Tracks on any surface — even on glass (minimum 4mm thickness)",
+        "App-specific customizations for Photoshop, Excel, Chrome, Premiere Pro"
+      ],
+      "common_objections": ["very_expensive", "right_hand_only"],
+      "objection_responses": {
+        "very_expensive": "For professionals coding or editing 8+ hours a day, the muscle strain relief and scroll speed increase pay for it in a month.",
+        "right_hand_only": "Yes, its ergonomic shape is optimized specifically for right-handed grip comfort. We suggest the Logitech Pebble for lefties."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "Logitech Premium Line"
+    }
+  },
+  {
+    "id": "dell-km3322w-combo",
+    "brand": "Dell",
+    "model": "KM3322W Wireless Combo",
+    "category": "keyboard",
+    "subcategory": "budget",
+    "specs": {
+      "processor": "None",
+      "gpu": "None",
+      "ram": "None",
+      "storage": "None",
+      "display": "Wireless Keyboard and Mouse Combo, 3-year warranty"
+    },
+    "pricing": {
+      "mrp": 2499,
+      "street_price_approx": 1450
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 3,
+      "categories": ["office", "peripheral"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["hp-pavilion-s01", "dell-vostro-3030-mt", "lenovo-ideacentre-3", "acer-veriton-m200"]
+    },
+    "knowledge": {
+      "target_persona": ["office_worker", "school_computer_lab", "data_entry"],
+      "use_cases": ["office_typing", "lab_sessions"],
+      "selling_points": [
+        "Spill-resistant keyboard keys withstand accidental coffee splashes",
+        "Anti-fade keys prevent letters from wearing off over years of typing",
+        "3-year Dell warranty with replacement support in Pune/Mumbai"
+      ],
+      "common_objections": ["standard_mouse_design", "no_multimedia_keys"],
+      "objection_responses": {
+        "standard_mouse_design": "The mouse has a symmetrical shape, perfect for ambidextrous office workers, and features a 1000 DPI sensor.",
+        "no_multimedia_keys": "It uses Fn combo keys for volume and media play/pause, keeping the keyboard layout compact."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "Dell Specs"
+    }
+  },
+  {
+    "id": "zebronics-judwaa-555",
+    "brand": "Zebronics",
+    "model": "Judwaa 555 Combo",
+    "category": "keyboard",
+    "subcategory": "budget",
+    "specs": {
+      "processor": "None",
+      "gpu": "None",
+      "ram": "None",
+      "storage": "None",
+      "display": "Wired USB Keyboard and Mouse Combo"
+    },
+    "pricing": {
+      "mrp": 799,
+      "street_price_approx": 450
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 1,
+      "categories": ["budget", "peripheral"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["hp-pavilion-s01", "lenovo-ideacentre-3", "acer-veriton-m200"]
+    },
+    "knowledge": {
+      "target_persona": ["retail_billing_counter", "school_computer_lab", "budget_buyer"],
+      "use_cases": ["billing", "classroom_computer_lab"],
+      "selling_points": [
+        "Extremely cheap wired keyboard and mouse bundle under ₹500",
+        "Plug-and-play USB connection, requires no drivers or battery management",
+        "Strong plastic chassis with kickstand feet for typing angle adjustment"
+      ],
+      "common_objections": ["wired_cables_clutter_desk", "clicky_keys"],
+      "objection_responses": {
+        "wired_cables_clutter_desk": "Wired connection means no battery replacement costs and no signal interference at busy billing counters.",
+        "clicky_keys": "The key caps are raised and have high travel, giving a very clear physical confirmation of key presses."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "Zebronics Retail Catalog"
+    }
+  },
+  {
+    "id": "wd-sn580-1tb",
+    "brand": "Western Digital",
+    "model": "WD Blue SN580 1TB NVMe",
+    "category": "ssd",
+    "subcategory": "premium",
+    "specs": {
+      "processor": "None",
+      "gpu": "None",
+      "ram": "None",
+      "storage": "1TB NVMe M.2 2280 PCIe Gen4 SSD",
+      "display": "Read up to 4150 MB/s, Write up to 4150 MB/s"
+    },
+    "pricing": {
+      "mrp": 8500,
+      "street_price_approx": 6200
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 5,
+      "categories": ["premium_performance", "storage"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["hp-victus-15-rtx3050", "lenovo-loq-15-rtx4050", "dell-vostro-3030-mt", "acer-predator-helios-neo-16"]
+    },
+    "knowledge": {
+      "target_persona": ["pc_builder", "gamer", "video_editor"],
+      "use_cases": ["expanding_laptop_storage", "building_gaming_pc", "scratch_disk"],
+      "selling_points": [
+        "PCIe Gen4 speed boosts game loading times and system boot times",
+        "Western Digital nCache 4.0 technology copies large files instantly",
+        "5-year local replacement warranty in Maharashtra through WD service centers"
+      ],
+      "common_objections": ["dram_less_architecture", "runs_hot_under_heavy_write"],
+      "objection_responses": {
+        "dram_less_architecture": "It uses Host Memory Buffer (HMB) technology to borrow system RAM, performing similarly to DRAM drives at a cheaper cost.",
+        "runs_hot_under_heavy_write": "Under heavy workloads, it should be paired with a motherboard M.2 heat sink (common on B760/Z790 boards)."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "WD Official specs"
+    }
+  },
+  {
+    "id": "samsung-870-evo-1tb",
+    "brand": "Samsung",
+    "model": "870 EVO 1TB SATA III",
+    "category": "ssd",
+    "subcategory": "premium",
+    "specs": {
+      "processor": "None",
+      "gpu": "None",
+      "ram": "None",
+      "storage": "1TB 2.5-inch SATA III SSD",
+      "display": "Read up to 560 MB/s, Write up to 530 MB/s"
+    },
+    "pricing": {
+      "mrp": 9900,
+      "street_price_approx": 7200
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 5,
+      "categories": ["storage"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["hp-pavilion-s01", "dell-vostro-3030-mt", "lenovo-ideacentre-3", "acer-veriton-m200"]
+    },
+    "knowledge": {
+      "target_persona": ["old_pc_upgrader", "small_nas_owner", "office_admin"],
+      "use_cases": ["reviving_old_office_desktop", "secondary_backup_drive"],
+      "selling_points": [
+        "Upgrades older laptops and PCs with standard 2.5-inch SATA drive slots",
+        "Top-class SATA III speeds up to 560MB/s make old systems feel like new",
+        "Class-leading 600 TBW (Terabytes Written) durability rating"
+      ],
+      "common_objections": ["slower_than_nvme", "higher_price_than_other_sata_ssds"],
+      "objection_responses": {
+        "slower_than_nvme": "Old motherboards lack M.2 NVMe slots. SATA III is the fastest upgrade path for systems older than 5 years.",
+        "higher_price_than_other_sata_ssds": "Samsung's custom controller and high-grade V-NAND deliver superior sustained write speeds and longer lifetimes."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "Samsung SSD Catalog"
+    }
+  },
+  {
+    "id": "kingston-nv3-500gb",
+    "brand": "Kingston",
+    "model": "NV3 500GB NVMe",
+    "category": "ssd",
+    "subcategory": "budget",
+    "specs": {
+      "processor": "None",
+      "gpu": "None",
+      "ram": "None",
+      "storage": "500GB NVMe PCIe Gen4 M.2 SSD",
+      "display": "Read 5000 MB/s, Write 3000 MB/s"
+    },
+    "pricing": {
+      "mrp": 4500,
+      "street_price_approx": 3150
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 3,
+      "categories": ["budget", "storage"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["hp-victus-15-rtx3050", "lenovo-loq-15-rtx4050", "dell-vostro-3030-mt", "lenovo-ideacentre-3"]
+    },
+    "knowledge": {
+      "target_persona": ["budget_gamer", "office_pc_upgrader", "student"],
+      "use_cases": ["adding_secondary_game_drive", "os_drive_upgrade"],
+      "selling_points": [
+        "Highly affordable Gen4 NVMe drive at a budget price of ₹3,150",
+        "Impressive read speed of 5000MB/s is 10 times faster than SATA SSDs",
+        "Low power consumption matches laptop motherboard battery savings"
+      ],
+      "common_objections": ["only_3_year_warranty", "limited_capacity"],
+      "objection_responses": {
+        "only_3_year_warranty": "Kingston offers a 3-year warranty at this low price point, which is standard for entry-level consumer SSDs.",
+        "limited_capacity": "500GB is perfect for the OS and 3-4 major games/software. For massive media storage, we recommend the 1TB model."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "Kingston Catalog"
+    }
+  },
+  {
+    "id": "kingston-nv3-1tb",
+    "brand": "Kingston",
+    "model": "NV3 1TB NVMe",
+    "category": "ssd",
+    "subcategory": "budget",
+    "specs": {
+      "processor": "None",
+      "gpu": "None",
+      "ram": "None",
+      "storage": "1TB NVMe PCIe Gen4 M.2 SSD",
+      "display": "Read 6000 MB/s, Write 4000 MB/s"
+    },
+    "pricing": {
+      "mrp": 7500,
+      "street_price_approx": 5200
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 3,
+      "categories": ["budget", "storage"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["hp-victus-15-rtx3050", "lenovo-loq-15-rtx4050", "dell-vostro-3030-mt", "acer-predator-helios-neo-16"]
+    },
+    "knowledge": {
+      "target_persona": ["gamer", "designer", "coder"],
+      "use_cases": ["bulk_game_storage", "multimedia_editing"],
+      "selling_points": [
+        "Great value: 1TB PCIe Gen4 speed under ₹5,200 in the Maharashtra market",
+        "6,000 MB/s reads speed up heavy copy operations and rendering loading",
+        "M.2 2280 form factor fits both compact laptops and desktop motherboards"
+      ],
+      "common_objections": ["qlc_nand_concerns", "warranty_length"],
+      "objection_responses": {
+        "qlc_nand_concerns": "Kingston's QLC implementation handles standard workloads and daily reading/writing without drop in speed for years.",
+        "warranty_length": "A 3-year warranty covers all manufacturing defects. In Pune, Kingston has rapid diagnostic exchange centers."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "Kingston Catalog"
+    }
+  },
+  {
+    "id": "crucial-bx500-480gb",
+    "brand": "Crucial",
+    "model": "BX500 480GB SATA",
+    "category": "ssd",
+    "subcategory": "budget",
+    "specs": {
+      "processor": "None",
+      "gpu": "None",
+      "ram": "None",
+      "storage": "480GB 2.5-inch SATA III SSD",
+      "display": "Read up to 540 MB/s, Write up to 500 MB/s"
+    },
+    "pricing": {
+      "mrp": 4500,
+      "street_price_approx": 2800
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 3,
+      "categories": ["budget", "storage"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["hp-pavilion-s01", "lenovo-ideacentre-3", "acer-veriton-m200"]
+    },
+    "knowledge": {
+      "target_persona": ["kirana_billing_counter", "accounting_office", "school_setup"],
+      "use_cases": ["reviving_billing_terminal", "old_pc_speed_boost"],
+      "selling_points": [
+        "Highly affordable upgrade SSD under ₹2,800 to speed up old office PCs",
+        "Saves battery life in old laptops compared to mechanical HDDs",
+        "Crucial Storage Executive software enables drive health tracking"
+      ],
+      "common_objections": ["no_dram_cache", "plastic_casing"],
+      "objection_responses": {
+        "no_dram_cache": "For standard office machines doing invoicing and documents, HMB technology handles it without needing DRAM.",
+        "plastic_casing": "The plastic case is lightweight, insulated, and fits safely in standard 2.5\" drive trays."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "Crucial specs"
+    }
+  },
+  {
+    "id": "kingston-8gb-ddr4",
+    "brand": "Kingston",
+    "model": "Kingston 8GB DDR4 3200MHz",
+    "category": "ram",
+    "subcategory": "budget",
+    "specs": {
+      "processor": "None",
+      "gpu": "None",
+      "ram": "8GB DDR4 3200MHz CL22 desktop DIMM",
+      "storage": "None",
+      "display": "1.2V Operating Voltage"
+    },
+    "pricing": {
+      "mrp": 2999,
+      "street_price_approx": 1750
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 3,
+      "categories": ["budget", "ram"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["hp-pavilion-s01", "lenovo-ideacentre-3", "acer-veriton-m200"]
+    },
+    "knowledge": {
+      "target_persona": ["pc_upgrader", "it_technician", "office_admin"],
+      "use_cases": ["upgrading_office_pc_ram", "dual_channel_upgrade"],
+      "selling_points": [
+        "Adds standard 8GB RAM to speed up basic Windows 11 systems",
+        "High compatibility with Intel H610 and B760 office motherboards",
+        "Kingston lifetime warranty (capped at 3 years by DCC local terms)"
+      ],
+      "common_objections": ["no_heatsink_rgb", "cl22_latency"],
+      "objection_responses": {
+        "no_heatsink_rgb": "Designed for standard office systems. Heatsinks are not needed at standard 1.2V voltages, keeping cost low.",
+        "cl22_latency": "CL22 is the JEDEC standard for 3200MHz DDR4. It ensures 100% stable, crash-free operation in business PCs."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "Kingston Specs"
+    }
+  },
+  {
+    "id": "crucial-16gb-ddr4",
+    "brand": "Crucial",
+    "model": "Crucial 16GB DDR4 3200MHz",
+    "category": "ram",
+    "subcategory": "budget",
+    "specs": {
+      "processor": "None",
+      "gpu": "None",
+      "ram": "16GB DDR4 3200MHz CL22 desktop DIMM",
+      "storage": "None",
+      "display": "JEDEC standard speed"
+    },
+    "pricing": {
+      "mrp": 5500,
+      "street_price_approx": 3200
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 3,
+      "categories": ["budget", "ram"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["hp-pavilion-s01", "dell-vostro-3030-mt", "lenovo-ideacentre-3", "acer-veriton-m200"]
+    },
+    "knowledge": {
+      "target_persona": ["developer", "office_power_user"],
+      "use_cases": ["upgrading_workstation_ram", "heavy_multitasking"],
+      "selling_points": [
+        "Installs 16GB single-stick DDR4 to support virtual machines and Chrome tabs",
+        "Crucial reliability guarantees compatibility with major pre-built systems",
+        "Low power footprint generates less heat inside micro-ATX business cabinets"
+      ],
+      "common_objections": ["single_channel_performance", "basic_green_pcb"],
+      "objection_responses": {
+        "single_channel_performance": "Buying one 16GB stick leaves the second slot open to easily upgrade to 32GB dual-channel later.",
+        "basic_green_pcb": "Standard green PCB keeps the cost down. It is covered inside closed business desktop cabinets anyway."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "Crucial Specs"
+    }
+  },
+  {
+    "id": "corsair-vengeance-16gb-ddr4",
+    "brand": "Corsair",
+    "model": "Vengeance LPX 16GB DDR4",
+    "category": "ram",
+    "subcategory": "premium",
+    "specs": {
+      "processor": "None",
+      "gpu": "None",
+      "ram": "16GB DDR4 3200MHz CL16 Gaming Desktop RAM",
+      "storage": "None",
+      "display": "Aluminium Heat Spreader, XMP 2.0"
+    },
+    "pricing": {
+      "mrp": 6500,
+      "street_price_approx": 3800
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 3,
+      "categories": ["premium_performance", "ram"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["dell-vostro-3030-mt", "wd-sn580-1tb", "kingston-nv3-1tb"]
+    },
+    "knowledge": {
+      "target_persona": ["gamer", "content_creator", "enthusiast"],
+      "use_cases": ["gaming_pc_build", "overclocking_xmp"],
+      "selling_points": [
+        "Low CL16 latency offers better gaming frame rates than standard RAM",
+        "Anodized aluminum heat spreader keeps chips cool during long gaming sessions",
+        "Supports Intel XMP 2.0 for one-click automatic overclocking"
+      ],
+      "common_objections": ["height_clearance_with_cpu_coolers", "requires_bios_tweak"],
+      "objection_responses": {
+        "height_clearance_with_cpu_coolers": "LPX stands for Low Profile. Its short height fits under almost all large air CPU coolers.",
+        "requires_bios_tweak": "Yes, to run at 3200MHz, you simply click 'Enable XMP' in the motherboard BIOS. Otherwise, it runs at 2666MHz."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "Corsair Official Catalog"
+    }
+  },
+  {
+    "id": "kingston-8gb-ddr5",
+    "brand": "Kingston",
+    "model": "Kingston 8GB DDR5 5600MHz",
+    "category": "ram",
+    "subcategory": "premium",
+    "specs": {
+      "processor": "None",
+      "gpu": "None",
+      "ram": "8GB DDR5 5600MHz CL46 Desktop DIMM",
+      "storage": "None",
+      "display": "1.1V Operating Voltage, On-die ECC"
+    },
+    "pricing": {
+      "mrp": 4500,
+      "street_price_approx": 2900
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 3,
+      "categories": ["premium_performance", "ram"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["dell-vostro-3030-mt", "wd-sn580-1tb", "kingston-nv3-1tb"]
+    },
+    "knowledge": {
+      "target_persona": ["builder_new_gen_pc", "it_purchaser"],
+      "use_cases": ["building_intel_14th_gen_pc", "am5_motherboard_build"],
+      "selling_points": [
+        "DDR5 speed (5600MHz) doubles the bandwidth compared to older DDR4 2666MHz RAM",
+        "Built-in On-die ECC (Error Correction Code) increases system stability",
+        "Highly future-proof standard for all new AMD AM5 and Intel CPU sockets"
+      ],
+      "common_objections": ["cl46_latency_high", "only_8gb_capacity"],
+      "objection_responses": {
+        "cl46_latency_high": "While CL latency count is higher, the massive 5600MHz clock speed makes real-world transfer speeds far superior to DDR4.",
+        "only_8gb_capacity": "This is a great starting stick. You can pair it with another 8GB stick later to run in dual-channel 16GB mode."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "Kingston DDR5 specs"
+    }
+  },
+  {
+    "id": "apc-bx600c-in",
+    "brand": "APC",
+    "model": "Back-UPS BX600C-IN",
+    "category": "ups",
+    "subcategory": "budget",
+    "specs": {
+      "processor": "None",
+      "gpu": "None",
+      "ram": "None",
+      "storage": "None",
+      "display": "600VA / 360W battery backup, 3 Indian outlets"
+    },
+    "pricing": {
+      "mrp": 4299,
+      "street_price_approx": 3200
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 2,
+      "categories": ["budget", "ups"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["hp-pavilion-s01", "lenovo-ideacentre-3", "acer-veriton-m200", "dell-e2224h", "lg-22mp410", "hp-smart-tank-585"]
+    },
+    "knowledge": {
+      "target_persona": ["home_office_worker", "kirana_shop_billing", "student"],
+      "use_cases": ["saving_work_during_power_cut", "preventing_pc_reboot"],
+      "selling_points": [
+        "Provides 15–20 minutes of battery backup to safely save office documents",
+        "Built-in AVR (Automatic Voltage Regulator) protects against high/low voltage surges",
+        "Compact footprint fits easily on small shelves under billing counters"
+      ],
+      "common_objections": ["short_backup_time", "no_lcd_screen"],
+      "objection_responses": {
+        "short_backup_time": "A UPS is designed to give you time to save work and shutdown safely, not for hours of continuous runtime.",
+        "no_lcd_screen": "Simple LED indicators and audio alarm beeps indicate battery status clearly while saving costs."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "APC India Guide"
+    }
+  },
+  {
+    "id": "apc-bx1100c-in",
+    "brand": "APC",
+    "model": "Back-UPS BX1100C-IN",
+    "category": "ups",
+    "subcategory": "premium",
+    "specs": {
+      "processor": "None",
+      "gpu": "None",
+      "ram": "None",
+      "storage": "None",
+      "display": "1100VA / 660W battery backup, 4 Indian outlets"
+    },
+    "pricing": {
+      "mrp": 8990,
+      "street_price_approx": 6900
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 2,
+      "categories": ["premium_performance", "ups"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["hp-victus-15-rtx3050", "lenovo-loq-15-rtx4050", "dell-vostro-3030-mt", "acer-predator-helios-neo-16", "dell-p2422h", "hp-laserjet-tank-2606sdw"]
+    },
+    "knowledge": {
+      "target_persona": ["gamer", "designer", "small_server_admin"],
+      "use_cases": ["gaming_pc_power_backup", "cctv_dvr_power_backup", "nas_power_protection"],
+      "selling_points": [
+        "Massive 1100VA capacity handles power-heavy gaming rigs and office servers",
+        "Generates 35–45 minutes of backup for standard office desktop PCs",
+        "Includes battery charge auto-diagnostic indicator and alarm mute button"
+      ],
+      "common_objections": ["heavy_cabinet", "warm_to_touch_during_charge"],
+      "objection_responses": {
+        "heavy_cabinet": "It weighs 9kg due to the dual heavy-duty lead-acid batteries that provide the massive backup capacity.",
+        "warm_to_touch_during_charge": "Minor warmth is normal when the internal fast-charger recharges the dual batteries. It cools down once fully charged."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "APC Catalog"
+    }
+  },
+  {
+    "id": "artis-600va",
+    "brand": "Artis",
+    "model": "Artis PS-600Eco",
+    "category": "ups",
+    "subcategory": "budget",
+    "specs": {
+      "processor": "None",
+      "gpu": "None",
+      "ram": "None",
+      "storage": "None",
+      "display": "600VA / 360W micro-UPS, 3 sockets"
+    },
+    "pricing": {
+      "mrp": 3299,
+      "street_price_approx": 2100
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 1,
+      "categories": ["budget", "ups"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["hp-pavilion-s01", "acer-veriton-m200", "lg-22mp410", "aoc-22b2h", "d-link-dir-615", "tp-link-tapo-c200"]
+    },
+    "knowledge": {
+      "target_persona": ["retailer", "budget_student", "cctv_installer"],
+      "use_cases": ["pos_billing_backup", "wifi_router_backup", "cctv_dvr_backup"],
+      "selling_points": [
+        "Highly budget-friendly 600VA UPS under ₹2,100",
+        "Auto-restart function automatically boot up when power returns",
+        "Cold start feature allows booting up the UPS directly from battery without AC mains"
+      ],
+      "common_objections": ["only_1_year_warranty", "no_avr_stabilizer"],
+      "objection_responses": {
+        "only_1_year_warranty": "Helps achieve the cheap price tag. Artis has a network of service centers in Pune for easy replacements.",
+        "no_avr_stabilizer": "It features basic surge suppression and switches to battery mode during heavy spikes, protecting billing terminals."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "Artis Catalog"
+    }
+  },
+  {
+    "id": "cp-plus-2mp-bullet",
+    "brand": "CP Plus",
+    "model": "CP-USC-TA21L2",
+    "category": "camera",
+    "subcategory": "budget",
+    "specs": {
+      "processor": "None",
+      "gpu": "None",
+      "ram": "None",
+      "storage": "None",
+      "display": "2MP Full HD Outdoor Bullet Camera, 20m IR, IP67 Waterproof"
+    },
+    "pricing": {
+      "mrp": 2500,
+      "street_price_approx": 1350
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 1,
+      "categories": ["budget", "surveillance"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["cp-plus-4ch-dvr", "artis-600va"]
+    },
+    "knowledge": {
+      "target_persona": ["shopkeeper", "homeowner", "warehouse_manager"],
+      "use_cases": ["shop_front_surveillance", "parking_area_security"],
+      "selling_points": [
+        "Full HD 1080p resolution provides clear facial recognition up to 10 meters",
+        "IP67 weatherproofing stands up to heavy Maharashtra monsoon rains",
+        "Smart Infrared night vision automatically activates in total darkness"
+      ],
+      "common_objections": ["requires_wired_dvr", "no_audio_recording"],
+      "objection_responses": {
+        "requires_wired_dvr": "Analog bullet cameras must connect to a DVR via coaxial cables. This provides a highly reliable feed that cannot be hacked over WiFi.",
+        "no_audio_recording": "This is a video-only security camera. For audio recording, we suggest CP Plus dome cameras with built-in mics."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "CP Plus Catalog"
+    }
+  },
+  {
+    "id": "cp-plus-4ch-dvr",
+    "brand": "CP Plus",
+    "model": "CP-UVR-0401E1-CS",
+    "category": "camera",
+    "subcategory": "budget",
+    "specs": {
+      "processor": "Embedded Processor",
+      "gpu": "None",
+      "ram": "None",
+      "storage": "Supports 1 SATA HDD up to 6TB (Not Included)",
+      "display": "4-Channel 1080p Digital Video Recorder, HDMI/VGA output"
+    },
+    "pricing": {
+      "mrp": 6500,
+      "street_price_approx": 3600
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 1,
+      "categories": ["budget", "surveillance"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["cp-plus-2mp-bullet", "artis-600va", "lg-22mp410", "aoc-22b2h"]
+    },
+    "knowledge": {
+      "target_persona": ["small_shop_owner", "apartment_secretary"],
+      "use_cases": ["recording_cctv_footage", "online_mobile_viewing"],
+      "selling_points": [
+        "Supports up to 4 analog cameras and records in clear Full HD 1080p resolution",
+        "CP Plus gCMOB mobile app allows live remote viewing from anywhere in the world",
+        "H.265+ compression saves up to 70% storage space, doubling HDD recording days"
+      ],
+      "common_objections": ["hard_disk_not_included", "only_4_channels"],
+      "objection_responses": {
+        "hard_disk_not_included": "We sell HDDs separately. A 1TB surveillance HDD costs ₹3,800 and records 4 cameras for 15 days continuously.",
+        "only_4_channels": "This is optimized for small shops needing 1-4 cameras. For larger spaces, we offer 8-channel and 16-channel models."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "CP Plus Specs"
+    }
+  },
+  {
+    "id": "hikvision-dome-2mp",
+    "brand": "Hikvision",
+    "model": "DS-2CE56D0T-IRPF",
+    "category": "camera",
+    "subcategory": "budget",
+    "specs": {
+      "processor": "None",
+      "gpu": "None",
+      "ram": "None",
+      "storage": "None",
+      "display": "2MP Indoor Dome Camera, 20m IR, Plastic Body"
+    },
+    "pricing": {
+      "mrp": 2200,
+      "street_price_approx": 1150
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 1,
+      "categories": ["budget", "surveillance"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["cp-plus-4ch-dvr", "artis-600va"]
+    },
+    "knowledge": {
+      "target_persona": ["shopkeeper", "office_manager", "homeowner"],
+      "use_cases": ["indoor_office_monitoring", "cash_counter_security"],
+      "selling_points": [
+        "Incredibly cheap Full HD indoor dome security camera under ₹1,200",
+        "Compact dome design blends discreetly into ceilings and drywall",
+        "Clear 2MP day/night video with automatic smart IR cut filters"
+      ],
+      "common_objections": ["plastic_body_fragile", "not_waterproof"],
+      "objection_responses": {
+        "plastic_body_fragile": "Designed for indoor ceiling installation out of reach of people, keeping the price very affordable.",
+        "not_waterproof": "Correct, dome cameras are for indoor ceilings. For outdoors exposed to monsoons, choose bullet cameras instead."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "Hikvision Catalog"
+    }
+  },
+  {
+    "id": "tp-link-tapo-c200",
+    "brand": "TP-Link",
+    "model": "Tapo C200 WiFi Camera",
+    "category": "camera",
+    "subcategory": "premium",
+    "specs": {
+      "processor": "None",
+      "gpu": "None",
+      "ram": "None",
+      "storage": "Supports MicroSD cards up to 128GB (Not Included)",
+      "display": "1080p Smart WiFi Pan/Tilt Dome Camera, 2-way Audio"
+    },
+    "pricing": {
+      "mrp": 3299,
+      "street_price_approx": 2350
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 1,
+      "categories": ["premium_performance", "surveillance"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["tp-link-archer-c6", "tp-link-ax1800", "logitech-mk295-combo"]
+    },
+    "knowledge": {
+      "target_persona": ["working_parents", "pet_owners", "small_shop_owners"],
+      "use_cases": ["baby_monitoring", "pet_checking", "wireless_shop_security"],
+      "selling_points": [
+        "Pan and Tilt: 360-degree horizontal rotation covers the entire room",
+        "Two-way audio allows speaking to children or warning off intruders via mobile",
+        "No complex wiring: just plug into power and connect to your home WiFi"
+      ],
+      "common_objections": ["no_continuous_backup_dvr", "wifi_disconnect_risk"],
+      "objection_responses": {
+        "no_continuous_backup_dvr": "It records loops to an internal MicroSD card. It also supports cheap Tapo Cloud video storage plans.",
+        "wifi_disconnect_risk": "If WiFi drops, it continues recording locally to the MicroSD card as long as it has power."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "TP-Link Tapo Datasheet"
+    }
+  },
+  {
+    "id": "logitech-c270",
+    "brand": "Logitech",
+    "model": "C270 HD Webcam",
+    "category": "webcam",
+    "subcategory": "budget",
+    "specs": {
+      "processor": "None",
+      "gpu": "None",
+      "ram": "None",
+      "storage": "None",
+      "display": "HD 720p/30fps Video, Auto Light Correction, Mono Mic"
+    },
+    "pricing": {
+      "mrp": 2995,
+      "street_price_approx": 1950
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 2,
+      "categories": ["budget", "peripheral"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["hp-pavilion-s01", "dell-vostro-3030-mt", "lenovo-ideacentre-3", "acer-veriton-m200"]
+    },
+    "knowledge": {
+      "target_persona": ["school_student", "online_tutor", "corporate_worker"],
+      "use_cases": ["zoom_online_classes", "skype_calls", "remote_proctored_exams"],
+      "selling_points": [
+        "HD 720p video call resolution is much better than cheap built-in laptop cameras",
+        "Built-in noise-reducing microphone ensures clear speech up to 1.5 meters",
+        "Universally clips securely to both flat-screen monitors and laptop lids"
+      ],
+      "common_objections": ["not_full_hd_1080p", "fixed_focus"],
+      "objection_responses": {
+        "not_full_hd_1080p": "For school classes and Skype calls, 720p is excellent and saves internet data bandwidth.",
+        "fixed_focus": "The fixed focus range (40cm to infinity) keeps everything in focus without annoying autofocus hunting."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "Logitech Specs"
+    }
+  },
+  {
+    "id": "logitech-c920",
+    "brand": "Logitech",
+    "model": "C920 Pro HD Webcam",
+    "category": "webcam",
+    "subcategory": "premium",
+    "specs": {
+      "processor": "None",
+      "gpu": "None",
+      "ram": "None",
+      "storage": "None",
+      "display": "Full HD 1080p/30fps, Autofocus, Stereo Mics"
+    },
+    "pricing": {
+      "mrp": 9995,
+      "street_price_approx": 7900
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 2,
+      "categories": ["premium_performance", "peripheral"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["hp-elitebook-840-g9", "dell-latitude-3440", "lenovo-thinkpad-e14-i5", "apple-macbook-air-m3-13"]
+    },
+    "knowledge": {
+      "target_persona": ["youtube_streamer", "online_teacher", "senior_executive"],
+      "use_cases": ["youtube_streaming", "recording_tutorials", "boardroom_meetings"],
+      "selling_points": [
+        "Full HD 1080p glass lens produces crisp, detailed video for streaming",
+        "Fast premium autofocus system ensures you stay sharp even when moving",
+        "Dual stereo microphones record natural, clear audio from all directions"
+      ],
+      "common_objections": ["expensive", "no_privacy_shutter_in_box"],
+      "objection_responses": {
+        "expensive": "It features a premium multi-element glass lens, autofocus, and dual mics, producing broadcast-quality video.",
+        "no_privacy_shutter_in_box": "You can slide a simple paper cover over it, or disable the camera in Windows Settings when not in use."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "Logitech Streaming Guide"
+    }
+  },
+  {
+    "id": "logitech-h390-usb",
+    "brand": "Logitech",
+    "model": "H390 USB Headset",
+    "category": "headset",
+    "subcategory": "budget",
+    "specs": {
+      "processor": "None",
+      "gpu": "None",
+      "ram": "None",
+      "storage": "None",
+      "display": "USB Wired Headset, Noise-Cancelling Mic, In-line Controls"
+    },
+    "pricing": {
+      "mrp": 4500,
+      "street_price_approx": 3200
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 2,
+      "categories": ["office", "peripheral"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["hp-14-intel-i3", "dell-vostro-3520-i5", "lenovo-ideapad-slim-3-i5", "hp-pavilion-s01"]
+    },
+    "knowledge": {
+      "target_persona": ["call_center_agent", "wfh_employee", "language_student"],
+      "use_cases": ["customer_support_calls", "online_english_learning"],
+      "selling_points": [
+        "Noise-cancelling microphone filters out fan noise and distant chatters",
+        "USB plug-and-play matches all corporate Windows and Mac systems",
+        "Comfortable padded leatherette headband and earcups for 8-hour shifts"
+      ],
+      "common_objections": ["wired_cable_snags", "usb_only_no_3_5mm_jack"],
+      "objection_responses": {
+        "wired_cables_snags": "The 2.4-meter long cable gives you plenty of room to stretch at your desk without pulling the plug.",
+        "usb_only_no_3_5mm_jack": "USB connection has a built-in sound card, which delivers much cleaner digital audio than standard audio jacks."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "Logitech Specs"
+    }
+  },
+  {
+    "id": "plantronics-voyager",
+    "brand": "Poly",
+    "model": "Plantronics Voyager 5200",
+    "category": "headset",
+    "subcategory": "premium",
+    "specs": {
+      "processor": "None",
+      "gpu": "None",
+      "ram": "None",
+      "storage": "None",
+      "display": "Bluetooth Mono Headset, Active Noise Cancelling Mic, 7hr Talk"
+    },
+    "pricing": {
+      "mrp": 12999,
+      "street_price_approx": 9800
+    },
+    "dcc_data": {
+      "in_stock": true,
+      "warranty_years": 1,
+      "categories": ["premium_performance", "peripheral"]
+    },
+    "compatibility": {
+      "compatible_accessories": ["hp-elitebook-840-g9", "dell-latitude-3440", "apple-macbook-air-m3-13"]
+    },
+    "knowledge": {
+      "target_persona": ["field_sales_executive", "delivery_manager", "corporate_ceo"],
+      "use_cases": ["calling_while_driving", "outdoor_meetings", "airport_travel_calls"],
+      "selling_points": [
+        "Four adaptive microphones and WindSmart technology block heavy traffic/wind noise",
+        "Bluetooth connectivity pairs with both your laptop and mobile phone simultaneously",
+        "Ergonomic behind-the-ear design feels weightless for day-long wearing"
+      ],
+      "common_objections": ["high_price_tag", "mono_ear_only_no_stereo"],
+      "objection_responses": {
+        "high_price_tag": "This is an executive tool. Its noise cancelling is so good that customers won't hear street traffic or engine noise at all.",
+        "mono_ear_only_no_stereo": "Designed for safe calling. It leaves one ear open so you can hear traffic and surrounding office discussions."
+      }
+    },
+    "metadata": {
+      "last_updated": "2026-06-25",
+      "data_source": "Poly India Catalog"
+    }
+  }
+]

@@ -1,0 +1,140 @@
+[
+  {
+    "id": "module-cpu-gpu-ram",
+    "topic": "hardware-fundamentals",
+    "title": "CPU, GPU & RAM Fundamentals",
+    "keywords": ["cpu", "gpu", "ram", "ddr4", "ddr5", "processor", "vram"],
+    "content": "Understanding the interaction between the Central Processing Unit (CPU), Graphics Processing Unit (GPU), and Random Access Memory (RAM) is the foundation of IT hardware architecture. The CPU acts as the brain of the computer, executing general program instructions and managing system resources. Modern CPUs feature multiple physical cores and threads, allowing them to perform several tasks concurrently. In contrast, the GPU is a specialized processor designed for parallel computation, containing thousands of smaller cores optimized to handle complex mathematical operations simultaneously. While originally built for rendering 3D graphics, GPUs are now critical for video editing rendering, machine learning, and artificial intelligence compute workloads. RAM acts as the system's short-term memory, holding active program instructions and data that the CPU needs to access immediately. The bandwidth and speed of RAM are crucial; DDR5 is the latest standard, operating at higher frequencies (e.g., 5600MHz) and lower voltages compared to DDR4, while also introducing on-die Error Correction Code (ECC) to prevent data corruption. In graphics cards, dedicated Video RAM (VRAM) is essential. Unlike system RAM, VRAM is soldered directly onto the graphics card next to the GPU, providing the ultra-high-speed memory buffer required to store texture files and frame data. For modern AI workloads, high VRAM capacity (e.g., 6GB or 8GB minimum) is critical, as large language models and generation pipelines are loaded directly into VRAM for processing.",
+    "quiz": [
+      {
+        "id": "q1",
+        "question": "What is the primary difference between a CPU and a GPU?",
+        "options": [
+          "CPUs are faster than GPUs in all calculations",
+          "CPUs run serial tasks with few cores, while GPUs run parallel tasks with thousands of smaller cores",
+          "GPUs are only used for gaming and cannot run business software",
+          "CPUs do not contain physical cores"
+        ],
+        "answerIndex": 1,
+        "explanation": "A CPU is designed for fast serial processing on a few cores, whereas a GPU is optimized for massive parallel workloads across thousands of smaller cores."
+      },
+      {
+        "id": "q2",
+        "question": "Why is dedicated VRAM important for video editing and gaming?",
+        "options": [
+          "It acts as a backup hard drive for video files",
+          "It provides the GPU with ultra-high-speed buffer memory separate from slower system RAM",
+          "It increases the battery life of desktop towers",
+          "It replaces the need for a CPU"
+        ],
+        "answerIndex": 1,
+        "explanation": "Dedicated VRAM is located on the graphics card itself, giving the GPU direct, high-bandwidth access to texture and frame data without clogging the system RAM bus."
+      },
+      {
+        "id": "q3",
+        "question": "Which of the following is a feature introduced in DDR5 RAM compared to DDR4?",
+        "options": [
+          "Dual-channel compatibility support",
+          "On-die Error Correction Code (ECC) and lower operating voltage (1.1V)",
+          "Higher latency and slower transfer frequencies",
+          "Compatibility with older DDR4 motherboard slots"
+        ],
+        "answerIndex": 2,
+        "explanation": "DDR5 RAM introduces built-in on-die ECC for increased stability and runs at a lower voltage (1.1V vs DDR4's 1.2V), while delivering much higher speeds."
+      },
+      {
+        "id": "q4",
+        "question": "What happens if a gaming computer runs out of dedicated VRAM during a game?",
+        "options": [
+          "The computer will instantly shut down",
+          "The game will crash or frame rates will drop heavily as the system falls back to slower system RAM",
+          "The monitor will display static noise",
+          "The CPU will take over graphics processing without any performance loss"
+        ],
+        "answerIndex": 1,
+        "explanation": "When VRAM is full, the GPU is forced to use system RAM over the slower PCIe interface, causing massive stutters or game crashes."
+      },
+      {
+        "id": "q5",
+        "question": "Which spec is most critical for running multiple virtual machines on a workstation?",
+        "options": [
+          "GPU cooling fans",
+          "High capacity System RAM (e.g., 32GB or 64GB)",
+          "Fast SSD read speeds",
+          "Display refresh rate"
+        ],
+        "answerIndex": 1,
+        "explanation": "Each virtual machine requires a dedicated portion of system RAM. Running out of RAM causes the host operating system to cache to disk, slowing the system to a crawl."
+      }
+    ]
+  },
+  {
+    "id": "module-networking-basics",
+    "topic": "networking",
+    "title": "Introduction to Computer Networking",
+    "keywords": ["router", "switch", "wifi", "poe", "lan", "networking", "dhcp"],
+    "content": "Computer networking is the practice of connecting computing devices together to share data, resources, and internet connections. The local network (LAN) forms the backbone of any office or home setup. The two most critical devices in a LAN are switches and routers. A switch connects devices within the same network, using MAC addresses to forward data frames to the correct recipient. Modern office deployments heavily utilize Power-over-Ethernet (PoE) switches, which send power and data over a single Category 6 (Cat6) Ethernet cable, eliminating the need for electrical outlets near ceiling-mounted WiFi access points or security cameras. A router, on the other hand, connects different networks together—specifically, it routes traffic between your private LAN and the public Internet. Routers use IP addresses to direct traffic and run DHCP servers to assign local IP addresses to new devices. Wireless networking has evolved rapidly; WiFi 6 (802.11ax) is the current standard, designed to handle high-density environments like modern offices and co-working spaces. WiFi 6 uses OFDMA (Orthogonal Frequency Division Multiple Access) to split a single wireless channel into multiple sub-channels, allowing the router to communicate with dozens of devices simultaneously without visual latency or dropouts.",
+    "quiz": [
+      {
+        "id": "q1",
+        "question": "What is the primary function of a network Switch?",
+        "options": [
+          "To connect different networks together and share internet",
+          "To connect devices within the same local network and forward data frames",
+          "To convert digital signals into analog phone lines",
+          "To host website domain names"
+        ],
+        "answerIndex": 1,
+        "explanation": "A switch operates inside the LAN, connecting devices like computers, printers, and servers together by forwarding data frames directly between them."
+      },
+      {
+        "id": "q2",
+        "question": "What does Power-over-Ethernet (PoE) accomplish in networking setups?",
+        "options": [
+          "It increases the speed of WiFi connections by 50%",
+          "It delivers both electrical power and data over a single LAN cable",
+          "It turns off unused routers at night to save electricity",
+          "It allows printers to work without ink"
+        ],
+        "answerIndex": 1,
+        "explanation": "PoE sends low-voltage power along with Ethernet data, letting you install devices like security cameras and WiFi access points in locations without power outlets."
+      },
+      {
+        "id": "q3",
+        "question": "Why is WiFi 6 superior to older WiFi 5 in busy office environments?",
+        "options": [
+          "It uses thicker cables that carry more data",
+          "It can communicate with multiple devices simultaneously on a single channel using OFDMA",
+          "It does not require password encryption",
+          "It operates only on analog frequencies"
+        ],
+        "answerIndex": 1,
+        "explanation": "WiFi 6 uses OFDMA and advanced MU-MIMO to handle multiple devices simultaneously on the same frequency channel, preventing network congestion."
+      },
+      {
+        "id": "q4",
+        "question": "Which protocol is responsible for automatically assigning IP addresses to devices?",
+        "options": [
+          "DNS",
+          "DHCP",
+          "HTTP",
+          "SMTP"
+        ],
+        "answerIndex": 1,
+        "explanation": "DHCP (Dynamic Host Configuration Protocol) automatically assigns IP configurations to devices when they connect to a network."
+      },
+      {
+        "id": "q5",
+        "question": "If a router has a WAN port and 4 LAN ports, where do you connect the incoming fiber modem line?",
+        "options": [
+          "Any LAN port",
+          "The WAN port",
+          "The USB backup port",
+          "The console port"
+        ],
+        "answerIndex": 1,
+        "explanation": "The WAN (Wide Area Network) port is designed to connect to the external internet source, such as a fiber optic or cable modem."
+      }
+    ]
+  }
+]

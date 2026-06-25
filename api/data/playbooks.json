@@ -1,0 +1,108 @@
+[
+  {
+    "id": "playbook-laptop-gaming",
+    "category": "laptop",
+    "subcategory": "gaming",
+    "keywords": ["gaming", "game", "rtx", "victus", "legion", "predator", "loq"],
+    "title": "Gaming Laptop Sales Playbook",
+    "discovery_questions": [
+      "Which games do you mainly play?",
+      "What is your budget range?",
+      "Do you need it for streaming or content creation too?",
+      "Are you looking for a laptop that can be upgraded later?",
+      "Do you have a monitor at home or will you use the laptop display?"
+    ],
+    "qualification_checklist": [
+      { "item": "Budget confirmed", "critical": true },
+      { "item": "Games identified (competitive/AAA)", "critical": true },
+      { "item": "Upgrade needs discussed", "critical": false },
+      { "item": "Warranty preference noted", "critical": false }
+    ],
+    "pitch_formats": {
+      "30_sec": "This HP Victus 15 gives you RTX 3050 graphics and a 144Hz display — that means smooth, competitive gaming at ₹72,000. Your games will run at 60-100 FPS on ultra settings. Best part? 1-year HP warranty and available right here in Pune.",
+      "2_min": "Let me explain why the HP Victus 15 is perfect for you. First, the graphics: RTX 3050 with 6GB VRAM handles games like BGMI, Valorant, and GTA V at high settings smoothly. The 144Hz display means no screen tearing — your reflexes actually matter in competitive play. The Intel Core i5-13420H processor handles streaming and recording without lag. 16GB RAM means you can game and have Discord, Chrome open simultaneously. The 512GB NVMe SSD means Windows boots in 8 seconds and games load instantly. Price: ₹72,000 with 1-year HP warranty. Compare this to competitors: similar spec gaming laptops cost ₹78,000-85,000.",
+      "technical": "HP Victus 15 FA1327TX: Intel Core i5-13420H (8C/12T, up to 4.6GHz), NVIDIA RTX 3050 6GB GDDR6, 16GB DDR4 3200MHz (2 slots, upgradeable to 32GB), 512GB NVMe PCIe Gen4, 15.6\" FHD IPS 144Hz, Wi-Fi 6, Thunderbolt 4. TDP: 45W+30W GPU. Supports DLSS 3 for supported titles.",
+      "retail_counter": "Sir/Madam, gaming laptop ₹72,000 mein — RTX 3050 graphics, 144Hz display. BGMI, Valorant, GTA V — sab games smooth chalenge. HP warranty 1 year. Aaj purchase karo.",
+      "corporate": "The HP Victus 15 provides enterprise-grade performance for technical users requiring GPU compute capabilities. NVIDIA RTX 3050 supports CUDA workloads for AI/ML prototyping alongside gaming use."
+    },
+    "objection_handling": {
+      "price_too_high": { "response": "Compare features: RTX 3050 + 144Hz at ₹72K vs competitor at ₹78K for same specs. DCC price is already the best in Maharashtra. Plus consider: 1-year HP warranty means zero repair cost risk.", "follow_up": "What budget were you thinking? I can show you the best option at your price point." },
+      "competitor_cheaper": { "response": "Which competitor? Let me compare spec by spec. Often cheaper laptops have lower GPU VRAM (4GB vs 6GB), lower refresh rate (60Hz vs 144Hz), or HDD instead of SSD. Always compare on same specs.", "follow_up": "Can I see the competitor model? I can do a live comparison." },
+      "battery_life": { "response": "Gaming laptops prioritize performance over battery. For gaming (plugged in) — no compromise. For college use (light tasks) — 4-5 hours. Many students use gaming laptop for both gaming and studies.", "follow_up": "Are you mainly gaming at home or do you need it for travel too?" }
+    },
+    "cross_sell": ["logitech-g305", "gaming-headset", "lg-24mr400", "apc-bx600c-in"],
+    "upsell": "Consider Lenovo LOQ 15 with RTX 4050 at ₹85,000 — 40% more gaming performance for ₹13,000 more. Long-term value is better.",
+    "closing_techniques": [
+      "Assumptive Close: 'Should we go ahead with the billing for the HP Victus 15, and would you like the gaming mouse bundled?'",
+      "Urgency Close: 'We only have 3 units of this specific model left in our Pune warehouse at this price.'"
+    ]
+  },
+  {
+    "id": "playbook-laptop-business",
+    "category": "laptop",
+    "subcategory": "business",
+    "keywords": ["business", "office", "elitebook", "latitude", "thinkpad", "tco", "warranty"],
+    "title": "Business Laptop Sales Playbook",
+    "discovery_questions": [
+      "What software programs does your team run daily (Tally, Excel, CRM)?",
+      "How many hours a day does your team travel or work away from desks?",
+      "What is your company's standard hardware replacement cycle?",
+      "How critical is data security and onsite support for your operation?"
+    ],
+    "qualification_checklist": [
+      { "item": "Corporate registration details verified", "critical": true },
+      { "item": "Onsite support requirements understood", "critical": true },
+      { "item": "Standard config defined", "critical": false }
+    ],
+    "pitch_formats": {
+      "30_sec": "The Dell Latitude 3440 is built for corporate work: Intel Core i5, 16GB RAM, and a 3-year ProSupport onsite warranty. It runs Tally and Excel instantly for ₹72,500. No repair worries for three full years.",
+      "2_min": "For your business, reliability is profit. The Dell Latitude 3440 offers a durable chassis that survives drops, WPA3 network security to protect client data, and an Intel Core i5 with 16GB RAM that won't lag. The main advantage is Dell's 3-year ProSupport warranty: if anything goes wrong, a Dell technician visits your Pune office next business day. It keeps your employees working and saves IT costs.",
+      "technical": "Dell Latitude 3440: Intel Core i5-1335U, Intel Iris Xe, 16GB DDR4 RAM, 512GB NVMe PCIe SSD, 14\" FHD display, 3-cell 54Whr ExpressCharge battery, TPM 2.0 security chip, 3-year ProSupport warranty.",
+      "retail_counter": "Sir, business ke liye Dell Latitude sabse best hai. 3-year onsite warranty hai, kuch problem hua toh Dell engineer office aake repair karega. 16GB RAM hai, super fast chalega.",
+      "corporate": "The Dell Latitude 3440 standardizes your end-user compute layer. Its TPM 2.0 encryption and 3-year lifecycle availability reduce your total cost of ownership (TCO) by 28% compared to consumer-grade laptops."
+    },
+    "objection_handling": {
+      "price_too_high": { "response": "A consumer laptop has only a 1-year carry-in warranty. A business laptop has a 3-year onsite warranty. If it breaks down in Year 2, a consumer laptop costs ₹10,000 in repairs, plus 5 days of employee idle time. Latitude saves that entire risk.", "follow_up": "How much does employee downtime cost your business per day?" },
+      "longer_warranty": { "response": "DCC stocks these with a 3-year manufacturer warranty. We can also provide an extended DCC annual maintenance contract (AMC) for Years 4 and 5.", "follow_up": "Would you like me to add AMC pricing to the quote?" }
+    },
+    "cross_sell": ["logitech-mk295-combo", "dell-p2422h", "apc-bx600c-in", "epson-l3250"],
+    "upsell": "Upsell to HP EliteBook 840 G9 at ₹98,000 for senior executives — features a premium aluminum body and Wolf Security protection.",
+    "closing_techniques": [
+      "Summary Close: 'So we have the Dell Latitude with 16GB RAM, the wireless mouse, and a 3-year warranty. I'll prepare the final GST invoice now.'",
+      "Trial Close: 'Does this 3-year onsite warranty meet your company's IT compliance policies?'"
+    ]
+  },
+  {
+    "id": "playbook-networking",
+    "category": "networking",
+    "subcategory": "router",
+    "keywords": ["router", "switch", "wifi", "network", "range", "tp-link", "ubiquiti"],
+    "title": "Enterprise Networking Playbook",
+    "discovery_questions": [
+      "What is the total carpet area of your office/home?",
+      "How many active devices will connect to the internet simultaneously?",
+      "What is your fiber broadband plan speed?",
+      "Do you have cabling infrastructure or do you need a wireless mesh?"
+    ],
+    "qualification_checklist": [
+      { "item": "Active user count confirmed", "critical": true },
+      { "item": "Broadband speed verified", "critical": true },
+      { "item": "Ceiling mounting feasibility checked", "critical": false }
+    ],
+    "pitch_formats": {
+      "30_sec": "The TP-Link Archer AX23 WiFi 6 router gives you AX1800 speeds and connects up to 60 devices without lagging, for just ₹4,200. It covers a 3-bedroom flat or small office perfectly.",
+      "2_min": "If your internet is lagging, it's usually not the fiber line — it's your old router. The TP-Link AX1800 features WiFi 6, which handles 4 times more devices than older WiFi 5 routers. It uses OFDMA technology so your laptop, mobiles, Smart TVs, and security cameras get high-speed connections simultaneously. It features 4 gigabit LAN ports for smart TVs or NAS, and has WPA3 encryption for data security. Price: ₹4,200 with a 3-year TP-Link warranty.",
+      "technical": "TP-Link Archer AX23: Dual-Band Wi-Fi 6 AX1800 (1201 Mbps on 5GHz + 574 Mbps on 2.4GHz), 4x external antennas, 4x Gigabit LAN ports, 1x Gigabit WAN, OFDMA, MU-MIMO, WPA3.",
+      "retail_counter": "Sir, WiFi 6 router lagao. Ghar ke sab mobiles aur TVs ek sath speed mein chalenge. Lag nahi hoga. TP-Link company ka 3-year warranty hai.",
+      "corporate": "Standardize your branch office connectivity with the Asus RT-AX53U. Its USB failover port supports a 4G/5G backup dongle, guaranteeing 100% uptime for your billing counters during fiber outages."
+    },
+    "objection_handling": {
+      "price_too_high": { "response": "A cheap ₹1,500 router slows down and requires reboots when more than 10 devices connect. The AX1800 connects 60 devices smoothly and has a 3-year warranty.", "follow_up": "How many devices are currently using WiFi at your place?" }
+    },
+    "cross_sell": ["ubiquiti-unifi-u6-plus", "logitech-c270", "tp-link-tapo-c200"],
+    "upsell": "For large office floors, upsell to Ubiquiti UniFi U6+ ceiling access points at ₹12,500 for seamless mesh roaming.",
+    "closing_techniques": [
+      "Direct Close: 'We have these in stock in our Pune warehouse. Can I ship this along with your desktop order?'"
+    ]
+  }
+]

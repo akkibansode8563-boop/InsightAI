@@ -1,0 +1,153 @@
+[
+  {
+    "id": "solution-gaming-budget",
+    "use_case": "Gaming Setup (Budget)",
+    "keywords": ["gaming", "casual", "budget", "valorant", "gta", "victus", "loq"],
+    "budget_range": { "min": 60000, "max": 90000 },
+    "description": "Complete budget gaming setup for casual to mid-level gaming in 1080p.",
+    "components": [
+      { "category": "laptop", "recommendation": "HP Victus 15 FA1327TX (RTX 3050)", "qty": 1, "budget_share_percent": 80, "notes": "Core processing and graphics" },
+      { "category": "mouse", "recommendation": "Logitech M170 Wireless Mouse", "qty": 1, "budget_share_percent": 2, "notes": "Basic wireless controls" },
+      { "category": "headset", "recommendation": "Logitech H390 USB Headset", "qty": 1, "budget_share_percent": 5, "notes": "Audio communication and mic" },
+      { "category": "ups", "recommendation": "APC BX600C-IN 600VA UPS", "qty": 1, "budget_share_percent": 5, "notes": "Protects against voltage fluctuations" },
+      { "category": "monitor", "recommendation": "LG 24MR400-B 23.8\" 100Hz IPS", "qty": 1, "budget_share_percent": 8, "notes": "Dual screen setup for gaming comfort" }
+    ],
+    "networking": "Standard home broadband connection. Connect via Ethernet to the main router for low-latency multiplayer gaming.",
+    "software": ["Windows 11 Home", "Steam Client", "Discord", "GeForce Experience Drivers"],
+    "installation_notes": "Connect the laptop to the external LG monitor via HDMI. Enable 100Hz refresh rate in Windows display adapter settings.",
+    "upgrade_path": "6 months: Upgrade RAM to 32GB. 12 months: Purchase external mechanical keyboard and gaming mouse combo."
+  },
+  {
+    "id": "solution-gaming-premium",
+    "use_case": "Gaming Setup (Premium)",
+    "keywords": ["gaming", "premium", "rtx4060", "predator", "helios", "165hz"],
+    "budget_range": { "min": 120000, "max": 200000 },
+    "description": "Premium 1440p high-refresh rate gaming and content creation station.",
+    "components": [
+      { "category": "laptop", "recommendation": "Acer Predator Helios Neo 16 (RTX 4060)", "qty": 1, "budget_share_percent": 75, "notes": "Workstation CPU and RTX 4060 graphics" },
+      { "category": "mouse", "recommendation": "Logitech MX Master 3S Wireless Mouse", "qty": 1, "budget_share_percent": 6, "notes": "Precision pointer and custom scroll wheels" },
+      { "category": "headset", "recommendation": "Plantronics Voyager 5200", "qty": 1, "budget_share_percent": 6, "notes": "Premium noise-cancelling headset" },
+      { "category": "ups", "recommendation": "APC BX1100C-IN 1100VA UPS", "qty": 1, "budget_share_percent": 5, "notes": "Maintains backup during gaming sessions" },
+      { "category": "monitor", "recommendation": "Dell P2422H 23.8\" IPS Pivot Monitor", "qty": 1, "budget_share_percent": 8, "notes": "Secondary portrait screen for coding or chats" }
+    ],
+    "networking": "WiFi 6 router connection required. Recommend connecting the laptop to an Asus AX1800 router via Cat6 LAN cable.",
+    "software": ["Windows 11 Pro", "Steam", "OBS Studio for streaming", "NVIDIA Broadcast"],
+    "installation_notes": "Connect the Dell monitor via Type-C to DisplayPort or HDMI. Enable G-Sync in NVIDIA Control Panel.",
+    "upgrade_path": "1 year: Add a high-performance external 1TB NVMe SSD for raw video capture storage."
+  },
+  {
+    "id": "solution-office-smb",
+    "use_case": "Office Setup (5-seat)",
+    "keywords": ["office", "smb", "desktops", "tally", "printing", "ups"],
+    "budget_range": { "min": 300000, "max": 500000 },
+    "description": "Standard business desk setup for 5 employees performing billing, accounting, and operations.",
+    "components": [
+      { "category": "desktop", "recommendation": "Acer Veriton M200 Tower PC", "qty": 5, "budget_share_percent": 50, "notes": "Reliable 3-year warranty desktop towers" },
+      { "category": "monitor", "recommendation": "Dell E2224H 21.5\" Monitor", "qty": 5, "budget_share_percent": 18, "notes": "FHD VA screens for spreadsheet clarity" },
+      { "category": "keyboard", "recommendation": "Dell KM3322W Wireless Combo", "qty": 5, "budget_share_percent": 8, "notes": "Spill-resistant wireless keyboard and mouse" },
+      { "category": "printer", "recommendation": "HP LaserJet Tank 2606sdw", "qty": 1, "budget_share_percent": 10, "notes": "Network printer for high-speed monochrome invoicing" },
+      { "category": "ups", "recommendation": "Artis PS-600Eco 600VA UPS", "qty": 5, "budget_share_percent": 10, "notes": "Individual UPS units per desktop to avoid data loss" },
+      { "category": "router", "recommendation": "TP-Link Archer C6 AC1200", "qty": 1, "budget_share_percent": 4, "notes": "Distributes office internet" }
+    ],
+    "networking": "Configure the HP LaserJet printer on the local WiFi network. Connect all desktops to the network via Ethernet or WiFi adapters.",
+    "software": ["Windows 11 Home", "Tally ERP / Prime Multi-user", "Microsoft Office Home & Business", "QuickBooks"],
+    "installation_notes": "DCC technician will install the network printer and configure folder sharing across the 5 desktops.",
+    "upgrade_path": "1 year: Add a central Synology NAS storage tower for automated daily document backups."
+  },
+  {
+    "id": "solution-school-lab",
+    "use_case": "School Computer Lab (25-seat)",
+    "keywords": ["school", "computer", "lab", "classroom", "budget", "desktops"],
+    "budget_range": { "min": 1200000, "max": 1800000 },
+    "description": "Complete computer lab setup for schools and colleges, optimized for 25 student seating slots.",
+    "components": [
+      { "category": "desktop", "recommendation": "Lenovo IdeaCentre 3 Tower", "qty": 25, "budget_share_percent": 55, "notes": "Compact 7L towers to fit 2 students per desk" },
+      { "category": "monitor", "recommendation": "LG 22MP410-B 21.5\" 75Hz Monitor", "qty": 25, "budget_share_percent": 22, "notes": "Affordable VA displays with eye protection" },
+      { "category": "keyboard", "recommendation": "Zebronics Judwaa 555 Wired Combo", "qty": 25, "budget_share_percent": 5, "notes": "Durable wired keyboards to prevent battery theft" },
+      { "category": "ups", "recommendation": "APC Back-UPS BX1100C-IN 1100VA", "qty": 13, "budget_share_percent": 12, "notes": "One 1100VA UPS powers two student desktops" },
+      { "category": "printer", "recommendation": "Brother DCP-T820DW Ink Tank All-in-One", "qty": 1, "budget_share_percent": 3, "notes": "For printing lab certificates and student reports" },
+      { "category": "router", "recommendation": "TP-Link Archer AX23 WiFi 6 Router", "qty": 1, "budget_share_percent": 3, "notes": "Deploys school lab wireless intranet network" }
+    ],
+    "networking": "Configure static IP routing on the TP-Link router. Connect all 25 towers to a 24-port Gigabit switch via Cat6 cabling.",
+    "software": ["Windows 11 / Ubuntu Linux Dual Boot", "Scratch Programming", "Python IDLE", "MS Office Academic"],
+    "installation_notes": "Position the 1100VA UPS units on bottom trays. Secure cables in wire trays to prevent accidental kicks by students.",
+    "upgrade_path": "Year 2: Add a school server tower to run local educational database applications."
+  },
+  {
+    "id": "solution-ai-workstation",
+    "use_case": "AI Workstation",
+    "keywords": ["ai", "machine", "learning", "gpu", "cuda", "development", "rtx"],
+    "budget_range": { "min": 250000, "max": 400000 },
+    "description": "High-end compute workstation for local LLM fine-tuning, training, and 3D modeling.",
+    "components": [
+      { "category": "desktop", "recommendation": "Acer Predator Helios Neo 16 Desktop Tower", "qty": 1, "budget_share_percent": 70, "notes": "Intel HX processor + dual slot for heavy GPU expansion" },
+      { "category": "ram", "recommendation": "Kingston 8GB DDR5 5600MHz", "qty": 4, "budget_share_percent": 8, "notes": "Upgrade system RAM to 32GB or 64GB DDR5" },
+      { "category": "ssd", "recommendation": "WD Blue SN580 1TB NVMe Gen4", "qty": 2, "budget_share_percent": 10, "notes": "Dual SSD layout: OS drive + dedicated high-speed dataset drive" },
+      { "category": "ups", "recommendation": "APC BX1100C-IN 1100VA UPS", "qty": 1, "budget_share_percent": 6, "notes": "Ensures clean power during heavy computational training runs" },
+      { "category": "monitor", "recommendation": "Dell P2422H 23.8\" IPS Pivot Monitor", "qty": 1, "budget_share_percent": 6, "notes": "Secondary screen for monitoring terminal commands" }
+    ],
+    "networking": "Connect to internet via gigabit Ethernet. Requires high-speed connection for downloading massive AI model weights.",
+    "software": ["Ubuntu Server / Desktop 22.04 LTS", "NVIDIA CUDA Toolkit & cuDNN", "Docker", "Anaconda Python Suite"],
+    "installation_notes": "Ensure the power outlet supports 15A loads. Keep the tower in an air-conditioned room to prevent GPU throttling during training.",
+    "upgrade_path": "6 months: Install a secondary liquid CPU cooler. 1 year: Upgrade storage to 4TB RAID arrays."
+  },
+  {
+    "id": "solution-cctv-surveillance",
+    "use_case": "CCTV Surveillance (20-cam)",
+    "keywords": ["cctv", "security", "camera", "surveillance", "dvr", "nvr"],
+    "budget_range": { "min": 200000, "max": 400000 },
+    "description": "Professional surveillance setup for warehouses, hotels, and large residential buildings.",
+    "components": [
+      { "category": "camera", "recommendation": "CP Plus 2MP Outdoor Bullet Camera", "qty": 12, "budget_share_percent": 25, "notes": "Waterproof outdoor perimeter coverage" },
+      { "category": "camera", "recommendation": "Hikvision DS-2CE56D0T 2MP Dome Camera", "qty": 8, "budget_share_percent": 15, "notes": "Indoor corridor and lobby coverage" },
+      { "category": "dvr", "recommendation": "CP Plus 4-Channel UVR (Upgraded to 24-ch commercial NVR)", "qty": 1, "budget_share_percent": 20, "notes": "Core video recording server" },
+      { "category": "storage", "recommendation": "WD Surveillance 4TB HDD", "qty": 2, "budget_share_percent": 15, "notes": "Handles continuous 24/7 video streaming records" },
+      { "category": "monitor", "recommendation": "LG 22MP410-B 21.5\" Monitor", "qty": 1, "budget_share_percent": 8, "notes": "Security guard desk monitoring display" },
+      { "category": "ups", "recommendation": "Artis PS-600Eco 600VA UPS", "qty": 2, "budget_share_percent": 10, "notes": "Maintains DVR power during power cuts to avoid recording gaps" },
+      { "category": "router", "recommendation": "D-Link DIR-615 N300 Router", "qty": 1, "budget_share_percent": 7, "notes": "Enables remote mobile application viewing access" }
+    ],
+    "networking": "Router should have a static IP or Dynamic DNS configured for stable remote viewing using the gCMOB mobile app.",
+    "software": ["CP Plus gCMOB Mobile App", "Hikvision iVMS Client Software"],
+    "installation_notes": "Mount outdoor bullet cameras under roofs/sunshades to prevent glare from direct sunlight. Ground the coaxial cables to prevent lightning damage.",
+    "upgrade_path": "1 year: Add IP-based PTZ (Pan-Tilt-Zoom) tracking cameras at main entries."
+  },
+  {
+    "id": "solution-video-editing",
+    "use_case": "Video Editing Studio",
+    "keywords": ["video", "editing", "studio", "macbook", "m3", "4k", "rendering"],
+    "budget_range": { "min": 180000, "max": 300000 },
+    "description": "High-speed video post-production editing workstation, optimized for 4K video rendering.",
+    "components": [
+      { "category": "laptop", "recommendation": "Apple MacBook Air 13\" M3 (Upgraded model)", "qty": 1, "budget_share_percent": 60, "notes": "Superfast M3 silicon with hardware ProRes video engines" },
+      { "category": "monitor", "recommendation": "Dell P2422H 23.8\" IPS Pivot Monitor", "qty": 1, "budget_share_percent": 12, "notes": "Secondary color-accurate IPS reference monitor" },
+      { "category": "mouse", "recommendation": "Logitech MX Master 3S Wireless Mouse", "qty": 1, "budget_share_percent": 6, "notes": "Side scroll wheel for fast horizontal timeline navigation" },
+      { "category": "storage", "recommendation": "WD Blue SN580 1TB NVMe SSD", "qty": 2, "budget_share_percent": 10, "notes": "High speed storage inside external Thunderbolt enclosure" },
+      { "category": "ups", "recommendation": "APC BX1100C-IN 1100VA UPS", "qty": 1, "budget_share_percent": 7, "notes": "Maintains power to external storage and monitors" },
+      { "category": "headset", "recommendation": "Plantronics Voyager 5200", "qty": 1, "budget_share_percent": 5, "notes": "For wireless voice-overs and audio checks" }
+    ],
+    "networking": "Fast WiFi network (Asus AX1800) recommended for quick upload of finished projects to YouTube or Vimeo servers.",
+    "software": ["macOS Sonoma", "Final Cut Pro / Adobe Premiere Pro", "DaVinci Resolve Studio", "Dropbox Cloud"],
+    "installation_notes": "Connect the MacBook Air to the Dell monitor using a USB-C to DisplayPort cable (delivers best 60Hz color accuracy).",
+    "upgrade_path": "6 months: Add a RAID 5 external desktop storage box for high-speed multi-gigabyte project backups."
+  },
+  {
+    "id": "solution-retail-shop",
+    "use_case": "Retail Shop Setup",
+    "keywords": ["retail", "shop", "billing", "store", "pos", "thermal"],
+    "budget_range": { "min": 80000, "max": 150000 },
+    "description": "Complete retail shop billing terminal, optimized for clothing stores, grocery shops, and pharmacies.",
+    "components": [
+      { "category": "desktop", "recommendation": "HP Pavilion Slim S01 Desktop PC", "qty": 1, "budget_share_percent": 45, "notes": "Space-saving billing counter tower" },
+      { "category": "monitor", "recommendation": "LG 22MP410-B 21.5\" Monitor", "qty": 1, "budget_share_percent": 12, "notes": "FHD screen for billing items display" },
+      { "category": "keyboard", "recommendation": "Logitech MK295 Silent Wireless Combo", "qty": 1, "budget_share_percent": 5, "notes": "Keeps billing counter quiet and cable-free" },
+      { "category": "ups", "recommendation": "Artis PS-600Eco 600VA UPS", "qty": 1, "budget_share_percent": 8, "notes": "Prevents terminal reboot during sudden billing entries" },
+      { "category": "printer", "recommendation": "HP Smart Tank 585 All-in-One", "qty": 1, "budget_share_percent": 18, "notes": "Prints general letters, customer bills, and labels" },
+      { "category": "router", "recommendation": "D-Link DIR-615 N300 Router", "qty": 1, "budget_share_percent": 7, "notes": "Distributes WiFi to card swipe machines" },
+      { "category": "camera", "recommendation": "TP-Link Tapo C200 WiFi Camera", "qty": 2, "budget_share_percent": 5, "notes": "Keeps watch on cashier counter and customer stands" }
+    ],
+    "networking": "Configure a secure private WiFi network for the POS terminal and swipe machines. Set up a separate guest network for customers.",
+    "software": ["Windows 11 Home", "Tally Prime ERP Billing", "POS Software (RetailGraph / Vyapar)", "Antivirus Client"],
+    "installation_notes": "Connect the thermal billing printer and barcode scanner to USB 3.0 ports for maximum signal processing speeds.",
+    "upgrade_path": "6 months: Install an electronic cash drawer linked to the thermal billing printer."
+  }
+]

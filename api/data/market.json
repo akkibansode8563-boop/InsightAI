@@ -1,0 +1,73 @@
+{
+  "categories": [
+    {
+      "name": "laptops",
+      "demand_index": [75, 78, 85, 92, 95, 88],
+      "price_trend": {
+        "history": [55000, 56200, 55800, 57000, 57500, 58200],
+        "projected": [58500, 59200, 60000]
+      },
+      "brands": [
+        { "name": "HP", "share": 35 },
+        { "name": "Dell", "share": 30 },
+        { "name": "Lenovo", "share": 20 },
+        { "name": "Acer", "share": 10 },
+        { "name": "Others", "share": 5 }
+      ],
+      "top_products": ["hp-victus-15-rtx3050", "dell-inspiron-3530-i5", "lenovo-ideapad-slim-3-i5"],
+      "seasonal_pattern": "Heavy spike in June-August due to college admissions ('Back to School' sales) and Q4 corporate budgets refresh.",
+      "forecast": {
+        "type": "ai_estimate",
+        "description": "Laptops prices are expected to rise by 3-5% over the next quarter due to rising component costs (RAM wafers) and high monsoon season demand in Maharashtra.",
+        "disclaimer": "AI Estimate — Not Guaranteed. Real market conditions may vary due to global chip shortages and exchange rate fluctuations."
+      }
+    },
+    {
+      "name": "networking",
+      "demand_index": [60, 65, 70, 75, 82, 85],
+      "price_trend": {
+        "history": [4500, 4600, 4550, 4700, 4800, 4850],
+        "projected": [4900, 4950, 5000]
+      },
+      "brands": [
+        { "name": "TP-Link", "share": 45 },
+        { "name": "D-Link", "share": 25 },
+        { "name": "Asus", "share": 15 },
+        { "name": "Ubiquiti", "share": 10 },
+        { "name": "Others", "share": 5 }
+      ],
+      "top_products": ["tp-link-archer-c6", "tp-link-ax1800", "ubiquiti-unifi-u6-plus"],
+      "seasonal_pattern": "Consistent demand throughout the year, with moderate spikes during festival seasons (October-November) when small businesses upgrade retail outlets.",
+      "forecast": {
+        "type": "ai_estimate",
+        "description": "WiFi 6 routers are expected to drop in price by 5% as WiFi 7 models enter the market in volume, making AX1800 the optimal budget business buy.",
+        "disclaimer": "AI Estimate — Not Guaranteed. Regional distributor pricing adjustments may affect final street prices."
+      }
+    },
+    {
+      "name": "printers",
+      "demand_index": [50, 52, 58, 65, 70, 68],
+      "price_trend": {
+        "history": [18000, 18500, 18300, 18800, 19200, 19500],
+        "projected": [19800, 20200, 20500]
+      },
+      "brands": [
+        { "name": "HP", "share": 40 },
+        { "name": "Epson", "share": 30 },
+        { "name": "Canon", "share": 20 },
+        { "name": "Brother", "share": 10 }
+      ],
+      "top_products": ["hp-smart-tank-585", "epson-l3250", "brother-dcp-t820dw"],
+      "seasonal_pattern": "Spike in April-May (academic year beginning) and October (Diwali billing setup changes).",
+      "forecast": {
+        "type": "ai_estimate",
+        "description": "Ink Tank printers remain in high demand due to ultra-low printing cost. Prices will remain stable with slight promotions during regional festivals.",
+        "disclaimer": "AI Estimate — Not Guaranteed. Supply chain logistics in Maharashtra may alter localized stocking campaigns."
+      }
+    }
+  ],
+  "market_summary": {
+    "overall_trends": "Maharashtra's IT distribution market remains highly active. Pune and Mumbai are driving 65% of enterprise networking and server growth. Laptops remain highly sought after by students, with custom desktop PCs dominating the gamer and tech-creator segments.",
+    "last_updated": "2026-06-25"
+  }
+}

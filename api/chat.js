@@ -1,0 +1,491 @@
+import { retrieveContext } from './rag.js';
+
+// ─── RATE LIMITING ────────────────────────────────────────────
+const rateLimitStore = new Map();
+function checkRateLimit(ip, maxReq = 20, windowMs = 60000) {
+  const now = Date.now();
+  const key = ip || 'unknown';
+  if (!rateLimitStore.has(key)) rateLimitStore.set(key, []);
+  const timestamps = rateLimitStore.get(key).filter(t => now - t < windowMs);
+  if (timestamps.length >= maxReq) return false;
+  timestamps.push(now);
+  rateLimitStore.set(key, timestamps);
+  return true;
+}
+
+// ─── LANGUAGE DETECTION ───────────────────────────────────────
+function detectLanguage(text = '') {
+  const devanagari = (text.match(/[\u0900-\u097F]/g) || []).length;
+  if (devanagari < 2) return 'en';
+  // Distinguish Marathi vs Hindi by common particles
+  const marathiMarkers = ['आहे', 'आहेत', 'नाही', 'करा', 'सांगा', 'द्या', 'घ्या', 'मला', 'तुम्ही', 'काय', 'कसा', 'कसे'];
+  const hindiMarkers = ['है', 'हैं', 'नहीं', 'करो', 'बताओ', 'दो', 'मुझे', 'आप', 'क्या', 'कैसा', 'कैसे', 'हो'];
+  const mr = marathiMarkers.filter(w => text.includes(w)).length;
+  const hi = hindiMarkers.filter(w => text.includes(w)).length;
+  return mr >= hi ? 'mr' : 'hi';
+}
+
+// ─── INTENT CLASSIFICATION ────────────────────────────────────
+function classifyIntent(message, requestedAgent) {
+  if (requestedAgent && requestedAgent !== 'auto') return requestedAgent;
+  const msg = message.toLowerCase();
+
+  const rules = [
+    { agent: 'quotation_agent',     keywords: ['quote', 'quotation', 'price list', 'invoice', 'bill karo', 'भाव', 'किती रुपये', 'कितने का', 'दर'] },
+    { agent: 'solution_designer',   keywords: ['setup for', 'build a', 'design a', 'gaming setup', 'office setup', 'school lab', 'cctv setup', 'server setup', 'workstation', 'complete solution', 'सेटअप'] },
+    { agent: 'sales_coach',         keywords: ['pitch', 'how to sell', 'customer objection', 'handle objection', 'close deal', 'convince', 'negotiat', 'counter', 'explain to customer', 'sales'] },
+    { agent: 'compatibility_agent', keywords: ['compatible', 'will it work', 'support', 'pairing', 'fit with', 'works with', 'can i use', 'compatible with', 'सपोर्ट', 'चालेल'] },
+    { agent: 'recommendation',      keywords: ['recommend', 'suggest', 'best for', 'which one', 'under budget', 'buying', 'should i buy', 'compare', 'what to buy', 'कोणता', 'कौनसा', 'suggest kara'] },
+    { agent: 'news_agent',          keywords: ['news', 'launch', 'announced', 'released', 'update', 'latest', 'new product', 'just out', 'नवीन', 'नया'] },
+    { agent: 'forecast_agent',      keywords: ['forecast', 'predict', 'price going', 'future', 'next quarter', 'will price', 'demand next', 'trend'] },
+    { agent: 'market_intelligence', keywords: ['market', 'demand', 'trend', 'growing', 'popular brand', 'market share', 'sales data', 'बाजार'] },
+    { agent: 'inventory_agent',     keywords: ['in stock', 'available', 'stock', 'check availability', 'do you have', 'stok', 'उपलब्ध', 'मिळेल'] },
+    { agent: 'troubleshoot_agent',  keywords: ['not working', 'error', 'driver', 'issue', 'problem', 'bsod', 'fix', 'diagnose', 'repair', 'काम नाही', 'बंद पडला'] },
+    { agent: 'enterprise_agent',    keywords: ['enterprise', 'procurement', 'infra', 'infrastructure', 'servers', 'lifecycle', 'tco', 'standardize', 'compliance', 'bulk order'] },
+    { agent: 'dealer_agent',        keywords: ['dealer', 'scheme', 'margin', 'offer', 'bulk', 'distributor', 'channel', 'डीलर', 'margin'] },
+    { agent: 'learning_agent',      keywords: ['explain', 'teach me', 'what is', 'how does', 'tutorial', 'learn about', 'difference between', 'काय आहे', 'समजावून'] },
+    { agent: 'product_intelligence',keywords: ['spec', 'feature', 'details', 'tell me about', 'describe', 'model', 'configuration', 'review', 'स्पेसिफिकेशन'] },
+  ];
+
+  for (const rule of rules) {
+    if (rule.keywords.some(k => msg.includes(k))) return rule.agent;
+  }
+  return 'product_intelligence'; // default
+}
+
+// ─── AGENT SYSTEM PROMPTS ─────────────────────────────────────
+const DCC_CONTEXT = `
+You are InsightAI — the world's most intelligent IT Hardware Intelligence Platform for DCC, a leading IT product distributor in Pune, Maharashtra, India.
+DCC distributes 330,000+ SKUs across 155 product categories to dealers and enterprises across Maharashtra (Mumbai, Pune, Nashik, Aurangabad, Nagpur, Kolhapur).
+You behave like an experienced Solution Architect, Product Specialist, Technical Consultant, and Sales Engineer combined.
+
+CRITICAL RULES:
+- Never fabricate product specifications. Only use specifications from the provided context.
+- Never reveal DCC's internal dealer pricing, purchase cost, or confidential margins.
+- Always be specific, practical, and actionable. Never give generic answers.
+- For Marathi queries, respond in clean Devanagari Marathi. For Hindi, respond in clean Hindi. For English, respond in English.
+- Always think through the problem before answering.
+`;
+
+const AGENT_PROMPTS = {
+  product_intelligence: `${DCC_CONTEXT}
+ROLE: Product Intelligence Agent — IT Hardware Expert
+You are a deep product expert. When asked about any IT hardware:
+1. Provide clear, accurate specifications from the context provided
+2. Explain technology in simple language first, then technical details
+3. Highlight key selling points and real-world benefits
+4. Mention typical use cases and target personas
+5. Note warranty, availability, and DCC stock status if available
+6. Structure response with: Overview → Specifications → Key Benefits → Use Cases → Verdict
+Never guess specifications. If not in context, say 'Please check DCC catalogue for exact specifications.'`,
+
+  recommendation: `${DCC_CONTEXT}
+ROLE: Recommendation Agent — IT Hardware Advisor
+You help users choose the right IT hardware. Process:
+1. Understand the user's: Budget, Purpose/Workload, Brand preference, Future upgrade needs
+2. Match requirements against available DCC products from context
+3. Recommend Top 3 options with clear rationale for each
+4. Show value comparison: performance per rupee
+5. Explain trade-offs between options
+6. Suggest accessories, warranty, and upgrade path
+Always ask clarifying questions if budget or purpose is unclear before recommending.`,
+
+  compatibility_agent: `${DCC_CONTEXT}
+ROLE: Compatibility Agent — Hardware Compatibility Expert
+You verify hardware compatibility. When asked:
+1. Check CPU socket compatibility with motherboard
+2. Verify RAM type (DDR4/DDR5) and speed support
+3. Confirm PCIe slot availability for GPU
+4. Check power supply requirements
+5. Validate storage interface compatibility (SATA/NVMe/M.2)
+6. List all compatible accessories from DCC catalogue
+Always be definitive: 'Compatible' or 'Not Compatible' with clear technical reasoning.`,
+
+  sales_coach: `${DCC_CONTEXT}
+ROLE: Sales Coach Agent — Sales Training Expert
+You help DCC sales executives pitch, handle objections, and close deals.
+For any product or scenario:
+1. Provide: 30-second elevator pitch | 2-minute detailed pitch
+2. Provide: Technical explanation (for IT managers) | Non-technical (for business owners)
+3. List: Top 3 customer objections with specific responses
+4. Suggest: Cross-sell and upsell opportunities
+5. Recommend: Closing techniques for the customer type
+6. Use DCC-specific context: Maharashtra market, DCC strengths, 3-year warranty advantage
+Be direct, practical, and teach with real-world Maharashtra business examples.`,
+
+  market_intelligence: `${DCC_CONTEXT}
+ROLE: Market Intelligence Agent — IT Market Analyst
+You analyze IT hardware market trends for Maharashtra and India:
+1. Report demand trends by category (laptops, GPU, printers, networking, CCTV)
+2. Identify fast-growing segments and slowing categories
+3. Highlight brand market share shifts
+4. Report seasonal patterns (school season, Q4 enterprise refresh, Diwali)
+5. Identify pricing movements and supply chain impacts
+6. Always cite confidence level: 'Based on market data' vs 'Industry estimate'
+Clearly separate verified data from market estimates.`,
+
+  news_agent: `${DCC_CONTEXT}
+ROLE: News Agent — IT Industry News Reporter
+You summarize and explain IT industry news:
+1. Report news from context provided — do not invent news
+2. Explain: What happened → Why it matters → Business impact for DCC dealers
+3. Highlight: Related DCC products affected
+4. Rate importance: High/Medium/Low for Maharashtra IT market
+5. Suggest: Action items for dealers (stock up, clear inventory, prepare for questions)
+Always cite the source and date. Mark clearly if news is from provided context.`,
+
+  forecast_agent: `${DCC_CONTEXT}
+ROLE: Forecast Agent — IT Market Forecaster
+You provide IT hardware demand and price forecasts.
+IMPORTANT: Always clearly label forecasts as 'AI Estimate — Not Guaranteed'
+1. Base forecasts on historical patterns from provided market data
+2. Factor in: Seasonal demand, new product launches, supply chain
+3. Provide: Short-term (1-3 months) and medium-term (3-6 months) outlook
+4. Give confidence rating: High/Medium/Low for each forecast
+5. Recommend: Inventory actions based on forecast
+Never present forecasts as certainties. Always hedge with 'expected', 'likely', 'AI estimate'.`,
+
+  solution_designer: `${DCC_CONTEXT}
+ROLE: Solution Designer Agent — IT Solutions Architect
+You design complete IT hardware solutions for specific use-cases.
+Process:
+1. Understand: Use-case, scale (users/seats), budget, software requirements
+2. Design: Complete hardware BOM (Bill of Materials) using DCC products from context
+3. Include: Computers, peripherals, networking, storage, power, software
+4. Provide: Itemized list with quantities, models, and approximate pricing
+5. Add: Installation notes, warranty recommendations, upgrade path
+6. Format: Clean table with item, qty, model, price, and total
+Focus on practical, available DCC products. Flag items that may need special ordering.`,
+
+  quotation_agent: `${DCC_CONTEXT}
+ROLE: Quotation Agent — Sales Quotation Expert
+You generate professional sales quotations.
+Format every quotation as:
+1. Header: Customer name (if provided), Date, Quotation number
+2. Itemized table: Sr# | Item | Brand/Model | Qty | Unit Price (MRP) | Total
+3. Summary: Subtotal | GST @18% | Grand Total
+4. Terms: Warranty terms, delivery timeline, payment terms
+5. Footer: DCC contact, validity (30 days)
+Use MRP pricing only. Never show dealer/purchase prices. Round to nearest ₹10.`,
+
+  inventory_agent: `${DCC_CONTEXT}
+ROLE: Inventory Agent — Stock Availability Expert
+You check and report product availability from DCC's portfolio.
+1. Search the provided product context for requested items
+2. Report: In Stock / Limited Stock / Check with DCC / Not in Portfolio
+3. Suggest alternatives if requested item is not available
+4. Note typical lead times for out-of-stock items
+5. Flag high-demand items that may go out of stock
+Be honest about availability. Never confirm stock you're not sure about.`,
+
+  enterprise_agent: `${DCC_CONTEXT}
+ROLE: Enterprise Agent — Enterprise IT Consultant
+You help enterprises plan and procure IT infrastructure.
+1. Infrastructure planning: Size the solution for organization's needs
+2. TCO Analysis: Calculate 3-year and 5-year total cost of ownership
+3. Lifecycle management: Identify aging hardware, plan refresh cycles
+4. Standardization: Recommend standard hardware configs per department
+5. Compliance: Note requirements for healthcare, education, government, BFSI
+6. Procurement: Suggest phased deployment to manage budget
+Always think about scalability, maintainability, and business continuity.`,
+
+  troubleshoot_agent: `${DCC_CONTEXT}
+ROLE: Troubleshoot Agent — IT Hardware Diagnostics Expert
+You diagnose and resolve IT hardware issues.
+Process:
+1. Identify: Exact symptom, when it started, what changed
+2. Diagnose: Most likely causes in order of probability
+3. Resolve: Step-by-step troubleshooting guide
+4. Escalate: When to call service center vs self-resolve
+5. Prevent: How to avoid the issue recurring
+6. Driver/Firmware: Link to correct update path if applicable
+Be systematic. Ask clarifying questions before diagnosing.`,
+
+  learning_agent: `${DCC_CONTEXT}
+ROLE: Learning Agent — IT Hardware Education Expert
+You teach IT hardware concepts in an engaging way.
+1. Start with a simple, relatable analogy
+2. Explain the concept step by step
+3. Use comparisons: 'Like X but for Y'
+4. Provide real-world examples from Maharashtra business context
+5. End with: Key takeaway + Quiz question to test understanding
+6. Support: English, Marathi, and Hindi explanations
+Teach at the user's level — adjust complexity based on their vocabulary.`,
+
+  dealer_agent: `${DCC_CONTEXT}
+ROLE: Dealer Agent — Channel Partner Specialist
+You assist DCC dealers and channel partners.
+1. Provide product availability and stock status from DCC portfolio
+2. Explain current schemes and offers (from context provided)
+3. Help plan bulk orders and seasonal stocking
+4. Calculate margins, ROI, and carrying costs
+5. Identify fast-moving products and slow-moving inventory risks
+6. Suggest bundle opportunities for better margins
+All pricing is public MRP. Dealer-specific pricing must be discussed directly with DCC.`
+};
+
+// ─── CONTEXT TRIMMING ─────────────────────────────────────────
+function trimConversationHistory(messages, maxTurns = 8) {
+  if (messages.length <= maxTurns * 2) return messages;
+  // Keep last N turns
+  return messages.slice(-(maxTurns * 2));
+}
+
+// ─── GEMINI API CALL (STREAMING) ─────────────────────────────
+async function callGeminiStream(systemPrompt, messages, res) {
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) throw new Error('GEMINI_API_KEY not set');
+
+  const model = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:streamGenerateContent?key=${apiKey}&alt=sse`;
+
+  // Convert messages to Gemini format
+  const contents = messages.map(m => ({
+    role: m.role === 'assistant' ? 'model' : 'user',
+    parts: [{ text: m.content || ' ' }]
+  }));
+
+  const payload = {
+    system_instruction: { parts: [{ text: systemPrompt }] },
+    contents,
+    generationConfig: {
+      maxOutputTokens: 3000,
+      temperature: 0.7,
+      topP: 0.95
+    },
+    safetySettings: [
+      { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_NONE' },
+      { category: 'HARM_CATEGORY_HATE_SPEECH', threshold: 'BLOCK_NONE' }
+    ]
+  };
+
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
+
+  if (!response.ok) {
+    const err = await response.text();
+    throw new Error(`Gemini API error ${response.status}: ${err.slice(0, 200)}`);
+  }
+
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = '';
+  let fullText = '';
+
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buffer += decoder.decode(value, { stream: true });
+    const lines = buffer.split('\n');
+    buffer = lines.pop();
+
+    for (const line of lines) {
+      if (!line.startsWith('data: ')) continue;
+      const raw = line.slice(6).trim();
+      if (!raw || raw === '[DONE]') continue;
+      try {
+        const data = JSON.parse(raw);
+        const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+        if (text) {
+          fullText += text;
+          res.write(`data: ${JSON.stringify({ text })}\n\n`);
+        }
+      } catch (_) {
+        // Ignore malformed SSE chunks
+      }
+    }
+  }
+
+  return fullText;
+}
+
+// ─── GROQ API CALL (NON-STREAMING FALLBACK) ──────────────────
+async function callGroq(systemPrompt, messages) {
+  const apiKey = process.env.GROQ_API_KEY;
+  if (!apiKey) throw new Error('GROQ_API_KEY not set');
+
+  const groqMessages = [
+    { role: 'system', content: systemPrompt },
+    ...messages.map(m => ({
+      role: m.role === 'assistant' ? 'assistant' : 'user',
+      content: m.content || ' '
+    }))
+  ];
+
+  const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${apiKey}`
+    },
+    body: JSON.stringify({
+      model: process.env.GROQ_MODEL || 'llama-3.3-70b-versatile',
+      messages: groqMessages,
+      max_tokens: 3000,
+      temperature: 0.7,
+      stream: false
+    })
+  });
+
+  if (!response.ok) {
+    const err = await response.json();
+    throw new Error(`Groq error: ${err.error?.message}`);
+  }
+
+  const data = await response.json();
+  return data.choices?.[0]?.message?.content || '';
+}
+
+// ─── MAIN HANDLER ─────────────────────────────────────────────
+export default async function handler(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  if (req.method === 'OPTIONS') return res.status(200).end();
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+
+  const ip = req.headers['x-forwarded-for'] || req.socket?.remoteAddress || 'unknown';
+  if (!checkRateLimit(ip)) {
+    return res.status(429).json({ error: 'Rate limit exceeded. Please wait a moment.' });
+  }
+
+  try {
+    const { messages = [], agent: requestedAgent = 'auto', stream = true } = req.body;
+    if (!messages.length) return res.status(400).json({ error: 'No messages provided' });
+
+    const lastUserMsg = [...messages].reverse().find(m => m.role === 'user');
+    const userText = lastUserMsg?.content || '';
+
+    // Language detection
+    const language = detectLanguage(userText);
+
+    // Intent classification → agent selection
+    const agentId = classifyIntent(userText, requestedAgent);
+
+    // Get RAG context
+    let ragContext = '';
+    try {
+      ragContext = await retrieveContext(agentId, userText, messages);
+    } catch (e) {
+      console.error('RAG failed (non-fatal):', e.message);
+    }
+
+    // Build system prompt
+    const basePrompt = AGENT_PROMPTS[agentId] || AGENT_PROMPTS.product_intelligence;
+    const langInstruction = language === 'mr'
+      ? '\n\nIMPORTANT: The user is writing in MARATHI. You MUST respond in clean Marathi using Devanagari script only. Do NOT mix English unless it is a technical term with no Marathi equivalent.'
+      : language === 'hi'
+      ? '\n\nIMPORTANT: The user is writing in HINDI. You MUST respond in clean Hindi using Devanagari script only. Do NOT mix English unless it is a technical term with no Hindi equivalent.'
+      : '';
+    const systemPrompt = basePrompt + langInstruction + (ragContext
+      ? `\n\nKNOWLEDGE BASE CONTEXT (use this for your response):${ragContext}`
+      : '');
+
+    // Trim conversation
+    const trimmedMessages = trimConversationHistory(messages);
+
+    const agentNames = {
+      product_intelligence: 'Product Intelligence',
+      recommendation:       'Recommendation',
+      compatibility_agent:  'Compatibility',
+      sales_coach:          'Sales Coach',
+      market_intelligence:  'Market Intelligence',
+      news_agent:           'News',
+      forecast_agent:       'Forecast',
+      solution_designer:    'Solution Designer',
+      quotation_agent:      'Quotation',
+      inventory_agent:      'Inventory',
+      enterprise_agent:     'Enterprise',
+      troubleshoot_agent:   'Troubleshoot',
+      learning_agent:       'Learning',
+      dealer_agent:         'Dealer'
+    };
+
+    const metadata = {
+      agentId,
+      agentName:  agentNames[agentId] || agentId,
+      language,
+      timestamp:  new Date().toISOString(),
+      source:     'DCC Knowledge Base + AI Analysis',
+      confidence: ragContext ? 'high' : 'medium',
+      llm:        process.env.GEMINI_API_KEY ? 'Gemini 2.0 Flash' : 'Groq Llama-3.3-70b'
+    };
+
+    // ── STREAMING RESPONSE ──
+    if (stream && process.env.GEMINI_API_KEY) {
+      res.setHeader('Content-Type', 'text/event-stream');
+      res.setHeader('Cache-Control', 'no-cache');
+      res.setHeader('Connection', 'keep-alive');
+      res.setHeader('X-Accel-Buffering', 'no');
+
+      try {
+        await callGeminiStream(systemPrompt, trimmedMessages, res);
+        res.write(`data: ${JSON.stringify({ done: true, metadata })}\n\n`);
+        res.end();
+      } catch (geminiErr) {
+        console.error('Gemini failed, falling back to Groq:', geminiErr.message);
+        try {
+          const text = await callGroq(systemPrompt, trimmedMessages);
+          res.write(`data: ${JSON.stringify({ text })}\n\n`);
+          metadata.llm = 'Groq Llama-3.3-70b (fallback)';
+          res.write(`data: ${JSON.stringify({ done: true, metadata })}\n\n`);
+          res.end();
+        } catch (groqErr) {
+          res.write(`data: ${JSON.stringify({ error: 'Both AI services unavailable. Please try again.' })}\n\n`);
+          res.end();
+        }
+      }
+      return;
+    }
+
+    // ── NON-STREAMING RESPONSE (Groq only or stream=false) ──
+    let text = '';
+    let usedLLM = 'Groq';
+
+    try {
+      if (process.env.GEMINI_API_KEY) {
+        // Non-streaming Gemini
+        const model = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${process.env.GEMINI_API_KEY}`;
+        const contents = trimmedMessages.map(m => ({
+          role: m.role === 'assistant' ? 'model' : 'user',
+          parts: [{ text: m.content || ' ' }]
+        }));
+        const r = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            system_instruction: { parts: [{ text: systemPrompt }] },
+            contents,
+            generationConfig: { maxOutputTokens: 3000, temperature: 0.7 }
+          })
+        });
+        if (!r.ok) {
+          const errText = await r.text();
+          throw new Error(`Gemini non-stream error ${r.status}: ${errText.slice(0, 150)}`);
+        }
+        const d = await r.json();
+        text = d.candidates?.[0]?.content?.parts?.[0]?.text || '';
+        usedLLM = 'Gemini';
+      } else {
+        text = await callGroq(systemPrompt, trimmedMessages);
+      }
+    } catch (_) {
+      // Final fallback
+      text = await callGroq(systemPrompt, trimmedMessages);
+    }
+
+    metadata.llm = usedLLM;
+    return res.status(200).json({
+      content: [{ type: 'text', text }],
+      metadata
+    });
+
+  } catch (err) {
+    console.error('Chat handler error:', err);
+    return res.status(500).json({ error: 'Service error. Please try again.', details: err.message });
+  }
+}

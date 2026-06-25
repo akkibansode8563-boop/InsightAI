@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">DCC InsightAI</string>
+    <string name="title_activity_main">DCC InsightAI</string>
+    <string name="package_name">com.dcc.insightai</string>
+    <string name="custom_url_scheme">com.dcc.insightai</string>
+</resources>

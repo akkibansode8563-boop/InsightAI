@@ -1,0 +1,87 @@
+[
+  {
+    "id": "news-001",
+    "title": "Intel Arrow Lake Desktop CPUs Launched in India",
+    "category": ["cpu", "india_it", "product_launch"],
+    "date": "2026-06-20",
+    "ai_summary": "Intel has officially launched its 15th Generation Arrow Lake desktop processors in the Indian market. The new line-up transitions completely to DDR5 memory and features a new socket LGA1851, dropping support for older DDR4 motherboards.",
+    "key_highlights": [
+      "Built on TSMC 3nm process node for improved energy efficiency",
+      "Completely new LGA1851 socket replacing the LGA1700 standard",
+      "Up to 15% IPC IPC single-threaded performance improvement"
+    ],
+    "business_impact": "Dealers should clear LGA1700 (12th-14th Gen) motherboard inventories. Expect high initial demand for high-end Z890 motherboards and DDR5 RAM packages from Pune custom PC builders.",
+    "technical_impact": "Existing Z790/B760 motherboards cannot be upgraded. Customers upgrading to Arrow Lake must purchase a new motherboard and DDR5 RAM, driving combo sales.",
+    "related_products": ["kingston-8gb-ddr5", "wd-sn580-1tb"],
+    "source": "Intel India Press Launch",
+    "confidence": "verified"
+  },
+  {
+    "id": "news-002",
+    "title": "Indian Government Extends IT Hardware Import Authorization Policy",
+    "category": ["govt_policy", "india_it", "supply_chain"],
+    "date": "2026-06-15",
+    "ai_summary": "The Ministry of Electronics and Information Technology (MeitY) has extended the import management system for laptops, tablets, and servers for another year. The system aims to monitor imports while local assembly lines scale up.",
+    "key_highlights": [
+      "No immediate import ban on popular foreign IT brands",
+      "Local assembly units in Maharashtra (Pune, Ranjangaon) expanding capacity",
+      "Simplified online authorization system prevents shipment delays"
+    ],
+    "business_impact": "DCC dealer network will experience stable supply chains for laptops and pre-built desktops. No major price hikes or inventory shortages are expected in the next two quarters.",
+    "technical_impact": "Encourages international brands (HP, Dell, Lenovo) to assemble more models locally in India, leading to localized parts availability and quicker service times.",
+    "related_products": ["hp-14-intel-i3", "dell-vostro-3520-i5", "lenovo-ideapad-slim-3-i5"],
+    "source": "DGFT Gazette Notification",
+    "confidence": "verified"
+  },
+  {
+    "id": "news-003",
+    "title": "Microsoft Copilot+ PC Specifications Standardized",
+    "category": ["ai_hardware", "product_launch"],
+    "date": "2026-06-10",
+    "ai_summary": "Microsoft has finalized the baseline hardware requirements for local Copilot+ AI integration on Windows 11. To qualify, laptops must feature an NPU (Neural Processing Unit) delivering at least 40 TOPS of compute power.",
+    "key_highlights": [
+      "Requires minimum 16GB unified RAM/memory and 256GB SSD storage",
+      "NPU power must exceed 40 TOPS for local AI features",
+      "Qualcomm Snapdragon X Elite, Intel Lunar Lake, and AMD Ryzen AI 9 support it"
+    ],
+    "business_impact": "Laptops with 8GB RAM are no longer standard for premium buyers. Sales executives should pitch 16GB RAM models as 'AI-Ready' to protect customers' long-term investments.",
+    "technical_impact": "Standardizes the NPU compute layer. Integrated AI features like Recall and local Image Creator will not run on legacy laptops, driving a massive premium upgrade cycle.",
+    "related_products": ["apple-macbook-air-m3-13", "asus-vivobook-15-i5", "dell-latitude-3440"],
+    "source": "Microsoft Build Developer Docs",
+    "confidence": "verified"
+  },
+  {
+    "id": "news-004",
+    "title": "DDR5 Pricing Expected to Rise 10% in Q3 due to HBM Production",
+    "category": ["semiconductors", "market_trends"],
+    "date": "2026-06-05",
+    "ai_summary": "Major RAM chip manufacturers (Samsung, SK Hynix, Micron) are shifting wafer allocation toward server-grade High Bandwidth Memory (HBM) for AI data centers, reducing consumer DDR5 production capacity.",
+    "key_highlights": [
+      "Server AI boom dominates silicon wafer manufacturing allocation",
+      "Consumer DDR5 output expected to drop by 15% next quarter",
+      "Standard 8GB/16GB DDR5 module prices projected to increase by 8-12%"
+    ],
+    "business_impact": "Dealers should stock up on DDR5 RAM inventory immediately at current lower prices to secure margins before the Q3 wholesale price hikes.",
+    "technical_impact": "DDR4 platforms remain highly cost-competitive for budget office and educational builds in rural Maharashtra where budget is key.",
+    "related_products": ["kingston-8gb-ddr5", "crucial-16gb-ddr4", "corsair-vengeance-16gb-ddr4"],
+    "source": "TrendForce DRAM Market Report",
+    "confidence": "high"
+  },
+  {
+    "id": "news-005",
+    "title": "Surge in Pune Co-working Spaces Drives Commercial Networking Demand",
+    "category": ["india_it", "market_trends"],
+    "date": "2026-06-01",
+    "ai_summary": "A rapid expansion of co-working spaces in Pune (Kalyani Nagar, Hinjawadi, Baner) has created a boom in commercial networking setups. Seamless high-density WiFi access points are the highest priority.",
+    "key_highlights": [
+      "Pune office occupancy rates at a 3-year high",
+      "Demand for Enterprise WiFi 6 Access Points up by 45% year-on-year",
+      "High reliance on PoE (Power over Ethernet) infrastructure for clean setups"
+    ],
+    "business_impact": "System integrators should pivot marketing toward co-working networking design. Focus on stocking Ubiquiti UniFi APs and Gigabit PoE switches.",
+    "technical_impact": "Requires deployment of enterprise routers with multi-WAN load balancing to handle multiple fiber broadband lines and prevent network drops.",
+    "related_products": ["ubiquiti-unifi-u6-plus", "tp-link-ax1800", "asus-rt-ax53u"],
+    "source": "Pune Real Estate & IT Quarterly",
+    "confidence": "high"
+  }
+]
