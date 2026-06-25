@@ -22,6 +22,151 @@ function ThinkingDots() {
   );
 }
 
+// Inline Markdown Parser
+function parseInlineMarkdown(str) {
+  if (!str) return '';
+  const regex = /(\*\*.*?\*\*|`.*?`|!\[.*?\]\(.*?\))/g;
+  const tokens = str.split(regex);
+  return tokens.map((token, idx) => {
+    if (token.startsWith('**') && token.endsWith('**')) {
+      return <strong key={idx} style={{ color: 'var(--text-primary)', fontWeight: '700' }}>{token.slice(2, -2)}</strong>;
+    }
+    if (token.startsWith('`') && token.endsWith('`')) {
+      return <code key={idx} style={{ background: 'var(--bg-elevated)', padding: '2px 6px', borderRadius: '4px', fontSize: '0.85em', fontFamily: 'monospace', color: 'var(--primary)', border: '1px solid var(--glass-border-strong)' }}>{token.slice(1, -1)}</code>;
+    }
+    if (token.startsWith('![') && token.includes('](')) {
+      const altMatch = token.match(/!\[(.*?)\]\((.*?)\)/);
+      if (altMatch) {
+        const [, alt, url] = altMatch;
+        return <img key={idx} src={url} alt={alt} style={{ maxWidth: '100%', height: 'auto', borderRadius: 'var(--radius-md)', display: 'block', margin: '12px auto', border: '1px solid var(--glass-border-strong)', boxShadow: 'var(--shadow-md)' }} />;
+      }
+    }
+    return token;
+  });
+}
+
+// Markdown Parser Helper
+function parseMarkdown(text) {
+  if (!text) return null;
+
+  const lines = text.split('\n');
+  const elements = [];
+  
+  let currentTable = null;
+  let currentList = null;
+
+  const flushTable = (key) => {
+    if (currentTable) {
+      elements.push(
+        <div key={key} style={{ overflowX: 'auto', margin: '16px 0', border: '1px solid var(--glass-border-strong)', borderRadius: 'var(--radius-md)', background: 'var(--bg-surface)', boxShadow: 'var(--shadow-sm)' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9em', textAlign: 'left' }}>
+            <thead>
+              <tr style={{ borderBottom: '2.5px solid var(--glass-border-strong)', background: 'var(--bg-elevated)' }}>
+                {currentTable.headers.map((h, i) => (
+                  <th key={i} style={{ padding: '12px 16px', fontWeight: '700', color: 'var(--text-secondary)' }}>{parseInlineMarkdown(h)}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {currentTable.rows.map((row, i) => (
+                <tr key={i} style={{ borderBottom: '1px solid var(--glass-border-strong)', transition: 'background var(--transition-fast)' }}>
+                  {row.map((cell, j) => (
+                    <td key={j} style={{ padding: '12px 16px', color: 'var(--text-primary)' }}>{parseInlineMarkdown(cell)}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      );
+      currentTable = null;
+    }
+  };
+
+  const flushList = (key) => {
+    if (currentList) {
+      elements.push(
+        <ul key={key} style={{ margin: '12px 0', paddingLeft: '24px', listStyleType: 'disc', display: 'flex', flexDirection: 'column', gap: 6 }}>
+          {currentList.map((item, i) => (
+            <li key={i} style={{ color: 'var(--text-primary)', lineHeight: 1.5 }}>{parseInlineMarkdown(item)}</li>
+          ))}
+        </ul>
+      );
+      currentList = null;
+    }
+  };
+
+  for (let idx = 0; idx < lines.length; idx++) {
+    const line = lines[idx].trim();
+    const key = `block-${idx}`;
+
+    // Table parsing
+    if (line.startsWith('|')) {
+      flushList(key);
+      const cells = line.split('|').map(c => c.trim()).filter((c, i, arr) => i > 0 && i < arr.length - 1);
+      
+      const isSeparator = cells.every(c => c.match(/^:?-+:?$/));
+      if (isSeparator) {
+        continue;
+      }
+
+      if (!currentTable) {
+        currentTable = { headers: cells, rows: [] };
+      } else {
+        currentTable.rows.push(cells);
+      }
+      continue;
+    } else {
+      flushTable(key);
+    }
+
+    // List parsing
+    if (line.startsWith('* ') || line.startsWith('- ')) {
+      const itemText = line.slice(2).trim();
+      if (!currentList) {
+        currentList = [itemText];
+      } else {
+        currentList.push(itemText);
+      }
+      continue;
+    } else {
+      flushList(key);
+    }
+
+    // Headings
+    if (line.startsWith('### ')) {
+      elements.push(<h4 key={key} className="font-heading" style={{ fontSize: '1.05em', fontWeight: '800', color: 'var(--text-secondary)', marginTop: 20, marginBottom: 8 }}>{parseInlineMarkdown(line.slice(4))}</h4>);
+      continue;
+    }
+    if (line.startsWith('## ')) {
+      elements.push(<h3 key={key} className="font-heading" style={{ fontSize: '1.18em', fontWeight: '800', color: 'var(--text-secondary)', marginTop: 24, marginBottom: 12, borderBottom: '1px solid var(--glass-border-strong)', paddingBottom: 6 }}>{parseInlineMarkdown(line.slice(3))}</h3>);
+      continue;
+    }
+    if (line.startsWith('# ')) {
+      elements.push(<h2 key={key} className="font-heading" style={{ fontSize: '1.35em', fontWeight: '900', color: 'var(--primary)', marginTop: 28, marginBottom: 16 }}>{parseInlineMarkdown(line.slice(2))}</h2>);
+      continue;
+    }
+
+    // Horizontal Rule
+    if (line === '---' || line === '***') {
+      elements.push(<hr key={key} style={{ border: 'none', borderTop: '1px solid var(--glass-border-strong)', margin: '20px 0' }} />);
+      continue;
+    }
+
+    // Normal text
+    if (line === '') {
+      elements.push(<div key={key} style={{ height: 8 }} />);
+    } else {
+      elements.push(<p key={key} style={{ margin: '8px 0', lineHeight: 1.6, color: 'var(--text-primary)' }}>{parseInlineMarkdown(line)}</p>);
+    }
+  }
+
+  flushTable('table-final');
+  flushList('list-final');
+
+  return elements;
+}
+
 // Message Bubble
 function MessageBubble({ msg, onCopy }) {
   const { t } = useApp();
@@ -65,17 +210,17 @@ function MessageBubble({ msg, onCopy }) {
               ? 'linear-gradient(135deg, var(--primary), #ea580c)'
               : 'var(--bg-surface)',
             color: isUser ? '#fff' : 'var(--text-primary)',
-            padding: '12px 16px',
+            padding: '12px 18px',
             borderRadius: isUser ? '18px 4px 18px 18px' : '4px 18px 18px 18px',
             fontSize: '0.88em',
             lineHeight: 1.6,
             boxShadow: 'var(--shadow-sm)',
             border: isUser ? 'none' : '1px solid var(--glass-border-strong)',
-            whiteSpace: 'pre-wrap',
+            whiteSpace: isUser ? 'pre-wrap' : 'normal',
             wordBreak: 'break-word',
           }}
         >
-          {msg.content}
+          {isUser ? msg.content : parseMarkdown(msg.content)}
         </div>
 
         {/* Copy & Meta Actions */}
