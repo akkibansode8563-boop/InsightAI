@@ -1,4 +1,5 @@
 import { retrieveContext } from './rag.js';
+import { findProductImage, getCategoryImage, detectCategory } from './productImages.js';
 
 // ─── RATE LIMITING ────────────────────────────────────────────
 const rateLimitStore = new Map();
@@ -72,16 +73,11 @@ ROLE: Product Intelligence Agent — Senior Product Manager & OEM Pre-Sales Cons
 You are an IT Hardware Expert. When asked about any IT hardware product (laptop, printer, server, etc.), you MUST generate a customer-friendly, sales-ready product brief following this exact format:
 
 ### 1. Product Showcase
-Include a product showcase image at the very beginning of your response.
-- Format: ![Product Name Showcase](image_url)
-- Special Rule: If the product is "HP OmniBook Ultra Flip" or "OmniBook Ultra Flip 14", you MUST use this URL: /hp_omnibook_showcase.png
-- Fallback URLs for other categories (always use one of these or a relevant high-quality image URL):
-  * Laptops: /showcase-laptop.png
-  * Desktops/Workstations: /showcase-desktop.png
-  * Printers: /showcase-printer.png
-  * Networking: /showcase-networking.png
-  * Storage/SSD/Components: /showcase-storage.png
-  * Others/Accessories: /showcase-general.png
+INCLUDE THE PRODUCT IMAGE at the very beginning using the EXACT image URL provided in your instructions for this request.
+- Format: ![Product Name Showcase](<IMAGE_URL_PLACEHOLDER>)
+- CRITICAL: Use ONLY the image URL you are given. Do NOT use placeholder or generic URLs.
+- If you see a URL starting with https:// use it exactly as-is in the markdown image tag.
+- If you see a local path like /showcase-laptop.png use it as-is.
 
 ### 2. Product Overview (Maximum 50 Words)
 Write a short overview covering product category, target audience, primary purpose, and key selling point. Keep it concise, sales-focused, and premium.
@@ -409,8 +405,33 @@ export default async function handler(req, res) {
       console.error('RAG failed (non-fatal):', e.message);
     }
 
-    // Build system prompt
-    const basePrompt = AGENT_PROMPTS[agentId] || AGENT_PROMPTS.product_intelligence;
+    // ── Product image injection ──────────────────────────────────────
+    // Look up a real product image URL from the database and inject it into the prompt
+    let productImageUrl = null;
+    let productImageInfo = null;
+    if (agentId === 'product_intelligence' || agentId === 'recommendation' || agentId === 'sales_coach') {
+      const imgMatch = findProductImage(userText);
+      if (imgMatch) {
+        productImageUrl = imgMatch.url;
+        productImageInfo = imgMatch;
+      } else {
+        // Detect category from user message and use category fallback
+        const cat = detectCategory ? detectCategory(userText) : null;
+        productImageUrl = cat ? getCategoryImage(cat) : null;
+      }
+    }
+
+    // Build system prompt (inject real product image URL)
+    let basePrompt = AGENT_PROMPTS[agentId] || AGENT_PROMPTS.product_intelligence;
+    if (productImageUrl) {
+      basePrompt = basePrompt.replace('<IMAGE_URL_PLACEHOLDER>', productImageUrl);
+      if (productImageInfo) {
+        basePrompt += `\n\nPRODUCT IMAGE: The REAL official product image URL for "${productImageInfo.name}" is: ${productImageUrl}\nUse this EXACT URL in the markdown image: ![${productImageInfo.name}](${productImageUrl})\nDo NOT change, truncate, or replace this URL with anything else.`;
+      }
+    } else {
+      // No specific product found — use category fallback URL
+      basePrompt = basePrompt.replace('<IMAGE_URL_PLACEHOLDER>', '/showcase-laptop.png');
+    }
     const langInstruction = language === 'mr'
       ? '\n\nIMPORTANT: The user is writing in MARATHI. You MUST respond in clean Marathi using Devanagari script only. Do NOT mix English unless it is a technical term with no Marathi equivalent.'
       : language === 'hi'

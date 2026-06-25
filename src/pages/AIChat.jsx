@@ -22,6 +22,75 @@ function ThinkingDots() {
   );
 }
 
+// ── Product Image Component ──────────────────────────────────────────
+function ProductImageCard({ src, alt }) {
+  const [imgSrc, setImgSrc] = useState(src);
+  const [loaded, setLoaded] = useState(false);
+  const [error, setError] = useState(false);
+  const [retryCount, setRetryCount] = useState(0);
+
+  // Fallback chain: original → /api/product-image proxy → category fallback
+  const getCategoryFallback = (altText) => {
+    const t = (altText || '').toLowerCase();
+    if (t.includes('server') || t.includes('proliant') || t.includes('poweredge')) return '/showcase-server.png';
+    if (t.includes('printer') || t.includes('laserjet') || t.includes('ecotank') || t.includes('pixma')) return '/showcase-printer.png';
+    if (t.includes('switch') || t.includes('router') || t.includes('catalyst') || t.includes('networking')) return '/showcase-networking.png';
+    if (t.includes('ssd') || t.includes('storage') || t.includes('hdd') || t.includes('nvme')) return '/showcase-storage.png';
+    if (t.includes('desktop') || t.includes('workstation') || t.includes('elitedesk')) return '/showcase-desktop.png';
+    return '/showcase-laptop.png';
+  };
+
+  const handleError = () => {
+    if (retryCount === 0 && imgSrc && imgSrc.startsWith('https://')) {
+      // Try fetching via our backend proxy endpoint (avoids CORS/hotlink issues)
+      const model = encodeURIComponent(alt || '');
+      setImgSrc(`/api/product-image?model=${model}&redirect=1`);
+      setRetryCount(1);
+    } else {
+      // Use category fallback
+      const fallback = getCategoryFallback(alt);
+      setImgSrc(fallback);
+      setError(true);
+      setRetryCount(2);
+    }
+  };
+
+  return (
+    <div className="my-4 rounded-2xl overflow-hidden border border-[var(--glass-border-strong)] shadow-md bg-[var(--bg-elevated)]">
+      {/* Image */}
+      <div className="relative bg-gradient-to-br from-[var(--bg-elevated)] to-[var(--bg-surface)] flex items-center justify-center" style={{ minHeight: 200, maxHeight: 320 }}>
+        {!loaded && (
+          <div className="absolute inset-0 skeleton rounded-none" />
+        )}
+        <img
+          src={imgSrc}
+          alt={alt}
+          onLoad={() => setLoaded(true)}
+          onError={handleError}
+          className="w-full object-contain transition-opacity duration-300"
+          style={{
+            maxHeight: 300,
+            padding: '12px',
+            opacity: loaded ? 1 : 0,
+            background: 'transparent',
+          }}
+        />
+      </div>
+      {/* Caption */}
+      <div className="px-4 py-2.5 border-t border-[var(--glass-border-strong)] bg-[var(--bg-surface)] flex items-center gap-2">
+        <span className="text-lg">🖼️</span>
+        <span className="text-sm font-semibold text-[var(--text-secondary)] truncate">{alt}</span>
+        {!error && imgSrc.startsWith('https://') && (
+          <span className="ml-auto text-[10px] font-bold px-2 py-0.5 rounded-full text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20">Official Image</span>
+        )}
+        {error && (
+          <span className="ml-auto text-[10px] font-bold px-2 py-0.5 rounded-full text-orange-500 bg-orange-50 dark:bg-orange-900/20">Category Preview</span>
+        )}
+      </div>
+    </div>
+  );
+}
+
 // Inline Markdown Parser
 function parseInlineMarkdown(str) {
   if (!str) return '';
@@ -38,7 +107,7 @@ function parseInlineMarkdown(str) {
       const altMatch = token.match(/!\[(.*?)\]\((.*?)\)/);
       if (altMatch) {
         const [, alt, url] = altMatch;
-        return <img key={idx} src={url} alt={alt} style={{ maxWidth: '100%', height: 'auto', borderRadius: 'var(--radius-md)', display: 'block', margin: '12px auto', border: '1px solid var(--glass-border-strong)', boxShadow: 'var(--shadow-md)' }} />;
+        return <ProductImageCard key={idx} src={url} alt={alt} />;
       }
     }
     return token;
