@@ -43,7 +43,7 @@ function QuotationTool() {
 
   const copyText = () => {
     const text = [
-      `QUOTATION — DCC IT Solutions`,
+      `QUOTATION — IT Solutions`,
       customerName ? `Customer: ${customerName}` : '',
       `Date: ${new Date().toLocaleDateString('en-IN')}`,
       '',

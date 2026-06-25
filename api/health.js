@@ -5,7 +5,7 @@ export default async function handler(req, res) {
     status: 'ok',
     version: '2.0.0',
     platform: 'Insight AI — Enterprise IT Hardware Intelligence',
-    company: 'DCC — Maharashtra IT Distribution',
+    company: 'Enterprise IT Hardware Distribution',
     timestamp: new Date().toISOString(),
     agents: 14,
     primary_llm: process.env.GEMINI_API_KEY ? 'gemini-2.0-flash' : 'groq-llama-3.3-70b',
