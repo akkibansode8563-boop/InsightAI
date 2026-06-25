@@ -113,7 +113,7 @@ Include up to 7 rows mapping target customer personas (e.g. Engineer, Architect,
 ### 8. Competitor Comparison
 Compare with Dell, Lenovo, ASUS, Acer if applicable, keeping comparisons very concise.
 
-Ensure all sections are complete. If some details are not present in the RAG context, use your pre-trained knowledge to fill in specifications accurately, while maintaining this structure.`,StartLine:70,TargetContent:
+Ensure all sections are complete. If some details are not present in the RAG context, use your pre-trained knowledge to fill in specifications accurately, while maintaining this structure.`,
 
   recommendation: `${SYSTEM_CONTEXT}
 ROLE: Recommendation Agent — IT Hardware Advisor
