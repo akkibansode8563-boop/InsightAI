@@ -358,7 +358,7 @@ async function callGroq(systemPrompt, messages) {
       'Authorization': `Bearer ${apiKey}`
     },
     body: JSON.stringify({
-      model: process.env.GROQ_MODEL || 'llama-3.3-70b-versatile',
+      model: process.env.GROQ_MODEL || 'llama-3.1-8b-instant',
       messages: groqMessages,
       max_tokens: 3000,
       temperature: 0.7,
@@ -447,7 +447,7 @@ export default async function handler(req, res) {
       timestamp:  new Date().toISOString(),
       source:     'Hardware Knowledge Base + AI Analysis',
       confidence: ragContext ? 'high' : 'medium',
-      llm:        process.env.GEMINI_API_KEY ? 'Gemini 2.0 Flash' : 'Groq Llama-3.3-70b'
+      llm:        process.env.GEMINI_API_KEY ? 'Gemini 2.0 Flash' : 'Groq Llama-3.1-8b'
     };
 
     // ── STREAMING RESPONSE ──
@@ -466,10 +466,11 @@ export default async function handler(req, res) {
         try {
           const text = await callGroq(systemPrompt, trimmedMessages);
           res.write(`data: ${JSON.stringify({ text })}\n\n`);
-          metadata.llm = 'Groq Llama-3.3-70b (fallback)';
+          metadata.llm = 'Groq Llama-3.1-8b (fallback)';
           res.write(`data: ${JSON.stringify({ done: true, metadata })}\n\n`);
           res.end();
         } catch (groqErr) {
+          console.error('Groq fallback failed:', groqErr.message);
           res.write(`data: ${JSON.stringify({ error: 'Both AI services unavailable. Please try again.' })}\n\n`);
           res.end();
         }
