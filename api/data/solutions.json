@@ -245,7 +245,7 @@
       "Microsoft Office Home & Business",
       "QuickBooks"
     ],
-    "installation_notes": "DCC technician will install the network printer and configure folder sharing across the 5 desktops.",
+    "installation_notes": "Certified technician will install the network printer and configure folder sharing across the 5 desktops.",
     "upgrade_path": "1 year: Add a central Synology NAS storage tower for automated daily document backups.",
     "use_case_mr": "ऑफिस सेटअप (५-सीट)",
     "use_case_hi": "ऑफिस सेटअप (५-सीट)",

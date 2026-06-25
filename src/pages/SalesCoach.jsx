@@ -5,28 +5,28 @@ import { streamChat } from '../services/api.js';
 const PLAYBOOKS = [
   {
     id: 'server',
-    title: 'Server & Storage',
+    titleKey: 'sales.playbook.server',
     icon: '🖥️',
     color: '#f97316',
     scenarios: ['SMB Server Pitch', 'Enterprise Rack Solution', 'NAS/SAN Upgrade', 'Cloud vs On-Prem'],
   },
   {
     id: 'laptop',
-    title: 'Laptops & Mobile',
+    titleKey: 'sales.playbook.laptop',
     icon: '💻',
     color: '#8b5cf6',
     scenarios: ['Corporate Laptop Refresh', 'WFH Setup Bundle', 'Student/Education', 'Gaming Workstation'],
   },
   {
     id: 'network',
-    title: 'Networking',
+    titleKey: 'sales.playbook.network',
     icon: '🌐',
     color: '#0ea5e9',
     scenarios: ['Office Network Setup', 'Wi-Fi 6 Upgrade', 'SD-WAN Proposal', 'Firewall & Security'],
   },
   {
     id: 'printer',
-    title: 'Print & Scan',
+    titleKey: 'sales.playbook.printer',
     icon: '🖨️',
     color: '#059669',
     scenarios: ['Office MFP Fleet', 'Production Printing', 'Label Solutions', 'Document Management'],
@@ -34,12 +34,12 @@ const PLAYBOOKS = [
 ];
 
 const OBJECTIONS = [
-  { id: 'price', label: 'Too expensive', icon: '💰' },
-  { id: 'vendor', label: 'Happy with current vendor', icon: '🤝' },
-  { id: 'timing', label: 'Not the right time', icon: '⏰' },
-  { id: 'specs', label: 'Need better specs', icon: '📋' },
-  { id: 'support', label: 'Concerned about support', icon: '🔧' },
-  { id: 'budget', label: 'Budget not approved', icon: '📊' },
+  { id: 'price', labelKey: 'sales.objection.price', icon: '💰' },
+  { id: 'vendor', labelKey: 'sales.objection.vendor', icon: '🤝' },
+  { id: 'timing', labelKey: 'sales.objection.timing', icon: '⏰' },
+  { id: 'specs', labelKey: 'sales.objection.specs', icon: '📋' },
+  { id: 'support', labelKey: 'sales.objection.support', icon: '🔧' },
+  { id: 'budget', labelKey: 'sales.objection.budget', icon: '📊' },
 ];
 
 function PageHeader({ icon, title, desc, color }) {
@@ -97,6 +97,7 @@ function TabBar({ tabs, active, onChange, color }) {
 }
 
 function AIResponseBox({ loading, response, error }) {
+  const { t } = useApp();
   if (!loading && !response && !error) return null;
   return (
     <div
@@ -111,7 +112,7 @@ function AIResponseBox({ loading, response, error }) {
       {loading && (
         <div style={{ display: 'flex', gap: 6, alignItems: 'center', color: 'var(--text-secondary)', fontSize: '0.85em' }}>
           {[0,1,2].map(i => <span key={i} className="loading-dot" style={{ animationDelay: `${i*0.16}s` }} />)}
-          <span style={{ marginLeft: 4 }}>Generating...</span>
+          <span style={{ marginLeft: 4 }}>{t('sales.playbookGenerating')}</span>
         </div>
       )}
       {error && <div style={{ color: '#dc2626', fontSize: '0.85em' }}>⚠️ {error}</div>}
@@ -158,7 +159,8 @@ export default function SalesCoach() {
 
   const handlePlaybookScenario = () => {
     if (!selectedPlaybook || !selectedScenario) return;
-    ask(`Generate a complete sales playbook for: ${selectedPlaybook.title} - ${selectedScenario}. Include: opening pitch, key value propositions, feature highlights, typical objections and responses, and closing techniques.`);
+    const title = t(selectedPlaybook.titleKey);
+    ask(`Generate a complete sales playbook for: ${title} - ${selectedScenario}. Include: opening pitch, key value propositions, feature highlights, typical objections and responses, and closing techniques.`);
   };
 
   const handlePitchGen = () => {
@@ -168,7 +170,8 @@ export default function SalesCoach() {
 
   const handleObjection = () => {
     if (!selectedObjection) return;
-    ask(`Provide 5 professional, empathetic responses to the sales objection: "${selectedObjection.label}" in context of IT hardware sales. Include: acknowledgment, reframe, value proof point, social proof, and next step.`);
+    const label = t(selectedObjection.labelKey);
+    ask(`Provide 5 professional, empathetic responses to the sales objection: "${label}" in context of IT hardware sales. Include: acknowledgment, reframe, value proof point, social proof, and next step.`);
   };
 
   const handleNegotiation = () => {
@@ -205,8 +208,10 @@ export default function SalesCoach() {
                   onClick={() => { setSelectedPlaybook(pb); setSelectedScenario(null); setResponse(''); }}
                 >
                   <div style={{ fontSize: 24, marginBottom: 8 }}>{pb.icon}</div>
-                  <div className="font-heading" style={{ fontWeight: 800, fontSize: '0.9em', color: 'var(--text-primary)', marginBottom: 4 }}>{pb.title}</div>
-                  <div style={{ fontSize: '0.72em', color: 'var(--text-muted)' }}>{pb.scenarios.length} scenarios</div>
+                  <div className="font-heading" style={{ fontWeight: 800, fontSize: '0.9em', color: 'var(--text-primary)', marginBottom: 4 }}>{t(pb.titleKey)}</div>
+                  <div style={{ fontSize: '0.72em', color: 'var(--text-muted)' }}>
+                    {pb.scenarios.length} {language === 'mr' ? 'प्रसंग' : language === 'hi' ? 'परिदृश्य' : 'scenarios'}
+                  </div>
                 </div>
               ))}
             </div>
@@ -214,7 +219,7 @@ export default function SalesCoach() {
             {selectedPlaybook && (
               <div className="card" style={{ padding: 20 }}>
                 <h3 className="font-heading" style={{ fontWeight: 800, fontSize: '0.95em', marginBottom: 12, color: 'var(--text-primary)' }}>
-                  {selectedPlaybook.icon} {selectedPlaybook.title} — Select Scenario
+                  {selectedPlaybook.icon} {t(selectedPlaybook.titleKey)} — {t('sales.selectScenario')}
                 </h3>
                 <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 16 }}>
                   {selectedPlaybook.scenarios.map(s => (
@@ -238,7 +243,7 @@ export default function SalesCoach() {
                     style={{ padding: '10px 20px', fontSize: '0.85em', background: `linear-gradient(135deg, ${selectedPlaybook.color}, ${selectedPlaybook.color}cc)` }}
                     disabled={loading}
                   >
-                    {loading ? 'Generating...' : '🚀 Generate Playbook'}
+                    {loading ? t('sales.playbookGenerating') : t('sales.generatePlaybook')}
                   </button>
                 )}
                 <AIResponseBox loading={loading} response={response} error={error} />
@@ -250,22 +255,22 @@ export default function SalesCoach() {
         {/* Pitch Generator Tab */}
         {activeTab === 'pitch' && (
           <div className="card" style={{ padding: 24, maxWidth: 640 }}>
-            <h3 className="font-heading" style={{ fontWeight: 800, fontSize: '1em', marginBottom: 16 }}>🎤 Pitch Generator</h3>
+            <h3 className="font-heading" style={{ fontWeight: 800, fontSize: '1em', marginBottom: 16 }}>🎤 {t('sales.pitch')}</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               <div>
-                <label style={{ fontSize: '0.78em', fontWeight: 700, color: 'var(--text-secondary)', display: 'block', marginBottom: 6 }}>Product / Solution</label>
+                <label style={{ fontSize: '0.78em', fontWeight: 700, color: 'var(--text-secondary)', display: 'block', marginBottom: 6 }}>{t('sales.pitchProduct')}</label>
                 <input className="input-field" value={pitchProduct} onChange={e => setPitchProduct(e.target.value)} placeholder="e.g. HP ProLiant DL380 Gen11 Server" />
               </div>
               <div>
-                <label style={{ fontSize: '0.78em', fontWeight: 700, color: 'var(--text-secondary)', display: 'block', marginBottom: 6 }}>Customer Profile</label>
+                <label style={{ fontSize: '0.78em', fontWeight: 700, color: 'var(--text-secondary)', display: 'block', marginBottom: 6 }}>{t('sales.pitchCustomer')}</label>
                 <input className="input-field" value={pitchCustomer} onChange={e => setPitchCustomer(e.target.value)} placeholder="e.g. 50-person manufacturing company IT manager" />
               </div>
               <div>
-                <label style={{ fontSize: '0.78em', fontWeight: 700, color: 'var(--text-secondary)', display: 'block', marginBottom: 6 }}>Budget Range</label>
+                <label style={{ fontSize: '0.78em', fontWeight: 700, color: 'var(--text-secondary)', display: 'block', marginBottom: 6 }}>{t('sales.pitchBudget')}</label>
                 <input className="input-field" value={pitchBudget} onChange={e => setPitchBudget(e.target.value)} placeholder="e.g. ₹2–5 lakh" />
               </div>
               <button onClick={handlePitchGen} disabled={!pitchProduct || loading} className="premium-btn" style={{ padding: '11px 20px', fontSize: '0.85em', background: 'linear-gradient(135deg, #8b5cf6, #7c3aed)', marginTop: 4 }}>
-                {loading ? 'Generating...' : '✨ Generate Pitch'}
+                {loading ? t('sales.playbookGenerating') : t('sales.generatePitch')}
               </button>
             </div>
             <AIResponseBox loading={loading} response={response} error={error} />
@@ -290,14 +295,14 @@ export default function SalesCoach() {
                   onClick={() => { setSelectedObjection(obj); setResponse(''); }}
                 >
                   <div style={{ fontSize: 20, marginBottom: 6 }}>{obj.icon}</div>
-                  <div style={{ fontSize: '0.82em', fontWeight: 700, color: 'var(--text-primary)' }}>{obj.label}</div>
+                  <div style={{ fontSize: '0.82em', fontWeight: 700, color: 'var(--text-primary)' }}>{t(obj.labelKey)}</div>
                 </div>
               ))}
             </div>
             {selectedObjection && (
               <div>
                 <button onClick={handleObjection} disabled={loading} className="premium-btn" style={{ padding: '11px 22px', fontSize: '0.85em', background: 'linear-gradient(135deg, #8b5cf6, #7c3aed)', marginBottom: 16 }}>
-                  {loading ? 'Generating...' : `🛡️ Handle: "${selectedObjection.label}"`}
+                  {loading ? t('sales.playbookGenerating') : `🛡️ ${t('sales.handleObjection')}: "${t(selectedObjection.labelKey)}"`}
                 </button>
                 <AIResponseBox loading={loading} response={response} error={error} />
               </div>
@@ -308,12 +313,12 @@ export default function SalesCoach() {
         {/* Negotiation Tab */}
         {activeTab === 'negotiation' && (
           <div className="card" style={{ padding: 24, maxWidth: 640 }}>
-            <h3 className="font-heading" style={{ fontWeight: 800, fontSize: '1em', marginBottom: 8 }}>🤝 Negotiation Coach</h3>
+            <h3 className="font-heading" style={{ fontWeight: 800, fontSize: '1em', marginBottom: 8 }}>🤝 {t('sales.negotiationTitle')}</h3>
             <p style={{ fontSize: '0.82em', color: 'var(--text-secondary)', marginBottom: 16, lineHeight: 1.6 }}>
-              Get AI-powered negotiation strategies specifically for IT hardware deals in the Indian market.
+              {t('sales.negotiationDesc')}
             </p>
             <button onClick={handleNegotiation} disabled={loading} className="premium-btn" style={{ padding: '11px 22px', fontSize: '0.85em', background: 'linear-gradient(135deg, #8b5cf6, #7c3aed)' }}>
-              {loading ? 'Generating...' : '🚀 Get Negotiation Script'}
+              {loading ? t('sales.playbookGenerating') : t('sales.negotiationBtn')}
             </button>
             <AIResponseBox loading={loading} response={response} error={error} />
           </div>
@@ -322,16 +327,16 @@ export default function SalesCoach() {
         {/* Discovery Tab */}
         {activeTab === 'discovery' && (
           <div className="card" style={{ padding: 24, maxWidth: 640 }}>
-            <h3 className="font-heading" style={{ fontWeight: 800, fontSize: '1em', marginBottom: 8 }}>🔍 Discovery Questions</h3>
+            <h3 className="font-heading" style={{ fontWeight: 800, fontSize: '1em', marginBottom: 8 }}>🔍 {t('sales.discoveryTitle')}</h3>
             <p style={{ fontSize: '0.82em', color: 'var(--text-secondary)', marginBottom: 12, lineHeight: 1.6 }}>
-              Qualify your prospect with the right questions before making a pitch.
+              {t('sales.discoveryDesc')}
             </p>
             <div style={{ marginBottom: 14 }}>
-              <label style={{ fontSize: '0.78em', fontWeight: 700, color: 'var(--text-secondary)', display: 'block', marginBottom: 6 }}>Product Focus (optional)</label>
+              <label style={{ fontSize: '0.78em', fontWeight: 700, color: 'var(--text-secondary)', display: 'block', marginBottom: 6 }}>{t('sales.discoveryProduct')}</label>
               <input className="input-field" value={pitchProduct} onChange={e => setPitchProduct(e.target.value)} placeholder="e.g. Servers, Laptops, Networking" />
             </div>
             <button onClick={handleDiscovery} disabled={loading} className="premium-btn" style={{ padding: '11px 22px', fontSize: '0.85em', background: 'linear-gradient(135deg, #8b5cf6, #7c3aed)' }}>
-              {loading ? 'Generating...' : '🔍 Generate Discovery Questions'}
+              {loading ? t('sales.playbookGenerating') : t('sales.discoveryBtn')}
             </button>
             <AIResponseBox loading={loading} response={response} error={error} />
           </div>

@@ -127,10 +127,10 @@ export default function LearningCenter() {
           </div>
           <div>
             <h1 className="font-heading" style={{ fontSize: '1.4em', fontWeight: 900, color: 'var(--text-primary)', lineHeight: 1 }}>
-              Learning & Certification
+              {t('module.learn.title')}
             </h1>
             <p style={{ fontSize: '0.82em', color: 'var(--text-secondary)', marginTop: 4 }}>
-              Learn IT Hardware configurations, test your knowledge, and earn certs
+              {t('module.learn.desc')}
             </p>
           </div>
         </div>
@@ -147,7 +147,7 @@ export default function LearningCenter() {
             alignItems: 'center'
           }}
         >
-          <span style={{ fontSize: '0.78em', fontWeight: 700, color: 'var(--text-secondary)' }}>Certifications Earned:</span>
+          <span style={{ fontSize: '0.78em', fontWeight: 700, color: 'var(--text-secondary)' }}>{t('learn.certificationsEarned')}</span>
           <span
             style={{
               fontSize: '0.9em',
@@ -178,10 +178,10 @@ export default function LearningCenter() {
           className="custom-scrollbar"
         >
           <h3 className="font-heading" style={{ fontSize: '0.88em', fontWeight: 800, color: 'var(--text-primary)', marginBottom: 12 }}>
-            Knowledge Modules
+            {t('learn.knowledgeModules')}
           </h3>
           {loading ? (
-            <div style={{ fontSize: '0.82em', color: 'var(--text-muted)' }}>Loading...</div>
+            <div style={{ fontSize: '0.82em', color: 'var(--text-muted)' }}>{t('common.loading')}</div>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               {modules.map(mod => {
@@ -232,7 +232,7 @@ export default function LearningCenter() {
                     {selectedModule.title}
                   </h2>
                   <span style={{ fontSize: '0.78em', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>
-                    Module Topic: {selectedModule.topic}
+                    {t('learn.topic')} {selectedModule.topic}
                   </span>
                 </div>
 
@@ -250,7 +250,7 @@ export default function LearningCenter() {
                       cursor: 'pointer'
                     }}
                   >
-                    Read Lesson
+                    {t('learn.readLesson')}
                   </button>
                   <button
                     onClick={() => setActiveQuizIndex(0)}
@@ -265,7 +265,7 @@ export default function LearningCenter() {
                       cursor: 'pointer'
                     }}
                   >
-                    Take Quiz
+                    {t('learn.takeQuiz')}
                   </button>
                 </div>
               </div>
@@ -296,10 +296,10 @@ export default function LearningCenter() {
                     }}
                   >
                     <h3 className="font-heading" style={{ fontSize: '1.05em', fontWeight: 800, margin: '0 0 10px' }}>
-                      Ready to test your knowledge?
+                      {t('learn.readyText')}
                     </h3>
                     <p style={{ fontSize: '0.8em', color: 'var(--text-secondary)', margin: '0 0 16px' }}>
-                      Complete the 5-question quiz. Score 80% (4 correct answers) to earn your certification badge.
+                      {t('learn.readyDesc')}
                     </p>
                     <button
                       onClick={() => setActiveQuizIndex(0)}
@@ -315,7 +315,7 @@ export default function LearningCenter() {
                         boxShadow: 'var(--shadow-sm)'
                       }}
                     >
-                      Start Interactive Quiz ✍️
+                      {t('learn.startQuiz')}
                     </button>
                   </div>
                 </div>
@@ -382,7 +382,7 @@ export default function LearningCenter() {
                       {/* Explanation */}
                       {quizSubmitted && (
                         <div style={{ marginTop: 12, padding: 10, background: 'var(--bg-elevated)', borderRadius: 4, fontSize: '0.78em', color: 'var(--text-secondary)' }}>
-                          💡 <strong>Explanation:</strong> {q.explanation}
+                          💡 <strong>{t('learn.explanation')}</strong> {q.explanation}
                         </div>
                       )}
                     </div>
@@ -406,7 +406,7 @@ export default function LearningCenter() {
                           opacity: Object.keys(userAnswers).length < selectedModule.quiz.length ? 0.5 : 1
                         }}
                       >
-                        Submit Answers
+                        {t('learn.submitAnswers')}
                       </button>
                     ) : (
                       <div
@@ -420,10 +420,10 @@ export default function LearningCenter() {
                         }}
                       >
                         <h3 className="font-heading" style={{ fontSize: '1.1em', fontWeight: 900, color: quizScore >= 80 ? '#059669' : '#ef4444', margin: '0 0 6px' }}>
-                          {quizScore >= 80 ? '🏆 Certification Earned!' : '😢 Try Again'}
+                          {quizScore >= 80 ? t('learn.certEarned') : t('learn.tryAgain')}
                         </h3>
                         <p style={{ fontSize: '0.85em', color: 'var(--text-secondary)', margin: '0 0 10px' }}>
-                          You scored <strong>{quizScore}%</strong> ({selectedModule.quiz.filter((q, i) => userAnswers[i] === q.answerIndex).length} / 5 correct answers).
+                          {t('learn.scoreText').replace('{score}', quizScore).replace('{correct}', selectedModule.quiz.filter((q, i) => userAnswers[i] === q.answerIndex).length).replace('{total}', 5)}
                         </p>
                         {quizScore < 80 && (
                           <button
@@ -443,7 +443,7 @@ export default function LearningCenter() {
                               cursor: 'pointer'
                             }}
                           >
-                            Retake Quiz
+                            {t('learn.retakeQuiz')}
                           </button>
                         )}
                       </div>
@@ -456,10 +456,10 @@ export default function LearningCenter() {
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', textAlign: 'center', color: 'var(--text-muted)' }}>
               <span style={{ fontSize: '3.5em', marginBottom: 12 }}>📚</span>
               <h3 className="font-heading" style={{ fontSize: '1.2em', fontWeight: 800, color: 'var(--text-secondary)' }}>
-                Select a Module to Start Learning
+                {t('learn.selectModule')}
               </h3>
               <p style={{ fontSize: '0.8em', maxWidth: 360, marginTop: 4 }}>
-                Choose a hardware or network category from the left pane to view tutorials, test your skills, and earn official certifications.
+                {t('learn.selectModuleDesc')}
               </p>
             </div>
           )}

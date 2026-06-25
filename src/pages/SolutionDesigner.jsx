@@ -25,6 +25,15 @@ const BUDGET_RANGES = [
 
 const USER_COUNT_OPTIONS = ['1–5', '6–20', '21–50', '51–100', '100+'];
 
+const PRIORITY_MAPPING = {
+  'Performance': 'solutions.priority.performance',
+  'Cost-effective': 'solutions.priority.cost',
+  'Energy efficient': 'solutions.priority.energy',
+  'Scalable': 'solutions.priority.scalable',
+  'Easy to manage': 'solutions.priority.manage',
+  'High availability': 'solutions.priority.availability'
+};
+
 export default function SolutionDesigner() {
   const { language, t } = useApp();
   const [selectedUseCase, setSelectedUseCase] = useState(null);
@@ -85,7 +94,7 @@ export default function SolutionDesigner() {
             {/* Use Case Selection */}
             <div className="card" style={{ padding: 18 }}>
               <h3 className="font-heading" style={{ fontWeight: 800, fontSize: '0.85em', marginBottom: 12, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-                1. Select Use Case
+                {t('solutions.selectUseCase')}
               </h3>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
                 {USE_CASES.map(uc => (
@@ -103,7 +112,7 @@ export default function SolutionDesigner() {
                     }}
                   >
                     <div style={{ fontSize: 18, marginBottom: 3 }}>{uc.icon}</div>
-                    <div style={{ fontSize: '0.7em', fontWeight: 700, color: 'var(--text-primary)' }}>{uc.label}</div>
+                    <div style={{ fontSize: '0.7em', fontWeight: 700, color: 'var(--text-primary)' }}>{t('solutions.usecase.' + uc.id)}</div>
                   </button>
                 ))}
               </div>
@@ -112,7 +121,7 @@ export default function SolutionDesigner() {
                   className="input-field"
                   value={custom}
                   onChange={e => { setCustom(e.target.value); setSelectedUseCase(null); }}
-                  placeholder="Or describe your custom use case..."
+                  placeholder={t('solutions.customPlaceholder')}
                 />
               </div>
             </div>
@@ -120,10 +129,10 @@ export default function SolutionDesigner() {
             {/* Users & Budget */}
             <div className="card" style={{ padding: 18 }}>
               <h3 className="font-heading" style={{ fontWeight: 800, fontSize: '0.85em', marginBottom: 12, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-                2. Scale & Budget
+                {t('solutions.scaleBudget')}
               </h3>
               <div style={{ marginBottom: 12 }}>
-                <label style={{ fontSize: '0.76em', fontWeight: 700, color: 'var(--text-secondary)', display: 'block', marginBottom: 6 }}>Number of Users</label>
+                <label style={{ fontSize: '0.76em', fontWeight: 700, color: 'var(--text-secondary)', display: 'block', marginBottom: 6 }}>{t('solutions.userCount')}</label>
                 <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                   {USER_COUNT_OPTIONS.map(u => (
                     <button
@@ -138,7 +147,7 @@ export default function SolutionDesigner() {
                 </div>
               </div>
               <div>
-                <label style={{ fontSize: '0.76em', fontWeight: 700, color: 'var(--text-secondary)', display: 'block', marginBottom: 6 }}>Budget Range</label>
+                <label style={{ fontSize: '0.76em', fontWeight: 700, color: 'var(--text-secondary)', display: 'block', marginBottom: 6 }}>{t('solutions.budgedRange')}</label>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
                   {BUDGET_RANGES.map(b => (
                     <button
@@ -152,7 +161,7 @@ export default function SolutionDesigner() {
                         transition: 'var(--transition-fast)',
                       }}
                     >
-                      {b.label}
+                      {t(b.label)}
                     </button>
                   ))}
                 </div>
@@ -162,7 +171,7 @@ export default function SolutionDesigner() {
             {/* Priorities */}
             <div className="card" style={{ padding: 18 }}>
               <h3 className="font-heading" style={{ fontWeight: 800, fontSize: '0.85em', marginBottom: 12, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-                3. Priorities
+                {t('solutions.priorities')}
               </h3>
               <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                 {PRIORITY_OPTIONS.map(p => (
@@ -177,7 +186,7 @@ export default function SolutionDesigner() {
                       transition: 'var(--transition-fast)',
                     }}
                   >
-                    {priorities.includes(p) ? '✓ ' : ''}{p}
+                    {priorities.includes(p) ? '✓ ' : ''}{t(PRIORITY_MAPPING[p] || p)}
                   </button>
                 ))}
               </div>
@@ -200,7 +209,7 @@ export default function SolutionDesigner() {
                 letterSpacing: '-0.01em',
               }}
             >
-              {loading ? '⚡ Designing Solution...' : '⚡ Design My Solution'}
+              {loading ? t('solutions.designProgress') : t('solutions.designBtn')}
             </button>
           </div>
 
@@ -218,10 +227,10 @@ export default function SolutionDesigner() {
               >
                 <div style={{ fontSize: 48, marginBottom: 16 }}>⚡</div>
                 <div className="font-heading" style={{ fontSize: '1.1em', fontWeight: 800, color: 'var(--text-secondary)', marginBottom: 8 }}>
-                  Configure & Generate
+                  {t('solutions.configureGenerate')}
                 </div>
                 <div style={{ fontSize: '0.82em', lineHeight: 1.6, maxWidth: 280, margin: '0 auto' }}>
-                  Select a use case, set your scale and budget, then click Design My Solution for a complete IT setup recommendation.
+                  {t('solutions.configureGenerateDesc')}
                 </div>
               </div>
             )}
@@ -229,7 +238,7 @@ export default function SolutionDesigner() {
             {loading && !response && (
               <div style={{ display: 'flex', gap: 8, alignItems: 'center', padding: 24, color: 'var(--text-secondary)', fontSize: '0.88em' }}>
                 {[0,1,2].map(i => <span key={i} className="loading-dot" style={{ animationDelay: `${i*0.16}s` }} />)}
-                <span style={{ marginLeft: 8 }}>Designing your custom IT solution...</span>
+                <span style={{ marginLeft: 8 }}>{t('solutions.designingMessage')}</span>
               </div>
             )}
 
@@ -243,14 +252,14 @@ export default function SolutionDesigner() {
               <div className="card" style={{ padding: 24, borderLeft: `3px solid ${COLOR}` }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
                   <span className="font-heading" style={{ fontWeight: 800, fontSize: '0.9em', color: 'var(--text-primary)' }}>
-                    ⚡ {selectedUseCase?.label || custom} — Solution Design
+                    ⚡ {selectedUseCase ? t('solutions.usecase.' + selectedUseCase.id) : custom} — {t('solutions.titleOutput')}
                   </span>
                   <button
                     onClick={() => navigator.clipboard.writeText(response)}
                     className="btn-ghost"
                     style={{ fontSize: '0.74em' }}
                   >
-                    📋 Copy
+                    {t('solutions.copyBtn')}
                   </button>
                 </div>
                 <div style={{ fontSize: '0.875em', lineHeight: 1.75, whiteSpace: 'pre-wrap', color: 'var(--text-primary)' }}>

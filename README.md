@@ -1,7 +1,7 @@
 # Insight AI 2.0 — Enterprise IT Hardware Intelligence Platform
-*DCC IT Distribution — Pune, Maharashtra, India*
+*InsightAI IT Hardware Intelligence Platform*
 
-Insight AI 2.0 is a premium, modular, multi-agent AI consulting and business intelligence platform built for DCC, a leading IT distributor in Maharashtra. It is designed to assist sales executives, channel partners, dealers, and enterprise clients with IT hardware configurations, pricing, sales coaching, and compatibility analysis.
+Insight AI 2.0 is a premium, modular, multi-agent AI consulting and business intelligence platform designed for enterprise IT hardware planning and sales consultation. It is designed to assist sales executives, channel partners, dealers, and enterprise clients with IT hardware configurations, pricing, sales coaching, and compatibility analysis.
 
 ---
 
@@ -128,18 +128,18 @@ To verify the endpoints locally, you can run the pre-configured verification scr
 
 1. **Verify all endpoints**:
    ```bash
-   node C:\Users\DCC\.gemini\antigravity\brain\982fd788-4794-4714-825f-3b3cf2234b69\scratch\test-endpoints.js
+   node C:\Users\InsightAI\.gemini\antigravity\brain\982fd788-4794-4714-825f-3b3cf2234b69\scratch\test-endpoints.js
    ```
    *This checks /api/health, /api/news, /api/market, and /api/dealer.*
 
 2. **Verify Gemini API connection directly**:
    ```bash
-   node C:\Users\DCC\.gemini\antigravity\brain\982fd788-4794-4714-825f-3b3cf2234b69\scratch\test-gemini.js
+   node C:\Users\InsightAI\.gemini\antigravity\brain\982fd788-4794-4714-825f-3b3cf2234b69\scratch\test-gemini.js
    ```
 
 3. **Verify Chat Streaming & Fallback**:
    ```bash
-   node C:\Users\DCC\.gemini\antigravity\brain\982fd788-4794-4714-825f-3b3cf2234b69\scratch\test-chat-stream.js
+   node C:\Users\InsightAI\.gemini\antigravity\brain\982fd788-4794-4714-825f-3b3cf2234b69\scratch\test-chat-stream.js
    ```
 
 ---

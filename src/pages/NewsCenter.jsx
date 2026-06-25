@@ -5,16 +5,16 @@ import { streamChat } from '../services/api.js';
 const COLOR = '#ef4444'; // Red accent for News Center
 
 const CATEGORY_TABS = [
-  { id: 'all', label: 'All News' },
-  { id: 'global_it', label: 'Global IT' },
-  { id: 'india_it', label: 'India IT' },
-  { id: 'brand_news', label: 'Brand News' },
-  { id: 'product_launch', label: 'Launches' },
-  { id: 'ai_hardware', label: 'AI Hardware' },
-  { id: 'semiconductors', label: 'Semiconductors' },
-  { id: 'supply_chain', label: 'Supply Chain' },
-  { id: 'market_trends', label: 'Trends' },
-  { id: 'govt_policy', label: 'Govt. Policy' }
+  { id: 'all', key: 'news.allNews' },
+  { id: 'global_it', key: 'news.globalIt' },
+  { id: 'india_it', key: 'news.indiaIt' },
+  { id: 'brand_news', key: 'news.brandNews' },
+  { id: 'product_launch', key: 'news.launches' },
+  { id: 'ai_hardware', key: 'news.aiHardware' },
+  { id: 'semiconductors', key: 'news.semiconductors' },
+  { id: 'supply_chain', key: 'news.supplyChain' },
+  { id: 'market_trends', key: 'news.trends' },
+  { id: 'govt_policy', key: 'news.govtPolicy' }
 ];
 
 export default function NewsCenter() {
@@ -110,10 +110,10 @@ export default function NewsCenter() {
           </div>
           <div>
             <h1 className="font-heading" style={{ fontSize: '1.4em', fontWeight: 900, color: 'var(--text-primary)', lineHeight: 1 }}>
-              IT News Center
+              {t('module.news.title')}
             </h1>
             <p style={{ fontSize: '0.82em', color: 'var(--text-secondary)', marginTop: 4 }}>
-              Global & National IT updates with AI Business Impact analysis
+              {t('module.news.desc')}
             </p>
           </div>
         </div>
@@ -122,7 +122,7 @@ export default function NewsCenter() {
         <div style={{ position: 'relative' }}>
           <input
             type="text"
-            placeholder="Search news..."
+            placeholder={t('news.searchPlaceholder')}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="glass"
@@ -169,7 +169,7 @@ export default function NewsCenter() {
               transition: 'var(--transition-fast)'
             }}
           >
-            {tab.label}
+            {t(tab.key)}
           </button>
         ))}
       </div>
@@ -178,11 +178,11 @@ export default function NewsCenter() {
       <div style={{ flex: 1, overflowY: 'auto', padding: '24px 32px' }} className="custom-scrollbar">
         {loading ? (
           <div style={{ display: 'flex', justifyContent: 'center', padding: 48, color: 'var(--text-secondary)' }}>
-            Loading IT news articles...
+            {t('news.loading')}
           </div>
         ) : filteredNews.length === 0 ? (
           <div style={{ padding: 48, textAlign: 'center', color: 'var(--text-muted)' }}>
-            No news articles found in this category matching your search.
+            {t('news.noNews')}
           </div>
         ) : (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(360px, 1fr))', gap: 20 }}>
@@ -280,7 +280,7 @@ export default function NewsCenter() {
                         }}
                       >
                         <h4 style={{ fontSize: '0.75em', fontWeight: 800, color: '#059669', display: 'flex', alignItems: 'center', gap: 4, margin: '0 0 4px' }}>
-                          💼 Business Impact (Maharashtra Dealers)
+                          {t('news.businessImpactTitle')}
                         </h4>
                         <p style={{ fontSize: '0.78em', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.4 }}>
                           {item.business_impact}
@@ -298,7 +298,7 @@ export default function NewsCenter() {
                         }}
                       >
                         <h4 style={{ fontSize: '0.75em', fontWeight: 800, color: '#0ea5e9', display: 'flex', alignItems: 'center', gap: 4, margin: '0 0 4px' }}>
-                          ⚙️ Technical Impact (Specifications)
+                          {t('news.technicalImpactTitle')}
                         </h4>
                         <p style={{ fontSize: '0.78em', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.4 }}>
                           {item.technical_impact}
@@ -308,7 +308,7 @@ export default function NewsCenter() {
                       {/* Related Products */}
                       {item.related_products && item.related_products.length > 0 && (
                         <div style={{ marginBottom: 12 }}>
-                          <span style={{ fontSize: '0.75em', fontWeight: 700, color: 'var(--text-primary)' }}>Related Products: </span>
+                          <span style={{ fontSize: '0.75em', fontWeight: 700, color: 'var(--text-primary)' }}>{t('news.relatedProducts')}</span>
                           <span style={{ fontSize: '0.75em', color: 'var(--text-muted)' }}>
                             {item.related_products.join(', ')}
                           </span>
@@ -343,7 +343,7 @@ export default function NewsCenter() {
                       gap: 4
                     }}
                   >
-                    {expandedId === item.id ? 'Read Less ▲' : 'Analyze Business Impact ▼'}
+                    {expandedId === item.id ? t('news.readLess') : t('news.readMore')}
                   </button>
 
                   <button
@@ -360,7 +360,7 @@ export default function NewsCenter() {
                       boxShadow: 'var(--shadow-sm)'
                     }}
                   >
-                    Ask AI Assistant 🤖
+                    {t('news.askAi')}
                   </button>
                 </div>
               </div>

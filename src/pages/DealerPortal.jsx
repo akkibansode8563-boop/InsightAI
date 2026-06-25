@@ -48,15 +48,15 @@ function QuotationTool() {
 
   const copyText = () => {
     const text = [
-      `QUOTATION — IT Solutions`,
-      customerName ? `Client: ${customerName}` : '',
-      `Date: ${new Date().toLocaleDateString('en-IN')}`,
+      t('dealer.quotationPrefix'),
+      customerName ? `${t('dealer.quotationClient')}: ${customerName}` : '',
+      `${t('dealer.quotationDate')}: ${new Date().toLocaleDateString('en-IN')}`,
       '----------------------------------------',
       ...result.lineItems.map(li => `${li.sr}. ${li.name} (${li.sku || ''}) × ${li.qty} = ${formatINR(li.lineTotal)}`),
       '',
-      `Subtotal: ${formatINR(result.subtotal)}`,
-      `GST @${gstRate}%: ${formatINR(result.gstAmount)}`,
-      `Grand Total: ${formatINR(result.grandTotal)}`,
+      `${t('dealer.subtotalLabel')}: ${formatINR(result.subtotal)}`,
+      `${t('dealer.gstLabel')} @${gstRate}%: ${formatINR(result.gstAmount)}`,
+      `${t('dealer.grandTotalLabel')}: ${formatINR(result.grandTotal)}`,
     ].filter(Boolean).join('\n');
     navigator.clipboard.writeText(text).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2000); });
   };
@@ -66,7 +66,7 @@ function QuotationTool() {
       <div style={{ display: 'flex', gap: 10, marginBottom: 16, alignItems: 'center', flexWrap: 'wrap' }}>
         <input className="input-field" style={{ maxWidth: 220 }} value={customerName} onChange={e => setCustomerName(e.target.value)} placeholder={t('dealer.customerNamePlaceholder')} />
         <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-          <label style={{ fontSize: '0.78em', fontWeight: 700, color: 'var(--text-secondary)' }}>{t('GST %')}</label>
+          <label style={{ fontSize: '0.78em', fontWeight: 700, color: 'var(--text-secondary)' }}>{t('dealer.gstPercent')}</label>
           <select className="input-field" style={{ width: 80 }} value={gstRate} onChange={e => setGstRate(Number(e.target.value))}>
             {[0, 5, 12, 18, 28].map(r => <option key={r} value={r}>{r}%</option>)}
           </select>
@@ -176,11 +176,11 @@ function MarginTool() {
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 16 }}>
         <div>
           <label style={{ fontSize: '0.78em', fontWeight: 700, color: 'var(--text-secondary)', display: 'block', marginBottom: 5 }}>{t('dealer.sellingPriceLabel')}</label>
-          <input type="number" className="input-field" value={mrp} onChange={e => setMrp(e.target.value)} placeholder="₹ Selling price" />
+          <input type="number" className="input-field" value={mrp} onChange={e => setMrp(e.target.value)} placeholder={t('dealer.sellingPriceLabel')} />
         </div>
         <div>
           <label style={{ fontSize: '0.78em', fontWeight: 700, color: 'var(--text-secondary)', display: 'block', marginBottom: 5 }}>{t('dealer.costPriceLabel')}</label>
-          <input type="number" className="input-field" value={cost} onChange={e => setCost(e.target.value)} placeholder="₹ Your cost" />
+          <input type="number" className="input-field" value={cost} onChange={e => setCost(e.target.value)} placeholder={t('dealer.costPriceLabel')} />
         </div>
       </div>
       {result && (

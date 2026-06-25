@@ -16,7 +16,7 @@
       "mrp": 79990,
       "street_price_approx": 72000
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 1,
       "categories": ["gaming", "content_creation", "student"]
@@ -40,7 +40,7 @@
     },
     "metadata": {
       "last_updated": "2026-06-25",
-      "data_source": "DCC Catalogue + HP Specs"
+      "data_source": "Catalogue + HP Specs"
     }
   },
   {
@@ -60,7 +60,7 @@
       "mrp": 92990,
       "street_price_approx": 85000
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 1,
       "categories": ["gaming", "premium_performance"]
@@ -84,7 +84,7 @@
     },
     "metadata": {
       "last_updated": "2026-06-25",
-      "data_source": "DCC Catalogue + HP Specs"
+      "data_source": "Catalogue + HP Specs"
     }
   },
   {
@@ -104,7 +104,7 @@
       "mrp": 42990,
       "street_price_approx": 38000
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 1,
       "categories": ["budget", "office", "student"]
@@ -128,7 +128,7 @@
     },
     "metadata": {
       "last_updated": "2026-06-25",
-      "data_source": "DCC Catalogue"
+      "data_source": "Catalogue"
     }
   },
   {
@@ -148,7 +148,7 @@
       "mrp": 115000,
       "street_price_approx": 98000
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 3,
       "categories": ["enterprise", "premium_performance", "business"]
@@ -192,7 +192,7 @@
       "mrp": 67990,
       "street_price_approx": 61500
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 1,
       "categories": ["office", "student", "home"]
@@ -236,7 +236,7 @@
       "mrp": 55990,
       "street_price_approx": 49000
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 1,
       "categories": ["business", "office", "budget"]
@@ -254,7 +254,7 @@
       ],
       "common_objections": ["only_8gb_ram", "intel_uhd_graphics"],
       "objection_responses": {
-        "only_8gb_ram": "This laptop has dual slots. DCC can upgrade the RAM to 16GB at the time of purchase for a nominal charge.",
+        "only_8gb_ram": "This laptop has dual slots. we can upgrade the RAM to 16GB at the time of purchase for a nominal charge.",
         "intel_uhd_graphics": "Intel UHD graphics are more than enough for office software, Tally, accounting, and basic video streaming."
       }
     },
@@ -280,7 +280,7 @@
       "mrp": 82000,
       "street_price_approx": 72500
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 3,
       "categories": ["enterprise", "business"]
@@ -324,7 +324,7 @@
       "mrp": 59990,
       "street_price_approx": 51000
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 1,
       "categories": ["budget", "office", "student"]
@@ -368,7 +368,7 @@
       "mrp": 95990,
       "street_price_approx": 83000
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 1,
       "categories": ["gaming", "content_creation"]
@@ -412,7 +412,7 @@
       "mrp": 89000,
       "street_price_approx": 76000
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 3,
       "categories": ["enterprise", "business"]
@@ -426,7 +426,7 @@
       "selling_points": [
         "Legendary ThinkPad spill-resistant keyboard with Red TrackPoint",
         "Passed 12 military-grade durability certifications (MIL-STD-810H)",
-        "3-year comprehensive onsite warranty standard in DCC stock"
+        "3-year comprehensive onsite warranty standard in stock"
       ],
       "common_objections": ["boring_black_design", "no_card_reader"],
       "objection_responses": {
@@ -456,7 +456,7 @@
       "mrp": 54990,
       "street_price_approx": 46500
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 1,
       "categories": ["budget", "office", "student"]
@@ -500,7 +500,7 @@
       "mrp": 139990,
       "street_price_approx": 122000
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 1,
       "categories": ["gaming", "premium_performance"]
@@ -544,7 +544,7 @@
       "mrp": 64990,
       "street_price_approx": 56000
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 1,
       "categories": ["office", "student", "home"]
@@ -588,7 +588,7 @@
       "mrp": 114900,
       "street_price_approx": 104500
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 1,
       "categories": ["premium_performance", "business", "student"]
@@ -632,7 +632,7 @@
       "mrp": 52990,
       "street_price_approx": 43500
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 1,
       "categories": ["budget", "office", "student"]
@@ -676,7 +676,7 @@
       "mrp": 39990,
       "street_price_approx": 33500
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 1,
       "categories": ["budget", "office"]
@@ -690,7 +690,7 @@
       "selling_points": [
         "Ultra-slim space-saving design, fits anywhere on billing counters",
         "Desktop-grade 12th Gen Intel Core i3 is much faster than laptop CPUs",
-        "DCC bundles keyboard and mouse in the box for ready-to-run use"
+        "we bundle keyboard and mouse in the box for ready-to-run use"
       ],
       "common_objections": ["no_monitor_included", "limited_expansion_ports"],
       "objection_responses": {
@@ -720,7 +720,7 @@
       "mrp": 69990,
       "street_price_approx": 59000
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 3,
       "categories": ["business", "enterprise", "premium_performance"]
@@ -764,7 +764,7 @@
       "mrp": 38990,
       "street_price_approx": 31000
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 1,
       "categories": ["budget", "office", "student"]
@@ -808,7 +808,7 @@
       "mrp": 35990,
       "street_price_approx": 29500
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 3,
       "categories": ["budget", "office", "education"]
@@ -852,7 +852,7 @@
       "mrp": 9500,
       "street_price_approx": 6500
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 3,
       "categories": ["budget", "office", "education"]
@@ -870,7 +870,7 @@
       ],
       "common_objections": ["no_hdmi_cable_in_box", "only_60hz"],
       "objection_responses": {
-        "no_hdmi_cable_in_box": "Dell bundles a DP-to-DP cable. For PCs with HDMI only, DCC provides a high-quality gold-plated HDMI cable for ₹250.",
+        "no_hdmi_cable_in_box": "Dell bundles a DP-to-DP cable. For PCs with HDMI only, we provide a high-quality gold-plated HDMI cable for ₹250.",
         "only_60hz": "60Hz is the standard refresh rate for office tasks and is perfectly comfortable for spreadsheets, emails, and browsing."
       }
     },
@@ -896,7 +896,7 @@
       "mrp": 18500,
       "street_price_approx": 13900
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 3,
       "categories": ["business", "premium_performance"]
@@ -940,7 +940,7 @@
       "mrp": 8900,
       "street_price_approx": 5900
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 3,
       "categories": ["budget", "office"]
@@ -984,7 +984,7 @@
       "mrp": 12500,
       "street_price_approx": 8000
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 3,
       "categories": ["budget", "student", "gaming"]
@@ -1028,7 +1028,7 @@
       "mrp": 7990,
       "street_price_approx": 5600
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 3,
       "categories": ["budget", "office"]
@@ -1072,7 +1072,7 @@
       "mrp": 28990,
       "street_price_approx": 24200
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 2,
       "categories": ["business", "office"]
@@ -1116,7 +1116,7 @@
       "mrp": 16990,
       "street_price_approx": 13900
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 1,
       "categories": ["budget", "student", "home"]
@@ -1160,7 +1160,7 @@
       "mrp": 15990,
       "street_price_approx": 12800
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 1,
       "categories": ["budget", "student", "home"]
@@ -1178,7 +1178,7 @@
       ],
       "common_objections": ["setup_is_slightly_complex", "mac_support_is_limited"],
       "objection_responses": {
-        "setup_is_slightly_complex": "DCC provides a free WhatsApp setup video and Canon offers free technician installation support.",
+        "setup_is_slightly_complex": "we provide a free WhatsApp setup video and Canon offers free technician installation support.",
         "mac_support_is_limited": "The G3010 is optimized for Windows and Android. For Mac users, we recommend the Canon G3020 instead."
       }
     },
@@ -1204,7 +1204,7 @@
       "mrp": 17999,
       "street_price_approx": 14500
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 1,
       "categories": ["budget", "office", "student"]
@@ -1248,7 +1248,7 @@
       "mrp": 38990,
       "street_price_approx": 32500
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 2,
       "categories": ["business", "enterprise"]
@@ -1292,7 +1292,7 @@
       "mrp": 24990,
       "street_price_approx": 20800
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 1,
       "categories": ["business", "office"]
@@ -1336,7 +1336,7 @@
       "mrp": 3499,
       "street_price_approx": 2200
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 3,
       "categories": ["budget", "networking"]
@@ -1380,7 +1380,7 @@
       "mrp": 6999,
       "street_price_approx": 4200
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 3,
       "categories": ["premium_performance", "networking"]
@@ -1424,7 +1424,7 @@
       "mrp": 7999,
       "street_price_approx": 4800
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 3,
       "categories": ["premium_performance", "networking"]
@@ -1468,7 +1468,7 @@
       "mrp": 1599,
       "street_price_approx": 950
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 3,
       "categories": ["budget", "networking"]
@@ -1512,7 +1512,7 @@
       "mrp": 15999,
       "street_price_approx": 12500
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 1,
       "categories": ["enterprise", "networking"]
@@ -1556,7 +1556,7 @@
       "mrp": 995,
       "street_price_approx": 650
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 3,
       "categories": ["budget", "peripheral"]
@@ -1600,7 +1600,7 @@
       "mrp": 2995,
       "street_price_approx": 1950
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 3,
       "categories": ["office", "peripheral"]
@@ -1644,7 +1644,7 @@
       "mrp": 10995,
       "street_price_approx": 9200
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 1,
       "categories": ["premium_performance", "peripheral"]
@@ -1688,7 +1688,7 @@
       "mrp": 2499,
       "street_price_approx": 1450
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 3,
       "categories": ["office", "peripheral"]
@@ -1732,7 +1732,7 @@
       "mrp": 799,
       "street_price_approx": 450
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 1,
       "categories": ["budget", "peripheral"]
@@ -1776,7 +1776,7 @@
       "mrp": 8500,
       "street_price_approx": 6200
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 5,
       "categories": ["premium_performance", "storage"]
@@ -1820,7 +1820,7 @@
       "mrp": 9900,
       "street_price_approx": 7200
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 5,
       "categories": ["storage"]
@@ -1864,7 +1864,7 @@
       "mrp": 4500,
       "street_price_approx": 3150
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 3,
       "categories": ["budget", "storage"]
@@ -1908,7 +1908,7 @@
       "mrp": 7500,
       "street_price_approx": 5200
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 3,
       "categories": ["budget", "storage"]
@@ -1952,7 +1952,7 @@
       "mrp": 4500,
       "street_price_approx": 2800
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 3,
       "categories": ["budget", "storage"]
@@ -1996,7 +1996,7 @@
       "mrp": 2999,
       "street_price_approx": 1750
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 3,
       "categories": ["budget", "ram"]
@@ -2010,7 +2010,7 @@
       "selling_points": [
         "Adds standard 8GB RAM to speed up basic Windows 11 systems",
         "High compatibility with Intel H610 and B760 office motherboards",
-        "Kingston lifetime warranty (capped at 3 years by DCC local terms)"
+        "Kingston lifetime warranty (capped at 3 years by local terms)"
       ],
       "common_objections": ["no_heatsink_rgb", "cl22_latency"],
       "objection_responses": {
@@ -2040,7 +2040,7 @@
       "mrp": 5500,
       "street_price_approx": 3200
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 3,
       "categories": ["budget", "ram"]
@@ -2084,7 +2084,7 @@
       "mrp": 6500,
       "street_price_approx": 3800
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 3,
       "categories": ["premium_performance", "ram"]
@@ -2128,7 +2128,7 @@
       "mrp": 4500,
       "street_price_approx": 2900
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 3,
       "categories": ["premium_performance", "ram"]
@@ -2172,7 +2172,7 @@
       "mrp": 4299,
       "street_price_approx": 3200
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 2,
       "categories": ["budget", "ups"]
@@ -2216,7 +2216,7 @@
       "mrp": 8990,
       "street_price_approx": 6900
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 2,
       "categories": ["premium_performance", "ups"]
@@ -2260,7 +2260,7 @@
       "mrp": 3299,
       "street_price_approx": 2100
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 1,
       "categories": ["budget", "ups"]
@@ -2304,7 +2304,7 @@
       "mrp": 2500,
       "street_price_approx": 1350
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 1,
       "categories": ["budget", "surveillance"]
@@ -2348,7 +2348,7 @@
       "mrp": 6500,
       "street_price_approx": 3600
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 1,
       "categories": ["budget", "surveillance"]
@@ -2392,7 +2392,7 @@
       "mrp": 2200,
       "street_price_approx": 1150
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 1,
       "categories": ["budget", "surveillance"]
@@ -2436,7 +2436,7 @@
       "mrp": 3299,
       "street_price_approx": 2350
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 1,
       "categories": ["premium_performance", "surveillance"]
@@ -2480,7 +2480,7 @@
       "mrp": 2995,
       "street_price_approx": 1950
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 2,
       "categories": ["budget", "peripheral"]
@@ -2524,7 +2524,7 @@
       "mrp": 9995,
       "street_price_approx": 7900
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 2,
       "categories": ["premium_performance", "peripheral"]
@@ -2568,7 +2568,7 @@
       "mrp": 4500,
       "street_price_approx": 3200
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 2,
       "categories": ["office", "peripheral"]
@@ -2612,7 +2612,7 @@
       "mrp": 12999,
       "street_price_approx": 9800
     },
-    "dcc_data": {
+    "catalogue_data": {
       "in_stock": true,
       "warranty_years": 1,
       "categories": ["premium_performance", "peripheral"]

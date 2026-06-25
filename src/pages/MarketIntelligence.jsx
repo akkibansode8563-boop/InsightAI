@@ -54,6 +54,12 @@ export default function MarketIntelligence() {
 
   const activeCategory = marketData?.categories?.[0];
 
+  const CAT_TRANSLATION_KEYS = {
+    'laptops': 'sales.playbook.laptop',
+    'networking': 'sales.playbook.network',
+    'printers': 'sales.playbook.printer'
+  };
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden' }}>
       {/* Header */}
@@ -87,10 +93,10 @@ export default function MarketIntelligence() {
           </div>
           <div>
             <h1 className="font-heading" style={{ fontSize: '1.4em', fontWeight: 900, color: 'var(--text-primary)', lineHeight: 1 }}>
-              Market Intelligence Dashboard
+              {t('module.market.title')}
             </h1>
             <p style={{ fontSize: '0.82em', color: 'var(--text-secondary)', marginTop: 4 }}>
-              IT hardware demand indices, price trends, and AI forecasts for Maharashtra
+              {t('module.market.desc')}
             </p>
           </div>
         </div>
@@ -113,7 +119,7 @@ export default function MarketIntelligence() {
                 textTransform: 'capitalize'
               }}
             >
-              {cat}
+              {t(CAT_TRANSLATION_KEYS[cat] || cat)}
             </button>
           ))}
         </div>
@@ -123,7 +129,7 @@ export default function MarketIntelligence() {
       <div style={{ flex: 1, overflowY: 'auto', padding: '32px' }} className="custom-scrollbar">
         {loading || !activeCategory ? (
           <div style={{ textAlign: 'center', padding: 48, color: 'var(--text-secondary)' }}>
-            Loading market charts and analytics...
+            {t('market.loading')}
           </div>
         ) : (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(420px, 1fr))', gap: 24, maxWidth: 1200, margin: '0 auto' }}>
@@ -131,7 +137,7 @@ export default function MarketIntelligence() {
             {/* Chart 1: Demand Index (Pure CSS / SVG Bar Chart) */}
             <div className="card" style={{ padding: 24, display: 'flex', flexDirection: 'column' }}>
               <h3 className="font-heading" style={{ fontSize: '0.98em', fontWeight: 800, margin: '0 0 16px', color: 'var(--text-primary)' }}>
-                📈 Demand Index (Last 6 Months)
+                {t('market.demandIndexTitle')}
               </h3>
               
               <div style={{ flex: 1, display: 'flex', alignItems: 'flex-end', justifyContent: 'space-around', height: 180, paddingBottom: 10, borderBottom: '1px solid var(--glass-border-strong)', position: 'relative' }}>
@@ -155,7 +161,7 @@ export default function MarketIntelligence() {
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: 8 }}>
                 {['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'].map((month, i) => (
-                  <span key={i} style={{ fontSize: '0.72em', color: 'var(--text-muted)', fontWeight: 600 }}>{month}</span>
+                  <span key={i} style={{ fontSize: '0.72em', color: 'var(--text-muted)', fontWeight: 600 }}>{t('market.month.' + month)}</span>
                 ))}
               </div>
             </div>
@@ -163,7 +169,7 @@ export default function MarketIntelligence() {
             {/* Chart 2: Price Trend & Forecast (SVG Line Chart) */}
             <div className="card" style={{ padding: 24 }}>
               <h3 className="font-heading" style={{ fontSize: '0.98em', fontWeight: 800, margin: '0 0 16px', color: 'var(--text-primary)' }}>
-                💰 Price Trend (History + Dotted AI Forecast)
+                {t('market.priceTrendTitle')}
               </h3>
 
               <div style={{ height: 180, position: 'relative', borderBottom: '1px solid var(--glass-border-strong)', borderLeft: '1px solid var(--glass-border-strong)', padding: '10px 10px 0 10px' }}>
@@ -196,22 +202,22 @@ export default function MarketIntelligence() {
                 
                 {/* Labels overlay */}
                 <div style={{ position: 'absolute', top: 12, right: 12, display: 'flex', gap: 10, fontSize: '0.65em', fontWeight: 700 }}>
-                  <span style={{ color: COLOR }}>● History</span>
-                  <span style={{ color: '#ea580c' }}>-- AI Forecast</span>
+                  <span style={{ color: COLOR }}>● {t('market.chart.history')}</span>
+                  <span style={{ color: '#ea580c' }}>-- {t('market.chart.forecast')}</span>
                 </div>
               </div>
 
               <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 8 }}>
-                <span style={{ fontSize: '0.68em', color: 'var(--text-muted)' }}>Jan (Prev)</span>
-                <span style={{ fontSize: '0.68em', color: 'var(--text-muted)' }}>Jun (Current)</span>
-                <span style={{ fontSize: '0.68em', color: '#ea580c', fontWeight: 700 }}>Sep (Forecast)</span>
+                <span style={{ fontSize: '0.68em', color: 'var(--text-muted)' }}>{t('market.month.Jan')} ({t('market.chart.prev')})</span>
+                <span style={{ fontSize: '0.68em', color: 'var(--text-muted)' }}>{t('market.month.Jun')} ({t('market.chart.current')})</span>
+                <span style={{ fontSize: '0.68em', color: '#ea580c', fontWeight: 700 }}>{language === 'mr' ? 'सप्टें' : language === 'hi' ? 'सितंबर' : 'Sep'} ({t('market.chart.forecast')})</span>
               </div>
             </div>
 
             {/* Chart 3: Brand Market Share (Horizontal Bar Chart) */}
             <div className="card" style={{ padding: 24 }}>
               <h3 className="font-heading" style={{ fontSize: '0.98em', fontWeight: 800, margin: '0 0 16px', color: 'var(--text-primary)' }}>
-                🏬 Brand Market Share (Maharashtra Distribution)
+                {t('market.brandShareTitle')}
               </h3>
               
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
@@ -242,7 +248,7 @@ export default function MarketIntelligence() {
             <div className="card" style={{ padding: 24, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
               <div>
                 <h3 className="font-heading" style={{ fontSize: '0.98em', fontWeight: 800, margin: '0 0 12px', color: 'var(--text-primary)' }}>
-                  📅 Seasonal Demand Pattern
+                  {t('market.seasonalPatternTitle')}
                 </h3>
                 <p style={{ fontSize: '0.82em', color: 'var(--text-secondary)', lineHeight: 1.5, margin: 0 }}>
                   {activeCategory.seasonal_pattern}
@@ -259,10 +265,10 @@ export default function MarketIntelligence() {
                 }}
               >
                 <span style={{ fontSize: '0.72em', fontWeight: 800, color: '#e65100', textTransform: 'uppercase', display: 'block', marginBottom: 4 }}>
-                  🔥 Next Peak Seasonal Window
+                  {t('market.peakWindowTag')}
                 </span>
                 <span style={{ fontSize: '0.8em', color: 'var(--text-primary)', fontWeight: 600 }}>
-                  July - August: Higher Education Admissions Refresh Cycle
+                  {t('market.peakWindowDesc')}
                 </span>
               </div>
             </div>
@@ -283,7 +289,7 @@ export default function MarketIntelligence() {
                 <div style={{ fontSize: '2em' }}>🔮</div>
                 <div>
                   <h4 className="font-heading" style={{ margin: '0 0 6px', fontWeight: 800, fontSize: '0.95em', color: COLOR }}>
-                    AI Market Intelligence Forecast (Next 90 Days)
+                    {t('market.forecastTitle')}
                   </h4>
                   <p style={{ fontSize: '0.82em', color: 'var(--text-primary)', lineHeight: 1.5, margin: '0 0 10px' }}>
                     {activeCategory.forecast?.description}
@@ -301,7 +307,7 @@ export default function MarketIntelligence() {
                       lineHeight: 1.4
                     }}
                   >
-                    ⚠️ <strong>DISCLAIMER:</strong> {activeCategory.forecast?.disclaimer}
+                    ⚠️ <strong>{t('market.disclaimerTag')}:</strong> {activeCategory.forecast?.disclaimer}
                   </div>
                 </div>
               </div>

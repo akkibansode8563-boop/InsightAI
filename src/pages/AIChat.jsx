@@ -27,6 +27,7 @@ function ThinkingDots() {
 // ── Message Bubble ────────────────────────────────────────────────────────────
 
 function MessageBubble({ msg, onCopy }) {
+  const { t } = useApp();
   const isUser = msg.role === 'user';
   return (
     <div
@@ -111,7 +112,7 @@ function MessageBubble({ msg, onCopy }) {
           )}
           {msg.confidence && (
             <span className="badge badge-success" style={{ fontSize: '0.62em' }}>
-              {msg.confidence}% confident
+              {msg.confidence}% {t('chat.confidenceSuffix')}
             </span>
           )}
         </div>
@@ -123,6 +124,7 @@ function MessageBubble({ msg, onCopy }) {
 // ── Agent Selector Panel ──────────────────────────────────────────────────────
 
 function AgentPanel({ activeAgent, onSelect }) {
+  const { t } = useApp();
   return (
     <div
       style={{
@@ -137,36 +139,40 @@ function AgentPanel({ activeAgent, onSelect }) {
     >
       <div style={{ padding: '14px 12px 8px', borderBottom: '1px solid var(--glass-border-strong)' }}>
         <h3 className="font-heading" style={{ fontSize: '0.78em', fontWeight: 800, color: 'var(--text-secondary)', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
-          AI Agents
+          {t('chat.agent')}
         </h3>
       </div>
       <div style={{ flex: 1, overflowY: 'auto', padding: '8px' }} className="custom-scrollbar">
-        {AGENTS.map(agent => (
-          <button
-            key={agent.id}
-            onClick={() => onSelect(agent.id)}
-            className={`agent-card${activeAgent === agent.id ? ' active' : ''}`}
-            style={{
-              width: '100%',
-              textAlign: 'left',
-              marginBottom: 4,
-              borderColor: activeAgent === agent.id ? agent.color : 'transparent',
-              background: activeAgent === agent.id ? `${agent.color}12` : 'var(--bg-surface)',
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <span style={{ fontSize: '1.2em' }}>{agent.icon}</span>
-              <div style={{ minWidth: 0 }}>
-                <div style={{ fontSize: '0.8em', fontWeight: 700, color: 'var(--text-primary)', lineHeight: 1.2 }}>
-                  {agent.name}
-                </div>
-                <div className="truncate" style={{ fontSize: '0.67em', color: 'var(--text-muted)', marginTop: 1 }}>
-                  {agent.description}
+        {AGENTS.map(agent => {
+          const name = t(`agent.${agent.id}.name`) !== `agent.${agent.id}.name` ? t(`agent.${agent.id}.name`) : agent.name;
+          const desc = t(`agent.${agent.id}.description`) !== `agent.${agent.id}.description` ? t(`agent.${agent.id}.description`) : agent.description;
+          return (
+            <button
+              key={agent.id}
+              onClick={() => onSelect(agent.id)}
+              className={`agent-card${activeAgent === agent.id ? ' active' : ''}`}
+              style={{
+                width: '100%',
+                textAlign: 'left',
+                marginBottom: 4,
+                borderColor: activeAgent === agent.id ? agent.color : 'transparent',
+                background: activeAgent === agent.id ? `${agent.color}12` : 'var(--bg-surface)',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                <span style={{ fontSize: '1.2em' }}>{agent.icon}</span>
+                <div style={{ minWidth: 0 }}>
+                  <div style={{ fontSize: '0.8em', fontWeight: 700, color: 'var(--text-primary)', lineHeight: 1.2 }}>
+                    {name}
+                  </div>
+                  <div className="truncate" style={{ fontSize: '0.67em', color: 'var(--text-muted)', marginTop: 1 }}>
+                    {desc}
+                  </div>
                 </div>
               </div>
-            </div>
-          </button>
-        ))}
+            </button>
+          );
+        })}
       </div>
     </div>
   );
@@ -268,24 +274,39 @@ export default function AIChat() {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, streaming]);
 
+  const getAgentName = useCallback((a) => {
+    const key = `agent.${a.id}.name`;
+    const trans = t(key);
+    return trans !== key ? trans : a.name;
+  }, [t]);
+
+  const getAgentDesc = useCallback((a) => {
+    const key = `agent.${a.id}.description`;
+    const trans = t(key);
+    return trans !== key ? trans : a.description;
+  }, [t]);
+
   // Start a new chat session
   const startNewChat = useCallback(() => {
     const session = createSession(agent.id, agent.name);
     setCurrentSession(session);
+    const name = getAgentName(agent);
+    const desc = getAgentDesc(agent);
+    const greeting = t('chat.greeting').replace('{name}', name).replace('{description}', desc);
     setMessages([{
       id: buildId(),
       role: 'assistant',
-      content: `Hi! I'm your ${agent.name} agent. ${agent.description}. How can I help you today?`,
+      content: greeting,
       agentIcon: agent.icon,
       time: timestamp(),
     }]);
     setShowHistory(false);
-  }, [agent]);
+  }, [agent, language, t, getAgentName, getAgentDesc]);
 
-  // Initialize chat on agent change
+  // Initialize chat on agent change or language change
   useEffect(() => {
     startNewChat();
-  }, [activeAgent]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [activeAgent, language, startNewChat]);
 
   const handleSend = async (text) => {
     if (streaming) return;

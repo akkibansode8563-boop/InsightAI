@@ -80,7 +80,7 @@ function TCOCalculator() {
 }
 
 function InfraPlanner() {
-  const { language } = useApp();
+  const { language, t } = useApp();
   const [selected, setSelected] = useState(null);
   const [custom, setCustom] = useState('');
   const [response, setResponse] = useState('');
@@ -92,7 +92,8 @@ function InfraPlanner() {
     setLoading(true);
     setResponse('');
     setError('');
-    const prompt = `Design a complete IT infrastructure plan for: ${template.label}. Include: component specifications, vendor recommendations, network topology, redundancy plan, backup strategy, total cost estimate in INR, and 3-year roadmap.`;
+    const resolvedLabel = t('enterprise.' + (template.id === 'smb' ? 'smbOffice' : template.id === 'enterprise' ? 'entOffice' : template.id === 'hospital' ? 'hospital' : template.id === 'school' ? 'school' : '')) || template.label;
+    const prompt = `Design a complete IT infrastructure plan for: ${resolvedLabel}. Include: component specifications, vendor recommendations, network topology, redundancy plan, backup strategy, total cost estimate in INR, and 3-year roadmap.`;
     let acc = '';
     await streamChat(
       { messages: [{ role: 'user', content: prompt }], agent: 'enterprise_agent', language },
@@ -110,35 +111,39 @@ function InfraPlanner() {
   return (
     <div>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 12, marginBottom: 20 }}>
-        {INFRA_TEMPLATES.map(t => (
-          <div
-            key={t.id}
-            className="card"
-            style={{ padding: 18, cursor: 'pointer', border: selected?.id === t.id ? `2px solid ${COLOR}` : '1px solid var(--glass-border-strong)', transition: 'var(--transition-smooth)' }}
-            onClick={() => planInfra(t)}
-          >
-            <div style={{ fontSize: 24, marginBottom: 8 }}>{t.icon}</div>
-            <div className="font-heading" style={{ fontWeight: 800, fontSize: '0.88em', color: 'var(--text-primary)', marginBottom: 4 }}>{t.label}</div>
-            <div style={{ fontSize: '0.72em', color: 'var(--text-muted)', marginBottom: 8 }}>{t.desc}</div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-              {t.components.slice(0, 3).map(c => (
-                <div key={c} style={{ fontSize: '0.68em', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: 4 }}>
-                  <span style={{ width: 4, height: 4, borderRadius: '50%', background: COLOR, flexShrink: 0 }} />
-                  {c}
-                </div>
-              ))}
-              {t.components.length > 3 && <div style={{ fontSize: '0.68em', color: 'var(--text-muted)' }}>+{t.components.length - 3} more</div>}
+        {INFRA_TEMPLATES.map(item => {
+          const resolvedLabel = t('enterprise.' + (item.id === 'smb' ? 'smbOffice' : item.id === 'enterprise' ? 'entOffice' : item.id === 'hospital' ? 'hospital' : 'school'));
+          const resolvedDesc = t('enterprise.' + (item.id === 'smb' ? 'smbOfficeDesc' : item.id === 'enterprise' ? 'entOfficeDesc' : item.id === 'hospital' ? 'hospitalDesc' : 'schoolDesc'));
+          return (
+            <div
+              key={item.id}
+              className="card"
+              style={{ padding: 18, cursor: 'pointer', border: selected?.id === item.id ? `2px solid ${COLOR}` : '1px solid var(--glass-border-strong)', transition: 'var(--transition-smooth)' }}
+              onClick={() => planInfra(item)}
+            >
+              <div style={{ fontSize: 24, marginBottom: 8 }}>{item.icon}</div>
+              <div className="font-heading" style={{ fontWeight: 800, fontSize: '0.88em', color: 'var(--text-primary)', marginBottom: 4 }}>{resolvedLabel}</div>
+              <div style={{ fontSize: '0.72em', color: 'var(--text-muted)', marginBottom: 8 }}>{resolvedDesc}</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+                {item.components.slice(0, 3).map(c => (
+                  <div key={c} style={{ fontSize: '0.68em', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: 4 }}>
+                    <span style={{ width: 4, height: 4, borderRadius: '50%', background: COLOR, flexShrink: 0 }} />
+                    {c}
+                  </div>
+                ))}
+                {item.components.length > 3 && <div style={{ fontSize: '0.68em', color: 'var(--text-muted)' }}>+{item.components.length - 3} more</div>}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       <div className="card" style={{ padding: 20, marginBottom: 16 }}>
-        <h4 className="font-heading" style={{ fontWeight: 800, fontSize: '0.88em', marginBottom: 10 }}>🔧 Custom Infrastructure Request</h4>
+        <h4 className="font-heading" style={{ fontWeight: 800, fontSize: '0.88em', marginBottom: 10 }}>{t('enterprise.customInfraTitle')}</h4>
         <div style={{ display: 'flex', gap: 8 }}>
-          <input className="input-field" value={custom} onChange={e => setCustom(e.target.value)} placeholder="Describe your infrastructure needs..." style={{ flex: 1 }} />
+          <input className="input-field" value={custom} onChange={e => setCustom(e.target.value)} placeholder={t('enterprise.customInfraPlaceholder')} style={{ flex: 1 }} />
           <button onClick={planCustom} disabled={!custom.trim() || loading} className="premium-btn" style={{ padding: '10px 18px', fontSize: '0.82em', background: `linear-gradient(135deg, ${COLOR}, #0284c7)`, flexShrink: 0 }}>
-            Plan →
+            {t('enterprise.planBtn')}
           </button>
         </div>
       </div>
@@ -147,7 +152,7 @@ function InfraPlanner() {
         <div className="card" style={{ padding: 20, borderLeft: `3px solid ${COLOR}` }}>
           {loading && <div style={{ display: 'flex', gap: 6, alignItems: 'center', color: 'var(--text-secondary)', fontSize: '0.85em' }}>
             {[0,1,2].map(i => <span key={i} className="loading-dot" style={{ animationDelay: `${i*0.16}s` }} />)}
-            <span style={{ marginLeft: 4 }}>Designing your infrastructure plan...</span>
+            <span style={{ marginLeft: 4 }}>{t('enterprise.planningProgress')}</span>
           </div>}
           {error && <div style={{ color: '#dc2626', fontSize: '0.85em' }}>⚠️ {error}</div>}
           {response && <div style={{ fontSize: '0.875em', lineHeight: 1.7, whiteSpace: 'pre-wrap', color: 'var(--text-primary)' }}>{response}</div>}
