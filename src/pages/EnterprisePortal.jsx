@@ -13,6 +13,7 @@ const INFRA_TEMPLATES = [
 ];
 
 function TCOCalculator() {
+  const { t } = useApp();
   const [hardware, setHardware] = useState('500000');
   const [maintenance, setMaintenance] = useState('50000');
   const [license, setLicense] = useState('30000');
@@ -25,55 +26,70 @@ function TCOCalculator() {
   );
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, alignItems: 'start' }}>
-      <div className="card" style={{ padding: 24 }}>
-        <h3 className="font-heading" style={{ fontWeight: 800, fontSize: '0.95em', marginBottom: 16, color: 'var(--text-primary)' }}>⚙️ TCO Inputs</h3>
-        {[
-          { label: 'Hardware Cost (₹)', val: hardware, set: setHardware },
-          { label: 'Annual Maintenance (₹)', val: maintenance, set: setMaintenance },
-          { label: 'Annual License (₹)', val: license, set: setLicense },
-          { label: 'Annual Power Cost (₹)', val: power, set: setPower },
-          { label: 'Analysis Period (years)', val: years, set: setYears },
-        ].map(f => (
-          <div key={f.label} style={{ marginBottom: 10 }}>
-            <label style={{ fontSize: '0.76em', fontWeight: 700, color: 'var(--text-secondary)', display: 'block', marginBottom: 4 }}>{f.label}</label>
-            <input type="number" className="input-field" value={f.val} onChange={e => f.set(e.target.value)} />
-          </div>
-        ))}
-      </div>
-
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-        <div className="card" style={{ padding: 20, background: `${COLOR}08` }}>
-          <h3 className="font-heading" style={{ fontWeight: 800, fontSize: '0.9em', marginBottom: 12, color: 'var(--text-primary)' }}>📊 TCO Summary</h3>
-          {result.display.map(d => (
-            <div key={d.label} style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0', borderBottom: '1px solid var(--glass-border-strong)' }}>
-              <span style={{ fontSize: '0.82em', color: 'var(--text-secondary)' }}>{d.label}</span>
-              <span style={{ fontSize: '0.9em', fontWeight: 800, color: COLOR }}>{d.value}</span>
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, alignItems: 'start' }}>
+      
+      {/* TCO Inputs */}
+      <div className="glass-strong" style={{ padding: 28, borderRadius: 'var(--radius-lg)' }}>
+        <h3 className="font-heading" style={{ fontWeight: 850, fontSize: '1.05em', marginBottom: 20, color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: 8 }}>
+          <span>⚙️</span> <span>{t('enterprise.tcoInputs')}</span>
+        </h3>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+          {[
+            { label: t('enterprise.hardwareCost'), val: hardware, set: setHardware },
+            { label: t('enterprise.maintenanceCost'), val: maintenance, set: setMaintenance },
+            { label: t('enterprise.licenseCost'), val: license, set: setLicense },
+            { label: t('enterprise.powerCost'), val: power, set: setPower },
+            { label: t('enterprise.period'), val: years, set: setYears },
+          ].map(f => (
+            <div key={f.label}>
+              <label style={{ fontSize: '0.8em', fontWeight: 700, color: 'var(--text-secondary)', display: 'block', marginBottom: 6 }}>{f.label}</label>
+              <input type="number" className="input-field" value={f.val} onChange={e => f.set(e.target.value)} />
             </div>
           ))}
         </div>
+      </div>
 
-        <div className="card" style={{ padding: 18 }}>
-          <h4 className="font-heading" style={{ fontWeight: 700, fontSize: '0.82em', marginBottom: 10, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-            Year-by-Year Cumulative
+      {/* TCO Results */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+        
+        {/* TCO Summary */}
+        <div className="card-premium" style={{ padding: 24, background: `linear-gradient(135deg, ${COLOR}06, transparent 80%)`, borderLeft: `4px solid ${COLOR}` }}>
+          <h3 className="font-heading" style={{ fontWeight: 850, fontSize: '1.05em', marginBottom: 16, color: 'var(--text-primary)' }}>
+            {t('enterprise.tcoSummary')}
+          </h3>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            {result.display.map(d => (
+              <div key={d.label} style={{ display: 'flex', justifyContent: 'space-between', padding: '10px 0', borderBottom: '1px solid var(--glass-border-strong)' }}>
+                <span style={{ fontSize: '0.85em', color: 'var(--text-secondary)', fontWeight: 550 }}>{t(d.label)}</span>
+                <span style={{ fontSize: '0.94em', fontWeight: 850, color: COLOR }}>{d.value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Year-by-Year Cumulative Progress */}
+        <div className="glass-strong" style={{ padding: 24, borderRadius: 'var(--radius-lg)' }}>
+          <h4 className="font-heading" style={{ fontWeight: 800, fontSize: '0.82em', marginBottom: 16, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            {t('enterprise.yearCumulative')}
           </h4>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
             {result.yearlyData.map(y => {
               const pct = (y.cumulative / result.totalTCO) * 100;
               return (
                 <div key={y.year}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 3 }}>
-                    <span style={{ fontSize: '0.76em', fontWeight: 600, color: 'var(--text-secondary)' }}>Year {y.year}</span>
-                    <span style={{ fontSize: '0.76em', fontWeight: 700, color: 'var(--text-primary)' }}>{formatINR(y.cumulative)}</span>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
+                    <span style={{ fontSize: '0.78em', fontWeight: 650, color: 'var(--text-secondary)' }}>{t('enterprise.year')} {y.year}</span>
+                    <span style={{ fontSize: '0.78em', fontWeight: 800, color: 'var(--text-primary)' }}>{formatINR(y.cumulative)}</span>
                   </div>
-                  <div style={{ height: 4, background: 'var(--bg-elevated)', borderRadius: 2, overflow: 'hidden' }}>
-                    <div style={{ height: '100%', width: `${pct}%`, background: COLOR, borderRadius: 2, transition: 'width 0.5s ease' }} />
+                  <div style={{ height: 6, background: 'var(--bg-elevated)', borderRadius: 3, overflow: 'hidden' }}>
+                    <div style={{ height: '100%', width: `${pct}%`, background: `linear-gradient(to right, ${COLOR}, #38bdf8)`, borderRadius: 3, transition: 'width 0.6s cubic-bezier(0.16, 1, 0.3, 1)' }} />
                   </div>
                 </div>
               );
             })}
           </div>
         </div>
+
       </div>
     </div>
   );
@@ -105,57 +121,70 @@ function InfraPlanner() {
 
   const planCustom = async () => {
     if (!custom.trim()) return;
-    await planInfra({ label: custom, icon: '🏢' });
+    await planInfra({ label: custom, icon: '🏢', id: 'custom' });
   };
 
   return (
-    <div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 12, marginBottom: 20 }}>
+    <div style={{ maxWidth: 1000, margin: '0 auto' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16, marginBottom: 24 }}>
         {INFRA_TEMPLATES.map(item => {
           const resolvedLabel = t('enterprise.' + (item.id === 'smb' ? 'smbOffice' : item.id === 'enterprise' ? 'entOffice' : item.id === 'hospital' ? 'hospital' : 'school'));
           const resolvedDesc = t('enterprise.' + (item.id === 'smb' ? 'smbOfficeDesc' : item.id === 'enterprise' ? 'entOfficeDesc' : item.id === 'hospital' ? 'hospitalDesc' : 'schoolDesc'));
+          const isSelected = selected?.id === item.id;
           return (
             <div
               key={item.id}
-              className="card"
-              style={{ padding: 18, cursor: 'pointer', border: selected?.id === item.id ? `2px solid ${COLOR}` : '1px solid var(--glass-border-strong)', transition: 'var(--transition-smooth)' }}
+              className="card-premium hover-scale"
+              style={{
+                padding: 22,
+                cursor: 'pointer',
+                border: isSelected ? `2.5px solid ${COLOR}` : '1.5px solid var(--glass-border-strong)',
+                background: isSelected ? `${COLOR}08` : 'var(--bg-surface)',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+              }}
               onClick={() => planInfra(item)}
             >
-              <div style={{ fontSize: 24, marginBottom: 8 }}>{item.icon}</div>
-              <div className="font-heading" style={{ fontWeight: 800, fontSize: '0.88em', color: 'var(--text-primary)', marginBottom: 4 }}>{resolvedLabel}</div>
-              <div style={{ fontSize: '0.72em', color: 'var(--text-muted)', marginBottom: 8 }}>{resolvedDesc}</div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+              <div>
+                <div style={{ fontSize: 28, marginBottom: 12 }}>{item.icon}</div>
+                <div className="font-heading" style={{ fontWeight: 850, fontSize: '0.92em', color: 'var(--text-primary)', marginBottom: 4 }}>{resolvedLabel}</div>
+                <div style={{ fontSize: '0.74em', color: 'var(--text-muted)', marginBottom: 12, lineHeight: 1.4 }}>{resolvedDesc}</div>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 4, borderTop: '1px solid var(--glass-border-strong)', paddingTop: 10 }}>
                 {item.components.slice(0, 3).map(c => (
-                  <div key={c} style={{ fontSize: '0.68em', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: 4 }}>
+                  <div key={c} style={{ fontSize: '0.7em', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: 5 }}>
                     <span style={{ width: 4, height: 4, borderRadius: '50%', background: COLOR, flexShrink: 0 }} />
-                    {c}
+                    <span className="truncate">{c}</span>
                   </div>
                 ))}
-                {item.components.length > 3 && <div style={{ fontSize: '0.68em', color: 'var(--text-muted)' }}>+{item.components.length - 3} more</div>}
+                {item.components.length > 3 && <div style={{ fontSize: '0.68em', color: 'var(--text-muted)', fontWeight: 600, marginLeft: 9 }}>+{item.components.length - 3} more</div>}
               </div>
             </div>
           );
         })}
       </div>
 
-      <div className="card" style={{ padding: 20, marginBottom: 16 }}>
-        <h4 className="font-heading" style={{ fontWeight: 800, fontSize: '0.88em', marginBottom: 10 }}>{t('enterprise.customInfraTitle')}</h4>
-        <div style={{ display: 'flex', gap: 8 }}>
+      <div className="glass-strong" style={{ padding: 24, marginBottom: 20, borderRadius: 'var(--radius-lg)' }}>
+        <h4 className="font-heading" style={{ fontWeight: 800, fontSize: '0.9em', marginBottom: 12 }}>{t('enterprise.customInfraTitle')}</h4>
+        <div style={{ display: 'flex', gap: 10 }}>
           <input className="input-field" value={custom} onChange={e => setCustom(e.target.value)} placeholder={t('enterprise.customInfraPlaceholder')} style={{ flex: 1 }} />
-          <button onClick={planCustom} disabled={!custom.trim() || loading} className="premium-btn" style={{ padding: '10px 18px', fontSize: '0.82em', background: `linear-gradient(135deg, ${COLOR}, #0284c7)`, flexShrink: 0 }}>
+          <button onClick={planCustom} disabled={!custom.trim() || loading} className="premium-btn hover-scale" style={{ padding: '10px 20px', fontSize: '0.82em', background: `linear-gradient(135deg, ${COLOR}, #0284c7)`, boxShadow: `0 4px 12px rgba(14, 165, 233, 0.2)`, flexShrink: 0 }}>
             {t('enterprise.planBtn')}
           </button>
         </div>
       </div>
 
       {(loading || response || error) && (
-        <div className="card" style={{ padding: 20, borderLeft: `3px solid ${COLOR}` }}>
-          {loading && <div style={{ display: 'flex', gap: 6, alignItems: 'center', color: 'var(--text-secondary)', fontSize: '0.85em' }}>
-            {[0,1,2].map(i => <span key={i} className="loading-dot" style={{ animationDelay: `${i*0.16}s` }} />)}
-            <span style={{ marginLeft: 4 }}>{t('enterprise.planningProgress')}</span>
-          </div>}
+        <div className="glass-strong" style={{ padding: 28, borderRadius: 'var(--radius-lg)', borderLeft: `4px solid ${COLOR}`, boxShadow: 'var(--shadow-md)' }}>
+          {loading && (
+            <div style={{ display: 'flex', gap: 6, alignItems: 'center', color: 'var(--text-secondary)', fontSize: '0.85em', minHeight: 40 }}>
+              {[0,1,2].map(i => <span key={i} className="loading-dot" style={{ animationDelay: `${i*0.16}s`, background: COLOR }} />)}
+              <span style={{ marginLeft: 6 }}>{t('enterprise.planningProgress')}</span>
+            </div>
+          )}
           {error && <div style={{ color: '#dc2626', fontSize: '0.85em' }}>⚠️ {error}</div>}
-          {response && <div style={{ fontSize: '0.875em', lineHeight: 1.7, whiteSpace: 'pre-wrap', color: 'var(--text-primary)' }}>{response}</div>}
+          {response && <div style={{ fontSize: '0.9em', lineHeight: 1.75, whiteSpace: 'pre-wrap', color: 'var(--text-primary)' }}>{response}</div>}
         </div>
       )}
     </div>
@@ -172,24 +201,31 @@ export default function EnterprisePortal() {
   ];
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden' }}>
-      <div style={{ padding: '28px 32px 24px', background: `linear-gradient(135deg, ${COLOR}14 0%, transparent 60%)`, borderBottom: '1px solid var(--glass-border-strong)' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-          <div style={{ width: 48, height: 48, borderRadius: 14, background: `${COLOR}20`, border: `2px solid ${COLOR}40`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 24 }}>🏢</div>
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden', position: 'relative' }}>
+      <div className="aurora-mesh" />
+      
+      {/* Header */}
+      <div style={{ padding: '32px 40px', background: `linear-gradient(135deg, ${COLOR}12 0%, transparent 60%)`, borderBottom: '1px solid var(--glass-border-strong)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 18 }}>
+          <div style={{ width: 52, height: 52, borderRadius: 'var(--radius-md)', background: `${COLOR}18`, border: `2px solid ${COLOR}35`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 26, boxShadow: 'var(--shadow-sm)' }}>🏢</div>
           <div>
-            <h1 className="font-heading" style={{ fontSize: '1.4em', fontWeight: 900, color: 'var(--text-primary)', lineHeight: 1 }}>{t('module.enterprise.title')}</h1>
-            <p style={{ fontSize: '0.82em', color: 'var(--text-secondary)', marginTop: 4 }}>{t('module.enterprise.desc')}</p>
+            <h1 className="font-heading" style={{ fontSize: '1.5em', fontWeight: 900, color: 'var(--text-primary)', lineHeight: 1.1 }}>{t('module.enterprise.title')}</h1>
+            <p style={{ fontSize: '0.85em', color: 'var(--text-secondary)', marginTop: 6 }}>{t('module.enterprise.desc')}</p>
           </div>
         </div>
       </div>
-      <div style={{ display: 'flex', gap: 4, padding: '12px 24px', borderBottom: '1px solid var(--glass-border-strong)', background: 'var(--bg-surface)' }}>
+
+      {/* Tabs */}
+      <div style={{ display: 'flex', gap: 4, padding: '12px 32px', borderBottom: '1px solid var(--glass-border-strong)', background: 'var(--bg-surface)', overflowX: 'auto', scrollbarWidth: 'none', zIndex: 10 }} className="custom-scrollbar">
         {TABS.map(tab => (
-          <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`nav-tab${activeTab === tab.id ? ' active' : ''}`} style={activeTab === tab.id ? { color: COLOR, background: `${COLOR}18` } : {}}>
-            <span>{tab.icon}</span>{tab.label}
+          <button key={tab.id} onClick={() => { setActiveTab(tab.id); }} className={`nav-tab ${activeTab === tab.id ? 'active' : ''}`} style={activeTab === tab.id ? { color: COLOR, background: `${COLOR}14`, boxShadow: 'var(--shadow-sm)' } : {}}>
+            <span style={{ fontSize: '1.1em' }}>{tab.icon}</span><span>{tab.label}</span>
           </button>
         ))}
       </div>
-      <div className="custom-scrollbar" style={{ flex: 1, overflowY: 'auto', padding: '24px' }}>
+
+      {/* Main Content Area */}
+      <div className="custom-scrollbar" style={{ flex: 1, overflowY: 'auto', padding: '32px', zIndex: 10 }}>
         {activeTab === 'infra' && <InfraPlanner />}
         {activeTab === 'tco' && <TCOCalculator />}
       </div>

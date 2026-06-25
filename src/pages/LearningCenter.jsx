@@ -95,67 +95,72 @@ export default function LearningCenter() {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden', position: 'relative' }}>
+      <div className="aurora-mesh" />
+
       {/* Header */}
       <div
         style={{
-          padding: '24px 32px',
+          padding: '32px 40px',
           background: `linear-gradient(135deg, ${COLOR}12 0%, transparent 60%)`,
           borderBottom: '1px solid var(--glass-border-strong)',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
           flexWrap: 'wrap',
-          gap: 16
+          gap: 16,
+          zIndex: 10,
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 18 }}>
           <div
             style={{
-              width: 48,
-              height: 48,
-              borderRadius: 14,
-              background: `${COLOR}20`,
-              border: `2px solid ${COLOR}40`,
+              width: 52,
+              height: 52,
+              borderRadius: 'var(--radius-md)',
+              background: `${COLOR}18`,
+              border: `2px solid ${COLOR}35`,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: 24
+              fontSize: 26,
+              boxShadow: 'var(--shadow-sm)',
             }}
           >
             🎓
           </div>
           <div>
-            <h1 className="font-heading" style={{ fontSize: '1.4em', fontWeight: 900, color: 'var(--text-primary)', lineHeight: 1 }}>
+            <h1 className="font-heading" style={{ fontSize: '1.5em', fontWeight: 900, color: 'var(--text-primary)', lineHeight: 1.1 }}>
               {t('module.learn.title')}
             </h1>
-            <p style={{ fontSize: '0.82em', color: 'var(--text-secondary)', marginTop: 4 }}>
+            <p style={{ fontSize: '0.85em', color: 'var(--text-secondary)', marginTop: 6 }}>
               {t('module.learn.desc')}
             </p>
           </div>
         </div>
 
-        {/* Cert Stats Dashboard */}
+        {/* Certification Badge Dashboard */}
         <div
+          className="glass-strong"
           style={{
             display: 'flex',
-            gap: 12,
-            background: 'var(--bg-surface)',
-            padding: '8px 16px',
+            gap: 14,
+            padding: '10px 20px',
             borderRadius: 'var(--radius-md)',
-            border: '1px solid var(--glass-border-strong)',
-            alignItems: 'center'
+            alignItems: 'center',
+            boxShadow: 'var(--shadow-sm)',
           }}
         >
-          <span style={{ fontSize: '0.78em', fontWeight: 700, color: 'var(--text-secondary)' }}>{t('learn.certificationsEarned')}</span>
+          <span style={{ fontSize: '0.8em', fontWeight: 700, color: 'var(--text-secondary)' }}>{t('learn.certificationsEarned')}</span>
           <span
             style={{
-              fontSize: '0.9em',
+              fontSize: '0.88em',
               fontWeight: 900,
               color: COLOR,
               background: `${COLOR}15`,
-              padding: '2px 8px',
-              borderRadius: 4
+              padding: '4px 12px',
+              borderRadius: 'var(--radius-sm)',
+              border: `1px solid ${COLOR}30`,
             }}
           >
             🏆 {Object.keys(certifications).length} / {modules.length || '—'}
@@ -163,21 +168,22 @@ export default function LearningCenter() {
         </div>
       </div>
 
-      {/* Main Panel split */}
-      <div style={{ flex: 1, display: 'flex', overflow: 'hidden' }}>
+      {/* Main Grid View */}
+      <div style={{ flex: 1, display: 'flex', overflow: 'hidden', zIndex: 10 }}>
+        
         {/* Module Sidebar */}
         <div
           style={{
             width: 320,
             borderRight: '1px solid var(--glass-border-strong)',
-            background: 'rgba(0, 0, 0, 0.01)',
+            background: 'transparent',
             overflowY: 'auto',
-            padding: '16px 20px',
-            flexShrink: 0
+            padding: '24px 20px',
+            flexShrink: 0,
           }}
           className="custom-scrollbar"
         >
-          <h3 className="font-heading" style={{ fontSize: '0.88em', fontWeight: 800, color: 'var(--text-primary)', marginBottom: 12 }}>
+          <h3 className="font-heading" style={{ fontSize: '0.82em', fontWeight: 800, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 16 }}>
             {t('learn.knowledgeModules')}
           </h3>
           {loading ? (
@@ -190,26 +196,24 @@ export default function LearningCenter() {
                 return (
                   <div
                     key={mod.id}
-                    className="card"
+                    className="card-premium hover-scale"
                     onClick={() => handleStartModule(mod)}
                     style={{
-                      padding: 14,
+                      padding: 18,
                       cursor: 'pointer',
-                      borderRadius: 'var(--radius-md)',
-                      border: active ? `1px solid ${COLOR}` : '1px solid var(--glass-border-strong)',
-                      background: active ? `${COLOR}05` : 'var(--bg-surface)',
-                      transition: 'var(--transition-fast)'
+                      border: active ? `2px solid ${COLOR}` : '1.5px solid var(--glass-border-strong)',
+                      background: active ? `${COLOR}08` : 'var(--bg-surface)',
                     }}
                   >
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span style={{ fontSize: '0.85em', fontWeight: 700, color: 'var(--text-primary)' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 10 }}>
+                      <span style={{ fontSize: '0.88em', fontWeight: 700, color: 'var(--text-primary)', lineHeight: 1.3 }}>
                         {mod.title}
                       </span>
-                      {completed && <span title="Passed" style={{ fontSize: '1em' }}>✅</span>}
+                      {completed && <span title="Passed" style={{ fontSize: '1.2em' }}>🏆</span>}
                     </div>
-                    <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginTop: 6 }}>
+                    <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 10 }}>
                       {mod.keywords?.slice(0, 3).map((kw, i) => (
-                        <span key={i} style={{ fontSize: '0.62em', background: 'var(--bg-elevated)', color: 'var(--text-muted)', padding: '2px 6px', borderRadius: 4 }}>
+                        <span key={i} style={{ fontSize: '0.66em', background: 'var(--bg-elevated)', color: 'var(--text-secondary)', padding: '3px 8px', borderRadius: 'var(--radius-xs)', border: '1px solid var(--glass-border-strong)' }}>
                           {kw}
                         </span>
                       ))}
@@ -221,48 +225,53 @@ export default function LearningCenter() {
           )}
         </div>
 
-        {/* Center Panel (Article Reader / Quiz) */}
-        <div style={{ flex: 1, overflowY: 'auto', padding: '32px 48px', background: 'var(--bg-surface)' }} className="custom-scrollbar">
+        {/* Center Panel (Reader / Quiz) */}
+        <div style={{ flex: 1, overflowY: 'auto', padding: '36px 48px', background: 'var(--bg-surface)' }} className="custom-scrollbar">
           {selectedModule ? (
             <div style={{ maxWidth: 760, margin: '0 auto' }}>
-              {/* Module Header */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24, borderBottom: '1px solid var(--glass-border-strong)', paddingBottom: 16 }}>
+              
+              {/* Module Sub-Header */}
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 28, borderBottom: '1px solid var(--glass-border-strong)', paddingBottom: 20 }}>
                 <div>
-                  <h2 className="font-heading" style={{ fontSize: '1.4em', fontWeight: 900, color: 'var(--text-primary)', margin: 0 }}>
+                  <h2 className="font-heading" style={{ fontSize: '1.45em', fontWeight: 900, color: 'var(--text-primary)', margin: 0 }}>
                     {selectedModule.title}
                   </h2>
-                  <span style={{ fontSize: '0.78em', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>
+                  <span style={{ fontSize: '0.82em', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 700, letterSpacing: '0.02em', marginTop: 4, display: 'inline-block' }}>
                     {t('learn.topic')} {selectedModule.topic}
                   </span>
                 </div>
 
-                <div style={{ display: 'flex', gap: 10 }}>
+                <div style={{ display: 'flex', gap: 8 }}>
                   <button
                     onClick={() => setActiveQuizIndex(-1)}
+                    className="hover-scale"
                     style={{
                       padding: '8px 16px',
                       borderRadius: 'var(--radius-md)',
-                      border: '1px solid var(--glass-border-strong)',
+                      border: '1.5px solid var(--glass-border-strong)',
                       background: activeQuizIndex === -1 ? COLOR : 'transparent',
                       color: activeQuizIndex === -1 ? '#fff' : 'var(--text-secondary)',
                       fontSize: '0.8em',
                       fontWeight: 700,
-                      cursor: 'pointer'
+                      cursor: 'pointer',
+                      boxShadow: activeQuizIndex === -1 ? `0 4px 12px ${COLOR}25` : 'none',
                     }}
                   >
                     {t('learn.readLesson')}
                   </button>
                   <button
                     onClick={() => setActiveQuizIndex(0)}
+                    className="hover-scale"
                     style={{
                       padding: '8px 16px',
                       borderRadius: 'var(--radius-md)',
-                      border: '1px solid var(--glass-border-strong)',
+                      border: '1.5px solid var(--glass-border-strong)',
                       background: activeQuizIndex >= 0 ? COLOR : 'transparent',
                       color: activeQuizIndex >= 0 ? '#fff' : 'var(--text-secondary)',
                       fontSize: '0.8em',
                       fontWeight: 700,
-                      cursor: 'pointer'
+                      cursor: 'pointer',
+                      boxShadow: activeQuizIndex >= 0 ? `0 4px 12px ${COLOR}25` : 'none',
                     }}
                   >
                     {t('learn.takeQuiz')}
@@ -272,47 +281,40 @@ export default function LearningCenter() {
 
               {/* View Article */}
               {activeQuizIndex === -1 ? (
-                <div style={{ animation: 'fadeIn 0.3s ease' }}>
+                <div style={{ animation: 'fadeUp 0.3s ease-out' }}>
                   <div
                     style={{
-                      fontSize: '0.98em',
+                      fontSize: '0.96em',
                       color: 'var(--text-primary)',
-                      lineHeight: 1.7,
-                      textAlign: 'justify',
-                      whiteSpace: 'pre-wrap'
+                      lineHeight: 1.8,
+                      whiteSpace: 'pre-wrap',
                     }}
                   >
                     {selectedModule.content}
                   </div>
 
                   <div
+                    className="glass-strong"
                     style={{
-                      marginTop: 32,
-                      padding: 24,
-                      background: 'var(--bg-elevated)',
+                      marginTop: 36,
+                      padding: 32,
                       borderRadius: 'var(--radius-lg)',
-                      border: '1px solid var(--glass-border-strong)',
-                      textAlign: 'center'
+                      textAlign: 'center',
                     }}
                   >
-                    <h3 className="font-heading" style={{ fontSize: '1.05em', fontWeight: 800, margin: '0 0 10px' }}>
+                    <h3 className="font-heading" style={{ fontSize: '1.1em', fontWeight: 800, marginBottom: 8 }}>
                       {t('learn.readyText')}
                     </h3>
-                    <p style={{ fontSize: '0.8em', color: 'var(--text-secondary)', margin: '0 0 16px' }}>
+                    <p style={{ fontSize: '0.84em', color: 'var(--text-secondary)', marginBottom: 20, maxWidth: 380, margin: '0 auto 20px' }}>
                       {t('learn.readyDesc')}
                     </p>
                     <button
                       onClick={() => setActiveQuizIndex(0)}
+                      className="premium-btn hover-scale"
                       style={{
-                        padding: '10px 24px',
+                        padding: '12px 28px',
                         background: COLOR,
-                        color: '#fff',
-                        border: 'none',
-                        borderRadius: 'var(--radius-md)',
-                        fontWeight: 700,
-                        cursor: 'pointer',
-                        fontSize: '0.88em',
-                        boxShadow: 'var(--shadow-sm)'
+                        boxShadow: `0 4px 12px ${COLOR}25`,
                       }}
                     >
                       {t('learn.startQuiz')}
@@ -321,34 +323,33 @@ export default function LearningCenter() {
                 </div>
               ) : (
                 /* View Quiz */
-                <div style={{ animation: 'fadeIn 0.3s ease' }}>
+                <div style={{ animation: 'fadeUp 0.3s ease-out' }}>
                   {selectedModule.quiz.map((q, idx) => (
                     <div
                       key={q.id}
-                      className="card"
+                      className="glass-strong"
                       style={{
-                        padding: 20,
-                        marginBottom: 16,
-                        border: '1px solid var(--glass-border-strong)',
-                        borderRadius: 'var(--radius-md)'
+                        padding: 24,
+                        marginBottom: 20,
+                        borderRadius: 'var(--radius-lg)',
                       }}
                     >
-                      <h4 style={{ fontSize: '0.92em', fontWeight: 700, color: 'var(--text-primary)', margin: '0 0 14px' }}>
+                      <h4 style={{ fontSize: '0.94em', fontWeight: 800, color: 'var(--text-primary)', marginBottom: 16 }}>
                         {idx + 1}. {q.question}
                       </h4>
 
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                         {q.options.map((opt, oIdx) => {
                           const chosen = userAnswers[idx] === oIdx;
                           const correct = q.answerIndex === oIdx;
                           let optBg = 'transparent';
-                          let optBorder = '1px solid var(--glass-border-strong)';
+                          let optBorder = '1.5px solid var(--glass-border-strong)';
                           if (chosen) {
-                            optBg = quizSubmitted ? (correct ? 'rgba(5, 150, 105, 0.08)' : 'rgba(239, 68, 68, 0.08)') : `${COLOR}10`;
-                            optBorder = quizSubmitted ? (correct ? '1px solid #059669' : '1px solid #ef4444') : `1px solid ${COLOR}`;
+                            optBg = quizSubmitted ? (correct ? 'rgba(5, 150, 105, 0.08)' : 'rgba(239, 68, 68, 0.08)') : `${COLOR}12`;
+                            optBorder = quizSubmitted ? (correct ? '1.5px solid #059669' : '1.5px solid #ef4444') : `1.5px solid ${COLOR}`;
                           } else if (quizSubmitted && correct) {
                             optBg = 'rgba(5, 150, 105, 0.08)';
-                            optBorder = '1px solid #059669';
+                            optBorder = '1.5px solid #059669';
                           }
 
                           return (
@@ -356,19 +357,21 @@ export default function LearningCenter() {
                               key={oIdx}
                               onClick={() => handleOptionSelect(idx, oIdx)}
                               disabled={quizSubmitted}
+                              className="hover-scale"
                               style={{
-                                padding: '10px 14px',
+                                padding: '12px 16px',
                                 borderRadius: 'var(--radius-md)',
                                 background: optBg,
                                 border: optBorder,
                                 color: 'var(--text-primary)',
                                 textAlign: 'left',
                                 cursor: quizSubmitted ? 'default' : 'pointer',
-                                fontSize: '0.8em',
+                                fontSize: '0.84em',
                                 fontWeight: chosen ? 700 : 500,
                                 display: 'flex',
                                 alignItems: 'center',
-                                justifyContent: 'space-between'
+                                justifyContent: 'space-between',
+                                transition: 'var(--transition-fast)',
                               }}
                             >
                               <span>{opt}</span>
@@ -381,7 +384,7 @@ export default function LearningCenter() {
 
                       {/* Explanation */}
                       {quizSubmitted && (
-                        <div style={{ marginTop: 12, padding: 10, background: 'var(--bg-elevated)', borderRadius: 4, fontSize: '0.78em', color: 'var(--text-secondary)' }}>
+                        <div style={{ marginTop: 16, padding: '12px 16px', background: 'var(--bg-elevated)', borderRadius: 'var(--radius-md)', border: '1px solid var(--glass-border-strong)', fontSize: '0.8em', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
                           💡 <strong>{t('learn.explanation')}</strong> {q.explanation}
                         </div>
                       )}
@@ -389,40 +392,38 @@ export default function LearningCenter() {
                   ))}
 
                   {/* Submission Row */}
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 24, paddingBottom: 48 }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 28, paddingBottom: 48 }}>
                     {!quizSubmitted ? (
                       <button
                         onClick={handleSubmitQuiz}
                         disabled={Object.keys(userAnswers).length < selectedModule.quiz.length}
+                        className="premium-btn hover-scale"
                         style={{
-                          padding: '12px 24px',
+                          padding: '14px 28px',
                           background: COLOR,
-                          color: '#fff',
-                          border: 'none',
-                          borderRadius: 'var(--radius-md)',
-                          fontWeight: 700,
-                          cursor: 'pointer',
-                          fontSize: '0.88em',
-                          opacity: Object.keys(userAnswers).length < selectedModule.quiz.length ? 0.5 : 1
+                          boxShadow: `0 4px 12px ${COLOR}25`,
+                          opacity: Object.keys(userAnswers).length < selectedModule.quiz.length ? 0.5 : 1,
                         }}
                       >
                         {t('learn.submitAnswers')}
                       </button>
                     ) : (
                       <div
+                        className="glass-strong"
                         style={{
-                          padding: '14px 20px',
+                          padding: 24,
                           borderRadius: 'var(--radius-lg)',
-                          background: quizScore >= 80 ? 'rgba(5, 150, 105, 0.08)' : 'rgba(239, 68, 68, 0.08)',
-                          border: quizScore >= 80 ? '1px solid #059669' : '1px solid #ef4444',
+                          background: quizScore >= 80 ? 'rgba(5, 150, 105, 0.05)' : 'rgba(239, 68, 68, 0.05)',
+                          border: quizScore >= 80 ? '2px solid #059669' : '2px solid #ef4444',
                           width: '100%',
-                          textAlign: 'center'
+                          textAlign: 'center',
+                          boxShadow: 'var(--shadow-md)',
                         }}
                       >
-                        <h3 className="font-heading" style={{ fontSize: '1.1em', fontWeight: 900, color: quizScore >= 80 ? '#059669' : '#ef4444', margin: '0 0 6px' }}>
+                        <h3 className="font-heading" style={{ fontSize: '1.2em', fontWeight: 900, color: quizScore >= 80 ? '#059669' : '#ef4444', marginBottom: 8 }}>
                           {quizScore >= 80 ? t('learn.certEarned') : t('learn.tryAgain')}
                         </h3>
-                        <p style={{ fontSize: '0.85em', color: 'var(--text-secondary)', margin: '0 0 10px' }}>
+                        <p style={{ fontSize: '0.88em', color: 'var(--text-secondary)', marginBottom: 16 }}>
                           {t('learn.scoreText').replace('{score}', quizScore).replace('{correct}', selectedModule.quiz.filter((q, i) => userAnswers[i] === q.answerIndex).length).replace('{total}', 5)}
                         </p>
                         {quizScore < 80 && (
@@ -432,15 +433,11 @@ export default function LearningCenter() {
                               setQuizSubmitted(false);
                               setQuizScore(0);
                             }}
+                            className="premium-btn hover-scale"
                             style={{
-                              padding: '8px 16px',
+                              padding: '10px 20px',
                               background: 'var(--text-primary)',
-                              color: 'var(--bg-surface)',
-                              border: 'none',
-                              borderRadius: 'var(--radius-md)',
-                              fontSize: '0.78em',
-                              fontWeight: 700,
-                              cursor: 'pointer'
+                              boxShadow: 'none',
                             }}
                           >
                             {t('learn.retakeQuiz')}
@@ -453,12 +450,12 @@ export default function LearningCenter() {
               )}
             </div>
           ) : (
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', textAlign: 'center', color: 'var(--text-muted)' }}>
-              <span style={{ fontSize: '3.5em', marginBottom: 12 }}>📚</span>
-              <h3 className="font-heading" style={{ fontSize: '1.2em', fontWeight: 800, color: 'var(--text-secondary)' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', textAlign: 'center', color: 'var(--text-muted)', minHeight: 300 }}>
+              <span style={{ fontSize: '4.2em', marginBottom: 16 }}>📚</span>
+              <h3 className="font-heading" style={{ fontSize: '1.25em', fontWeight: 800, color: 'var(--text-secondary)' }}>
                 {t('learn.selectModule')}
               </h3>
-              <p style={{ fontSize: '0.8em', maxWidth: 360, marginTop: 4 }}>
+              <p style={{ fontSize: '0.84em', maxWidth: 380, marginTop: 6, lineHeight: 1.6 }}>
                 {t('learn.selectModuleDesc')}
               </p>
             </div>
