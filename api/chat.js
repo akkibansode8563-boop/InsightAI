@@ -76,12 +76,12 @@ Include a product showcase image at the very beginning of your response.
 - Format: ![Product Name Showcase](image_url)
 - Special Rule: If the product is "HP OmniBook Ultra Flip" or "OmniBook Ultra Flip 14", you MUST use this URL: /hp_omnibook_showcase.png
 - Fallback URLs for other categories (always use one of these or a relevant high-quality image URL):
-  * Laptops: /showcase-laptop.svg
-  * Desktops/Workstations: /showcase-desktop.svg
-  * Printers: /showcase-printer.svg
-  * Networking: /showcase-networking.svg
-  * Storage/SSD/Components: /showcase-storage.svg
-  * Others/Accessories: /showcase-general.svg
+  * Laptops: /showcase-laptop.png
+  * Desktops/Workstations: /showcase-desktop.png
+  * Printers: /showcase-printer.png
+  * Networking: /showcase-networking.png
+  * Storage/SSD/Components: /showcase-storage.png
+  * Others/Accessories: /showcase-general.png
 
 ### 2. Product Overview (Maximum 50 Words)
 Write a short overview covering product category, target audience, primary purpose, and key selling point. Keep it concise, sales-focused, and premium.
