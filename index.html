@@ -2,17 +2,39 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <meta name="apple-mobile-web-app-title" content="Insight AI" />
+    <meta name="apple-mobile-web-app-title" content="InsightAI" />
     <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="theme-color" content="#e65100" />
-    <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
-    <title>InsightAI</title>
+    <meta name="theme-color" content="#f97316" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="description" content="InsightAI — Enterprise IT Hardware Intelligence Platform by DCC. AI-powered sales, procurement and market intelligence for IT dealers." />
+    <link rel="apple-touch-icon" href="/icon/icon-192x192.png" />
+    <link rel="icon" type="image/png" href="/icon/icon-192x192.png" />
+    <title>InsightAI 2.0 — by DCC</title>
+
+    <!-- Prevent dark mode flash on load -->
+    <script>
+      (function() {
+        try {
+          var theme = localStorage.getItem('insightai_theme');
+          if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+          }
+        } catch(e) {}
+      })();
+    </script>
+
     <style>
       * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
-      body { margin: 0; overflow: hidden; overscroll-behavior: none; }
+      body { margin: 0; overscroll-behavior: none; }
+      html.dark body { background: #0f172a; }
+      html:not(.dark) body { background: #f8fafc; }
     </style>
   </head>
   <body>

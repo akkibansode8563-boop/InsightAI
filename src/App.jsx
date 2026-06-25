@@ -1,5 +1,7 @@
 import { AppProvider, useApp } from './context/AppContext.jsx';
 import NavBar from './components/NavBar.jsx';
+import { BottomNav } from './components/ui/BottomNav.jsx';
+import { ToastProvider } from './components/ui/Toast.jsx';
 import AIChat from './pages/AIChat.jsx';
 import SalesCoach from './pages/SalesCoach.jsx';
 import DealerPortal from './pages/DealerPortal.jsx';
@@ -27,12 +29,14 @@ function AppShell() {
     <div className={`app-shell${theme === 'dark' ? ' dark' : ''}`}>
       <NavBar />
       <main
-        className="page-content"
+        className="page-content has-bottom-nav"
         key={activeModule}
         style={{ animation: 'fadeUp 0.3s ease' }}
       >
         {pages[activeModule] ?? <AIChat />}
       </main>
+      {/* Mobile-only bottom navigation */}
+      <BottomNav />
     </div>
   );
 }
@@ -40,7 +44,9 @@ function AppShell() {
 export default function App() {
   return (
     <AppProvider>
-      <AppShell />
+      <ToastProvider>
+        <AppShell />
+      </ToastProvider>
     </AppProvider>
   );
 }
