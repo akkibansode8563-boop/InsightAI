@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.dcc.insightai',
-  appName: 'DCC InsightAI',
+  appId: 'com.insightai.app',
+  appName: 'InsightAI',
   webDir: 'dist',
   server: {
     androidScheme: 'https',

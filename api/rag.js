@@ -50,9 +50,9 @@ export async function retrieveContext(agentId, message, conversationHistory = []
         const products = searchProducts(query, filters);
         context += buildContextBlock(products.map(p => ({
           id: p.id, brand: p.brand, model: p.model, category: p.category,
-          specs: p.specs, pricing: p.pricing, in_stock: p.dcc_data?.in_stock,
+          specs: p.specs, pricing: p.pricing, in_stock: p.catalogue_data?.in_stock,
           use_cases: p.knowledge?.use_cases, selling_points: p.knowledge?.selling_points
-        })), 'DCC PRODUCT KNOWLEDGE BASE');
+        })), 'PRODUCT KNOWLEDGE BASE');
         break;
       }
 
@@ -102,7 +102,7 @@ export async function retrieveContext(agentId, message, conversationHistory = []
         context += buildContextBlock(products.slice(0, 5).map(p => ({
           id: p.id, brand: p.brand, model: p.model, category: p.category,
           pricing: p.pricing, use_cases: p.knowledge?.use_cases
-        })), 'AVAILABLE DCC PRODUCTS');
+        })), 'AVAILABLE PRODUCTS');
         break;
       }
 
@@ -120,7 +120,7 @@ export async function retrieveContext(agentId, message, conversationHistory = []
         const products = searchProducts(query, {});
         context += buildContextBlock(products.map(p => ({
           id: p.id, brand: p.brand, model: p.model,
-          pricing: p.pricing, in_stock: p.dcc_data?.in_stock
+          pricing: p.pricing, in_stock: p.catalogue_data?.in_stock
         })), 'PRODUCT PRICING DATA');
         break;
       }
@@ -147,7 +147,7 @@ export async function retrieveContext(agentId, message, conversationHistory = []
         const products = searchProducts(query, {});
         context += buildContextBlock(products.slice(0, 5).map(p => ({
           brand: p.brand, model: p.model, category: p.category, pricing: p.pricing
-        })), 'DCC PRODUCT REFERENCE');
+        })), 'PRODUCT REFERENCE');
       }
     }
   } catch (err) {

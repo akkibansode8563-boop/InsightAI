@@ -2,7 +2,11 @@
   {
     "id": "news-001",
     "title": "Intel Arrow Lake Desktop CPUs Launched in India",
-    "category": ["cpu", "india_it", "product_launch"],
+    "category": [
+      "cpu",
+      "india_it",
+      "product_launch"
+    ],
     "date": "2026-06-20",
     "ai_summary": "Intel has officially launched its 15th Generation Arrow Lake desktop processors in the Indian market. The new line-up transitions completely to DDR5 memory and features a new socket LGA1851, dropping support for older DDR4 motherboards.",
     "key_highlights": [
@@ -12,14 +16,39 @@
     ],
     "business_impact": "Dealers should clear LGA1700 (12th-14th Gen) motherboard inventories. Expect high initial demand for high-end Z890 motherboards and DDR5 RAM packages from Pune custom PC builders.",
     "technical_impact": "Existing Z790/B760 motherboards cannot be upgraded. Customers upgrading to Arrow Lake must purchase a new motherboard and DDR5 RAM, driving combo sales.",
-    "related_products": ["kingston-8gb-ddr5", "wd-sn580-1tb"],
+    "related_products": [
+      "kingston-8gb-ddr5",
+      "wd-sn580-1tb"
+    ],
     "source": "Intel India Press Launch",
-    "confidence": "verified"
+    "confidence": "verified",
+    "title_mr": "इंटेल आरो लेक डेस्कटॉप सीपीयू भारतात लाँच",
+    "title_hi": "इंटेल आरो लेक डेस्कटॉप सीपीयू भारत में लॉन्च",
+    "ai_summary_mr": "इंटेलने भारतीय बाजारपेठेत त्यांच्या १५ व्या पिढीचे आरो लेक डेस्कटॉप प्रोसेसर अधिकृतपणे लाँच केले आहेत. नवीन लाइन-अप पूर्णपणे DDR5 मेमरीमध्ये संक्रमित होते आणि नवीन सॉकेट LGA1851 वैशिष्ट्यीकृत करते, ज्यामुळे जुन्या DDR4 मदरबोर्डसाठी समर्थन कमी होते.",
+    "ai_summary_hi": "इंटेल ने भारतीय बाजार में अपने 15वीं पीढ़ी के आरो लेक डेस्कटॉप प्रोसेसर को आधिकारिक तौर पर लॉन्च किया है. नई लाइन-अप पूरी तरह से DDR5 मेमोरी में स्थानांतरित हो गई है और इसमें एक नया सॉकेट LGA1851 फीचर है, जो पुराने DDR4 मदरबोर्ड के लिए समर्थन को समाप्त करता है.",
+    "key_highlights_mr": [
+      "उर्जा कार्यक्षमता सुधारण्यासाठी TSMC 3nm प्रक्रिया नोडवर बांधले जाते",
+      "पूर्णपणे नवीन LGA1851 सॉकेट LGA1700 मानकाच्या जागी",
+      "एकल-थ्रेडेड कार्यक्षमता 15% IPC सुधारित"
+    ],
+    "key_highlights_hi": [
+      "ऊर्जा कार्यक्षमता में सुधार के लिए TSMC 3nm प्रक्रिया नोड पर बनाया गया",
+      "पूरी तरह से नया LGA1851 सॉकेट LGA1700 मानक की जगह",
+      "एकल-थ्रेडेड प्रदर्शन में 15% IPC सुधार"
+    ],
+    "business_impact_mr": "विक्रेत्यांनी LGA1700 (12वी-14वी पिढी) मदरबोर्ड इन्वेंटरी साफ केली पाहिजे. पुण्यातील कस्टम पीसी बिल्डर्सकडून उच्च-अंत Z890 मदरबोर्ड आणि DDR5 RAM पॅकेजेससाठी उच्च प्रारंभिक मागणी अपेक्षित आहे.",
+    "business_impact_hi": "विक्रेताओं को LGA1700 (12वीं-14वीं पीढ़ी) मदरबोर्ड इन्वेंट्री साफ करनी चाहिए. पुणे के कस्टम पीसी बिल्डर्स से उच्च-अंत Z890 मदरबोर्ड और DDR5 RAM पैकेजों की उच्च प्रारंभिक मांग की उम्मीद है.",
+    "technical_impact_mr": "अस्तित्वातील Z790/B760 मदरबोर्ड अपग्रेड केले जाऊ शकत नाहीत. आरो लेकमध्ये अपग्रेड करणारे ग्राहकांना नवीन मदरबोर्ड आणि DDR5 RAM खरेदी करणे आवश्यक आहे, ज्यामुळे कॉम्बो विक्री चालू होते.",
+    "technical_impact_hi": "मौजूदा Z790/B760 मदरबोर्ड अपग्रेड नहीं किए जा सकते हैं. आरो लेक में अपग्रेड करने वाले ग्राहकों को नए मदरबोर्ड और DDR5 RAM खरीदना होगा, जिससे कॉम्बो बिक्री चलेगी."
   },
   {
     "id": "news-002",
     "title": "Indian Government Extends IT Hardware Import Authorization Policy",
-    "category": ["govt_policy", "india_it", "supply_chain"],
+    "category": [
+      "govt_policy",
+      "india_it",
+      "supply_chain"
+    ],
     "date": "2026-06-15",
     "ai_summary": "The Ministry of Electronics and Information Technology (MeitY) has extended the import management system for laptops, tablets, and servers for another year. The system aims to monitor imports while local assembly lines scale up.",
     "key_highlights": [
@@ -29,14 +58,39 @@
     ],
     "business_impact": "DCC dealer network will experience stable supply chains for laptops and pre-built desktops. No major price hikes or inventory shortages are expected in the next two quarters.",
     "technical_impact": "Encourages international brands (HP, Dell, Lenovo) to assemble more models locally in India, leading to localized parts availability and quicker service times.",
-    "related_products": ["hp-14-intel-i3", "dell-vostro-3520-i5", "lenovo-ideapad-slim-3-i5"],
+    "related_products": [
+      "hp-14-intel-i3",
+      "dell-vostro-3520-i5",
+      "lenovo-ideapad-slim-3-i5"
+    ],
     "source": "DGFT Gazette Notification",
-    "confidence": "verified"
+    "confidence": "verified",
+    "title_mr": "भारत सरकार आयटी हार्डवेअर आयात प्राधिकरण धोरण वाढविते",
+    "title_hi": "भारत सरकार ने आईटी हार्डवेयर आयात प्राधिकरण नीति को बढ़ाया",
+    "ai_summary_mr": "इलेक्ट्रॉनिक्स आणि माहिती तंत्रज्ञान मंत्रालयाने (मित्या) लॅपटॉप, टॅब्लेट आणि सर्व्हरसाठी आयात व्यवस्थापन प्रणाली आणखी एक वर्षासाठी वाढविली आहे. प्रणालीचा उद्देश स्थानिक असेंब्ली लाइन्स स्केल अप करताना आयातीचे निरीक्षण करणे आहे.",
+    "ai_summary_hi": "इलेक्ट्रॉनिक्स और सूचना प्रौद्योगिकी मंत्रालय (मित्या) ने लैपटॉप, टैबलेट और सर्वर के लिए आयात प्रबंधन प्रणाली को एक और साल के लिए बढ़ा दिया है. प्रणाली का उद्देश्य स्थानीय असेंबली लाइनों को स्केल अप करते समय आयात की निगरानी करना है.",
+    "key_highlights_mr": [
+      "लोकप्रिय विदेशी आयटी ब्रँडवर तातडीचे आयात निर्बंध नाहीत",
+      "महाराष्ट्रातील स्थानिक असेंब्ली युनिट्स (पुणे, रांजणगाव) क्षमता वाढवत आहेत",
+      "साध्या ऑनलाइन प्राधिकरण प्रणालीमुळे शिपमेंट विलंब होत नाही"
+    ],
+    "key_highlights_hi": [
+      "लोकप्रिय विदेशी आईटी ब्रांडों पर तात्कालिक आयात प्रतिबंध नहीं हैं",
+      "महाराष्ट्र में स्थानीय असेंबली यूनिट्स (पुणे, रांजणगांव) क्षमता बढ़ा रहे हैं",
+      "सरलीकृत ऑनलाइन प्राधिकरण प्रणाली से शिपमेंट में देरी नहीं होती है"
+    ],
+    "business_impact_mr": "DCC डीलर नेटवर्क लॅपटॉप आणि प्री-बिल्ट डेस्कटॉपसाठी स्थिर सप्लाय चेन अनुभवेल. पुढील दोन तिमाहीत कोणत्याही मोठ्या किमती वाढ किंवा इन्वेंटरी कमतरता अपेक्षित नाही.",
+    "business_impact_hi": "DCC डीलर नेटवर्क लैपटॉप और प्री-बिल्ट डेस्कटॉप के लिए स्थिर सप्लाई चेन का अनुभव करेगा. अगले दो तिमाही में किसी भी बड़ी कीमत वृद्धि या इन्वेंट्री कमी की उम्मीद नहीं है.",
+    "technical_impact_mr": "अंतरराष्ट्रीय ब्रँड्स (HP, Dell, Lenovo) भारतात अधिक मॉडेल्स स्थानिकपणे असेंबल करण्यास प्रोत्साहित करते, ज्यामुळे स्थानिक भागांची उपलब्धता आणि जलद सेवा वेळा येतात.",
+    "technical_impact_hi": "अंतरराष्ट्रीय ब्रांड (एचपी, डेल, लेनोवो) भारत में अधिक मॉडल्स को स्थानीय रूप से असेंबल करने के लिए प्रोत्साहित करते हैं, जिससे स्थानीय भागों की उपलब्धता और तेजी से सेवा समय मिलता है."
   },
   {
     "id": "news-003",
     "title": "Microsoft Copilot+ PC Specifications Standardized",
-    "category": ["ai_hardware", "product_launch"],
+    "category": [
+      "ai_hardware",
+      "product_launch"
+    ],
     "date": "2026-06-10",
     "ai_summary": "Microsoft has finalized the baseline hardware requirements for local Copilot+ AI integration on Windows 11. To qualify, laptops must feature an NPU (Neural Processing Unit) delivering at least 40 TOPS of compute power.",
     "key_highlights": [
@@ -46,14 +100,39 @@
     ],
     "business_impact": "Laptops with 8GB RAM are no longer standard for premium buyers. Sales executives should pitch 16GB RAM models as 'AI-Ready' to protect customers' long-term investments.",
     "technical_impact": "Standardizes the NPU compute layer. Integrated AI features like Recall and local Image Creator will not run on legacy laptops, driving a massive premium upgrade cycle.",
-    "related_products": ["apple-macbook-air-m3-13", "asus-vivobook-15-i5", "dell-latitude-3440"],
+    "related_products": [
+      "apple-macbook-air-m3-13",
+      "asus-vivobook-15-i5",
+      "dell-latitude-3440"
+    ],
     "source": "Microsoft Build Developer Docs",
-    "confidence": "verified"
+    "confidence": "verified",
+    "title_mr": "मायक्रोसॉफ्ट कोपिलॉट+ पीसी स्पेसिफिकेशन्स मानकीकृत",
+    "title_hi": "माइक्रोसॉफ्ट कोपिलॉट+ पीसी स्पेसिफिकेशन्स मानकीकृत",
+    "ai_summary_mr": "मायक्रोसॉफ्टने विंडोज 11 वर स्थानिक कोपिलॉट+ एआय एकीकरणासाठी बेसलाइन हार्डवेअर आवश्यकता निर्धारित केली आहे. यासाठी लॅपटॉपमध्ये कमीत कमी 40 TOPS च्या गणना शक्तीचा NPU (न्यूरल प्रोसेसिंग युनिट) असणे आवश्यक आहे.",
+    "ai_summary_hi": "माइक्रोसॉफ्ट ने विंडोज 11 पर स्थानीय कोपिलॉट+ एआई एकीकरण के लिए बेसलाइन हार्डवेयर आवश्यकता निर्धारित की है. इसके लिए लैपटॉप में कम से कम 40 TOPS की गणना शक्ति वाला NPU (न्यूरल प्रोसेसिंग यूनिट) होना आवश्यक है.",
+    "key_highlights_mr": [
+      "कमीत कमी 16GB युनिफाइड RAM/मेमरी आणि 256GB SSD स्टोरेज आवश्यक",
+      "NPU पॉवर 40 TOPS पेक्षा जास्त असणे आवश्यक आहे",
+      "क्वालकॉम स्नैपड्रॅगन X एलिट, इंटेल लुनर लेक आणि AMD रायझन AI 9 सपोर्ट"
+    ],
+    "key_highlights_hi": [
+      "न्यूनतम 16GB यूनिफाइड RAM/मेमोरी और 256GB SSD स्टोरेज आवश्यक",
+      "NPU पावर 40 TOPS से अधिक होना आवश्यक है",
+      "क्वालकॉम स्नैपड्रैगन X एलिट, इंटेल लूनर लेक और एएमडी राइज़न एआई 9 सपोर्ट"
+    ],
+    "business_impact_mr": "8GB RAM प्रीमियम ग्राहकांसाठी मानक नाही. विक्री कार्यकारी 16GB RAM मॉडेल्सचे 'AI-रेडी' म्हणून पिच करावेत जेणेकरून ग्राहकांची दीर्घकालीन गुंतवणूक सुरक्षित राहील.",
+    "business_impact_hi": "8GB RAM प्रीमियम खरीदारों के लिए मानक नहीं है. बिक्री कार्यकारी 16GB RAM मॉडल्स को 'एआई-तैयार' के रूप में पिच करें ताकि ग्राहकों का दीर्घकालिक निवेश सुरक्षित रहे.",
+    "technical_impact_mr": "NPU कंप्यूट लेयर मानकीकृत करते. एकीकृत AI वैशिष्ट्ये जसे की रिकॉल आणि स्थानिक इमेज क्रिएटर जुन्या लॅपटॉपवर चालणार नाहीत, ज्यामुळे मोठ्या प्रीमियम अपग्रेड चक्राला चालना मिळेल.",
+    "technical_impact_hi": "NPU कंप्यूट लेयर मानकीकृत करता है. एकीकृत एआई सुविधाएं जैसे कि रिकॉल और स्थानीय इमेज क्रिएटर पुराने लैपटॉप पर नहीं चलेंगी, जिससे बड़े प्रीमियम अपग्रेड चक्र को बढ़ावा मिलेगा."
   },
   {
     "id": "news-004",
     "title": "DDR5 Pricing Expected to Rise 10% in Q3 due to HBM Production",
-    "category": ["semiconductors", "market_trends"],
+    "category": [
+      "semiconductors",
+      "market_trends"
+    ],
     "date": "2026-06-05",
     "ai_summary": "Major RAM chip manufacturers (Samsung, SK Hynix, Micron) are shifting wafer allocation toward server-grade High Bandwidth Memory (HBM) for AI data centers, reducing consumer DDR5 production capacity.",
     "key_highlights": [
@@ -63,14 +142,39 @@
     ],
     "business_impact": "Dealers should stock up on DDR5 RAM inventory immediately at current lower prices to secure margins before the Q3 wholesale price hikes.",
     "technical_impact": "DDR4 platforms remain highly cost-competitive for budget office and educational builds in rural Maharashtra where budget is key.",
-    "related_products": ["kingston-8gb-ddr5", "crucial-16gb-ddr4", "corsair-vengeance-16gb-ddr4"],
+    "related_products": [
+      "kingston-8gb-ddr5",
+      "crucial-16gb-ddr4",
+      "corsair-vengeance-16gb-ddr4"
+    ],
     "source": "TrendForce DRAM Market Report",
-    "confidence": "high"
+    "confidence": "high",
+    "title_mr": "DDR5 किंमती Q3 मध्ये 10% वाढण्याची शक्यता आहे",
+    "title_hi": "DDR5 कीमतें Q3 में 10% बढ़ने की संभावना है",
+    "ai_summary_mr": "प्रमुख RAM चिप उत्पादक (सॅमसंग, SK हाइनिक्स, मायक्रॉन) सर्व्हर-ग्रेड हाय बँडविड्थ मेमरी (HBM) साठी सिलिकॉन वेफर अलोकेशन कमी करत आहेत, ज्यामुळे ग्राहक DDR5 उत्पादन क्षमता कमी होते.",
+    "ai_summary_hi": "प्रमुख रैम चिप उत्पादक (सैमसंग, एसके हाइनिक्स, माइक्रॉन) सर्वर-ग्रेड हाई बैंडविथ मेमोरी (एचबीएम) के लिए सिलिकॉन वेफर अलोकेशन कम कर रहे हैं, जिससे उपभोक्ता डीडीआर5 उत्पादन क्षमता कम हो जाती है.",
+    "key_highlights_mr": [
+      "सर्व्हर AI बूम सिलिकॉन वेफर उत्पादन अलोकेशनवर प्रभुत्व गाजवतो",
+      "ग्राहक DDR5 उत्पादन 15% कमी होणे अपेक्षित आहे",
+      "8GB/16GB DDR5 मॉड्यूल किंमती 8-12% वाढतील"
+    ],
+    "key_highlights_hi": [
+      "सर्वर एआई बूम सिलिकॉन वेफर उत्पादन आवंटन पर प्रभुत्व जमाता है",
+      "उपभोक्ता डीडीआर5 उत्पादन 15% कम होने की उम्मीद है",
+      "8GB/16GB डीडीआर5 मॉड्यूल कीमतें 8-12% बढ़ेंगी"
+    ],
+    "business_impact_mr": "विक्रेत्यांनी Q3 च्या व्होलसेल किंमत वाढ होण्यापूर्वी DDR5 RAM इन्व्हेंटरी तातडीचे स्टॉक करावी जेणेकरून त्यांचे मार्जिन सुरक्षित राहील.",
+    "business_impact_hi": "विक्रेताओं को Q3 की थोक कीमत वृद्धि से पहले DDR5 रैम इन्वेंट्री तुरंत स्टॉक करनी चाहिए ताकि उनके मार्जिन सुरक्षित रहें.",
+    "technical_impact_mr": "DDR4 प्लॅटफॉर्म्स निम्न-बजेट कार्यालयीन आणि शैक्षणिक बांधकामांसाठी ग्रामीण महाराष्ट्रात बजेट महत्त्वाचे असल्याने खूप प्रतिस्पर्धी आहेत.",
+    "technical_impact_hi": "डीडीआर4 प्लेटफ़ॉर्म निम्न-बजट कार्यालयीन और शैक्षिक निर्माण के लिए ग्रामीण महाराष्ट्र में बजट महत्वपूर्ण होने के कारण बहुत प्रतिस्पर्धी हैं."
   },
   {
     "id": "news-005",
     "title": "Surge in Pune Co-working Spaces Drives Commercial Networking Demand",
-    "category": ["india_it", "market_trends"],
+    "category": [
+      "india_it",
+      "market_trends"
+    ],
     "date": "2026-06-01",
     "ai_summary": "A rapid expansion of co-working spaces in Pune (Kalyani Nagar, Hinjawadi, Baner) has created a boom in commercial networking setups. Seamless high-density WiFi access points are the highest priority.",
     "key_highlights": [
@@ -80,8 +184,30 @@
     ],
     "business_impact": "System integrators should pivot marketing toward co-working networking design. Focus on stocking Ubiquiti UniFi APs and Gigabit PoE switches.",
     "technical_impact": "Requires deployment of enterprise routers with multi-WAN load balancing to handle multiple fiber broadband lines and prevent network drops.",
-    "related_products": ["ubiquiti-unifi-u6-plus", "tp-link-ax1800", "asus-rt-ax53u"],
+    "related_products": [
+      "ubiquiti-unifi-u6-plus",
+      "tp-link-ax1800",
+      "asus-rt-ax53u"
+    ],
     "source": "Pune Real Estate & IT Quarterly",
-    "confidence": "high"
+    "confidence": "high",
+    "title_mr": "पुण्यातील को-वर्किंग स्पेसेसमध्ये वाढ झाल्याने व्यावसायिक नेटवर्किंग मागणी वाढली",
+    "title_hi": "पुणे में को-वर्किंग स्पेसेज़ में वृद्धि से व्यावसायिक नेटवर्किंग की मांग बढ़ी",
+    "ai_summary_mr": "पुण्यातील (कल्याणी नगर, हिंजवडी, बानेर) को-वर्किंग स्पेसेसच्या झपाट्याने वाढीमुळे व्यावसायिक नेटवर्किंग सेटअप्समध्ये बूम आला आहे. सीमलेस हाय-डेंसिटी वाई-फाई ऍक्सेस पॉइंट्स सर्वात जास्त प्राधान्य आहेत.",
+    "ai_summary_hi": "पुणे (कल्याणी नगर, हिंजवडी, बानेर) में को-वर्किंग स्पेसेज़ की तेजी से वृद्धि के कारण व्यावसायिक नेटवर्किंग सेटअप में बूम आया है. सीमलेस हाई-डेंसिटी वाई-फाई एक्सेस पॉइंट्स सबसे अधिक प्राथमिकता हैं.",
+    "key_highlights_mr": [
+      "पुणे ऑफिस ऑक्युपेंसी दर 3 वर्षांत सर्वाधिक",
+      "एंटरप्राइझ वाई-फाई 6 ऍक्सेस पॉइंट्सची मागणी वर्षाला 45% वाढली",
+      "पॉवर ओव्हर इथरनेट (PoE) इन्फ्रास्ट्रक्चरचा मोठा वापर स्वच्छ सेटअपसाठी"
+    ],
+    "key_highlights_hi": [
+      "पुणे ऑफिस ऑक्यूपेंसी दर 3 साल में सबसे अधिक",
+      "एंटरप्राइज़ वाई-फाई 6 एक्सेस पॉइंट्स की मांग साल-दर-साल 45% बढ़ी",
+      "पॉवर ओवर इथरनेट (पीओई) इन्फ्रास्ट्रक्चर का बड़े पैमाने पर उपयोग स्वच्छ सेटअप के लिए"
+    ],
+    "business_impact_mr": "सिस्टम इंटिग्रेटर्सने को-वर्किंग नेटवर्किंग डिझाइनवर मार्केटिंग केली पाहिजे. युबिक्विटी युनिफाई APs आणि गिगाबिट PoE स्विचेसच्या स्टॉकवर लक्ष केंद्रित केले पाहिजे.",
+    "business_impact_hi": "सिस्टम इंटिग्रेटर्स को को-वर्किंग नेटवर्किंग डिज़ाइन पर मार्केटिंग करनी चाहिए. यूबिक्विटी यूनिफाई एप्स और गिगाबिट पीओई स्विचेस के स्टॉक पर ध्यान केंद्रित करना चाहिए.",
+    "technical_impact_mr": "मल्टी-वान लोड बॅलन्सिंगसह एंटरप्राइझ राउटर्सची तैनाती आवश्यक आहे जेणेकरून अनेक फायबर ब्रॉडबँड लाइन्स हाताळता येतील आणि नेटवर्क ड्रॉप्स टाळता येतील.",
+    "technical_impact_hi": "मल्टी-वान लोड बैलेंसिंग के साथ एंटरप्राइज़ राउटर्स की तैनाती आवश्यक है ताकि कई फाइबर ब्रॉडबैंड लाइनों को संभाला जा सके और नेटवर्क ड्रॉप्स को रोका जा सके."
   }
 ]

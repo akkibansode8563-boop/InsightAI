@@ -31,7 +31,7 @@ export default function NewsCenter() {
       try {
         setLoading(true);
         // In local development or production, we read the news.json data
-        const res = await fetch('/api/news');
+        const res = await fetch(`/api/news?lang=${language}`);
         if (res.ok) {
           const data = await res.json();
           setNews(data.articles || []);
@@ -40,7 +40,15 @@ export default function NewsCenter() {
           const fallbackRes = await fetch('/api/data/news.json');
           if (fallbackRes.ok) {
             const data = await fallbackRes.json();
-            setNews(data);
+            const localized = data.map(item => ({
+              ...item,
+              title: item[`title_${language}`] || item.title,
+              ai_summary: item[`ai_summary_${language}`] || item.ai_summary,
+              key_highlights: item[`key_highlights_${language}`] || item.key_highlights,
+              business_impact: item[`business_impact_${language}`] || item.business_impact,
+              technical_impact: item[`technical_impact_${language}`] || item.technical_impact
+            }));
+            setNews(localized);
           }
         }
       } catch (err) {
@@ -50,7 +58,7 @@ export default function NewsCenter() {
       }
     };
     loadNews();
-  }, []);
+  }, [language]);
 
   const handleAskAI = (article) => {
     // Navigate to Chat, set active agent to news_agent, and pass context

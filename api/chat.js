@@ -359,7 +359,7 @@ export default async function handler(req, res) {
     const userText = lastUserMsg?.content || '';
 
     // Language detection
-    const language = detectLanguage(userText);
+    const language = req.body.language || detectLanguage(userText);
 
     // Intent classification → agent selection
     const agentId = classifyIntent(userText, requestedAgent);

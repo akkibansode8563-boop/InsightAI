@@ -52,7 +52,7 @@ export default function SolutionDesigner() {
       users ? `User count: ${users} users.` : '',
       budget ? `Budget: ${budget}.` : '',
       priorities.length ? `Priorities: ${priorities.join(', ')}.` : '',
-      `Include: complete bill of materials with SKUs, pricing in INR, vendor recommendations (prioritize HP, Dell, Lenovo, Cisco as DCC distributes these), network diagram description, implementation timeline, and support/warranty recommendations.`,
+      `Include: complete bill of materials with SKUs, pricing in INR, vendor recommendations (prioritize HP, Dell, Lenovo, Cisco), network diagram description, implementation timeline, and support/warranty recommendations.`,
     ].filter(Boolean).join(' ');
 
     let acc = '';

@@ -77,7 +77,7 @@ export default function NavBar() {
               textTransform: 'uppercase',
             }}
           >
-            DCC 2.0
+            v2.0
           </span>
         </div>
       </div>

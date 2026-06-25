@@ -87,8 +87,8 @@ export async function streamChat(
  * @param {number} page - Page number for pagination
  * @returns {Promise<Object>}
  */
-export async function fetchNews(category = null, limit = 10, page = 1) {
-  const params = new URLSearchParams({ limit: String(limit), page: String(page) });
+export async function fetchNews(category = null, limit = 10, page = 1, lang = 'en') {
+  const params = new URLSearchParams({ limit: String(limit), page: String(page), lang });
   if (category) params.set('category', category);
   const res = await fetch(`${BASE_URL}/api/news?${params}`);
   if (!res.ok) throw new Error('Failed to fetch news');
@@ -100,9 +100,10 @@ export async function fetchNews(category = null, limit = 10, page = 1) {
  * @param {string|null} category - Optional category filter
  * @returns {Promise<Object>}
  */
-export async function fetchMarketData(category = null) {
-  const params = category ? `?category=${encodeURIComponent(category)}` : '';
-  const res = await fetch(`${BASE_URL}/api/market${params}`);
+export async function fetchMarketData(category = null, lang = 'en') {
+  const params = new URLSearchParams({ lang });
+  if (category) params.set('category', category);
+  const res = await fetch(`${BASE_URL}/api/market?${params}`);
   if (!res.ok) throw new Error('Failed to fetch market data');
   return res.json();
 }
@@ -111,8 +112,8 @@ export async function fetchMarketData(category = null) {
  * Fetch current dealer schemes and offers
  * @returns {Promise<Object>}
  */
-export async function fetchSchemes() {
-  const res = await fetch(`${BASE_URL}/api/dealer/schemes`);
+export async function fetchSchemes(lang = 'en') {
+  const res = await fetch(`${BASE_URL}/api/dealer/schemes?lang=${lang}`);
   if (!res.ok) throw new Error('Failed to fetch schemes');
   return res.json();
 }
@@ -123,11 +124,11 @@ export async function fetchSchemes() {
  * @param {number} gstRate - GST rate (default 18%)
  * @returns {Promise<Object>}
  */
-export async function generateQuotation(items, gstRate = 18) {
+export async function generateQuotation(items, gstRate = 18, lang = 'en') {
   const res = await fetch(`${BASE_URL}/api/dealer`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ items, gstRate })
+    body: JSON.stringify({ items, gstRate, lang })
   });
   if (!res.ok) throw new Error('Failed to generate quotation');
   return res.json();
@@ -154,9 +155,10 @@ export async function fetchStock(sku = null, category = null) {
  * @param {string|null} category - Optional category filter
  * @returns {Promise<Object>}
  */
-export async function fetchCourses(category = null) {
-  const params = category ? `?category=${encodeURIComponent(category)}` : '';
-  const res = await fetch(`${BASE_URL}/api/learn${params}`);
+export async function fetchCourses(category = null, lang = 'en') {
+  const params = new URLSearchParams({ lang });
+  if (category) params.set('category', category);
+  const res = await fetch(`${BASE_URL}/api/learn?${params}`);
   if (!res.ok) throw new Error('Failed to fetch courses');
   return res.json();
 }

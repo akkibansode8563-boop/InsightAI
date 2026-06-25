@@ -13,13 +13,14 @@ const SAMPLE_SCHEMES = [
 ];
 
 function PageHeader() {
+  const { t } = useApp();
   return (
     <div style={{ padding: '28px 32px 24px', background: `linear-gradient(135deg, ${COLOR}14 0%, transparent 60%)`, borderBottom: '1px solid var(--glass-border-strong)' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
         <div style={{ width: 48, height: 48, borderRadius: 14, background: `${COLOR}20`, border: `2px solid ${COLOR}40`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 24 }}>🏪</div>
         <div>
-          <h1 className="font-heading" style={{ fontSize: '1.4em', fontWeight: 900, color: 'var(--text-primary)', lineHeight: 1 }}>Dealer Portal</h1>
-          <p style={{ fontSize: '0.82em', color: 'var(--text-secondary)', marginTop: 4 }}>Quotations, Stock, Schemes & Margin Calculator</p>
+          <h1 className="font-heading" style={{ fontSize: '1.4em', fontWeight: 900, color: 'var(--text-primary)', lineHeight: 1 }}>{t('module.dealer.title')}</h1>
+          <p style={{ fontSize: '0.82em', color: 'var(--text-secondary)', marginTop: 4 }}>{t('module.dealer.desc')}</p>
         </div>
       </div>
     </div>
@@ -27,26 +28,30 @@ function PageHeader() {
 }
 
 function QuotationTool() {
+  const { t } = useApp();
+  const [customerName, setCustomerName] = useState('');
+  const [gstRate, setGstRate] = useState(18);
   const [items, setItems] = useState([
     { name: 'HP ProLiant DL380 Gen11', qty: 2, unitPrice: 425000, sku: 'HPE-DL380G11' },
     { name: 'HP 16GB DDR5 RAM', qty: 8, unitPrice: 9500, sku: 'HPE-P43313' },
   ]);
-  const [gstRate, setGstRate] = useState(18);
-  const [customerName, setCustomerName] = useState('');
   const [copied, setCopied] = useState(false);
 
   const result = calcQuotation(items, gstRate);
 
+  const updateItem = (index, field, value) => {
+    setItems(prev => prev.map((item, i) => i === index ? { ...item, [field]: value } : item));
+  };
+
   const addItem = () => setItems(prev => [...prev, { name: '', qty: 1, unitPrice: 0, sku: '' }]);
-  const removeItem = (i) => setItems(prev => prev.filter((_, idx) => idx !== i));
-  const updateItem = (i, field, value) => setItems(prev => prev.map((item, idx) => idx === i ? { ...item, [field]: value } : item));
+  const removeItem = (index) => setItems(prev => prev.filter((_, i) => i !== index));
 
   const copyText = () => {
     const text = [
       `QUOTATION — IT Solutions`,
-      customerName ? `Customer: ${customerName}` : '',
+      customerName ? `Client: ${customerName}` : '',
       `Date: ${new Date().toLocaleDateString('en-IN')}`,
-      '',
+      '----------------------------------------',
       ...result.lineItems.map(li => `${li.sr}. ${li.name} (${li.sku || ''}) × ${li.qty} = ${formatINR(li.lineTotal)}`),
       '',
       `Subtotal: ${formatINR(result.subtotal)}`,
@@ -59,9 +64,9 @@ function QuotationTool() {
   return (
     <div>
       <div style={{ display: 'flex', gap: 10, marginBottom: 16, alignItems: 'center', flexWrap: 'wrap' }}>
-        <input className="input-field" style={{ maxWidth: 220 }} value={customerName} onChange={e => setCustomerName(e.target.value)} placeholder="Customer / Company name" />
+        <input className="input-field" style={{ maxWidth: 220 }} value={customerName} onChange={e => setCustomerName(e.target.value)} placeholder={t('dealer.customerNamePlaceholder')} />
         <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-          <label style={{ fontSize: '0.78em', fontWeight: 700, color: 'var(--text-secondary)' }}>GST %</label>
+          <label style={{ fontSize: '0.78em', fontWeight: 700, color: 'var(--text-secondary)' }}>{t('GST %')}</label>
           <select className="input-field" style={{ width: 80 }} value={gstRate} onChange={e => setGstRate(Number(e.target.value))}>
             {[0, 5, 12, 18, 28].map(r => <option key={r} value={r}>{r}%</option>)}
           </select>
@@ -73,11 +78,11 @@ function QuotationTool() {
           <thead>
             <tr>
               <th>#</th>
-              <th>Product</th>
-              <th>SKU</th>
-              <th style={{ textAlign: 'right' }}>Qty</th>
-              <th style={{ textAlign: 'right' }}>Unit Price</th>
-              <th style={{ textAlign: 'right' }}>Total</th>
+              <th>{t('dealer.productHeader')}</th>
+              <th>{t('dealer.skuHeader')}</th>
+              <th style={{ textAlign: 'right' }}>{t('dealer.qtyHeader')}</th>
+              <th style={{ textAlign: 'right' }}>{t('dealer.priceHeader')}</th>
+              <th style={{ textAlign: 'right' }}>{t('dealer.totalHeader')}</th>
               <th></th>
             </tr>
           </thead>
@@ -91,7 +96,7 @@ function QuotationTool() {
                     style={{ minWidth: 200 }}
                     value={item.name}
                     onChange={e => updateItem(i, 'name', e.target.value)}
-                    placeholder="Product name"
+                    placeholder={t('dealer.productNamePlaceholder')}
                   />
                 </td>
                 <td>
@@ -100,7 +105,7 @@ function QuotationTool() {
                     style={{ width: 110 }}
                     value={item.sku}
                     onChange={e => updateItem(i, 'sku', e.target.value)}
-                    placeholder="SKU"
+                    placeholder={t('dealer.skuHeader')}
                   />
                 </td>
                 <td>
@@ -135,22 +140,22 @@ function QuotationTool() {
       </div>
 
       <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
-        <button onClick={addItem} className="btn-ghost">+ Add Item</button>
-        <button onClick={copyText} className="btn-ghost">{copied ? '✅ Copied!' : '📋 Copy Quotation'}</button>
+        <button onClick={addItem} className="btn-ghost">{t('dealer.addLineItem')}</button>
+        <button onClick={copyText} className="btn-ghost">{copied ? t('dealer.copied') : t('dealer.copyQuotation')}</button>
       </div>
 
       {/* Summary */}
       <div className="card" style={{ padding: 20, maxWidth: 360, marginLeft: 'auto', background: `${COLOR}08` }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85em', color: 'var(--text-secondary)' }}>
-            <span>Subtotal</span><span style={{ fontWeight: 700, color: 'var(--text-primary)' }}>{formatINR(result.subtotal)}</span>
+            <span>{t('dealer.subtotalLabel')}</span><span style={{ fontWeight: 700, color: 'var(--text-primary)' }}>{formatINR(result.subtotal)}</span>
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85em', color: 'var(--text-secondary)' }}>
-            <span>GST @{gstRate}%</span><span style={{ fontWeight: 700, color: 'var(--text-primary)' }}>{formatINR(result.gstAmount)}</span>
+            <span>{t('dealer.gstLabel')} @{gstRate}%</span><span style={{ fontWeight: 700, color: 'var(--text-primary)' }}>{formatINR(result.gstAmount)}</span>
           </div>
           <div style={{ height: 1, background: 'var(--glass-border-strong)', margin: '4px 0' }} />
           <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '1em' }}>
-            <span className="font-heading" style={{ fontWeight: 900 }}>Grand Total</span>
+            <span className="font-heading" style={{ fontWeight: 900 }}>{t('dealer.grandTotalLabel')}</span>
             <span className="font-heading" style={{ fontWeight: 900, color: COLOR, fontSize: '1.1em' }}>{formatINR(result.grandTotal)}</span>
           </div>
         </div>
@@ -160,20 +165,21 @@ function QuotationTool() {
 }
 
 function MarginTool() {
+  const { t } = useApp();
   const [mrp, setMrp] = useState('');
   const [cost, setCost] = useState('');
   const result = calcMargin(Number(mrp), Number(cost));
 
   return (
     <div className="card" style={{ padding: 24, maxWidth: 480 }}>
-      <h3 className="font-heading" style={{ fontWeight: 800, fontSize: '0.95em', marginBottom: 16 }}>📊 Margin Calculator</h3>
+      <h3 className="font-heading" style={{ fontWeight: 800, fontSize: '0.95em', marginBottom: 16 }}>📊 {t('dealer.marginCalculatorTitle')}</h3>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 16 }}>
         <div>
-          <label style={{ fontSize: '0.78em', fontWeight: 700, color: 'var(--text-secondary)', display: 'block', marginBottom: 5 }}>Selling Price (MRP)</label>
+          <label style={{ fontSize: '0.78em', fontWeight: 700, color: 'var(--text-secondary)', display: 'block', marginBottom: 5 }}>{t('dealer.sellingPriceLabel')}</label>
           <input type="number" className="input-field" value={mrp} onChange={e => setMrp(e.target.value)} placeholder="₹ Selling price" />
         </div>
         <div>
-          <label style={{ fontSize: '0.78em', fontWeight: 700, color: 'var(--text-secondary)', display: 'block', marginBottom: 5 }}>Cost Price</label>
+          <label style={{ fontSize: '0.78em', fontWeight: 700, color: 'var(--text-secondary)', display: 'block', marginBottom: 5 }}>{t('dealer.costPriceLabel')}</label>
           <input type="number" className="input-field" value={cost} onChange={e => setCost(e.target.value)} placeholder="₹ Your cost" />
         </div>
       </div>
@@ -181,7 +187,7 @@ function MarginTool() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           {result.display.map(d => (
             <div key={d.label} style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 12px', background: 'var(--bg-elevated)', borderRadius: 'var(--radius-md)' }}>
-              <span style={{ fontSize: '0.82em', color: 'var(--text-secondary)' }}>{d.label}</span>
+              <span style={{ fontSize: '0.82em', color: 'var(--text-secondary)' }}>{t(d.label)}</span>
               <span style={{ fontSize: '0.9em', fontWeight: 800, color: COLOR }}>{d.value}</span>
             </div>
           ))}
@@ -192,6 +198,7 @@ function MarginTool() {
 }
 
 function SchemesBoard() {
+  const { t } = useApp();
   const badgeStyle = (badge) => {
     if (badge === 'HOT') return { background: '#fef2f2', color: '#dc2626' };
     if (badge === 'NEW') return { background: '#f0fdf4', color: '#059669' };
@@ -205,20 +212,20 @@ function SchemesBoard() {
         <div key={s.id} className="card" style={{ padding: 18, position: 'relative', overflow: 'hidden' }}>
           {s.badge && (
             <span className="badge" style={{ ...badgeStyle(s.badge), position: 'absolute', top: 12, right: 12, fontSize: '0.62em' }}>
-              {s.badge}
+              {t(s.badge)}
             </span>
           )}
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
             <span className="badge badge-info" style={{ fontSize: '0.68em' }}>{s.brand}</span>
-            <span className="badge badge-warning" style={{ fontSize: '0.68em' }}>{s.type}</span>
+            <span className="badge badge-warning" style={{ fontSize: '0.68em' }}>{t(s.type)}</span>
           </div>
-          <div className="font-heading" style={{ fontWeight: 800, fontSize: '0.92em', color: 'var(--text-primary)', marginBottom: 6 }}>{s.title}</div>
-          <div style={{ fontSize: '0.78em', color: 'var(--text-secondary)', marginBottom: 8 }}>{s.product}</div>
-          <div style={{ fontSize: '1em', fontWeight: 900, color: COLOR, marginBottom: 8 }}>{s.discount}</div>
+          <div className="font-heading" style={{ fontWeight: 800, fontSize: '0.92em', color: 'var(--text-primary)', marginBottom: 6 }}>{t(s.title)}</div>
+          <div style={{ fontSize: '0.78em', color: 'var(--text-secondary)', marginBottom: 8 }}>{t(s.product)}</div>
+          <div style={{ fontSize: '1em', fontWeight: 900, color: COLOR, marginBottom: 8 }}>{t(s.discount)}</div>
           <div style={{ display: 'flex', gap: 10, fontSize: '0.72em', color: 'var(--text-muted)' }}>
-            <span>Min qty: {s.minQty}</span>
+            <span>{t('dealer.minQty')}: {s.minQty}</span>
             <span>•</span>
-            <span>Valid till: {s.validTill}</span>
+            <span>{t('dealer.validTill')}: {s.validTill}</span>
           </div>
         </div>
       ))}

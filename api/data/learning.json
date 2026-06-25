@@ -3,7 +3,15 @@
     "id": "module-cpu-gpu-ram",
     "topic": "hardware-fundamentals",
     "title": "CPU, GPU & RAM Fundamentals",
-    "keywords": ["cpu", "gpu", "ram", "ddr4", "ddr5", "processor", "vram"],
+    "keywords": [
+      "cpu",
+      "gpu",
+      "ram",
+      "ddr4",
+      "ddr5",
+      "processor",
+      "vram"
+    ],
     "content": "Understanding the interaction between the Central Processing Unit (CPU), Graphics Processing Unit (GPU), and Random Access Memory (RAM) is the foundation of IT hardware architecture. The CPU acts as the brain of the computer, executing general program instructions and managing system resources. Modern CPUs feature multiple physical cores and threads, allowing them to perform several tasks concurrently. In contrast, the GPU is a specialized processor designed for parallel computation, containing thousands of smaller cores optimized to handle complex mathematical operations simultaneously. While originally built for rendering 3D graphics, GPUs are now critical for video editing rendering, machine learning, and artificial intelligence compute workloads. RAM acts as the system's short-term memory, holding active program instructions and data that the CPU needs to access immediately. The bandwidth and speed of RAM are crucial; DDR5 is the latest standard, operating at higher frequencies (e.g., 5600MHz) and lower voltages compared to DDR4, while also introducing on-die Error Correction Code (ECC) to prevent data corruption. In graphics cards, dedicated Video RAM (VRAM) is essential. Unlike system RAM, VRAM is soldered directly onto the graphics card next to the GPU, providing the ultra-high-speed memory buffer required to store texture files and frame data. For modern AI workloads, high VRAM capacity (e.g., 6GB or 8GB minimum) is critical, as large language models and generation pipelines are loaded directly into VRAM for processing.",
     "quiz": [
       {
@@ -16,7 +24,23 @@
           "CPUs do not contain physical cores"
         ],
         "answerIndex": 1,
-        "explanation": "A CPU is designed for fast serial processing on a few cores, whereas a GPU is optimized for massive parallel workloads across thousands of smaller cores."
+        "explanation": "A CPU is designed for fast serial processing on a few cores, whereas a GPU is optimized for massive parallel workloads across thousands of smaller cores.",
+        "question_mr": "सीपीयू आणि जीपीयू यांच्यातील प्राथमिक फरक काय आहे?",
+        "question_hi": "सीपीयू और जीपीयू के बीच प्राथमिक अंतर क्या है?",
+        "options_mr": [
+          "सीपीयू सर्व गणनांमध्ये जीपीयूपेक्षा जलद आहे",
+          "सीपीयू कम कोर्सही सिरियल कार्ये चालतात, तर जीपीयू सहस्रावधी लहान कोर्सही समांतर कार्ये चालतात",
+          "जीपीयू फक्त गेमिंगसाठी वापरले जाते आणि व्यवसाय सॉफ्टवेअर चालू करू शकत नाही",
+          "सीपीयूमध्ये भौतिक कोर नाहीत"
+        ],
+        "options_hi": [
+          "सीपीयू सभी गणनाओं में जीपीयू से तेज है",
+          "सीपीयू कम कोर वाले सीरियल कार्य करता है, जबकि जीपीयू हजारों छोटे कोर वाले समांतर कार्य करता है",
+          "जीपीयू केवल गेमिंग के लिए उपयोग किया जाता है और व्यवसाय सॉफ्टवेयर नहीं चला सकता",
+          "सीपीयू में शारीरिक कोर नहीं होते"
+        ],
+        "explanation_mr": "सीपीयू हा वेगवान सिरियल प्रोसेसिंगसाठी काही कोरवर डिझाइन केलेला आहे, तर जीपीयू हा विशाल समांतर वर्कलोडसाठी सहस्रावधी लहान कोरवर ऑप्टिमाइझ केलेला आहे.",
+        "explanation_hi": "सीपीयू तेज सीरियल प्रोसेसिंग के लिए कुछ कोर पर डिज़ाइन किया गया है, जबकि जीपीयू विशाल समांतर वर्कलोड के लिए हजारों छोटे कोर पर अनुकूलित किया गया है।"
       },
       {
         "id": "q2",
@@ -28,7 +52,23 @@
           "It replaces the need for a CPU"
         ],
         "answerIndex": 1,
-        "explanation": "Dedicated VRAM is located on the graphics card itself, giving the GPU direct, high-bandwidth access to texture and frame data without clogging the system RAM bus."
+        "explanation": "Dedicated VRAM is located on the graphics card itself, giving the GPU direct, high-bandwidth access to texture and frame data without clogging the system RAM bus.",
+        "question_mr": "व्हिडिओ एडिटिंग आणि गेमिंगसाठी व्हीआरएएम महत्त्वाचे का आहे?",
+        "question_hi": "वीडियो एडिटिंग और गेमिंग के लिए वीआरएएम महत्वपूर्ण क्यों है?",
+        "options_mr": [
+          "ते व्हिडिओ फाइल्ससाठी बॅकअप हार्ड ड्राइव्ह म्हणून काम करते",
+          "ते जीपीयूला सिस्टम रॅमपेक्षा वेगवान बफर मेमरी प्रदान करते",
+          "ते डेस्कटॉप टॉवर्सची बॅटरी लाइफ वाढवते",
+          "ते सीपीयूची गरज दूर करते"
+        ],
+        "options_hi": [
+          "यह वीडियो फ़ाइलों के लिए बैकअप हार्ड ड्राइव के रूप में काम करता है",
+          "यह जीपीयू को सिस्टम रैम की तुलना में तेज़ बफ़र मेमोरी प्रदान करता है",
+          "यह डेस्कटॉप टावरों की बैटरी लाइफ बढ़ाता है",
+          "यह सीपीयू की आवश्यकता को दूर करता है"
+        ],
+        "explanation_mr": "व्हीआरएएम हे ग्राफिक्स कार्डवर स्थित असते, ज्यामुळे जीपीयूला सिस्टम रॅम बसवर clog न करता टेक्सचर फाइल्स आणि फ्रेम डेटा साठवण्यासाठी आवश्यक अल्ट्रा-हाय-स्पीड मेमरी बफरचा थेट प्रवेश मिळतो.",
+        "explanation_hi": "वीआरएएम ग्राफिक्स कार्ड पर स्थित होता है, जिससे जीपीयू को सिस्टम रैम बस को clog किए बिना टेक्सचर फ़ाइलों और फ्रेम डेटा को स्टोर करने के लिए आवश्यक अल्ट्रा-हाई-स्पीड मेमोरी बफ़र तक सीधी पहुंच मिलती है।"
       },
       {
         "id": "q3",
@@ -40,7 +80,23 @@
           "Compatibility with older DDR4 motherboard slots"
         ],
         "answerIndex": 2,
-        "explanation": "DDR5 RAM introduces built-in on-die ECC for increased stability and runs at a lower voltage (1.1V vs DDR4's 1.2V), while delivering much higher speeds."
+        "explanation": "DDR5 RAM introduces built-in on-die ECC for increased stability and runs at a lower voltage (1.1V vs DDR4's 1.2V), while delivering much higher speeds.",
+        "question_mr": "Which of the following is a feature introduced in DDR5 RAM compared to DDR4?",
+        "question_hi": "Which of the following is a feature introduced in DDR5 RAM compared to DDR4?",
+        "options_mr": [
+          "Dual-channel compatibility support",
+          "On-die Error Correction Code (ECC) and lower operating voltage (1.1V)",
+          "Higher latency and slower transfer frequencies",
+          "Compatibility with older DDR4 motherboard slots"
+        ],
+        "options_hi": [
+          "Dual-channel compatibility support",
+          "On-die Error Correction Code (ECC) and lower operating voltage (1.1V)",
+          "Higher latency and slower transfer frequencies",
+          "Compatibility with older DDR4 motherboard slots"
+        ],
+        "explanation_mr": "DDR5 RAM introduces built-in on-die ECC for increased stability and runs at a lower voltage (1.1V vs DDR4's 1.2V), while delivering much higher speeds.",
+        "explanation_hi": "DDR5 RAM introduces built-in on-die ECC for increased stability and runs at a lower voltage (1.1V vs DDR4's 1.2V), while delivering much higher speeds."
       },
       {
         "id": "q4",
@@ -52,7 +108,23 @@
           "The CPU will take over graphics processing without any performance loss"
         ],
         "answerIndex": 1,
-        "explanation": "When VRAM is full, the GPU is forced to use system RAM over the slower PCIe interface, causing massive stutters or game crashes."
+        "explanation": "When VRAM is full, the GPU is forced to use system RAM over the slower PCIe interface, causing massive stutters or game crashes.",
+        "question_mr": "What happens if a gaming computer runs out of dedicated VRAM during a game?",
+        "question_hi": "What happens if a gaming computer runs out of dedicated VRAM during a game?",
+        "options_mr": [
+          "The computer will instantly shut down",
+          "The game will crash or frame rates will drop heavily as the system falls back to slower system RAM",
+          "The monitor will display static noise",
+          "The CPU will take over graphics processing without any performance loss"
+        ],
+        "options_hi": [
+          "The computer will instantly shut down",
+          "The game will crash or frame rates will drop heavily as the system falls back to slower system RAM",
+          "The monitor will display static noise",
+          "The CPU will take over graphics processing without any performance loss"
+        ],
+        "explanation_mr": "When VRAM is full, the GPU is forced to use system RAM over the slower PCIe interface, causing massive stutters or game crashes.",
+        "explanation_hi": "When VRAM is full, the GPU is forced to use system RAM over the slower PCIe interface, causing massive stutters or game crashes."
       },
       {
         "id": "q5",
@@ -64,15 +136,43 @@
           "Display refresh rate"
         ],
         "answerIndex": 1,
-        "explanation": "Each virtual machine requires a dedicated portion of system RAM. Running out of RAM causes the host operating system to cache to disk, slowing the system to a crawl."
+        "explanation": "Each virtual machine requires a dedicated portion of system RAM. Running out of RAM causes the host operating system to cache to disk, slowing the system to a crawl.",
+        "question_mr": "Which spec is most critical for running multiple virtual machines on a workstation?",
+        "question_hi": "Which spec is most critical for running multiple virtual machines on a workstation?",
+        "options_mr": [
+          "GPU cooling fans",
+          "High capacity System RAM (e.g., 32GB or 64GB)",
+          "Fast SSD read speeds",
+          "Display refresh rate"
+        ],
+        "options_hi": [
+          "GPU cooling fans",
+          "High capacity System RAM (e.g., 32GB or 64GB)",
+          "Fast SSD read speeds",
+          "Display refresh rate"
+        ],
+        "explanation_mr": "Each virtual machine requires a dedicated portion of system RAM. Running out of RAM causes the host operating system to cache to disk, slowing the system to a crawl.",
+        "explanation_hi": "Each virtual machine requires a dedicated portion of system RAM. Running out of RAM causes the host operating system to cache to disk, slowing the system to a crawl."
       }
-    ]
+    ],
+    "title_mr": "सीपीयू, जीपीयू आणि रॅम मूलभूत गोष्टी",
+    "title_hi": "सीपीयू, जीपीयू और रैम मूलभूत बातें",
+    "content_mr": "सेंट्रल प्रोसेसिंग युनिट (सीपीयू), ग्राफिक्स प्रोसेसिंग युनिट (जीपीयू) आणि रँडम ऍक्सेस मेमरी (रॅम) यांच्यातील परस्परसंवाद हे आयटी हार्डवेअर आर्किटेक्चरचा पाया आहे. सीपीयू संगणकाच्या मेंदूसारखा काम करतो, सामान्य प्रोग्राम सूचना कार्यान्वित करतो आणि सिस्टम संसाधने व्यवस्थापित करतो. आधुनिक सीपीयू मध्ये एकाधिक भौतिक कोर आणि थ्रेड्स आहेत, ज्यामुळे ते एकाच वेळी अनेक कार्ये करू शकतात. दुसरीकडे, जीपीयू हा समांतर गणनेसाठी डिझाइन केलेला विशेष प्रोसेसर आहे, ज्यामध्ये सहस्रावधी लहान कोर असतात जे एकाच वेळी जटिल गणिती क्रिया हाताळू शकतात. मूळतः 3डी ग्राफिक्स रेंडरिंगसाठी बांधलेले, जीपीयू साठी आता व्हिडिओ एडिटिंग रेंडरिंग, मशीन लर्निंग आणि आर्टिफिशियल इंटेलिजेंस कंप्युटे वर्कलोडसाठी महत्त्वपूर्ण आहेत. रॅम सिस्टमच्या लहान-मुदतीच्या स्मृती म्हणून काम करते, सक्रिय प्रोग्राम सूचना आणि डेटा धारण करते ज्याची सीपीयूला त्वरित प्रवेश आवश्यक आहे. रॅमची बँडविड्थ आणि वेग महत्त्वाचे आहेत; डीडीआर 5 हा नवीनतम मानक आहे, जो डीडीआर 4 च्या तुलनेत कमी व्होल्टेजवर (उदा. 5600 मेगाहर्ट्ज) आणि जास्त वारंवारतेने कार्य करतो आणि डेटा भ्रष्टाचार टाळण्यासाठी ऑन-डाय इरर कॉरेक्शन कोड (ईसीसी) देखील आणतो. ग्राफिक्स कार्डवर, व्हिडिओ रॅम (व्हीआरएएम) आवश्यक आहे. सिस्टम रॅमच्या विपरीत, व्हीआरएएम हे ग्राफिक्स कार्डवर जीपीयूच्या बाजूला थेट सोल्डर केले जाते, ज्यामुळे टेक्सचर फाइल्स आणि फ्रेम डेटा साठवण्यासाठी आवश्यक असलेला अल्ट्रा-हाय-स्पीड मेमरी बफर प्रदान करते. आधुनिक एआय वर्कलोडसाठी, जास्त व्हीआरएएम क्षमता (उदा. 6 जीबी किंवा 8 जीबी किमान) महत्त्वाची आहे, कारण मोठ्या भाषा मॉडेल्स आणि जेनरेशन पाइपलाइन्स हे प्रोसेसिंगसाठी थेट व्हीआरएएममध्ये लोड केले जातात.",
+    "content_hi": "सेंट्रल प्रोसेसिंग यूनिट (सीपीयू), ग्राफिक्स प्रोसेसिंग यूनिट (जीपीयू) और रैंडम एक्सेस मेमोरी (रैम) के बीच की इंटरैक्शन को समझना आईटी हार्डवेयर आर्किटेक्चर का आधार है। सीपीयू कंप्यूटर के दिमाग की तरह काम करता है, सामान्य प्रोग्राम निर्देशों को निष्पादित करता है और सिस्टम संसाधनों का प्रबंधन करता है। आधुनिक सीपीयू में कई भौतिक कोर और थ्रेड होते हैं, जो एक ही समय में कई कार्यों को करने में सक्षम बनाते हैं। दूसरी ओर, जीपीयू समांतर गणना के लिए डिज़ाइन किया गया एक विशेष प्रोसेसर है, जिसमें हज़ारों छोटे कोर होते हैं जो एक ही समय में जटिल गणितीय क्रियाओं को संभाल सकते हैं। मूल रूप से 3डी ग्राफिक्स रेंडरिंग के लिए बनाया गया, जीपीयू अब वीडियो एडिटिंग रेंडरिंग, मशीन लर्निंग और आर्टिफिशियल इंटेलिजेंस कंप्यूटे वर्कलोड के लिए महत्वपूर्ण है। रैम सिस्टम की शॉर्ट-टर्म मेमोरी के रूप में काम करती है, सक्रिय प्रोग्राम निर्देशों और डेटा को धारण करती है जिसे सीपीयू को तुरंत एक्सेस करने की आवश्यकता होती है। रैम की बैंडविड्थ और गति महत्वपूर्ण हैं; डीडीआर 5 नवीनतम मानक है, जो डीडीआर 4 की तुलना में कम वोल्टेज (जैसे 5600 मेगाहर्ट्ज) पर काम करता है और डेटा भ्रष्टाचार को रोकने के लिए ऑन-डाई इरर कॉरेक्शन कोड (ईसीसी) भी पेश करता है। ग्राफिक्स कार्ड पर, वीडियो रैम (वीआरएएम) आवश्यक है। सिस्टम रैम के विपरीत, वीआरएएम ग्राफिक्स कार्ड पर जीपीयू के बगल में सीधे सोल्डर किया जाता है, जो टेक्सचर फाइलों और फ्रेम डेटा को स्टोर करने के लिए आवश्यक अल्ट्रा-हाई-स्पीड मेमोरी बफर प्रदान करता है। आधुनिक एआई वर्कलोड के लिए, उच्च वीआरएएम क्षमता (जैसे 6 जीबी या 8 जीबी न्यूनतम) महत्वपूर्ण है, क्योंकि बड़े भाषा मॉडल और जेनरेशन पाइपलाइन्स को प्रोसेसिंग के लिए सीधे वीआरएएम में लोड किया जाता है।"
   },
   {
     "id": "module-networking-basics",
     "topic": "networking",
     "title": "Introduction to Computer Networking",
-    "keywords": ["router", "switch", "wifi", "poe", "lan", "networking", "dhcp"],
+    "keywords": [
+      "router",
+      "switch",
+      "wifi",
+      "poe",
+      "lan",
+      "networking",
+      "dhcp"
+    ],
     "content": "Computer networking is the practice of connecting computing devices together to share data, resources, and internet connections. The local network (LAN) forms the backbone of any office or home setup. The two most critical devices in a LAN are switches and routers. A switch connects devices within the same network, using MAC addresses to forward data frames to the correct recipient. Modern office deployments heavily utilize Power-over-Ethernet (PoE) switches, which send power and data over a single Category 6 (Cat6) Ethernet cable, eliminating the need for electrical outlets near ceiling-mounted WiFi access points or security cameras. A router, on the other hand, connects different networks together—specifically, it routes traffic between your private LAN and the public Internet. Routers use IP addresses to direct traffic and run DHCP servers to assign local IP addresses to new devices. Wireless networking has evolved rapidly; WiFi 6 (802.11ax) is the current standard, designed to handle high-density environments like modern offices and co-working spaces. WiFi 6 uses OFDMA (Orthogonal Frequency Division Multiple Access) to split a single wireless channel into multiple sub-channels, allowing the router to communicate with dozens of devices simultaneously without visual latency or dropouts.",
     "quiz": [
       {
@@ -85,7 +185,23 @@
           "To host website domain names"
         ],
         "answerIndex": 1,
-        "explanation": "A switch operates inside the LAN, connecting devices like computers, printers, and servers together by forwarding data frames directly between them."
+        "explanation": "A switch operates inside the LAN, connecting devices like computers, printers, and servers together by forwarding data frames directly between them.",
+        "question_mr": "नेटवर्क स्विचची प्राथमिक कार्य काय आहे?",
+        "question_hi": "नेटवर्क स्विच का प्राथमिक कार्य क्या है?",
+        "options_mr": [
+          "वेगवेगळ्या नेटवर्क्सना जोडणे आणि इंटरनेट सामायिक करणे",
+          "सेम नेटवर्कमधील उपकरणांना जोडणे आणि डेटा फ्रेम्स पाठवणे",
+          "डिजिटल सिग्नल्सला अॅनालॉग फोन लाइन्समध्ये रूपांतरित करणे",
+          "वेबसाइट डोमेन नावे होस्ट करणे"
+        ],
+        "options_hi": [
+          "विभिन्न नेटवर्कों को जोड़ना और इंटरनेट साझा करना",
+          "एक ही नेटवर्क के भीतर डिवाइसों को जोड़ना और डेटा फ्रेम भेजना",
+          "डिजिटल सिग्नल को एनालॉग फोन लाइनों में परिवर्तित करना",
+          "वेबसाइट डोमेन नाम होस्ट करना"
+        ],
+        "explanation_mr": "स्विच हे LAN च्या आत कार्य करते, संगणक, प्रिंटर आणि सर्व्हरसारख्या उपकरणांना थेट त्यांच्यामध्ये डेटा फ्रेम्स पाठवून जोडते.",
+        "explanation_hi": "स्विच LAN के भीतर कार्य करता है, कंप्यूटर, प्रिंटर और सर्वर जैसे डिवाइसों को सीधे उनमें डेटा फ्रेम भेजकर जोड़ता है।"
       },
       {
         "id": "q2",
@@ -97,7 +213,23 @@
           "It allows printers to work without ink"
         ],
         "answerIndex": 1,
-        "explanation": "PoE sends low-voltage power along with Ethernet data, letting you install devices like security cameras and WiFi access points in locations without power outlets."
+        "explanation": "PoE sends low-voltage power along with Ethernet data, letting you install devices like security cameras and WiFi access points in locations without power outlets.",
+        "question_mr": "नेटवर्किंग सेटअपमध्ये पॉवर-ओव्हर-इथरनेट (PoE) काय साध्य करते?",
+        "question_hi": "नेटवर्किंग सेटअप में पॉवर-ओवर-इथरनेट (PoE) क्या हासिल करता है?",
+        "options_mr": [
+          "WiFi कनेक्शनचा वेग 50% वाढवते",
+          "एकाच LAN केबलवरून वीज आणि डेटा पाठवणे",
+          "रात्री वापर न झालेल्या राउटर्स बंद करून वीज वाचते",
+          "प्रिंटरला इंक न लावता कार्य करण्याची परवानगी देते"
+        ],
+        "options_hi": [
+          "वाई-फाई कनेक्शन की गति 50% बढ़ाता है",
+          "एक ही लैन केबल पर बिजली और डेटा दोनों भेजना",
+          "रात में उपयोग न होने वाले राउटर्स को बंद करके बिजली बचाता है",
+          "प्रिंटर को स्याही के बिना काम करने की अनुमति देता है"
+        ],
+        "explanation_mr": "PoE हे इथरनेट डेटासह कमी-वोल्टेज पॉवर पाठवते, ज्यामुळे तुम्ही विद्युत आउटलेट्सशिवाय सुरक्षा कॅमेरे आणि WiFi एक्सेस पॉइंट्ससारखी उपकरणे स्थापित करू शकता.",
+        "explanation_hi": "पीओई इथरनेट डेटा के साथ कम-वोल्टेज पावर भेजता है, जिससे आप बिजली के आउटलेट के बिना सुरक्षा कैमरों और वायरलेस एक्सेस पॉइंट्स जैसे डिवाइस स्थापित कर सकते हैं।"
       },
       {
         "id": "q3",
@@ -109,7 +241,23 @@
           "It operates only on analog frequencies"
         ],
         "answerIndex": 1,
-        "explanation": "WiFi 6 uses OFDMA and advanced MU-MIMO to handle multiple devices simultaneously on the same frequency channel, preventing network congestion."
+        "explanation": "WiFi 6 uses OFDMA and advanced MU-MIMO to handle multiple devices simultaneously on the same frequency channel, preventing network congestion.",
+        "question_mr": "व्यस्त कार्यालय वातावरणात WiFi 5 पेक्षा WiFi 6 का श्रेष्ठ का काय आहे?",
+        "question_hi": "व्यस्त कार्यालय वातावरण में वाई-फाई 5 की तुलना में वाई-फाई 6 का श्रेष्ठ क्या है?",
+        "options_mr": [
+          "जाड केबल्स वापरून जास्त डेटा पाठवणे",
+          "एकाच चॅनेलवर अनेक उपकरणांशी संवाद साधण्यासाठी OFDMA वापरणे",
+          "पासवर्ड एन्क्रिप्शनची गरज नाहीसे करणे",
+          "फक्त अॅनालॉग फ्रिक्वेन्सीवर कार्य करणे"
+        ],
+        "options_hi": [
+          "मोटे तारों का उपयोग करके अधिक डेटा भेजना",
+          "एक ही चैनल पर कई उपकरणों के साथ संवाद करने के लिए ओएफडीएमए का उपयोग करना",
+          "पासवर्ड एन्क्रिप्शन की आवश्यकता को समाप्त करना",
+          "केवल एनालॉग फ्रीक्वेंसी पर काम करना"
+        ],
+        "explanation_mr": "WiFi 6 हे OFDMA आणि अॅडव्हान्स्ड MU-MIMO वापरून एकाच फ्रिक्वेन्सी चॅनेलवर अनेक उपकरणांशी संवाद साधते, ज्यामुळे नेटवर्क कोंडी टाळली जाते.",
+        "explanation_hi": "वाई-फाई 6 ओएफडीएमए और एडवांस्ड एमयू-मिमो का उपयोग करके एक ही फ्रीक्वेंसी चैनल पर कई डिवाइसों के साथ संवाद करता है, जिससे नेटवर्क की भीड़भाड़ को रोका जा सकता है।"
       },
       {
         "id": "q4",
@@ -121,7 +269,23 @@
           "SMTP"
         ],
         "answerIndex": 1,
-        "explanation": "DHCP (Dynamic Host Configuration Protocol) automatically assigns IP configurations to devices when they connect to a network."
+        "explanation": "DHCP (Dynamic Host Configuration Protocol) automatically assigns IP configurations to devices when they connect to a network.",
+        "question_mr": "Which protocol is responsible for automatically assigning IP addresses to devices?",
+        "question_hi": "Which protocol is responsible for automatically assigning IP addresses to devices?",
+        "options_mr": [
+          "DNS",
+          "DHCP",
+          "HTTP",
+          "SMTP"
+        ],
+        "options_hi": [
+          "DNS",
+          "DHCP",
+          "HTTP",
+          "SMTP"
+        ],
+        "explanation_mr": "DHCP (Dynamic Host Configuration Protocol) automatically assigns IP configurations to devices when they connect to a network.",
+        "explanation_hi": "DHCP (Dynamic Host Configuration Protocol) automatically assigns IP configurations to devices when they connect to a network."
       },
       {
         "id": "q5",
@@ -133,8 +297,28 @@
           "The console port"
         ],
         "answerIndex": 1,
-        "explanation": "The WAN (Wide Area Network) port is designed to connect to the external internet source, such as a fiber optic or cable modem."
+        "explanation": "The WAN (Wide Area Network) port is designed to connect to the external internet source, such as a fiber optic or cable modem.",
+        "question_mr": "If a router has a WAN port and 4 LAN ports, where do you connect the incoming fiber modem line?",
+        "question_hi": "If a router has a WAN port and 4 LAN ports, where do you connect the incoming fiber modem line?",
+        "options_mr": [
+          "Any LAN port",
+          "The WAN port",
+          "The USB backup port",
+          "The console port"
+        ],
+        "options_hi": [
+          "Any LAN port",
+          "The WAN port",
+          "The USB backup port",
+          "The console port"
+        ],
+        "explanation_mr": "The WAN (Wide Area Network) port is designed to connect to the external internet source, such as a fiber optic or cable modem.",
+        "explanation_hi": "The WAN (Wide Area Network) port is designed to connect to the external internet source, such as a fiber optic or cable modem."
       }
-    ]
+    ],
+    "title_mr": "संगणक नेटवर्किंगचा परिचय",
+    "title_hi": "कंप्यूटर नेटवर्किंग का परिचय",
+    "content_mr": "संगणक नेटवर्किंग ही संगणकीय उपकरणांना डेटा, संसाधने आणि इंटरनेट कनेक्शन सामायिक करण्यासाठी जोडण्याची प्रथा आहे. स्थानिक नेटवर्क (LAN) कोणत्याही कार्यालय किंवा गृह सेटअपचा मुख्य भाग बनवते. LAN मध्ये दोन अत्यंत महत्त्वाची उपकरणे स्विच आणि राउटर आहेत. स्विच हे सेम नेटवर्कमधील उपकरणांना जोडते, डेटा फ्रेम्सचे स्वीकृतकर्त्याला पाठवण्यासाठी MAC पत्त्यांचा वापर करते. आधुनिक कार्यालय तैनातीमध्ये पॉवर-ओव्हर-इथरनेट (PoE) स्विचचा मोठ्या प्रमाणावर वापर केला जातो, जे एकाच कॅट 6 (Cat6) इथरनेट केबलवरून वीज आणि डेटा पाठवतात, छतावर बसवलेल्या वायरलेस WiFi एक्सेस पॉइंट्स किंवा सुरक्षा कॅमेरांजवळ विद्युत आउटलेट्सची गरज नाहीशी करतात. दुसरीकडे, राउटर वेगवेगळ्या नेटवर्क्सना जोडतो - विशेषत:, तो तुमच्या खाजगी LAN आणि सार्वजनिक इंटरनेट दरम्यान ट्रॅफिकची वाहतूक करतो. राउटर्स IP पत्त्यांचा वापर ट्रॅफिकची दिशा निर्देशित करण्यासाठी करतात आणि नवीन उपकरणांना स्थानिक IP पत्ते नियुक्त करण्यासाठी DHCP सर्व्हर्स चालवतात. वायरलेस नेटवर्किंगमध्ये जलद प्रगती झाली आहे; WiFi 6 (802.11ax) हा सध्याचा मानक आहे, जो आधुनिक कार्यालये आणि सह-कार्य स्थानांसारख्या उच्च-घनतेच्या वातावरणात व्यवस्थापित करण्यासाठी डिझाइन केलेला आहे. WiFi 6 OFDMA (Orthogonal Frequency Division Multiple Access) वापरते, ज्यामुळे एकाच वायरलेस चॅनेलला अनेक उप-चॅनेलमध्ये विभाजित केले जाते, ज्यामुळे राउटरला दृश्य विलंब किंवा ड्रॉपआउट्सशिवाय दशकांहून अधिक उपकरणांशी संवाद साधता येतो.",
+    "content_hi": "कंप्यूटर नेटवर्किंग डिवाइसों को डेटा, संसाधनों और इंटरनेट कनेक्शन साझा करने के लिए जोड़ने का अभ्यास है। स्थानीय नेटवर्क (LAN) किसी भी कार्यालय या घरेलू सेटअप की रीढ़ है। LAN में दो सबसे महत्वपूर्ण डिवाइस स्विच और राउटर हैं। एक स्विच एक ही नेटवर्क के भीतर डिवाइसों को जोड़ता है, डेटा फ्रेम को सही प्राप्तकर्ता को भेजने के लिए MAC पते का उपयोग करता है। आधुनिक कार्यालय तैनाती में पॉवर-ओवर-इथरनेट (PoE) स्विच का व्यापक रूप से उपयोग किया जाता है, जो एक ही कैट 6 (Cat6) इथरनेट केबल पर बिजली और डेटा दोनों भेजता है, छत पर स्थापित वायरलेस WiFi एक्सेस पॉइंट या सुरक्षा कैमरों के पास बिजली के आउटलेट की आवश्यकता को समाप्त करता है। दूसरी ओर, राउटर विभिन्न नेटवर्कों को जोड़ता है - विशेष रूप से, यह आपके निजी LAN और सार्वजनिक इंटरनेट के बीच ट्रैफिक को रूट करता है। राउटर IP पते का उपयोग ट्रैफिक को निर्देशित करने के लिए करते हैं और नए डिवाइसों को स्थानीय IP पते नियुक्त करने के लिए DHCP सर्वर चलाते हैं। वायरलेस नेटवर्किंग में तेजी से प्रगति हुई है; WiFi 6 (802.11ax) वर्तमान मानक है, जिसे आधुनिक कार्यालयों और सह-कार्य स्थानों जैसे उच्च घनत्व वाले वातावरण में संभालने के लिए डिज़ाइन किया गया है। WiFi 6 OFDMA (Orthogonal Frequency Division Multiple Access) का उपयोग करता है, जो एक ही वायरलेस चैनल को कई उप-चैनलों में विभाजित करता है, जिससे राउटर को दृश्य विलंब या ड्रॉपआउट के बिना दशकों से अधिक डिवाइसों के साथ संवाद करने की अनुमति मिलती है।"
   }
 ]

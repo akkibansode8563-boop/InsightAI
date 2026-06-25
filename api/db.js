@@ -55,24 +55,56 @@ export function getPlaybook(category) {
   return playbooks().find(p => p.category === category || p.keywords?.includes(category)) || null;
 }
 
-export function getNewsArticles(category = null, limit = 10, page = 1) {
+export function getNewsArticles(category = null, limit = 10, page = 1, lang = 'en') {
   let articles = news();
   if (category) articles = articles.filter(a => a.category?.includes(category));
   const start = (page - 1) * limit;
-  return articles.slice(start, start + limit);
+  const items = articles.slice(start, start + limit);
+  if (lang === 'mr' || lang === 'hi') {
+    return items.map(item => ({
+      ...item,
+      title: item[`title_${lang}`] || item.title,
+      ai_summary: item[`ai_summary_${lang}`] || item.ai_summary,
+      key_highlights: item[`key_highlights_${lang}`] || item.key_highlights,
+      business_impact: item[`business_impact_${lang}`] || item.business_impact,
+      technical_impact: item[`technical_impact_${lang}`] || item.technical_impact
+    }));
+  }
+  return items;
 }
 
 export function getLearningModule(topic) {
   return learning().find(m => m.topic === topic || m.keywords?.some(k => topic.toLowerCase().includes(k))) || learning()[0];
 }
 
-export function getMarketData(category = null) {
+export function getMarketData(category = null, lang = 'en') {
   const m = market();
-  if (!category) return m;
-  return {
-    ...m,
-    categories: m.categories?.filter(c => c.name === category)
-  };
+  let result = m;
+  if (category) {
+    result = {
+      ...m,
+      categories: m.categories?.filter(c => c.name === category)
+    };
+  }
+  if (lang === 'mr' || lang === 'hi') {
+    return {
+      ...result,
+      categories: result.categories?.map(c => ({
+        ...c,
+        seasonal_pattern: c[`seasonal_pattern_${lang}`] || c.seasonal_pattern,
+        forecast: {
+          ...c.forecast,
+          description: c.forecast?.[`description_${lang}`] || c.forecast?.description,
+          disclaimer: c.forecast?.[`disclaimer_${lang}`] || c.forecast?.disclaimer
+        }
+      })),
+      market_summary: {
+        ...result.market_summary,
+        overall_trends: result.market_summary?.[`overall_trends_${lang}`] || result.market_summary?.overall_trends
+      }
+    };
+  }
+  return result;
 }
 
 export function getSolutionTemplate(useCase) {

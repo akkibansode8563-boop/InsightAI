@@ -9,9 +9,9 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['icons/*.png'],
       manifest: {
-        name: 'DCC InsightAI 2.0',
+        name: 'InsightAI 2.0',
         short_name: 'InsightAI',
-        description: 'Enterprise IT Hardware Intelligence Platform — DCC Maharashtra',
+        description: 'Enterprise IT Hardware Intelligence Platform',
         theme_color: '#f97316',
         background_color: '#0f172a',
         display: 'standalone',

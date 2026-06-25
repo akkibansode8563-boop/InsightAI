@@ -13,7 +13,7 @@ export default function MarketIntelligence() {
     const loadMarket = async () => {
       try {
         setLoading(true);
-        const res = await fetch('/api/market?category=' + selectedCategory);
+        const res = await fetch(`/api/market?category=${selectedCategory}&lang=${language}`);
         if (res.ok) {
           const data = await res.json();
           setMarketData(data);
@@ -23,7 +23,24 @@ export default function MarketIntelligence() {
           if (fallbackRes.ok) {
             const data = await fallbackRes.json();
             const catData = data.categories?.find(c => c.name === selectedCategory) || data.categories?.[0];
-            setMarketData({ ...data, categories: [catData] });
+            const localizedCat = catData ? {
+              ...catData,
+              seasonal_pattern: catData[`seasonal_pattern_${language}`] || catData.seasonal_pattern,
+              forecast: {
+                ...catData.forecast,
+                description: catData.forecast?.[`description_${language}`] || catData.forecast?.description,
+                disclaimer: catData.forecast?.[`disclaimer_${language}`] || catData.forecast?.disclaimer
+              }
+            } : null;
+            const localizedSummary = {
+              ...data.market_summary,
+              overall_trends: data.market_summary?.[`overall_trends_${language}`] || data.market_summary?.overall_trends
+            };
+            setMarketData({
+              ...data,
+              categories: localizedCat ? [localizedCat] : [],
+              market_summary: localizedSummary
+            });
           }
         }
       } catch (err) {
@@ -33,7 +50,7 @@ export default function MarketIntelligence() {
       }
     };
     loadMarket();
-  }, [selectedCategory]);
+  }, [selectedCategory, language]);
 
   const activeCategory = marketData?.categories?.[0];
 

@@ -1,4 +1,4 @@
-package com.dcc.insightai;
+package com.insightai.app;
 
 import com.getcapacitor.BridgeActivity;
 

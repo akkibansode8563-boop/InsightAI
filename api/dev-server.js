@@ -30,6 +30,7 @@ import newsHandler from './news.js';
 import marketHandler from './market.js';
 import dealerHandler from './dealer.js';
 import chatHandler from './chat.js';
+import learnHandler from './learn.js';
 
 const PORT = 3001;
 
@@ -119,6 +120,8 @@ const server = http.createServer(async (req, res) => {
       await dealerHandler(vercelReq, vercelRes);
     } else if (pathname === '/api/chat') {
       await chatHandler(vercelReq, vercelRes);
+    } else if (pathname === '/api/learn') {
+      await learnHandler(vercelReq, vercelRes);
     } else {
       vercelRes.status(404).json({ error: 'Not Found' });
     }

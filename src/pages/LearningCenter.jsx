@@ -24,10 +24,27 @@ export default function LearningCenter() {
     const loadLearning = async () => {
       try {
         setLoading(true);
-        const res = await fetch('/api/data/learning.json');
+        const res = await fetch(`/api/learn?lang=${language}`);
         if (res.ok) {
           const data = await res.json();
           setModules(data);
+        } else {
+          const fallbackRes = await fetch('/api/data/learning.json');
+          if (fallbackRes.ok) {
+            const data = await fallbackRes.json();
+            const localized = data.map(m => ({
+              ...m,
+              title: m[`title_${language}`] || m.title,
+              content: m[`content_${language}`] || m.content,
+              quiz: m.quiz?.map(q => ({
+                ...q,
+                question: q[`question_${language}`] || q.question,
+                options: q[`options_${language}`] || q.options,
+                explanation: q[`explanation_${language}`] || q.explanation
+              }))
+            }));
+            setModules(localized);
+          }
         }
       } catch (err) {
         console.error("Failed to load learning modules:", err);
@@ -36,7 +53,14 @@ export default function LearningCenter() {
       }
     };
     loadLearning();
-  }, []);
+  }, [language]);
+
+  useEffect(() => {
+    if (selectedModule) {
+      const updated = modules.find(m => m.id === selectedModule.id);
+      if (updated) setSelectedModule(updated);
+    }
+  }, [modules]);
 
   const handleStartModule = (mod) => {
     setSelectedModule(mod);

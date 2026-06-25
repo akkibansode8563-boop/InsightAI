@@ -45,9 +45,34 @@ export default async function handler(req, res) {
     const gstAmount = Math.round(subtotal * gstRate / 100);
     const grandTotal = subtotal + gstAmount;
 
+    const lang = req.body.lang || 'en';
+    const termsMap = {
+      en: [
+        'All prices are MRP inclusive',
+        `GST @${gstRate}% applicable as above`,
+        'Warranty as per manufacturer terms',
+        'Delivery: 2-5 working days for in-stock items',
+        'This quotation is valid for 30 days'
+      ],
+      mr: [
+        'सर्व किमती एमआरपी समाविष्ट आहेत',
+        `वरीलप्रमाणे जीएसटी @${gstRate}% लागू होईल`,
+        'उत्पादकाच्या अटींनुसार वॉरंटी',
+        'डिलिव्हरी: स्टॉक असलेल्या वस्तूंसाठी २-५ कामाचे दिवस',
+        'हे कोटेशन ३० दिवसांसाठी वैध आहे'
+      ],
+      hi: [
+        'सभी कीमतें एमआरपी सहित हैं',
+        `उपरोक्त अनुसार जीएसटी @${gstRate}% लागू होगा`,
+        'निर्माता की शर्तों के अनुसार वारंटी',
+        'डिलिवरी: स्टॉक वाली वस्तुओं के लिए २-५ कार्य दिवस',
+        'यह कोटेशन ३० दिनों के लिए मान्य है'
+      ]
+    };
+
     return res.status(200).json({
       quotation: {
-        number: `DCC-${Date.now().toString().slice(-6)}`,
+        number: `QT-${Date.now().toString().slice(-6)}`,
         date: new Date().toLocaleDateString('en-IN'),
         valid_until: new Date(Date.now() + 30 * 86400000).toLocaleDateString('en-IN'),
         items: lineItems,
@@ -55,13 +80,7 @@ export default async function handler(req, res) {
         gstRate,
         gstAmount,
         grandTotal,
-        terms: [
-          'All prices are MRP inclusive',
-          `GST @${gstRate}% applicable as above`,
-          'Warranty as per manufacturer terms',
-          'Delivery: 2-5 working days for in-stock items',
-          'This quotation is valid for 30 days'
-        ]
+        terms: termsMap[lang] || termsMap['en']
       }
     });
   }

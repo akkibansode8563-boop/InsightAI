@@ -2,72 +2,200 @@
   "categories": [
     {
       "name": "laptops",
-      "demand_index": [75, 78, 85, 92, 95, 88],
+      "demand_index": [
+        75,
+        78,
+        85,
+        92,
+        95,
+        88
+      ],
       "price_trend": {
-        "history": [55000, 56200, 55800, 57000, 57500, 58200],
-        "projected": [58500, 59200, 60000]
+        "history": [
+          55000,
+          56200,
+          55800,
+          57000,
+          57500,
+          58200
+        ],
+        "projected": [
+          58500,
+          59200,
+          60000
+        ]
       },
       "brands": [
-        { "name": "HP", "share": 35 },
-        { "name": "Dell", "share": 30 },
-        { "name": "Lenovo", "share": 20 },
-        { "name": "Acer", "share": 10 },
-        { "name": "Others", "share": 5 }
+        {
+          "name": "HP",
+          "share": 35
+        },
+        {
+          "name": "Dell",
+          "share": 30
+        },
+        {
+          "name": "Lenovo",
+          "share": 20
+        },
+        {
+          "name": "Acer",
+          "share": 10
+        },
+        {
+          "name": "Others",
+          "share": 5
+        }
       ],
-      "top_products": ["hp-victus-15-rtx3050", "dell-inspiron-3530-i5", "lenovo-ideapad-slim-3-i5"],
+      "top_products": [
+        "hp-victus-15-rtx3050",
+        "dell-inspiron-3530-i5",
+        "lenovo-ideapad-slim-3-i5"
+      ],
       "seasonal_pattern": "Heavy spike in June-August due to college admissions ('Back to School' sales) and Q4 corporate budgets refresh.",
       "forecast": {
         "type": "ai_estimate",
         "description": "Laptops prices are expected to rise by 3-5% over the next quarter due to rising component costs (RAM wafers) and high monsoon season demand in Maharashtra.",
-        "disclaimer": "AI Estimate — Not Guaranteed. Real market conditions may vary due to global chip shortages and exchange rate fluctuations."
-      }
+        "disclaimer": "AI Estimate — Not Guaranteed. Real market conditions may vary due to global chip shortages and exchange rate fluctuations.",
+        "description_mr": "लॅपटॉपच्या किमती रॅम वेफर्सच्या वाढत्या किंमती आणि महाराष्ट्रातील मान्सून हंगामातील मोठ्या प्रमाणातील मागणीमुळे पुढील तिमाहीत ३-५% वाढण्याची शक्यता आहे.",
+        "description_hi": "लैपटॉप की कीमतें बढ़ती घटक लागत (रॅम वेफर्स) और महाराष्ट्र में मानसून के मौसम में उच्च मांग के कारण अगली तिमाही में ३-५% बढ़ने की संभावना है।",
+        "disclaimer_mr": "AI अंदाज — गॅरंटीड नाही. जागतिक चिप कमी आणि विनिमय दरातील चढउतार यामुळे वास्तविक बाजारपेठेची परिस्थिती बदलू शकते.",
+        "disclaimer_hi": "AI अनुमान — गारंटीड नहीं। वैश्विक चिप की कमी और विनिमय दर में उतार-चढ़ाव के कारण वास्तविक बाजार की स्थिति भिन्न हो सकती है।"
+      },
+      "seasonal_pattern_mr": "जून-ऑगस्ट या काळात महाविद्यालय प्रवेशांमुळे ('बॅक टू स्कूल' विक्री) आणि Q4 कॉर्पोरेट बजेट रिफ्रेशमुळे मोठी वाढ.",
+      "seasonal_pattern_hi": "जून-अगस्त में कॉलेज प्रवेशों के कारण ('बैक टू स्कूल' बिक्री) और Q4 कॉर्पोरेट बजट ताज़ा करने के कारण भारी वृद्धि।"
     },
     {
       "name": "networking",
-      "demand_index": [60, 65, 70, 75, 82, 85],
+      "demand_index": [
+        60,
+        65,
+        70,
+        75,
+        82,
+        85
+      ],
       "price_trend": {
-        "history": [4500, 4600, 4550, 4700, 4800, 4850],
-        "projected": [4900, 4950, 5000]
+        "history": [
+          4500,
+          4600,
+          4550,
+          4700,
+          4800,
+          4850
+        ],
+        "projected": [
+          4900,
+          4950,
+          5000
+        ]
       },
       "brands": [
-        { "name": "TP-Link", "share": 45 },
-        { "name": "D-Link", "share": 25 },
-        { "name": "Asus", "share": 15 },
-        { "name": "Ubiquiti", "share": 10 },
-        { "name": "Others", "share": 5 }
+        {
+          "name": "TP-Link",
+          "share": 45
+        },
+        {
+          "name": "D-Link",
+          "share": 25
+        },
+        {
+          "name": "Asus",
+          "share": 15
+        },
+        {
+          "name": "Ubiquiti",
+          "share": 10
+        },
+        {
+          "name": "Others",
+          "share": 5
+        }
       ],
-      "top_products": ["tp-link-archer-c6", "tp-link-ax1800", "ubiquiti-unifi-u6-plus"],
+      "top_products": [
+        "tp-link-archer-c6",
+        "tp-link-ax1800",
+        "ubiquiti-unifi-u6-plus"
+      ],
       "seasonal_pattern": "Consistent demand throughout the year, with moderate spikes during festival seasons (October-November) when small businesses upgrade retail outlets.",
       "forecast": {
         "type": "ai_estimate",
         "description": "WiFi 6 routers are expected to drop in price by 5% as WiFi 7 models enter the market in volume, making AX1800 the optimal budget business buy.",
-        "disclaimer": "AI Estimate — Not Guaranteed. Regional distributor pricing adjustments may affect final street prices."
-      }
+        "disclaimer": "AI Estimate — Not Guaranteed. Regional distributor pricing adjustments may affect final street prices.",
+        "description_mr": "वायफाय ६ रूटरच्या किमती वायफाय ७ मॉडेल्स जसजसे मोठ्या प्रमाणावर बाजारात येतील तसतसे ५% कमी होण्याची शक्यता आहे, ज्यामुळे AX1800 हे आर्थिक व्यवसाय खरेदी होईल.",
+        "description_hi": "वाई-फाई ६ राउटर की कीमतें वाई-फाई ७ मॉडल्स के बड़े पैमाने पर बाजार में आने के कारण ५% कम होने की संभावना है, जिससे AX1800 ऑप्टिमल बजट व्यवसाय खरीद होगी।",
+        "disclaimer_mr": "AI अंदाज — गॅरंटीड नाही. प्रादेशिक वितरक किंमत समायोजने अंतिम स्ट्रीट किंमतींवर परिणाम करू शकतात.",
+        "disclaimer_hi": "AI अनुमान — गारंटीड नहीं। क्षेत्रीय वितरक मूल्य समायोजन अंतिम स्ट्रीट मूल्यों पर प्रभाव डाल सकते हैं।"
+      },
+      "seasonal_pattern_mr": "वर्षभरातील स्थिर मागणी, ऑक्टोबर-नोव्हेंबर (उत्सव मोसम) या काळात लहान व्यवसाय खुद्द रिटेल आउटलेट्सच्या अपग्रेडमुळे मध्यम वाढ.",
+      "seasonal_pattern_hi": "पूरे साल की स्थिर मांग, अक्टूबर-नवंबर (त्योहार के मौसम) में छोटे व्यवसाय खुद रिटेल आउटलेट्स के अपग्रेड के कारण मध्यम वृद्धि।"
     },
     {
       "name": "printers",
-      "demand_index": [50, 52, 58, 65, 70, 68],
+      "demand_index": [
+        50,
+        52,
+        58,
+        65,
+        70,
+        68
+      ],
       "price_trend": {
-        "history": [18000, 18500, 18300, 18800, 19200, 19500],
-        "projected": [19800, 20200, 20500]
+        "history": [
+          18000,
+          18500,
+          18300,
+          18800,
+          19200,
+          19500
+        ],
+        "projected": [
+          19800,
+          20200,
+          20500
+        ]
       },
       "brands": [
-        { "name": "HP", "share": 40 },
-        { "name": "Epson", "share": 30 },
-        { "name": "Canon", "share": 20 },
-        { "name": "Brother", "share": 10 }
+        {
+          "name": "HP",
+          "share": 40
+        },
+        {
+          "name": "Epson",
+          "share": 30
+        },
+        {
+          "name": "Canon",
+          "share": 20
+        },
+        {
+          "name": "Brother",
+          "share": 10
+        }
       ],
-      "top_products": ["hp-smart-tank-585", "epson-l3250", "brother-dcp-t820dw"],
+      "top_products": [
+        "hp-smart-tank-585",
+        "epson-l3250",
+        "brother-dcp-t820dw"
+      ],
       "seasonal_pattern": "Spike in April-May (academic year beginning) and October (Diwali billing setup changes).",
       "forecast": {
         "type": "ai_estimate",
         "description": "Ink Tank printers remain in high demand due to ultra-low printing cost. Prices will remain stable with slight promotions during regional festivals.",
-        "disclaimer": "AI Estimate — Not Guaranteed. Supply chain logistics in Maharashtra may alter localized stocking campaigns."
-      }
+        "disclaimer": "AI Estimate — Not Guaranteed. Supply chain logistics in Maharashtra may alter localized stocking campaigns.",
+        "description_mr": "इंक टँक प्रिंटर्सचा मोठ्या प्रमाणातील मागणीमुळे अल्ट्रा-लो प्रिंटिंग कॉस्ट आहे, किंमती स्थिर राहण्याची शक्यता आहे आणि काही प्रादेशिक उत्सवांच्या दरम्यान थोड्या प्रमोशन्ससह.",
+        "description_hi": "इंक टैंक प्रिंटर्स की अल्ट्रा-लो प्रिंटिंग लागत के कारण उच्च मांग में हैं। कीमतें स्थिर रहेंगी और कुछ क्षेत्रीय त्योहारों के दौरान थोड़े प्रमोशन के साथ।",
+        "disclaimer_mr": "AI अंदाज — गॅरंटीड नाही. महाराष्ट्रातील सप्लाय चेन लॉजिस्टिक्स स्थानिक स्टॉकिंग मोहिमांना बदलू शकते.",
+        "disclaimer_hi": "AI अनुमान — गारंटीड नहीं। महाराष्ट्र में सप्लाई चेन लॉजिस्टिक्स स्थानीय स्टॉकिंग अभियानों को बदल सकते हैं।"
+      },
+      "seasonal_pattern_mr": "एप्रिल-मे (शैक्षणिक वर्ष सुरूवात) आणि ऑक्टोबर (दिवाळी बिलिंग सेटअप बदल) या काळात वाढ.",
+      "seasonal_pattern_hi": "अप्रैल-मई (शैक्षणिक वर्ष की शुरुआत) और अक्टूबर (दिवाली बिलिंग सेटअप बदल) में वृद्धि।"
     }
   ],
   "market_summary": {
     "overall_trends": "Maharashtra's IT distribution market remains highly active. Pune and Mumbai are driving 65% of enterprise networking and server growth. Laptops remain highly sought after by students, with custom desktop PCs dominating the gamer and tech-creator segments.",
-    "last_updated": "2026-06-25"
+    "last_updated": "2026-06-25",
+    "overall_trends_mr": "महाराष्ट्राच्या आयटी वितरण बाजारपेठेत खूपच सक्रिय आहे. पुणे आणि मुंबई ६५% एंटरप्राइझ नेटवर्किंग आणि सर्व्हर वाढीला चालना देत आहेत. लॅपटॉप विद्यार्थ्यांकडून खूप मागणी आहे, साथीच्या डेस्कटॉप पीसी गेमर आणि टेक-क्रिएटर सेगमेंटवर वर्चस्व गाजवत आहेत.",
+    "overall_trends_hi": "महाराष्ट्र का आईटी वितरण बाजार अत्यधिक सक्रिय है। पुणे और मुंबई ६५% एंटरप्राइज नेटवर्किंग और सर्वर वृद्धि को बढ़ावा दे रहे हैं। लैपटॉप छात्रों द्वारा बहुत मांग में हैं, साथ ही कस्टम डेस्कटॉप पीसी गेमर और टेक-क्रिएटर सेगमेंट पर हावी हैं।"
   }
 }
