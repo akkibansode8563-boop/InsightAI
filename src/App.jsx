@@ -10,6 +10,7 @@ import SolutionDesigner from './pages/SolutionDesigner.jsx';
 import NewsCenter from './pages/NewsCenter.jsx';
 import LearningCenter from './pages/LearningCenter.jsx';
 import MarketIntelligence from './pages/MarketIntelligence.jsx';
+import ObservabilityDashboard from './pages/ObservabilityDashboard.tsx';
 
 function AppShell() {
   const { activeModule, theme } = useApp();
@@ -23,6 +24,7 @@ function AppShell() {
     news:       <NewsCenter />,
     learn:      <LearningCenter />,
     market:     <MarketIntelligence />,
+    observability: <ObservabilityDashboard />,
   };
 
   return (

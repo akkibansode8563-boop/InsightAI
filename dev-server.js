@@ -32,6 +32,7 @@ import dealerHandler from './api/dealer.js';
 import chatHandler from './api/chat.ts';
 import learnHandler from './api/learn.js';
 import productImageHandler from './api/product-image.js';
+import telemetryHandler from './api/telemetry.ts';
 
 const PORT = 3001;
 
@@ -125,6 +126,8 @@ const server = http.createServer(async (req, res) => {
       await learnHandler(vercelReq, vercelRes);
     } else if (pathname === '/api/product-image') {
       await productImageHandler(vercelReq, vercelRes);
+    } else if (pathname === '/api/telemetry') {
+      await telemetryHandler(vercelReq, vercelRes);
     } else {
       vercelRes.status(404).json({ error: 'Not Found' });
     }

@@ -7,3 +7,4 @@ test-results/
 *.sqlite-wal
 test-embedding.js
 test-models.js
+api-lib/logs/

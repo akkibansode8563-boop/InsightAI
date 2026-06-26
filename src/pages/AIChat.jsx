@@ -3,6 +3,7 @@ import { useApp, AGENTS } from '../context/AppContext.jsx';
 import { streamChat } from '../services/api';
 import { createSession, saveSession, loadSessions, deleteSession } from '../services/sessionStorage.js';
 import RichProductPage from '../components/ui/RichProductPage.tsx';
+import CommandPalette from '../components/ui/CommandPalette.tsx';
 
 // Helper functions
 function buildId() { return Date.now().toString(36) + Math.random().toString(36).slice(2); }
@@ -711,7 +712,19 @@ export default function AIChat() {
   const [sessions, setSessions] = useState([]);
   const [currentSession, setCurrentSession] = useState(null);
   const [showHistory, setShowHistory] = useState(false);
+  const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const bottomRef = useRef(null);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setIsCommandPaletteOpen(prev => !prev);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   const agent = AGENTS.find(a => a.id === activeAgent) || AGENTS[0];
 
@@ -1018,6 +1031,8 @@ export default function AIChat() {
           </div>
         </>
       )}
+      {/* Command Palette */}
+      <CommandPalette isOpen={isCommandPaletteOpen} onClose={() => setIsCommandPaletteOpen(false)} />
     </div>
   );
 }

@@ -123,7 +123,41 @@ export async function semanticSearchProducts(query: string, filters: any = {}): 
 
   // Sort by score descending
   filtered.sort((a, b) => b.score - a.score);
-  return filtered.slice(0, 3);
+  
+  // Re-rank top candidates using token density and exact specification overlap
+  const candidates = filtered.slice(0, 6);
+  if (candidates.length > 0 && query) {
+    const qTokens = query.toLowerCase().split(/\s+/).filter(w => w.length > 2);
+    candidates.forEach(c => {
+      let reRankBonus = 0;
+      const brand = (c.brand || '').toLowerCase();
+      const model = (c.model || '').toLowerCase();
+      const category = (c.category || '').toLowerCase();
+      const specsStr = JSON.stringify(c.specs || {}).toLowerCase();
+      
+      qTokens.forEach(token => {
+        if (model.includes(token)) reRankBonus += 0.05;
+        if (brand.includes(token)) reRankBonus += 0.03;
+        if (category.includes(token)) reRankBonus += 0.02;
+        if (specsStr.includes(token)) reRankBonus += 0.01;
+      });
+
+      // Boost score if spec measurements (e.g. 16GB, 512GB, 144Hz) match exactly
+      const specMentions = query.toLowerCase().match(/\d+\s*(gb|tb|mb|hz)/gi) || [];
+      specMentions.forEach(mention => {
+        const clean = mention.replace(/\s+/g, '').toLowerCase();
+        if (specsStr.includes(clean)) {
+          reRankBonus += 0.1;
+        }
+      });
+
+      c.score = c.score + reRankBonus;
+    });
+
+    candidates.sort((a, b) => b.score - a.score);
+  }
+
+  return candidates.slice(0, 3);
 }
 
 /**

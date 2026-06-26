@@ -6,18 +6,7 @@ import { authenticate } from '../api-lib/middleware/auth.js';
 import { TOOL_SCHEMAS, executeTool } from '../api-lib/agents/tools.js';
 import { logTelemetry, recordMetric } from '../api-lib/telemetry/observability.js';
 
-// --- RATE LIMITING ---
-const rateLimitStore = new Map<string, number[]>();
-function checkRateLimit(ip: string, maxReq = 20, windowMs = 60000): boolean {
-  const now = Date.now();
-  const key = ip || 'unknown';
-  if (!rateLimitStore.has(key)) rateLimitStore.set(key, []);
-  const timestamps = (rateLimitStore.get(key) || []).filter(t => now - t < windowMs);
-  if (timestamps.length >= maxReq) return false;
-  timestamps.push(now);
-  rateLimitStore.set(key, timestamps);
-  return true;
-}
+
 
 // --- LANGUAGE DETECTION ---
 function detectLanguage(text = ''): 'en' | 'mr' | 'hi' {
@@ -43,6 +32,57 @@ function isGreeting(text = ''): boolean {
 // --- CONTEXT TRIMMING ---
 function trimConversationHistory(messages: any[], maxTurns = 8) {
   if (messages.length <= maxTurns * 2) return messages;
+  return messages.slice(-(maxTurns * 2));
+}
+
+// --- CONTEXT COMPRESSION & SUMMARIZATION ---
+async function compressConversationHistory(messages: any[]): Promise<any[]> {
+  const maxTurns = 6;
+  if (messages.length <= maxTurns * 2) return messages;
+
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) {
+    return messages.slice(-(maxTurns * 2));
+  }
+
+  const olderMessages = messages.slice(0, -(maxTurns * 2));
+  const recentMessages = messages.slice(-(maxTurns * 2));
+
+  try {
+    const summaryPrompt = `You are a system context compressor. Summarize the following conversation history between a user and an AI hardware assistant. Focus on key hardware models discussed, user preferences, and established facts. Keep the summary under 150 words.
+Conversation:
+${olderMessages.map(m => `${m.role.toUpperCase()}: ${m.content}`).join('\n')}`;
+
+    const model = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{ role: 'user', parts: [{ text: summaryPrompt }] }],
+        generationConfig: { maxOutputTokens: 250, temperature: 0.2 }
+      })
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      const summaryText = data.candidates?.[0]?.content?.parts?.[0]?.text?.trim();
+      if (summaryText) {
+        console.log(`[Context Compressor] Summarized history to: ${summaryText.slice(0, 50)}...`);
+        return [
+          {
+            role: 'user',
+            content: `[Previous Conversation Summary: ${summaryText}]`
+          },
+          ...recentMessages
+        ];
+      }
+    }
+  } catch (err: any) {
+    console.warn("Failed to compress conversation history:", err.message);
+  }
+
   return messages.slice(-(maxTurns * 2));
 }
 
@@ -340,6 +380,10 @@ Ask me about any hardware model or brand (e.g. 'HP Victus 15') to see specs and 
 export default async function handler(req: any, res: any) {
   const startTime = Date.now();
 
+  const { setSecurityHeaders, sanitizeInput } = await import('../api-lib/middleware/security.js');
+  setSecurityHeaders(res);
+  req.body = sanitizeInput(req.body);
+
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
@@ -347,7 +391,8 @@ export default async function handler(req: any, res: any) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   const ip = req.headers['x-forwarded-for'] || req.socket?.remoteAddress || 'unknown';
-  if (!checkRateLimit(ip)) {
+  const { rateLimiter } = await import('../api-lib/middleware/rate-limiter.js');
+  if (!rateLimiter.checkRateLimit(ip)) {
     return res.status(429).json({ error: 'Rate limit exceeded. Please wait a moment.' });
   }
 
@@ -385,6 +430,50 @@ Introduce yourself as InsightAI and list your main capabilities. Keep it short (
       const routedAgent = await routeAgent(userText, requestedAgent);
       activeAgentId = routedAgent.id;
       systemContext = routedAgent.systemPrompt;
+    }
+
+    // --- SEMANTIC CACHE LOOKUP ---
+    let queryEmbedding: number[] | null = null;
+    if (process.env.GEMINI_API_KEY && activeAgentId !== 'general_greeting' && activeAgentId !== 'sales_practice') {
+      try {
+        const { getQueryEmbedding } = await import('../api-lib/rag/advanced-rag.js');
+        queryEmbedding = await getQueryEmbedding(userText);
+        if (queryEmbedding) {
+          const { semanticCache } = await import('../api-lib/rag/semantic-cache.js');
+          const cached = semanticCache.get(queryEmbedding);
+          if (cached) {
+            const duration = Date.now() - startTime;
+            logTelemetry({
+              agentId: activeAgentId,
+              language,
+              durationMs: duration,
+              status: 'success',
+              tokensEstimated: Math.round(cached.response.length / 4),
+              userRole: req.user?.role
+            });
+            recordMetric(activeAgentId, duration, false);
+
+            if (stream) {
+              res.setHeader('Content-Type', 'text/event-stream');
+              res.setHeader('Cache-Control', 'no-cache');
+              res.setHeader('Connection', 'keep-alive');
+              res.setHeader('X-Accel-Buffering', 'no');
+
+              res.write(`data: ${JSON.stringify({ text: cached.response })}\n\n`);
+              res.write(`data: ${JSON.stringify({ done: true, metadata: { ...cached.metadata, cached: true } })}\n\n`);
+              res.end();
+              return;
+            } else {
+              return res.status(200).json({
+                content: [{ type: 'text', text: cached.response }],
+                metadata: { ...cached.metadata, cached: true }
+              });
+            }
+          }
+        }
+      } catch (cacheErr: any) {
+        console.warn("Semantic cache check failed (non-fatal):", cacheErr.message);
+      }
     }
 
     let ragContext = '';
@@ -430,7 +519,7 @@ Introduce yourself as InsightAI and list your main capabilities. Keep it short (
       ? `\n\nKNOWLEDGE BASE CONTEXT (use this for your response):${ragContext}`
       : '');
 
-    const trimmedMessages = trimConversationHistory(messages);
+    const trimmedMessages = await compressConversationHistory(messages);
 
     const metadata = {
       agentId: activeAgentId,
@@ -455,6 +544,16 @@ Introduce yourself as InsightAI and list your main capabilities. Keep it short (
         res.write(`data: ${JSON.stringify({ done: true, metadata })}\n\n`);
         res.end();
 
+        // Save successful stream to semantic cache
+        if (queryEmbedding && textStream) {
+          try {
+            const { semanticCache } = await import('../api-lib/rag/semantic-cache.js');
+            semanticCache.set(userText, queryEmbedding, textStream, metadata);
+          } catch (e: any) {
+            console.warn("Failed to write to semantic cache:", e.message);
+          }
+        }
+
         // Log successful stream telemetry
         const duration = Date.now() - startTime;
         logTelemetry({
@@ -474,6 +573,16 @@ Introduce yourself as InsightAI and list your main capabilities. Keep it short (
           metadata.llm = 'Groq Llama-3.3-70b (fallback)';
           res.write(`data: ${JSON.stringify({ done: true, metadata })}\n\n`);
           res.end();
+
+          // Save Groq fallback stream to semantic cache
+          if (queryEmbedding && textStream) {
+            try {
+              const { semanticCache } = await import('../api-lib/rag/semantic-cache.js');
+              semanticCache.set(userText, queryEmbedding, textStream, metadata);
+            } catch (e: any) {
+              console.warn("Failed to write to semantic cache:", e.message);
+            }
+          }
 
           const duration = Date.now() - startTime;
           logTelemetry({
@@ -591,6 +700,16 @@ Introduce yourself as InsightAI and list your main capabilities. Keep it short (
       userRole: req.user?.role
     });
     recordMetric(activeAgentId, duration, false);
+
+    // Save successful non-stream to semantic cache
+    if (queryEmbedding && text && usedLLM !== 'Local Offline DB Fallback') {
+      try {
+        const { semanticCache } = await import('../api-lib/rag/semantic-cache.js');
+        semanticCache.set(userText, queryEmbedding, text, metadata);
+      } catch (e: any) {
+        console.warn("Failed to write to semantic cache:", e.message);
+      }
+    }
 
     metadata.llm = usedLLM;
     return res.status(200).json({

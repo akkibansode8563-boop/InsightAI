@@ -121,6 +121,30 @@ export default function NavBar() {
             {langLabels[language]}
           </button>
 
+          {/* Command Palette Search Button */}
+          <button
+            onClick={() => window.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', ctrlKey: true }))}
+            className="w-9 h-9 rounded-lg flex items-center justify-center text-base transition-all duration-200 hover:scale-110 border border-[var(--glass-border-strong)] hover:bg-[var(--bg-elevated)] min-h-touch min-w-touch"
+            style={{ background: 'var(--bg-surface)' }}
+            title="Open Command Palette (Ctrl+K)"
+            aria-label="Open Command Palette"
+          >
+            🔍
+          </button>
+
+          {/* Observability Dashboard */}
+          <button
+            onClick={() => setActiveModule('observability')}
+            className={`w-9 h-9 rounded-lg flex items-center justify-center text-base transition-all duration-200 hover:scale-110 border border-[var(--glass-border-strong)] hover:bg-[var(--bg-elevated)] min-h-touch min-w-touch ${
+              activeModule === 'observability' ? 'bg-[var(--primary-soft)] text-[var(--primary)] border-[var(--primary)]/30' : ''
+            }`}
+            style={{ background: activeModule === 'observability' ? 'var(--primary-soft)' : 'var(--bg-surface)' }}
+            title="Observability Telemetry Dashboard"
+            aria-label="Observability Dashboard"
+          >
+            📡
+          </button>
+
           {/* Theme Toggle */}
           <button
             onClick={toggleTheme}
