@@ -484,7 +484,7 @@ async function callGroq(systemPrompt, messages) {
       'Authorization': `Bearer ${apiKey}`
     },
     body: JSON.stringify({
-      model: process.env.GROQ_MODEL || 'llama-3.1-8b-instant',
+      model: process.env.GROQ_MODEL || 'llama-3.3-70b-versatile',
       messages: groqMessages,
       max_tokens: 3000,
       temperature: 0.7,
@@ -500,6 +500,25 @@ async function callGroq(systemPrompt, messages) {
   const data = await response.json();
   return data.choices?.[0]?.message?.content || '';
 }
+
+const agentNames = {
+  product_intelligence: 'Product Intelligence',
+  recommendation:       'Recommendation',
+  compatibility_agent:  'Compatibility',
+  sales_coach:          'Sales Coach',
+  market_intelligence:  'Market Intelligence',
+  news_agent:           'News',
+  forecast_agent:       'Forecast',
+  solution_designer:    'Solution Designer',
+  quotation_agent:      'Quotation',
+  inventory_agent:      'Inventory',
+  enterprise_agent:     'Enterprise',
+  troubleshoot_agent:   'Troubleshoot',
+  learning_agent:       'Learning',
+  dealer_agent:         'Dealer',
+  sales_practice:       'Sales Practice',
+  general_greeting:     'InsightAI Assistant'
+};
 
 // ─── MAIN HANDLER ─────────────────────────────────────────────
 export default async function handler(req, res) {
@@ -532,11 +551,12 @@ export default async function handler(req, res) {
 
     // Intent classification → agent selection
     const userIsGreeting = isGreeting(userText);
-    const agentId = userIsGreeting ? 'general_greeting' : await classifyIntent(userText, requestedAgent);
+    const isAutoRoute = !requestedAgent || requestedAgent === 'auto';
+    const agentId = (userIsGreeting && isAutoRoute) ? 'general_greeting' : await classifyIntent(userText, requestedAgent);
 
     // Get RAG context
     let ragContext = '';
-    if (!userIsGreeting) {
+    if (agentId !== 'general_greeting') {
       try {
         ragContext = await retrieveContext(agentId, userText, messages);
       } catch (e) {
@@ -571,6 +591,12 @@ export default async function handler(req, res) {
       // No specific product found — use category fallback URL
       basePrompt = basePrompt.replace('<IMAGE_URL_PLACEHOLDER>', '/showcase-laptop.png');
     }
+
+    // Customize greeting behavior for specific agents so they don't print a template
+    if (userIsGreeting && agentId !== 'general_greeting' && agentId !== 'sales_practice') {
+      basePrompt += `\n\nIMPORTANT: The user has just greeted you with a simple greeting (e.g., "HI"). Since they haven't asked a specific question yet, do NOT generate your full template, tables, or product brief. Instead, respond with a warm, professional greeting in character as the ${agentNames[agentId] || 'InsightAI'} agent, briefly state your specialized role, and ask how you can help them today. Keep it under 60 words.`;
+    }
+
     const langInstruction = language === 'mr'
       ? '\n\nIMPORTANT: The user is writing in MARATHI. You MUST respond in clean Marathi using Devanagari script only. Do NOT mix English unless it is a technical term with no Marathi equivalent.'
       : language === 'hi'
@@ -583,25 +609,6 @@ export default async function handler(req, res) {
     // Trim conversation
     const trimmedMessages = trimConversationHistory(messages);
 
-    const agentNames = {
-      product_intelligence: 'Product Intelligence',
-      recommendation:       'Recommendation',
-      compatibility_agent:  'Compatibility',
-      sales_coach:          'Sales Coach',
-      market_intelligence:  'Market Intelligence',
-      news_agent:           'News',
-      forecast_agent:       'Forecast',
-      solution_designer:    'Solution Designer',
-      quotation_agent:      'Quotation',
-      inventory_agent:      'Inventory',
-      enterprise_agent:     'Enterprise',
-      troubleshoot_agent:   'Troubleshoot',
-      learning_agent:       'Learning',
-      dealer_agent:         'Dealer',
-      sales_practice:       'Sales Practice',
-      general_greeting:     'InsightAI Assistant'
-    };
-
     const metadata = {
       agentId,
       agentName:  agentNames[agentId] || agentId,
@@ -609,7 +616,7 @@ export default async function handler(req, res) {
       timestamp:  new Date().toISOString(),
       source:     'Hardware Knowledge Base + AI Analysis',
       confidence: ragContext ? 'high' : 'medium',
-      llm:        process.env.GEMINI_API_KEY ? 'Gemini 2.0 Flash' : 'Groq Llama-3.1-8b'
+      llm:        process.env.GEMINI_API_KEY ? 'Gemini 2.0 Flash' : 'Groq Llama-3.3-70b'
     };
 
     // ── STREAMING RESPONSE ──
@@ -628,7 +635,7 @@ export default async function handler(req, res) {
         try {
           const text = await callGroq(systemPrompt, trimmedMessages);
           res.write(`data: ${JSON.stringify({ text })}\n\n`);
-          metadata.llm = 'Groq Llama-3.1-8b (fallback)';
+          metadata.llm = 'Groq Llama-3.3-70b (fallback)';
           res.write(`data: ${JSON.stringify({ done: true, metadata })}\n\n`);
           res.end();
         } catch (groqErr) {
@@ -642,7 +649,7 @@ export default async function handler(req, res) {
 
     // ── NON-STREAMING RESPONSE (Groq only or stream=false) ──
     let text = '';
-    let usedLLM = 'Groq';
+    let usedLLM = 'Groq Llama-3.3-70b';
 
     try {
       if (process.env.GEMINI_API_KEY) {
@@ -668,13 +675,15 @@ export default async function handler(req, res) {
         }
         const d = await r.json();
         text = d.candidates?.[0]?.content?.parts?.[0]?.text || '';
-        usedLLM = 'Gemini';
+        usedLLM = 'Gemini 2.0 Flash';
       } else {
         text = await callGroq(systemPrompt, trimmedMessages);
       }
-    } catch (_) {
+    } catch (err) {
+      console.error("Gemini non-streaming failed:", err.message);
       // Final fallback
       text = await callGroq(systemPrompt, trimmedMessages);
+      usedLLM = 'Groq Llama-3.3-70b (fallback)';
     }
 
     metadata.llm = usedLLM;

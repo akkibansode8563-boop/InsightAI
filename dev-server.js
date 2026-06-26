@@ -7,7 +7,7 @@ import { fileURLToPath } from 'url';
 // Load environment variables from .env file manually
 const __dirname = dirname(fileURLToPath(import.meta.url));
 try {
-  const envPath = join(__dirname, '..', '.env');
+  const envPath = join(__dirname, '.env');
   const envContent = readFileSync(envPath, 'utf-8');
   envContent.split('\n').forEach(line => {
     const trimmed = line.trim();

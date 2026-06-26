@@ -24,7 +24,8 @@ export const chatRequestSchema = z.object({
     'enterprise_agent',
     'troubleshoot_agent',
     'learning_agent',
-    'dealer_agent'
+    'dealer_agent',
+    'sales_practice'
   ]).optional().default('auto'),
   stream: z.boolean().optional().default(true),
   language: z.enum(['en', 'mr', 'hi']).optional()
