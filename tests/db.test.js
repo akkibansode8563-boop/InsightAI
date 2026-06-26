@@ -9,13 +9,12 @@ import {
   getNewsArticles,
   getLearningModule,
   getMarketData,
-  getSolutionTemplate,
-  getDb
+  getSolutionTemplate
 } from '../api/db.js';
 import { cosineSimilarity, semanticSearchProducts } from '../api/rag.js';
 
-describe('Database Query unit tests (SQLite)', () => {
-  // Ensure database connection can be made
+describe('Database Query unit tests (JSON)', () => {
+  // Load environment variables
   beforeAll(async () => {
     try {
       const envPath = path.resolve('.env');
@@ -34,8 +33,6 @@ describe('Database Query unit tests (SQLite)', () => {
     } catch (e) {
       console.warn("Could not load env in test:", e.message);
     }
-    const db = await getDb();
-    expect(db).toBeDefined();
   });
 
   it('should search products with query matching model and brand', async () => {
