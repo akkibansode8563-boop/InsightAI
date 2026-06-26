@@ -127,7 +127,7 @@ async function classifyIntent(message, requestedAgent) {
     { agent: 'solution_designer',   keywords: ['setup for', 'build a', 'design a', 'gaming setup', 'office setup', 'school lab', 'cctv setup', 'server setup', 'workstation', 'complete solution', 'सेटअप'] },
     { agent: 'sales_coach',         keywords: ['pitch', 'how to sell', 'customer objection', 'handle objection', 'close deal', 'convince', 'negotiat', 'counter', 'explain to customer', 'sales'] },
     { agent: 'compatibility_agent', keywords: ['compatible', 'will it work', 'support', 'pairing', 'fit with', 'works with', 'can i use', 'compatible with', 'सपोर्ट', 'चालेल'] },
-    { agent: 'recommendation',      keywords: ['recommend', 'suggest', 'best for', 'which one', 'under budget', 'buying', 'should i buy', 'compare', 'what to buy', 'कोणता', 'कौनसा', 'suggest kara'] },
+    { agent: 'recommendation',      keywords: ['recommend', 'suggest', 'best for', 'which one', 'under budget', 'buying', 'should i buy', 'compare', 'what to buy', 'list of', 'list', 'options', 'choose', 'select', 'comparison', 'show me', 'give me', 'top', 'difference between', 'कोणता', 'कौनसा', 'suggest kara'] },
     { agent: 'news_agent',          keywords: ['news', 'launch', 'announced', 'released', 'update', 'latest', 'new product', 'just out', 'नवीन', 'नया'] },
     { agent: 'forecast_agent',      keywords: ['forecast', 'predict', 'price going', 'future', 'next quarter', 'will price', 'demand next', 'trend'] },
     { agent: 'market_intelligence', keywords: ['market', 'demand', 'trend', 'growing', 'popular brand', 'market share', 'sales data', 'बाजार'] },
@@ -135,14 +135,22 @@ async function classifyIntent(message, requestedAgent) {
     { agent: 'troubleshoot_agent',  keywords: ['not working', 'error', 'driver', 'issue', 'problem', 'bsod', 'fix', 'diagnose', 'repair', 'काम नाही', 'बंद पडला'] },
     { agent: 'enterprise_agent',    keywords: ['enterprise', 'procurement', 'infra', 'infrastructure', 'servers', 'lifecycle', 'tco', 'standardize', 'compliance', 'bulk order'] },
     { agent: 'dealer_agent',        keywords: ['dealer', 'scheme', 'margin', 'offer', 'bulk', 'distributor', 'channel', 'डीलर', 'margin'] },
-    { agent: 'learning_agent',      keywords: ['explain', 'teach me', 'what is', 'how does', 'tutorial', 'learn about', 'difference between', 'काय आहे', 'समजावून'] },
+    { agent: 'learning_agent',      keywords: ['explain', 'teach me', 'what is', 'how does', 'tutorial', 'learn about', 'काय आहे', 'समजावून'] },
     { agent: 'product_intelligence',keywords: ['spec', 'feature', 'details', 'tell me about', 'describe', 'model', 'configuration', 'review', 'स्पेसिफिकेशन'] },
   ];
 
   for (const rule of rules) {
     if (rule.keywords.some(k => msg.includes(k))) return rule.agent;
   }
-  return 'product_intelligence'; // default
+
+  // If no keyword rule matches, check if a specific product in our database is mentioned
+  const matchedProduct = findProductImage(message);
+  if (matchedProduct) {
+    return 'product_intelligence';
+  }
+
+  // Default to recommendation for generic/ambiguous requests
+  return 'recommendation';
 }
 
 // ─── AGENT SYSTEM PROMPTS ─────────────────────────────────────
