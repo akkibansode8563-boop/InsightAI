@@ -1,18 +1,26 @@
+import { ChatMessage } from '../types/index';
+
 const BASE_URL = '';
+
+interface StreamChatParams {
+  messages: ChatMessage[];
+  agent?: string;
+  language?: string;
+}
 
 /**
  * Stream chat response using Server-Sent Events (SSE) or plain JSON fallback
- * @param {Object} params - { messages, agent, language }
- * @param {Function} onChunk - Called with each text chunk
- * @param {Function} onDone - Called when streaming completes with metadata
- * @param {Function} onError - Called on error with error message string
+ * @param params - { messages, agent, language }
+ * @param onChunk - Called with each text chunk
+ * @param onDone - Called when streaming completes with metadata
+ * @param onError - Called on error with error message string
  */
 export async function streamChat(
-  { messages, agent = 'auto', language = 'en' },
-  onChunk,
-  onDone,
-  onError
-) {
+  { messages, agent = 'auto', language = 'en' }: StreamChatParams,
+  onChunk: (text: string) => void,
+  onDone: (metadata: any) => void,
+  onError: (error: string) => void
+): Promise<void> {
   try {
     const response = await fetch(`${BASE_URL}/api/chat`, {
       method: 'POST',
@@ -33,7 +41,8 @@ export async function streamChat(
 
     // SSE streaming path
     if (contentType.includes('text/event-stream')) {
-      const reader = response.body.getReader();
+      const reader = response.body?.getReader();
+      if (!reader) throw new Error('Response body not readable');
       const decoder = new TextDecoder();
       let buffer = '';
 
@@ -42,7 +51,7 @@ export async function streamChat(
         if (done) break;
         buffer += decoder.decode(value, { stream: true });
         const lines = buffer.split('\n');
-        buffer = lines.pop(); // keep incomplete line in buffer
+        buffer = lines.pop() || ''; // keep incomplete line in buffer
 
         for (const line of lines) {
           if (!line.startsWith('data: ')) continue;
@@ -71,23 +80,19 @@ export async function streamChat(
     } else {
       // Non-streaming JSON fallback
       const data = await response.json();
-      const text = data.content?.map(b => b.text || '').join('') || data.text || '';
+      const text = data.content?.map((b: any) => b.text || '').join('') || data.text || '';
       onChunk?.(text);
       onDone?.(data.metadata);
     }
-  } catch (err) {
+  } catch (err: any) {
     onError?.(err.message || 'Network error');
   }
 }
 
 /**
  * Fetch IT news articles
- * @param {string|null} category - Optional category filter
- * @param {number} limit - Number of articles
- * @param {number} page - Page number for pagination
- * @returns {Promise<Object>}
  */
-export async function fetchNews(category = null, limit = 10, page = 1, lang = 'en') {
+export async function fetchNews(category: string | null = null, limit = 10, page = 1, lang = 'en'): Promise<any> {
   const params = new URLSearchParams({ limit: String(limit), page: String(page), lang });
   if (category) params.set('category', category);
   const res = await fetch(`${BASE_URL}/api/news?${params}`);
@@ -97,10 +102,8 @@ export async function fetchNews(category = null, limit = 10, page = 1, lang = 'e
 
 /**
  * Fetch market intelligence data
- * @param {string|null} category - Optional category filter
- * @returns {Promise<Object>}
  */
-export async function fetchMarketData(category = null, lang = 'en') {
+export async function fetchMarketData(category: string | null = null, lang = 'en'): Promise<any> {
   const params = new URLSearchParams({ lang });
   if (category) params.set('category', category);
   const res = await fetch(`${BASE_URL}/api/market?${params}`);
@@ -110,9 +113,8 @@ export async function fetchMarketData(category = null, lang = 'en') {
 
 /**
  * Fetch current dealer schemes and offers
- * @returns {Promise<Object>}
  */
-export async function fetchSchemes(lang = 'en') {
+export async function fetchSchemes(lang = 'en'): Promise<any> {
   const res = await fetch(`${BASE_URL}/api/dealer/schemes?lang=${lang}`);
   if (!res.ok) throw new Error('Failed to fetch schemes');
   return res.json();
@@ -120,11 +122,8 @@ export async function fetchSchemes(lang = 'en') {
 
 /**
  * Generate a formal quotation document
- * @param {Array} items - Line items [{ name, qty, unitPrice, sku? }]
- * @param {number} gstRate - GST rate (default 18%)
- * @returns {Promise<Object>}
  */
-export async function generateQuotation(items, gstRate = 18, lang = 'en') {
+export async function generateQuotation(items: any[], gstRate = 18, lang = 'en'): Promise<any> {
   const res = await fetch(`${BASE_URL}/api/dealer`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -136,11 +135,8 @@ export async function generateQuotation(items, gstRate = 18, lang = 'en') {
 
 /**
  * Fetch stock/inventory levels
- * @param {string|null} sku - Optional SKU to check
- * @param {string|null} category - Optional category filter
- * @returns {Promise<Object>}
  */
-export async function fetchStock(sku = null, category = null) {
+export async function fetchStock(sku: string | null = null, category: string | null = null): Promise<any> {
   const params = new URLSearchParams();
   if (sku) params.set('sku', sku);
   if (category) params.set('category', category);
@@ -152,10 +148,8 @@ export async function fetchStock(sku = null, category = null) {
 
 /**
  * Fetch learning courses and modules
- * @param {string|null} category - Optional category filter
- * @returns {Promise<Object>}
  */
-export async function fetchCourses(category = null, lang = 'en') {
+export async function fetchCourses(category: string | null = null, lang = 'en'): Promise<any> {
   const params = new URLSearchParams({ lang });
   if (category) params.set('category', category);
   const res = await fetch(`${BASE_URL}/api/learn?${params}`);
@@ -165,11 +159,8 @@ export async function fetchCourses(category = null, lang = 'en') {
 
 /**
  * Submit quiz answers and get results
- * @param {string} quizId - Quiz identifier
- * @param {Array} answers - User's answers
- * @returns {Promise<Object>}
  */
-export async function submitQuiz(quizId, answers) {
+export async function submitQuiz(quizId: string, answers: any[]): Promise<any> {
   const res = await fetch(`${BASE_URL}/api/learn/quiz`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -181,9 +172,8 @@ export async function submitQuiz(quizId, answers) {
 
 /**
  * Check backend health status
- * @returns {Promise<Object>} Health status object
  */
-export async function checkHealth() {
+export async function checkHealth(): Promise<any> {
   try {
     const res = await fetch(`${BASE_URL}/api/health`);
     return res.json();
@@ -194,12 +184,8 @@ export async function checkHealth() {
 
 /**
  * Export data as CSV or PDF
- * @param {string} type - Export type ('quotation', 'report', etc.)
- * @param {Object} data - Data to export
- * @param {string} format - 'csv' or 'pdf'
- * @returns {Promise<Blob>}
  */
-export async function exportData(type, data, format = 'pdf') {
+export async function exportData(type: string, data: any, format = 'pdf'): Promise<Blob> {
   const res = await fetch(`${BASE_URL}/api/export/${type}?format=${format}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

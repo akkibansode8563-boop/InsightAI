@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useApp } from '../context/AppContext.jsx';
 import { useToast } from '../components/ui/Toast.jsx';
-import { streamChat } from '../services/api.js';
+import { streamChat } from '../services/api';
 
 const PLAYBOOKS = [
   {

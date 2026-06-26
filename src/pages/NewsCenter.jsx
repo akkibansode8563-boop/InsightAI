@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useApp } from '../context/AppContext.jsx';
-import { streamChat } from '../services/api.js';
+import { streamChat } from '../services/api';
 
 const COLOR = '#ef4444'; // Red accent for News Center
 

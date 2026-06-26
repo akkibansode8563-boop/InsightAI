@@ -5,6 +5,7 @@ import { PageHeader } from '../components/ui/PageHeader.jsx';
 import { Button } from '../components/ui/Button.jsx';
 import { Badge } from '../components/ui/Badge.jsx';
 import { Card, CardBody } from '../components/ui/Card.jsx';
+import { exportQuoteToExcel } from '../services/export';
 
 const COLOR = '#059669';
 
@@ -282,6 +283,13 @@ function QuotationTool() {
           size="sm"
         >
           📥 Download PDF
+        </Button>
+        <Button
+          variant="secondary"
+          onClick={() => exportQuoteToExcel(customerName || 'Valued Customer', items, { ...result, gstRate })}
+          size="sm"
+        >
+          📊 Export Excel
         </Button>
         <Button
           variant="secondary"

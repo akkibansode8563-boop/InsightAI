@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { useApp, AGENTS } from '../context/AppContext.jsx';
-import { streamChat } from '../services/api.js';
+import { streamChat } from '../services/api';
 import { createSession, saveSession, loadSessions, deleteSession } from '../services/sessionStorage.js';
+import RichProductPage from '../components/ui/RichProductPage.tsx';
 
 // Helper functions
 function buildId() { return Date.now().toString(36) + Math.random().toString(36).slice(2); }
@@ -114,9 +115,122 @@ function parseInlineMarkdown(str) {
   });
 }
 
+function parseMarkdownTable(tableText) {
+  const lines = tableText.trim().split('\n');
+  const rows = [];
+  lines.forEach(line => {
+    if (line.startsWith('|')) {
+      const cells = line.split('|').map(c => c.trim()).filter((_, i, arr) => i > 0 && i < arr.length - 1);
+      if (cells.length > 0 && !cells.every(c => c.match(/^:?-+:?$/))) {
+        rows.push(cells);
+      }
+    }
+  });
+  return rows.slice(1); // skip headers
+}
+
+function tryParseProductBrief(text) {
+  if (!text || !text.includes('### 2. Product Overview')) return null;
+
+  try {
+    const sections = {};
+    const parts = text.split(/###\s+\d+\.\s+/);
+    
+    parts.forEach(part => {
+      const lines = part.trim().split('\n');
+      const title = lines[0].trim();
+      const content = lines.slice(1).join('\n').trim();
+
+      if (title.toLowerCase().includes('showcase')) {
+        const match = content.match(/!\[(.*?)\]\((.*?)\)/);
+        if (match) {
+          sections.modelName = match[1].replace(' Showcase', '');
+          sections.imageUrl = match[2];
+        }
+      } else if (title.toLowerCase().includes('overview')) {
+        sections.overviewText = lines.slice(1).join(' ').trim();
+      } else if (title.toLowerCase().includes('specification')) {
+        sections.specs = parseMarkdownTable(content);
+      } else if (title.toLowerCase().includes('suited for')) {
+        sections.industries = parseMarkdownTable(content);
+      } else if (title.toLowerCase().includes('selling points')) {
+        sections.sellingPoints = content.split('\n').map(l => l.replace(/^[\s*-+]+/g, '').trim()).filter(Boolean);
+      } else if (title.toLowerCase().includes('sales pitch') || title.toLowerCase().includes('30-second')) {
+        sections.salesPitch = lines.slice(1).join(' ').trim();
+      } else if (title.toLowerCase().includes('benefits')) {
+        sections.benefits = parseMarkdownTable(content);
+      } else if (title.toLowerCase().includes('competitor')) {
+        sections.competitors = parseMarkdownTable(content);
+      }
+    });
+
+    if (!sections.overviewText) return null;
+
+    const specsMapped = (sections.specs || []).map(r => ({
+      category: r[0] || 'Specification',
+      spec: r[1] || '',
+      why: r[2] || 'Key feature'
+    }));
+
+    const industriesMapped = (sections.industries || []).map(r => ({
+      industry: r[0] || 'User',
+      useCase: r[1] || 'General Workload'
+    }));
+
+    const benefitsMapped = (sections.benefits || []).map(r => ({
+      customerType: r[0] || 'Customer',
+      benefit: r[1] || 'Work productivity'
+    }));
+
+    const competitorsMapped = (sections.competitors || []).map(r => ({
+      brand: (r[0] || '').split(' ')[0] || 'Competitor',
+      model: (r[0] || '').split(' ').slice(1).join(' ') || 'Model',
+      specDiff: r[1] || 'Comparable performance',
+      priceDiff: r[2] || 'Contact for quote'
+    }));
+
+    let mrp = 0;
+    let streetPrice = 0;
+    const priceSpec = specsMapped.find(s => s.category.toLowerCase().includes('price') || s.category.toLowerCase().includes('mrp'));
+    if (priceSpec) {
+      const match = priceSpec.spec.match(/(\d+)/);
+      if (match) mrp = parseInt(match[0]);
+    }
+    const mrpMatch = text.match(/mrp[\s\S]{0,10}₹?\s*(\d+(?:,\d+)*)/i);
+    if (mrpMatch) mrp = parseInt(mrpMatch[1].replace(/,/g, ''));
+    const streetMatch = text.match(/street price[\s\S]{0,10}₹?\s*(\d+(?:,\d+)*)/i);
+    if (streetMatch) streetPrice = parseInt(streetMatch[1].replace(/,/g, ''));
+
+    if (!mrp && streetPrice) mrp = Math.round(streetPrice * 1.1);
+    if (!streetPrice && mrp) streetPrice = Math.round(mrp * 0.9);
+
+    return {
+      modelName: sections.modelName || 'IT Hardware Product',
+      imageUrl: sections.imageUrl,
+      overviewText: sections.overviewText,
+      specs: specsMapped,
+      sellingPoints: sections.sellingPoints || [],
+      salesPitch: sections.salesPitch || '',
+      industries: industriesMapped,
+      benefits: benefitsMapped,
+      competitors: competitorsMapped,
+      mrp,
+      streetPrice
+    };
+  } catch (e) {
+    console.warn('Failed parsing product brief:', e);
+    return null;
+  }
+}
+
 // Markdown Parser Helper
 function parseMarkdown(text) {
   if (!text) return null;
+
+  const parsedBrief = tryParseProductBrief(text);
+  if (parsedBrief) {
+    return <RichProductPage {...parsedBrief} />;
+  }
 
   const lines = text.split('\n');
   const elements = [];

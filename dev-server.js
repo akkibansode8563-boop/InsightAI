@@ -29,7 +29,7 @@ import healthHandler from './api/health.js';
 import newsHandler from './api/news.js';
 import marketHandler from './api/market.js';
 import dealerHandler from './api/dealer.js';
-import chatHandler from './api/chat.js';
+import chatHandler from './api/chat.ts';
 import learnHandler from './api/learn.js';
 import productImageHandler from './api/product-image.js';
 

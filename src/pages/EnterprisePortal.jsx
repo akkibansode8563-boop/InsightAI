@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useApp } from '../context/AppContext.jsx';
 import { calcTCO, formatINR } from '../services/calculator.js';
-import { streamChat } from '../services/api.js';
+import { streamChat } from '../services/api';
 
 const COLOR = '#0ea5e9';
 

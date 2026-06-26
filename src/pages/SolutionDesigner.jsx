@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useApp } from '../context/AppContext.jsx';
-import { streamChat } from '../services/api.js';
+import { streamChat } from '../services/api';
 
 const COLOR = '#f59e0b';
 
