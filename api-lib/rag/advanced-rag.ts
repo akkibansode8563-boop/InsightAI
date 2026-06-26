@@ -77,14 +77,31 @@ export async function semanticSearchProducts(query: string, filters: any = {}): 
       const pVec = typeof p.embedding === 'string' ? JSON.parse(p.embedding) : p.embedding;
       score = cosineSimilarity(queryVec, pVec);
     } else {
-      // Keyword fallback score
-      const q = query.toLowerCase();
-      const brand = (p.brand || '').toLowerCase();
-      const model = (p.model || '').toLowerCase();
-      const specs = JSON.stringify(p.specs || {}).toLowerCase();
-      if (model.includes(q)) score = 0.8;
-      else if (brand.includes(q)) score = 0.4;
-      else if (specs.includes(q)) score = 0.3;
+      // Keyword fallback score (token-based keyword matching)
+      const tokens = query.toLowerCase().split(/\s+/).filter(Boolean);
+      if (tokens.length > 0) {
+        const brand = (p.brand || '').toLowerCase();
+        const model = (p.model || '').toLowerCase();
+        const category = (p.category || '').toLowerCase();
+        const subcategory = (p.subcategory || '').toLowerCase();
+        const specs = JSON.stringify(p.specs || {}).toLowerCase();
+        const knowledge = JSON.stringify(p.knowledge || {}).toLowerCase();
+        
+        let matches = 0;
+        for (const token of tokens) {
+          if (
+            brand.includes(token) ||
+            model.includes(token) ||
+            category.includes(token) ||
+            subcategory.includes(token) ||
+            specs.includes(token) ||
+            knowledge.includes(token)
+          ) {
+            matches += 1;
+          }
+        }
+        score = matches / tokens.length;
+      }
     }
     return { ...p, score };
   });

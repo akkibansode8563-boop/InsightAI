@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeAll } from 'vitest';
+import { describe, it, expect, beforeAll, vi } from 'vitest';
 import fs from 'fs';
 import path from 'path';
 import {
@@ -16,6 +16,54 @@ import { cosineSimilarity, semanticSearchProducts } from '../api-lib/rag.js';
 describe('Database Query unit tests (JSON)', () => {
   // Load environment variables
   beforeAll(async () => {
+    // Mock global fetch for Gemini embedding API to run semantically in CI
+    const originalFetch = globalThis.fetch;
+    vi.stubGlobal('fetch', async (url, options) => {
+      if (typeof url === 'string' && url.includes('gemini-embedding-001')) {
+        try {
+          const productsPath = path.resolve('api-lib/data/products.json');
+          if (fs.existsSync(productsPath)) {
+            const products = JSON.parse(fs.readFileSync(productsPath, 'utf-8'));
+            const victus = products.find(p => p.id === 'hp-victus-15-rtx3050');
+            const embedding = victus?.embedding || [];
+            return {
+              ok: true,
+              status: 200,
+              json: async () => ({
+                embedding: {
+                  values: embedding
+                }
+              })
+            };
+          }
+        } catch (e) {
+          console.warn("Mock embedding fetch error:", e.message);
+        }
+        return {
+          ok: true,
+          status: 200,
+          json: async () => ({
+            embedding: {
+              values: new Array(768).fill(0.1)
+            }
+          })
+        };
+      }
+      if (originalFetch) {
+        return originalFetch(url, options);
+      }
+      return {
+        ok: false,
+        status: 500,
+        json: async () => ({})
+      };
+    });
+
+    // Set mock GEMINI_API_KEY if not already set, so embedding fetch gets triggered
+    if (!process.env.GEMINI_API_KEY) {
+      process.env.GEMINI_API_KEY = 'mock-gemini-key-for-testing';
+    }
+
     try {
       const envPath = path.resolve('.env');
       if (fs.existsSync(envPath)) {

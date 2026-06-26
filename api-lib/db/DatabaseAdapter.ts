@@ -58,21 +58,37 @@ export class JsonDatabaseAdapter implements IDatabaseAdapter {
     let list = this.clone(this.products);
 
     if (query) {
-      const q = query.toLowerCase();
-      list = list.filter(p => {
-        const brand = (p.brand || '').toLowerCase();
-        const model = (p.model || '').toLowerCase();
-        const category = (p.category || '').toLowerCase();
-        const subcategory = (p.subcategory || '').toLowerCase();
-        const specs = JSON.stringify(p.specs || {}).toLowerCase();
-        const knowledge = JSON.stringify(p.knowledge || {}).toLowerCase();
-        return brand.includes(q) ||
-               model.includes(q) ||
-               category.includes(q) ||
-               subcategory.includes(q) ||
-               specs.includes(q) ||
-               knowledge.includes(q);
-      });
+      const tokens = query.toLowerCase().split(/\s+/).filter(Boolean);
+      if (tokens.length > 0) {
+        const listWithScores = list.map(p => {
+          const brand = (p.brand || '').toLowerCase();
+          const model = (p.model || '').toLowerCase();
+          const category = (p.category || '').toLowerCase();
+          const subcategory = (p.subcategory || '').toLowerCase();
+          const specs = JSON.stringify(p.specs || {}).toLowerCase();
+          const knowledge = JSON.stringify(p.knowledge || {}).toLowerCase();
+          
+          let score = 0;
+          for (const token of tokens) {
+            if (
+              brand.includes(token) ||
+              model.includes(token) ||
+              category.includes(token) ||
+              subcategory.includes(token) ||
+              specs.includes(token) ||
+              knowledge.includes(token)
+            ) {
+              score += 1;
+            }
+          }
+          return { product: p, score };
+        });
+
+        list = listWithScores
+          .filter(item => item.score > 0)
+          .sort((a, b) => b.score - a.score)
+          .map(item => item.product);
+      }
     }
 
     if (filters.brand) {
@@ -226,12 +242,6 @@ export class SqliteDatabaseAdapter implements IDatabaseAdapter {
     let sql = 'SELECT * FROM products WHERE 1=1';
     const params: any[] = [];
 
-    if (query) {
-      sql += ' AND (brand LIKE ? OR model LIKE ? OR category LIKE ? OR subcategory LIKE ? OR specs LIKE ? OR knowledge LIKE ?)';
-      const searchWildcard = `%${query}%`;
-      params.push(searchWildcard, searchWildcard, searchWildcard, searchWildcard, searchWildcard, searchWildcard);
-    }
-
     if (filters.brand) {
       sql += ' AND LOWER(brand) = LOWER(?)';
       params.push(filters.brand);
@@ -247,9 +257,8 @@ export class SqliteDatabaseAdapter implements IDatabaseAdapter {
       params.push(filters.maxPrice);
     }
 
-    sql += ' LIMIT 10';
     const rows = await db.all(sql, ...params);
-    return rows.map((r: any) => ({
+    let products = rows.map((r: any) => ({
       ...r,
       specs: JSON.parse(r.specs || '{}'),
       pricing: JSON.parse(r.pricing || '{}'),
@@ -259,6 +268,42 @@ export class SqliteDatabaseAdapter implements IDatabaseAdapter {
       metadata: JSON.parse(r.metadata || '{}'),
       embedding: r.embedding ? JSON.parse(r.embedding) : undefined
     }));
+
+    if (query) {
+      const tokens = query.toLowerCase().split(/\s+/).filter(Boolean);
+      if (tokens.length > 0) {
+        const listWithScores = products.map(p => {
+          const brand = (p.brand || '').toLowerCase();
+          const model = (p.model || '').toLowerCase();
+          const category = (p.category || '').toLowerCase();
+          const subcategory = (p.subcategory || '').toLowerCase();
+          const specs = JSON.stringify(p.specs || {}).toLowerCase();
+          const knowledge = JSON.stringify(p.knowledge || {}).toLowerCase();
+          
+          let score = 0;
+          for (const token of tokens) {
+            if (
+              brand.includes(token) ||
+              model.includes(token) ||
+              category.includes(token) ||
+              subcategory.includes(token) ||
+              specs.includes(token) ||
+              knowledge.includes(token)
+            ) {
+              score += 1;
+            }
+          }
+          return { product: p, score };
+        });
+
+        products = listWithScores
+          .filter(item => item.score > 0)
+          .sort((a, b) => b.score - a.score)
+          .map(item => item.product);
+      }
+    }
+
+    return products.slice(0, 10);
   }
 
   async getProductById(id: string): Promise<Product | null> {
