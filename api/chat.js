@@ -169,14 +169,14 @@ CRITICAL RULES:
 const AGENT_PROMPTS = {
   product_intelligence: `${SYSTEM_CONTEXT}
 ROLE: Product Intelligence Agent — Senior Product Manager & OEM Pre-Sales Consultant
-You are an IT Hardware Expert. When asked about any IT hardware product (laptop, printer, server, etc.), you MUST generate a customer-friendly, sales-ready product brief following this exact format:
+You are an IT Hardware Expert. When asked about any IT hardware product (laptop, printer, server, etc.), you MUST generate a customer-friendly, sales-ready product brief.
+
+CRITICAL IMAGE INSTRUCTION:
+- If an official product image URL is provided in the instructions, you MUST include it at the very beginning in the "### 1. Product Showcase" section using the exact URL provided. Format: ![Product Name Showcase](URL)
+- If NO official product image URL is provided in the instructions (or if you are told no image is available), you MUST completely OMIT the "### 1. Product Showcase" section and do NOT output any image markdown tag. Start your response directly with the "### 2. Product Overview" section.
 
 ### 1. Product Showcase
-INCLUDE THE PRODUCT IMAGE at the very beginning using the EXACT image URL provided in your instructions for this request.
-- Format: ![Product Name Showcase](<IMAGE_URL_PLACEHOLDER>)
-- CRITICAL: Use ONLY the image URL you are given. Do NOT use placeholder or generic URLs.
-- If you see a URL starting with https:// use it exactly as-is in the markdown image tag.
-- If you see a local path like /showcase-laptop.png use it as-is.
+![Product Name Showcase](<IMAGE_URL_PLACEHOLDER>)
 
 ### 2. Product Overview (Maximum 50 Words)
 Write a short overview covering product category, target audience, primary purpose, and key selling point. Keep it concise, sales-focused, and premium.
@@ -573,10 +573,6 @@ export default async function handler(req, res) {
       if (imgMatch) {
         productImageUrl = imgMatch.url;
         productImageInfo = imgMatch;
-      } else {
-        // Detect category from user message and use category fallback
-        const cat = detectCategory ? detectCategory(userText) : null;
-        productImageUrl = cat ? getCategoryImage(cat) : null;
       }
     }
 
@@ -588,8 +584,9 @@ export default async function handler(req, res) {
         basePrompt += `\n\nPRODUCT IMAGE: The REAL official product image URL for "${productImageInfo.name}" is: ${productImageUrl}\nUse this EXACT URL in the markdown image: ![${productImageInfo.name}](${productImageUrl})\nDo NOT change, truncate, or replace this URL with anything else.`;
       }
     } else {
-      // No specific product found — use category fallback URL
-      basePrompt = basePrompt.replace('<IMAGE_URL_PLACEHOLDER>', '/showcase-laptop.png');
+      // No specific product image found — instruct the LLM to completely omit the Product Showcase
+      basePrompt = basePrompt.replace('<IMAGE_URL_PLACEHOLDER>', '');
+      basePrompt += `\n\nCRITICAL IMAGE INSTRUCTION: No official product image is available for this product. You MUST completely OMIT the '### 1. Product Showcase' section and do NOT output any image markdown tag. Start your response directly with the '### 2. Product Overview' section.`;
     }
 
     // Customize greeting behavior for specific agents so they don't print a template

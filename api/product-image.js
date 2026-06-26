@@ -27,6 +27,12 @@ export default async function handler(req, res) {
   const { model, redirect: redirectMode } = validationResult.data;
 
   const sendImage = async (url) => {
+    if (url.startsWith('/')) {
+      res.status(302);
+      res.setHeader('Location', url);
+      res.end();
+      return;
+    }
     try {
       const imgRes = await fetch(url);
       if (imgRes.ok) {

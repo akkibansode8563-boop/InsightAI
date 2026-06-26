@@ -222,6 +222,15 @@ export const PRODUCT_IMAGES = [
     category: 'laptop',
   },
 
+  // ── DELL DESKTOPS ──────────────────────────────────────────────────────
+  {
+    keywords: ['dell vostro 3030 tower', 'vostro 3030 tower', 'dell vostro 3030 mt', 'dell vostro 3030'],
+    url: '/dell_vostro_showcase.png',
+    name: 'Dell Vostro 3030 Tower',
+    brand: 'Dell',
+    category: 'desktop',
+  },
+
   // ── DELL SERVERS ──────────────────────────────────────────────────────
   {
     keywords: ['dell poweredge r750', 'poweredge r750', 'r750 server'],
