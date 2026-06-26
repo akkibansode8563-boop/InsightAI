@@ -10,8 +10,8 @@ import {
   getLearningModule,
   getMarketData,
   getSolutionTemplate
-} from '../api/db.js';
-import { cosineSimilarity, semanticSearchProducts } from '../api/rag.js';
+} from '../api-lib/db.js';
+import { cosineSimilarity, semanticSearchProducts } from '../api-lib/rag.js';
 
 describe('Database Query unit tests (JSON)', () => {
   // Load environment variables

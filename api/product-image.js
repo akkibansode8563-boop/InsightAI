@@ -1,5 +1,5 @@
-import { findProductImage, getCategoryImage } from './productImages.js';
-import { productImageQuerySchema } from './schemas/validation.js';
+import { findProductImage, getCategoryImage } from '../api-lib/productImages.js';
+import { productImageQuerySchema } from '../api-lib/schemas/validation.js';
 
 /**
  * GET /api/product-image?model=HP+ProLiant+DL380+Gen11

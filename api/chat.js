@@ -1,6 +1,6 @@
-import { retrieveContext } from './rag.js';
-import { findProductImage, getCategoryImage, detectCategory } from './productImages.js';
-import { chatRequestSchema } from './schemas/validation.js';
+import { retrieveContext } from '../api-lib/rag.js';
+import { findProductImage, getCategoryImage, detectCategory } from '../api-lib/productImages.js';
+import { chatRequestSchema } from '../api-lib/schemas/validation.js';
 
 // ─── RATE LIMITING ────────────────────────────────────────────
 const rateLimitStore = new Map();

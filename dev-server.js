@@ -24,14 +24,14 @@ try {
 }
 
 // Import handlers dynamically
-import healthHandler from './health.js';
+import healthHandler from './api/health.js';
 // db is not a serverless endpoint itself, but we have news, market, dealer, chat
-import newsHandler from './news.js';
-import marketHandler from './market.js';
-import dealerHandler from './dealer.js';
-import chatHandler from './chat.js';
-import learnHandler from './learn.js';
-import productImageHandler from './product-image.js';
+import newsHandler from './api/news.js';
+import marketHandler from './api/market.js';
+import dealerHandler from './api/dealer.js';
+import chatHandler from './api/chat.js';
+import learnHandler from './api/learn.js';
+import productImageHandler from './api/product-image.js';
 
 const PORT = 3001;
 

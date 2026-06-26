@@ -1,5 +1,5 @@
-import { getMarketData } from './db.js';
-import { marketQuerySchema } from './schemas/validation.js';
+import { getMarketData } from '../api-lib/db.js';
+import { marketQuerySchema } from '../api-lib/schemas/validation.js';
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');

@@ -1,4 +1,4 @@
-import { getNewsArticles } from './db.js';
+import { getNewsArticles } from '../api-lib/db.js';
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
