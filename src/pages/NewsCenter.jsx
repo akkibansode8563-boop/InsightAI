@@ -81,15 +81,9 @@ export default function NewsCenter() {
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden' }}>
       {/* Header */}
       <div
+        className="p-6 md:px-8 md:py-6 border-b border-[var(--glass-border-strong)] flex justify-between items-center flex-wrap gap-4"
         style={{
-          padding: '24px 32px',
-          background: `linear-gradient(135deg, ${COLOR}12 0%, transparent 60%)`,
-          borderBottom: '1px solid var(--glass-border-strong)',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: 16
+          background: `linear-gradient(135deg, ${COLOR}12 0%, transparent 60%)`
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
@@ -141,16 +135,7 @@ export default function NewsCenter() {
 
       {/* Tabs */}
       <div
-        style={{
-          display: 'flex',
-          gap: 8,
-          padding: '12px 32px',
-          overflowX: 'auto',
-          borderBottom: '1px solid var(--glass-border-strong)',
-          flexShrink: 0,
-          background: 'rgba(0, 0, 0, 0.02)'
-        }}
-        className="hide-scrollbar"
+        className="flex gap-2 px-6 py-3 md:px-8 overflow-x-auto scrollbar-none border-b border-[var(--glass-border-strong)] flex-shrink-0 bg-black/5 dark:bg-white/5"
       >
         {CATEGORY_TABS.map(tab => (
           <button
@@ -175,7 +160,7 @@ export default function NewsCenter() {
       </div>
 
       {/* Content */}
-      <div style={{ flex: 1, overflowY: 'auto', padding: '24px 32px' }} className="custom-scrollbar">
+      <div className="custom-scrollbar flex-1 overflow-y-auto p-6 md:p-8">
         {loading ? (
           <div style={{ display: 'flex', justifyContent: 'center', padding: 48, color: 'var(--text-secondary)' }}>
             {t('news.loading')}
@@ -185,7 +170,7 @@ export default function NewsCenter() {
             {t('news.noNews')}
           </div>
         ) : (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(360px, 1fr))', gap: 20 }}>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {filteredNews.map(item => (
               <div
                 key={item.id}

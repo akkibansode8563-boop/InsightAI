@@ -86,7 +86,7 @@ export default function SolutionDesigner() {
       <div className="aurora-mesh" />
       
       {/* Header */}
-      <div style={{ padding: '32px 40px', background: `linear-gradient(135deg, ${COLOR}12 0%, transparent 60%)`, borderBottom: '1px solid var(--glass-border-strong)', flexShrink: 0 }}>
+      <div className="p-6 md:px-10 md:py-8 border-b border-[var(--glass-border-strong)] flex-shrink-0" style={{ background: `linear-gradient(135deg, ${COLOR}12 0%, transparent 60%)` }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 18 }}>
           <div style={{ width: 52, height: 52, borderRadius: 'var(--radius-md)', background: `${COLOR}18`, border: `2px solid ${COLOR}35`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 26, boxShadow: 'var(--shadow-sm)' }}>⚡</div>
           <div>
@@ -96,8 +96,8 @@ export default function SolutionDesigner() {
         </div>
       </div>
 
-      <div className="custom-scrollbar" style={{ flex: 1, overflowY: 'auto', padding: '32px', zIndex: 10 }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(300px, 380px) 1fr', gap: 24, alignItems: 'start', maxWidth: 1200, margin: '0 auto' }}>
+      <div className="custom-scrollbar flex-1 overflow-y-auto p-6 md:p-8 z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(300px,380px)_1fr] gap-6 items-start max-w-[1200px] mx-auto">
 
           {/* Configuration Panel */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
@@ -107,7 +107,7 @@ export default function SolutionDesigner() {
               <h3 className="font-heading" style={{ fontWeight: 800, fontSize: '0.85em', marginBottom: 16, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 {t('solutions.selectUseCase')}
               </h3>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 gap-3">
                 {USE_CASES.map(uc => {
                   const isSelected = selectedUseCase?.id === uc.id;
                   return (

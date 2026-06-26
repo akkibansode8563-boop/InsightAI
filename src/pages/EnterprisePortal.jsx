@@ -26,7 +26,7 @@ function TCOCalculator() {
   );
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, alignItems: 'start' }}>
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
       
       {/* TCO Inputs */}
       <div className="glass-strong" style={{ padding: 28, borderRadius: 'var(--radius-lg)' }}>
@@ -126,7 +126,7 @@ function InfraPlanner() {
 
   return (
     <div style={{ maxWidth: 1000, margin: '0 auto' }}>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16, marginBottom: 24 }}>
+      <div className="flex overflow-x-auto lg:grid lg:grid-cols-4 gap-4 mb-6 pb-3 lg:pb-0 snap-x snap-mandatory scrollbar-none">
         {INFRA_TEMPLATES.map(item => {
           const resolvedLabel = t('enterprise.' + (item.id === 'smb' ? 'smbOffice' : item.id === 'enterprise' ? 'entOffice' : item.id === 'hospital' ? 'hospital' : 'school'));
           const resolvedDesc = t('enterprise.' + (item.id === 'smb' ? 'smbOfficeDesc' : item.id === 'enterprise' ? 'entOfficeDesc' : item.id === 'hospital' ? 'hospitalDesc' : 'schoolDesc'));
@@ -134,7 +134,7 @@ function InfraPlanner() {
           return (
             <div
               key={item.id}
-              className="card-premium hover-scale"
+              className="card-premium hover-scale flex-shrink-0 w-[80vw] lg:w-auto snap-center"
               style={{
                 padding: 22,
                 cursor: 'pointer',
@@ -205,7 +205,7 @@ export default function EnterprisePortal() {
       <div className="aurora-mesh" />
       
       {/* Header */}
-      <div style={{ padding: '32px 40px', background: `linear-gradient(135deg, ${COLOR}12 0%, transparent 60%)`, borderBottom: '1px solid var(--glass-border-strong)' }}>
+      <div className="p-6 md:px-10 md:py-8 border-b border-[var(--glass-border-strong)]" style={{ background: `linear-gradient(135deg, ${COLOR}12 0%, transparent 60%)` }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 18 }}>
           <div style={{ width: 52, height: 52, borderRadius: 'var(--radius-md)', background: `${COLOR}18`, border: `2px solid ${COLOR}35`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 26, boxShadow: 'var(--shadow-sm)' }}>🏢</div>
           <div>
@@ -216,7 +216,7 @@ export default function EnterprisePortal() {
       </div>
 
       {/* Tabs */}
-      <div style={{ display: 'flex', gap: 4, padding: '12px 32px', borderBottom: '1px solid var(--glass-border-strong)', background: 'var(--bg-surface)', overflowX: 'auto', scrollbarWidth: 'none', zIndex: 10 }} className="custom-scrollbar">
+      <div className="flex gap-2 px-6 py-3 md:px-10 border-b border-[var(--glass-border-strong)] bg-[var(--bg-surface)] overflow-x-auto scrollbar-none z-10">
         {TABS.map(tab => (
           <button key={tab.id} onClick={() => { setActiveTab(tab.id); }} className={`nav-tab ${activeTab === tab.id ? 'active' : ''}`} style={activeTab === tab.id ? { color: COLOR, background: `${COLOR}14`, boxShadow: 'var(--shadow-sm)' } : {}}>
             <span style={{ fontSize: '1.1em' }}>{tab.icon}</span><span>{tab.label}</span>
@@ -225,7 +225,7 @@ export default function EnterprisePortal() {
       </div>
 
       {/* Main Content Area */}
-      <div className="custom-scrollbar" style={{ flex: 1, overflowY: 'auto', padding: '32px', zIndex: 10 }}>
+      <div className="custom-scrollbar flex-1 overflow-y-auto p-6 md:p-10 z-10">
         {activeTab === 'infra' && <InfraPlanner />}
         {activeTab === 'tco' && <TCOCalculator />}
       </div>

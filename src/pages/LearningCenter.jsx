@@ -100,16 +100,9 @@ export default function LearningCenter() {
 
       {/* Header */}
       <div
+        className="p-6 md:px-10 md:py-8 border-b border-[var(--glass-border-strong)] flex flex-col md:flex-row md:items-center justify-between gap-4 z-10"
         style={{
-          padding: '32px 40px',
-          background: `linear-gradient(135deg, ${COLOR}12 0%, transparent 60%)`,
-          borderBottom: '1px solid var(--glass-border-strong)',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: 16,
-          zIndex: 10,
+          background: `linear-gradient(135deg, ${COLOR}12 0%, transparent 60%)`
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 18 }}>
@@ -169,19 +162,11 @@ export default function LearningCenter() {
       </div>
 
       {/* Main Grid View */}
-      <div style={{ flex: 1, display: 'flex', overflow: 'hidden', zIndex: 10 }}>
+      <div className="flex-1 flex flex-col md:flex-row overflow-hidden z-10">
         
         {/* Module Sidebar */}
         <div
-          style={{
-            width: 320,
-            borderRight: '1px solid var(--glass-border-strong)',
-            background: 'transparent',
-            overflowY: 'auto',
-            padding: '24px 20px',
-            flexShrink: 0,
-          }}
-          className="custom-scrollbar"
+          className={`w-full md:w-[320px] md:border-r border-[var(--glass-border-strong)] bg-transparent overflow-y-auto p-6 flex-shrink-0 ${selectedModule ? 'hidden md:block' : 'block'}`}
         >
           <h3 className="font-heading" style={{ fontSize: '0.82em', fontWeight: 800, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 16 }}>
             {t('learn.knowledgeModules')}
@@ -226,9 +211,16 @@ export default function LearningCenter() {
         </div>
 
         {/* Center Panel (Reader / Quiz) */}
-        <div style={{ flex: 1, overflowY: 'auto', padding: '36px 48px', background: 'var(--bg-surface)' }} className="custom-scrollbar">
+        <div className={`flex-1 overflow-y-auto p-6 md:p-10 md:py-8 bg-[var(--bg-surface)] ${selectedModule ? 'block' : 'hidden md:block'}`}>
           {selectedModule ? (
             <div style={{ maxWidth: 760, margin: '0 auto' }}>
+              {/* Back to modules button for mobile */}
+              <button
+                onClick={() => setSelectedModule(null)}
+                className="flex md:hidden items-center gap-2 text-sm font-semibold mb-6 text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
+              >
+                ← {t('learn.knowledgeModules') || 'Back to Modules'}
+              </button>
               
               {/* Module Sub-Header */}
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 28, borderBottom: '1px solid var(--glass-border-strong)', paddingBottom: 20 }}>
