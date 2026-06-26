@@ -123,7 +123,7 @@ export async function semanticSearchProducts(query: string, filters: any = {}): 
 
   // Sort by score descending
   filtered.sort((a, b) => b.score - a.score);
-  return filtered.slice(0, 10);
+  return filtered.slice(0, 3);
 }
 
 /**
@@ -200,7 +200,7 @@ export async function retrieveRAGContext(agentId: string, message: string): Prom
       }
 
       case 'news_agent': {
-        const articles = await dbAdapter.getNewsArticles(filters.category || null, 5, 1, 'en');
+        const articles = await dbAdapter.getNewsArticles(filters.category || null, 2, 1, 'en');
         context += formatContextBlock(articles.map(a => ({
           title: a.title,
           date: a.date,

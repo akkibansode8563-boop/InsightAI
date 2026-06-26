@@ -118,8 +118,8 @@ export async function semanticSearchProducts(query, filters = {}) {
     // Sort by similarity score descending
     filtered.sort((a, b) => b.similarityScore - a.similarityScore);
     
-    // Return top 10 results
-    return filtered.slice(0, 10);
+    // Return top 3 results
+    return filtered.slice(0, 3);
   } catch (err) {
     console.warn("Semantic similarity search failed, falling back to keyword search:", err.message);
     return searchProducts(query, filters);
@@ -177,7 +177,7 @@ export async function retrieveContext(agentId, message, conversationHistory = []
 
       case 'news_agent': {
         const category = entities.categories[0] || null;
-        const articles = await getNewsArticles(category, 5);
+        const articles = await getNewsArticles(category, 2);
         context += buildContextBlock(articles.map(a => ({
           title: a.title, date: a.date, summary: a.ai_summary,
           highlights: a.key_highlights, business_impact: a.business_impact,
