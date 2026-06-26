@@ -42,6 +42,39 @@ export function AppProvider({ children }) {
   );
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  // XP and Level Gamification state
+  const [xp, setXp] = useState(() => {
+    try {
+      return parseInt(localStorage.getItem('insightai_xp') || '0', 10);
+    } catch {
+      return 0;
+    }
+  });
+
+  const [level, setLevel] = useState(() => {
+    try {
+      return parseInt(localStorage.getItem('insightai_level') || '1', 10);
+    } catch {
+      return 1;
+    }
+  });
+
+  const addXp = (amount) => {
+    const currentXp = parseInt(localStorage.getItem('insightai_xp') || '0', 10);
+    const newXp = currentXp + amount;
+    localStorage.setItem('insightai_xp', String(newXp));
+    setXp(newXp);
+
+    const oldLevel = Math.floor(currentXp / 500) + 1;
+    const newLevel = Math.floor(newXp / 500) + 1;
+    if (newLevel > oldLevel) {
+      localStorage.setItem('insightai_level', String(newLevel));
+      setLevel(newLevel);
+      return { newXp, newLevel, leveledUp: true };
+    }
+    return { newXp, newLevel: oldLevel, leveledUp: false };
+  };
+
   // Persist language preference
   useEffect(() => {
     localStorage.setItem('insightai_lang', language);
@@ -78,6 +111,9 @@ export function AppProvider({ children }) {
     sidebarOpen,
     setSidebarOpen,
     t: translate,
+    xp,
+    level,
+    addXp,
   };
 
   return (

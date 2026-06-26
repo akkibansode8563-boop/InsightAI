@@ -11,6 +11,8 @@ export default function NavBar() {
     theme,
     toggleTheme,
     t,
+    xp,
+    level,
   } = useApp();
 
   return (
@@ -43,6 +45,29 @@ export default function NavBar() {
             </span>
           </div>
         </button>
+
+        {/* ── Gamified Level/XP Indicator (Desktop & Tablet) ── */}
+        <div className="hidden sm:flex items-center gap-2 px-3 py-1 rounded-lg border border-[var(--glass-border-strong)] bg-[var(--bg-elevated)] text-[var(--text-secondary)] select-none">
+          <span className="text-xs font-black text-[var(--primary)]" style={{ background: 'var(--primary-soft)', padding: '2px 6px', borderRadius: 'var(--radius-sm)' }}>
+            Lvl {level}
+          </span>
+          <div className="flex flex-col gap-0.5">
+            <span className="text-[9px] font-bold uppercase tracking-wider text-[var(--text-muted)] leading-none">
+              XP PROGRESS
+            </span>
+            <div className="flex items-center gap-1.5">
+              <div className="w-16 h-1.5 rounded-full bg-[var(--glass-border-strong)] overflow-hidden">
+                <div 
+                  className="h-full bg-[var(--primary)] transition-all duration-300"
+                  style={{ width: `${(xp % 500) / 5}%` }}
+                />
+              </div>
+              <span className="text-[10px] font-bold text-[var(--text-primary)]">
+                {xp % 500}/500
+              </span>
+            </div>
+          </div>
+        </div>
 
         {/* ── Nav Tabs (Desktop only — hidden on mobile) ── */}
         <div className="hidden md:flex flex-1 justify-center overflow-x-auto scrollbar-hide">

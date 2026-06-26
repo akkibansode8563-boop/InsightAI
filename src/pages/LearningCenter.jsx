@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useApp } from '../context/AppContext.jsx';
+import { useToast } from '../components/ui/Toast.jsx';
 
 const COLOR = '#6366f1'; // Indigo accent for Learning Center
 
 export default function LearningCenter() {
-  const { language, t } = useApp();
+  const { language, t, addXp } = useApp();
+  const { showToast } = useToast();
   const [modules, setModules] = useState([]);
   const [selectedModule, setSelectedModule] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -91,6 +93,15 @@ export default function LearningCenter() {
       const updated = { ...certifications, [selectedModule.id]: { score: percent, date: new Date().toLocaleDateString('en-IN') } };
       setCertifications(updated);
       localStorage.setItem('insightai_certifications', JSON.stringify(updated));
+      
+      const xpResult = addXp(100);
+      if (xpResult?.leveledUp) {
+        showToast(`🎉 Level Up! You reached Level ${xpResult.newLevel}!`, 'success');
+      } else {
+        showToast('🎯 Earned 100 XP for passing the quiz!', 'success');
+      }
+    } else {
+      showToast('⚠️ Score under 80%. Try again to earn your certificate and XP!', 'warning');
     }
   };
 

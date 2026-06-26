@@ -1,8 +1,4 @@
-import { readFileSync } from 'fs';
-import { join, dirname } from 'path';
-import { fileURLToPath } from 'url';
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
+import { getAllLearning } from './db.js';
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -12,8 +8,7 @@ export default async function handler(req, res) {
 
   const { lang = 'en' } = req.query;
   try {
-    const filePath = join(__dirname, 'data', 'learning.json');
-    const modules = JSON.parse(readFileSync(filePath, 'utf-8'));
+    const modules = await getAllLearning();
 
     if (lang === 'mr' || lang === 'hi') {
       const localized = modules.map(m => ({

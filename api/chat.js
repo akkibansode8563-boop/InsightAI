@@ -1,5 +1,6 @@
 import { retrieveContext } from './rag.js';
 import { findProductImage, getCategoryImage, detectCategory } from './productImages.js';
+import { chatRequestSchema } from './schemas/validation.js';
 
 // ─── RATE LIMITING ────────────────────────────────────────────
 const rateLimitStore = new Map();
@@ -27,10 +28,90 @@ function detectLanguage(text = '') {
 }
 
 // ─── INTENT CLASSIFICATION ────────────────────────────────────
-function classifyIntent(message, requestedAgent) {
-  if (requestedAgent && requestedAgent !== 'auto') return requestedAgent;
-  const msg = message.toLowerCase();
+async function classifyIntentNLP(message) {
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) return null;
 
+  const model = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+
+  const systemInstruction = `You are a router agent for InsightAI. Your job is to classify the user's message into one of the following agent IDs based on their intent:
+- product_intelligence: if they ask for specifications, features, details, configurations, or description of a specific hardware model.
+- recommendation: if they ask for advice on what to buy, compare models, choose under a budget, or need buying recommendations.
+- compatibility_agent: if they ask if hardware is compatible, will it work, socket support, pairing, or fits with another device.
+- sales_coach: if they ask for pitching tips, how to sell, handling objections, or closing sales.
+- market_intelligence: if they ask about market trends, demand index, brand market share, or general hardware market.
+- news_agent: if they ask about latest news, announcements, new releases, updates, or recent events.
+- forecast_agent: if they ask for future pricing forecasts, demand trends next quarter, or future predictions.
+- solution_designer: if they ask for complete setups, solution designs, school/office setups, or bill of materials templates.
+- quotation_agent: if they ask for a formal quotation, bill creation, invoice, or pricing list details.
+- inventory_agent: if they ask about stock availability, check availability, or if something is in stock.
+- enterprise_agent: if they ask about enterprise procurement, infrastructure planning, TCO calculation, or lifecycle management.
+- troubleshoot_agent: if they diagnose errors, BSOD, issues, drivers, repair, or troubleshooting hardware problems.
+- learning_agent: if they ask to explain a technical concept, tutorial, learn about hardware, or educational explanations.
+- dealer_agent: if they ask about margins, distributor details, schemes, or dealer offers.
+
+Return ONLY the agent ID as a plain lowercase string. Do not include any punctuation, markdown formatting, explanation, or extra characters. Example: product_intelligence`;
+
+  const payload = {
+    system_instruction: { parts: [{ text: systemInstruction }] },
+    contents: [{
+      role: 'user',
+      parts: [{ text: message }]
+    }],
+    generationConfig: {
+      maxOutputTokens: 20,
+      temperature: 0.1
+    }
+  };
+
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 2000); // 2 seconds timeout for fast routing
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+      signal: controller.signal
+    });
+
+    clearTimeout(timeoutId);
+
+    if (!response.ok) return null;
+    const data = await response.json();
+    const text = data.candidates?.[0]?.content?.parts?.[0]?.text?.trim()?.toLowerCase();
+    
+    // Normalize and validate response
+    const validAgents = [
+      'product_intelligence', 'recommendation', 'compatibility_agent', 'sales_coach',
+      'market_intelligence', 'news_agent', 'forecast_agent', 'solution_designer',
+      'quotation_agent', 'inventory_agent', 'enterprise_agent', 'troubleshoot_agent',
+      'learning_agent', 'dealer_agent'
+    ];
+    
+    if (validAgents.includes(text)) {
+      return text;
+    }
+    return null;
+  } catch (err) {
+    console.warn(`NLP classification failed or timed out: ${err.message}`);
+    return null;
+  }
+}
+
+async function classifyIntent(message, requestedAgent) {
+  if (requestedAgent && requestedAgent !== 'auto') return requestedAgent;
+
+  // Try NLP classification first
+  const nlpAgent = await classifyIntentNLP(message);
+  if (nlpAgent) {
+    console.log(`NLP classified intent as: ${nlpAgent}`);
+    return nlpAgent;
+  }
+
+  // Fallback to keyword rules
+  const msg = message.toLowerCase();
   const rules = [
     { agent: 'quotation_agent',     keywords: ['quote', 'quotation', 'price list', 'invoice', 'bill karo', 'भाव', 'किती रुपये', 'कितने का', 'दर'] },
     { agent: 'solution_designer',   keywords: ['setup for', 'build a', 'design a', 'gaming setup', 'office setup', 'school lab', 'cctv setup', 'server setup', 'workstation', 'complete solution', 'सेटअप'] },
@@ -253,7 +334,25 @@ You assist dealers and channel partners.
 4. Calculate margins, ROI, and carrying costs
 5. Identify fast-moving products and slow-moving inventory risks
 6. Suggest bundle opportunities for better margins
-7. All pricing is public MRP. Dealer-specific pricing must be discussed directly with our sales team.`
+7. All pricing is public MRP. Dealer-specific pricing must be discussed directly with our sales team.`,
+
+  sales_practice: `${SYSTEM_CONTEXT}
+ROLE: Simulated IT Hardware Buyer — Role-play Practice Partner
+You are acting as an enterprise buyer, SMB owner, or school procurement officer.
+Your task is to negotiate and object to the sales pitch or quote provided by the sales executive (the user).
+Rules:
+1. Adopt a specific persona (e.g., skeptical CTO, price-sensitive SMB owner, or cautious school director) as requested by the user.
+2. Raise realistic objections: price too high, brand preference (e.g. Dell vs HP), timeline concerns, installation support, or compliance.
+3. Be conversational, challenging, and professional.
+4. If the user handles objections well (demonstrating value, highlighting warranties, addressing security, or being professional), steer towards a sale.
+5. If they fail to explain the value, persist with objections.
+6. After 3-4 turns, if the user explicitly asks for feedback, or asks to wrap up, or if you feel the negotiation is complete, output a final wrap-up block in this exact format:
+---
+ROLE-PLAY COMPLETED
+Result: [SUCCESS / FAIL]
+Score: [Score out of 100]
+Feedback: [2-3 sentences of constructive critique on their pitch, objection handling, and relationship building.]
+---`
 };
 
 // ─── CONTEXT TRIMMING ─────────────────────────────────────────
@@ -385,17 +484,23 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { messages = [], agent: requestedAgent = 'auto', stream = true } = req.body;
-    if (!messages.length) return res.status(400).json({ error: 'No messages provided' });
+    const validationResult = chatRequestSchema.safeParse(req.body);
+    if (!validationResult.success) {
+      return res.status(400).json({
+        error: 'Validation failed',
+        details: validationResult.error.flatten().fieldErrors
+      });
+    }
+    const { messages, agent: requestedAgent, stream, language: reqLanguage } = validationResult.data;
 
     const lastUserMsg = [...messages].reverse().find(m => m.role === 'user');
     const userText = lastUserMsg?.content || '';
 
     // Language detection
-    const language = req.body.language || detectLanguage(userText);
+    const language = reqLanguage || detectLanguage(userText);
 
     // Intent classification → agent selection
-    const agentId = classifyIntent(userText, requestedAgent);
+    const agentId = await classifyIntent(userText, requestedAgent);
 
     // Get RAG context
     let ragContext = '';
@@ -458,7 +563,8 @@ export default async function handler(req, res) {
       enterprise_agent:     'Enterprise',
       troubleshoot_agent:   'Troubleshoot',
       learning_agent:       'Learning',
-      dealer_agent:         'Dealer'
+      dealer_agent:         'Dealer',
+      sales_practice:       'Sales Practice'
     };
 
     const metadata = {

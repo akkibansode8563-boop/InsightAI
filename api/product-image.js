@@ -1,4 +1,5 @@
 import { findProductImage, getCategoryImage } from './productImages.js';
+import { productImageQuerySchema } from './schemas/validation.js';
 
 /**
  * GET /api/product-image?model=HP+ProLiant+DL380+Gen11
@@ -16,10 +17,14 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'GET') return res.status(405).json({ error: 'Method not allowed' });
 
-  const model = (req.query.model || '').trim();
-  if (!model) return res.status(400).json({ error: 'model query param required' });
-
-  const redirectMode = req.query.redirect === '1' || req.query.redirect === 'true';
+  const validationResult = productImageQuerySchema.safeParse(req.query);
+  if (!validationResult.success) {
+    return res.status(400).json({
+      error: 'Validation failed',
+      details: validationResult.error.flatten().fieldErrors
+    });
+  }
+  const { model, redirect: redirectMode } = validationResult.data;
 
   const sendImage = async (url) => {
     try {

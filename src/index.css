@@ -209,6 +209,7 @@ body::before {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, transparent 100%);
   opacity: 0;
   transition: var(--transition-smooth);
+  pointer-events: none;
 }
 .card-premium:hover {
   transform: translateY(-4px);
@@ -554,3 +555,10 @@ body::before {
   animation: fadeUp 0.3s ease;
   font-size: 0.85em;
 }
+
+@media (max-width: 767px) {
+  .chat-sidebar {
+    display: none !important;
+  }
+}
+

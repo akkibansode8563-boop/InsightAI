@@ -340,7 +340,7 @@ function AgentPanel({ activeAgent, onSelect }) {
   const { t } = useApp();
   return (
     <div
-      className="glass"
+      className="glass chat-sidebar"
       style={{
         width: 'var(--sidebar-width)',
         borderRight: '1px solid var(--glass-border-strong)',
