@@ -188,6 +188,154 @@ async function callGroq(systemPrompt: string, messages: any[]): Promise<string> 
   return data.choices?.[0]?.message?.content || '';
 }
 
+// --- LOCAL/OFFLINE DATABASE FALLBACK GENERATOR ---
+function parseRagContext(ragContext: string): any[] {
+  const items: any[] = [];
+  const lines = ragContext.split('\n');
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (trimmed.startsWith('{') && trimmed.endsWith('}')) {
+      try {
+        items.push(JSON.parse(trimmed));
+      } catch {
+        // ignore
+      }
+    }
+  }
+  return items;
+}
+
+function generateLocalFallbackResponse(
+  query: string,
+  agentId: string,
+  ragContext: string,
+  language: 'en' | 'mr' | 'hi'
+): string {
+  const items = parseRagContext(ragContext);
+  const isGreetingMsg = isGreeting(query);
+
+  let response = '';
+
+  if (language === 'mr') {
+    response += `### 📴 स्थानिक ऑफलाइन मोड\n\nतात्पुरत्या नेटवर्क समस्येमुळे, मी स्थानिक डेटाबेसमधून थेट माहिती मिळवली आहे:\n\n`;
+  } else if (language === 'hi') {
+    response += `### 📴 स्थानीय ऑफलाइन मोड\n\nअस्थायी नेटवर्क समस्या के कारण, मैंने स्थानीय डेटाबेस से सीधे जानकारी प्राप्त की है:\n\n`;
+  } else {
+    response += `### 📴 Local Offline Assistant Mode\n\nDue to temporary AI service rate limits, I have retrieved this information directly from our local IT Hardware Database:\n\n`;
+  }
+
+  if (isGreetingMsg) {
+    if (language === 'mr') {
+      response += `नमस्कार! मी तुमचा स्थानिक सहाय्यक आहे. मी तुम्हाला खालील गोष्टींमध्ये मदत करू शकतो:
+- आयटी हार्डवेअर तांत्रिक तपशील (Specifications)
+- उत्पादनांच्या किमती आणि उपलब्धता
+- विक्री धोरण आणि शिफारसी
+
+कृपया मला एखाद्या मॉडेलबद्दल विचारा (उदा. 'HP Victus 15').`;
+    } else if (language === 'hi') {
+      response += `नमस्ते! मैं आपका स्थानीय सहायक हूँ। मैं निम्नलिखित चीजों में आपकी मदद कर सकता हूँ:
+- आईटी हार्डवेयर तकनीकी विनिर्देश (Specifications)
+- उत्पादों की कीमतें और उपलब्धता
+- बिक्री रणनीतियाँ और सिफारिशें
+
+कृपया मुझसे किसी मॉडल के बारे में पूछें (जैसे 'HP Victus 15').`;
+    } else {
+      response += `Hello! I am your local hardware consultant. Since upstream LLMs are currently rate-limited, I can still help you with:
+- IT Hardware Specifications
+- Real-time Pricing & Catalogue availability
+- Sales Coaching Playbooks
+- Reference Solution Templates
+
+Ask me about any hardware model or brand (e.g. 'HP Victus 15') to see specs and pricing.`;
+    }
+    return response;
+  }
+
+  const products = items.filter(item => item.model && item.brand);
+  const playbooks = items.filter(item => item.closing_techniques || item.discovery_questions || item.objection_responses);
+  const solutions = items.filter(item => item.use_case && item.components);
+  const news = items.filter(item => item.title && item.summary);
+
+  if (products.length > 0) {
+    if (language === 'mr') {
+      response += `#### 💻 उत्पादने आढळली (${products.length}):\n\n`;
+    } else if (language === 'hi') {
+      response += `#### 💻 उत्पाद मिले (${products.length}):\n\n`;
+    } else {
+      response += `#### 💻 Top Product Matches (${products.length}):\n\n`;
+    }
+
+    products.forEach((p, idx) => {
+      response += `**${idx + 1}. ${p.brand} ${p.model}** (Category: ${p.category})\n`;
+      if (p.specs) {
+        response += `- **Specs**: ${Object.entries(p.specs).map(([k, v]) => `${k.toUpperCase()}: ${v}`).join(', ')}\n`;
+      }
+      if (p.pricing) {
+        response += `- **Street Price**: ₹${p.pricing.street_price_approx?.toLocaleString('en-IN') || 'N/A'} (MRP: ₹${p.pricing.mrp?.toLocaleString('en-IN') || 'N/A'})\n`;
+      }
+      if (p.in_stock !== undefined) {
+        response += `- **Availability**: ${p.in_stock ? '🟢 Available in Stock' : '🔴 Out of Stock'}\n`;
+      }
+      if (p.selling_points && p.selling_points.length > 0) {
+        response += `- **Key Selling Point**: ${p.selling_points[0]}\n`;
+      }
+      response += `\n`;
+    });
+  }
+
+  if (playbooks.length > 0) {
+    response += `#### 📘 Sales Playbook & Objections:\n\n`;
+    playbooks.forEach((pb) => {
+      response += `* **Category**: ${pb.category}\n`;
+      if (pb.objection_responses) {
+        response += `* **Handling Objections**:\n`;
+        Object.entries(pb.objection_responses).forEach(([k, v]) => {
+          response += `  - *${k.replace(/_/g, ' ')}*: "${v}"\n`;
+        });
+      }
+      response += `\n`;
+    });
+  }
+
+  if (solutions.length > 0) {
+    response += `#### 📐 Reference Solution Architecture:\n\n`;
+    solutions.forEach((s) => {
+      response += `* **Use Case**: ${s.use_case}\n`;
+      if (s.components && s.components.length > 0) {
+        response += `* **Components**:\n`;
+        s.components.forEach((c: any) => {
+          response += `  - ${c.qty}x ${c.role}: ${c.recommended_spec || c.category}\n`;
+        });
+      }
+      response += `\n`;
+    });
+  }
+
+  if (news.length > 0) {
+    response += `#### 📰 Latest IT News Articles:\n\n`;
+    news.forEach((n) => {
+      response += `* **${n.title}** (${n.date || 'Recent'})\n`;
+      response += `  - *Summary*: ${n.summary}\n`;
+      if (n.business_impact) {
+        response += `  - *Business Impact*: ${n.business_impact}\n`;
+      }
+      response += `\n`;
+    });
+  }
+
+  if (products.length === 0 && playbooks.length === 0 && solutions.length === 0 && news.length === 0) {
+    if (language === 'mr') {
+      response += `तुमच्या '${query}' या प्रश्नाशी जुळणारे थेट रेकॉर्ड डेटाबेसमध्ये सापडले नाही. कृपया वेगळा आयटी हार्डवेअर ब्रँड, मॉडेल किंवा श्रेणी वापरून पहा.`;
+    } else if (language === 'hi') {
+      response += `आपके '${query}' सवाल से मेल खाने वाला सीधा रिकॉर्ड डेटाबेस में नहीं मिला। कृपया कोई अन्य आईटी हार्डवेयर ब्रांड, मॉडल या श्रेणी खोजें।`;
+    } else {
+      response += `No matching structured records for '${query}' were found in the database. Please try searching using a specific IT hardware brand (HP, Dell, Lenovo), model (Victus, Latitude), or category (laptop, printer).`;
+    }
+  }
+
+  return response;
+}
+
 // --- MAIN HANDLER ---
 export default async function handler(req: any, res: any) {
   const startTime = Date.now();
@@ -338,8 +486,11 @@ Introduce yourself as InsightAI and list your main capabilities. Keep it short (
           });
           recordMetric(activeAgentId, duration, false);
         } catch (groqErr: any) {
-          console.error('Groq fallback failed:', groqErr.message);
-          res.write(`data: ${JSON.stringify({ error: 'AI service unavailable.' })}\n\n`);
+          console.error('Groq fallback failed, executing local database fallback:', groqErr.message);
+          const localResponse = generateLocalFallbackResponse(userText, activeAgentId, ragContext, language);
+          res.write(`data: ${JSON.stringify({ text: localResponse })}\n\n`);
+          metadata.llm = 'Local Offline DB Fallback';
+          res.write(`data: ${JSON.stringify({ done: true, metadata })}\n\n`);
           res.end();
 
           const duration = Date.now() - startTime;
@@ -347,11 +498,11 @@ Introduce yourself as InsightAI and list your main capabilities. Keep it short (
             agentId: activeAgentId,
             language,
             durationMs: duration,
-            status: 'failed',
-            error: groqErr.message,
+            status: 'fallback',
+            tokensEstimated: Math.round(localResponse.length / 4),
             userRole: req.user?.role
           });
-          recordMetric(activeAgentId, duration, true);
+          recordMetric(activeAgentId, duration, false);
         }
       }
       return;
@@ -420,8 +571,14 @@ Introduce yourself as InsightAI and list your main capabilities. Keep it short (
       }
     } catch (err: any) {
       console.warn("Gemini non-stream call failed, trying Groq fallback:", err.message);
-      text = await callGroq(systemPrompt, trimmedMessages);
-      usedLLM = 'Groq Llama-3.3-70b (fallback)';
+      try {
+        text = await callGroq(systemPrompt, trimmedMessages);
+        usedLLM = 'Groq Llama-3.3-70b (fallback)';
+      } catch (groqErr: any) {
+        console.warn("Groq non-stream fallback also failed. Using local database fallback:", groqErr.message);
+        text = generateLocalFallbackResponse(userText, activeAgentId, ragContext, language);
+        usedLLM = 'Local Offline DB Fallback';
+      }
     }
 
     const duration = Date.now() - startTime;
