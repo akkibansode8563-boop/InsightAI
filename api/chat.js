@@ -27,6 +27,16 @@ function detectLanguage(text = '') {
   return mr >= hi ? 'mr' : 'hi';
 }
 
+function isGreeting(text = '') {
+  const clean = text.trim().toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g, "");
+  const greetings = [
+    'hi', 'hello', 'hey', 'yo', 'hola', 'greetings', 'good morning', 'good afternoon', 'good evening',
+    'namaste', 'namaskar', 'नमस्ते', 'नमस्कार', 'राम राम', 'जय महाराष्ट्र', 'सुप्रभात', 'शुभ दुपार', 'शुभ संध्याकाळ',
+    'hii', 'hiii', 'heyy', 'hello there', 'hi there'
+  ];
+  return greetings.includes(clean);
+}
+
 // ─── INTENT CLASSIFICATION ────────────────────────────────────
 async function classifyIntentNLP(message) {
   const apiKey = process.env.GEMINI_API_KEY;
@@ -352,7 +362,20 @@ ROLE-PLAY COMPLETED
 Result: [SUCCESS / FAIL]
 Score: [Score out of 100]
 Feedback: [2-3 sentences of constructive critique on their pitch, objection handling, and relationship building.]
----`
+---`,
+
+  general_greeting: `You are InsightAI — a premium, enterprise-grade IT Hardware Intelligence Platform.
+The user has greeted you. Respond with a warm, professional, and friendly welcome.
+Introduce yourself as InsightAI and list your main capabilities:
+- Product specifications and intelligence
+- Hardware recommendations and comparisons
+- Compatibility verification
+- Sales coaching, objections, and negotiation practice
+- Market intelligence and demand indexing
+- Latest IT hardware news and price forecasts
+- Complete solution design and quotes
+
+Keep your response concise (under 80 words), inviting, and professional. Do NOT include any markdown tables or product specifications.`
 };
 
 // ─── CONTEXT TRIMMING ─────────────────────────────────────────
@@ -500,14 +523,17 @@ export default async function handler(req, res) {
     const language = reqLanguage || detectLanguage(userText);
 
     // Intent classification → agent selection
-    const agentId = await classifyIntent(userText, requestedAgent);
+    const userIsGreeting = isGreeting(userText);
+    const agentId = userIsGreeting ? 'general_greeting' : await classifyIntent(userText, requestedAgent);
 
     // Get RAG context
     let ragContext = '';
-    try {
-      ragContext = await retrieveContext(agentId, userText, messages);
-    } catch (e) {
-      console.error('RAG failed (non-fatal):', e.message);
+    if (!userIsGreeting) {
+      try {
+        ragContext = await retrieveContext(agentId, userText, messages);
+      } catch (e) {
+        console.error('RAG failed (non-fatal):', e.message);
+      }
     }
 
     // ── Product image injection ──────────────────────────────────────
@@ -564,7 +590,8 @@ export default async function handler(req, res) {
       troubleshoot_agent:   'Troubleshoot',
       learning_agent:       'Learning',
       dealer_agent:         'Dealer',
-      sales_practice:       'Sales Practice'
+      sales_practice:       'Sales Practice',
+      general_greeting:     'InsightAI Assistant'
     };
 
     const metadata = {
