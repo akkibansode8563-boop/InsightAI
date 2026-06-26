@@ -31,6 +31,7 @@ import marketHandler from './market.js';
 import dealerHandler from './dealer.js';
 import chatHandler from './chat.js';
 import learnHandler from './learn.js';
+import productImageHandler from './product-image.js';
 
 const PORT = 3001;
 
@@ -122,6 +123,8 @@ const server = http.createServer(async (req, res) => {
       await chatHandler(vercelReq, vercelRes);
     } else if (pathname === '/api/learn') {
       await learnHandler(vercelReq, vercelRes);
+    } else if (pathname === '/api/product-image') {
+      await productImageHandler(vercelReq, vercelRes);
     } else {
       vercelRes.status(404).json({ error: 'Not Found' });
     }

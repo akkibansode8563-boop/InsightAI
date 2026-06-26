@@ -1,5 +1,19 @@
 import { useState, useEffect } from 'react';
 import { useApp } from '../context/AppContext.jsx';
+import {
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  AreaChart,
+  Area,
+  PieChart,
+  Pie,
+  Cell
+} from 'recharts';
 
 const COLOR = '#10b981'; // Green accent for Market Intelligence
 
@@ -53,6 +67,45 @@ export default function MarketIntelligence() {
   }, [selectedCategory, language]);
 
   const activeCategory = marketData?.categories?.[0];
+
+  // Map data for Recharts
+  const demandIndexData = activeCategory?.demand_index?.map((val, idx) => {
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
+    return {
+      month: t('market.month.' + months[idx]) || months[idx],
+      value: val
+    };
+  }) || [];
+
+  const history = activeCategory?.price_trend?.history || [];
+  const projected = activeCategory?.price_trend?.projected || [];
+  
+  const priceTrendData = [];
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'];
+  
+  history.forEach((val, idx) => {
+    priceTrendData.push({
+      month: t('market.month.' + months[idx]) || months[idx],
+      History: val,
+      Forecast: null
+    });
+  });
+  
+  if (priceTrendData.length > 0 && projected.length > 0) {
+    priceTrendData[priceTrendData.length - 1].Forecast = priceTrendData[priceTrendData.length - 1].History;
+  }
+  
+  projected.forEach((val, idx) => {
+    const monthIdx = history.length + idx;
+    priceTrendData.push({
+      month: months[monthIdx] ? (t('market.month.' + months[monthIdx]) || months[monthIdx]) : `F${idx+1}`,
+      History: null,
+      Forecast: val
+    });
+  });
+
+  const brandData = activeCategory?.brands || [];
+  const pieColors = [COLOR, '#34d399', '#60a5fa', '#f59e0b', '#a78bfa'];
 
   const CAT_TRANSLATION_KEYS = {
     'laptops': 'sales.playbook.laptop',
@@ -148,29 +201,26 @@ export default function MarketIntelligence() {
                 📈 {t('market.demandIndexTitle')}
               </h3>
               
-              <div style={{ flex: 1, display: 'flex', alignItems: 'flex-end', justifyContent: 'space-around', height: 200, paddingBottom: 12, borderBottom: '1.5px solid var(--glass-border-strong)', position: 'relative' }}>
-                {activeCategory.demand_index?.map((val, idx) => (
-                  <div key={idx} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '12%' }} className="hover-scale">
-                    <span style={{ fontSize: '0.7em', fontWeight: 800, color: COLOR, marginBottom: 6 }}>
-                      {val}
-                    </span>
-                    <div
-                      style={{
-                        width: '100%',
-                        height: `${val * 1.6}px`,
-                        background: `linear-gradient(to top, ${COLOR}, #34d399)`,
-                        borderRadius: '6px 6px 0 0',
-                        boxShadow: `0 4px 12px ${COLOR}20`,
-                        transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
-                      }}
+              <div style={{ flex: 1, height: 200, minHeight: 200, position: 'relative' }}>
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={demandIndexData} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
+                    <defs>
+                      <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#34d399" />
+                        <stop offset="100%" stopColor={COLOR} />
+                      </linearGradient>
+                    </defs>
+                    <CartesianGrid strokeDasharray="3 3" stroke="var(--glass-border-strong)" vertical={false} />
+                    <XAxis dataKey="month" stroke="var(--text-muted)" fontSize={11} tickLine={false} axisLine={false} />
+                    <YAxis stroke="var(--text-muted)" fontSize={11} tickLine={false} axisLine={false} />
+                    <Tooltip
+                      contentStyle={{ background: 'var(--bg-elevated)', border: '1px solid var(--glass-border-strong)', borderRadius: 'var(--radius-md)' }}
+                      labelStyle={{ fontWeight: 'bold', color: 'var(--text-primary)' }}
+                      itemStyle={{ color: '#34d399' }}
                     />
-                  </div>
-                ))}
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: 10 }}>
-                {['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'].map((month, i) => (
-                  <span key={i} style={{ fontSize: '0.74em', color: 'var(--text-secondary)', fontWeight: 650 }}>{t('market.month.' + month)}</span>
-                ))}
+                    <Bar dataKey="value" fill="url(#barGrad)" radius={[4, 4, 0, 0]} />
+                  </BarChart>
+                </ResponsiveContainer>
               </div>
             </div>
 
@@ -180,76 +230,58 @@ export default function MarketIntelligence() {
                 💰 {t('market.priceTrendTitle')}
               </h3>
 
-              <div style={{ height: 200, position: 'relative', borderBottom: '1.5px solid var(--glass-border-strong)', borderLeft: '1.5px solid var(--glass-border-strong)', padding: '10px 10px 0 10px' }}>
-                <svg width="100%" height="100%" viewBox="0 0 300 150" preserveAspectRatio="none" style={{ overflow: 'visible' }}>
-                  {/* Grid Lines */}
-                  <line x1="0" y1="37" x2="300" y2="37" stroke="var(--glass-border-strong)" strokeDasharray="3" />
-                  <line x1="0" y1="75" x2="300" y2="75" stroke="var(--glass-border-strong)" strokeDasharray="3" />
-                  <line x1="0" y1="112" x2="300" y2="112" stroke="var(--glass-border-strong)" strokeDasharray="3" />
-
-                  {/* Area Gradient Background */}
-                  <defs>
-                    <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor={COLOR} stopOpacity="0.25" />
-                      <stop offset="100%" stopColor={COLOR} stopOpacity="0.0" />
-                    </linearGradient>
-                  </defs>
-                  
-                  {/* Area Fill */}
-                  <path
-                    d="M10,150 L10,120 L50,110 L90,115 L130,95 L170,90 L210,80 L210,150 Z"
-                    fill="url(#chartGrad)"
-                  />
-
-                  {/* History Line */}
-                  <polyline
-                    fill="none"
-                    stroke={COLOR}
-                    strokeWidth="3.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    points="10,120 50,110 90,115 130,95 170,90 210,80"
-                  />
-                  
-                  {/* Forecast Area Fill */}
-                  <defs>
-                    <linearGradient id="chartGradFore" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#ea580c" stopOpacity="0.18" />
-                      <stop offset="100%" stopColor="#ea580c" stopOpacity="0.0" />
-                    </linearGradient>
-                  </defs>
-                  <path
-                    d="M210,150 L210,80 L240,78 L270,70 L295,60 L295,150 Z"
-                    fill="url(#chartGradFore)"
-                  />
-
-                  {/* Forecast Dotted Line */}
-                  <polyline
-                    fill="none"
-                    stroke="#ea580c"
-                    strokeWidth="3.5"
-                    strokeDasharray="6 4"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    points="210,80 240,78 270,70 295,60"
-                  />
-                  
-                  {/* Data Points */}
-                  <circle cx="210" cy="80" r="5" fill={COLOR} stroke="var(--bg-surface)" strokeWidth="1.5" />
-                  <circle cx="295" cy="60" r="5" fill="#ea580c" stroke="var(--bg-surface)" strokeWidth="1.5" />
-                </svg>
+              <div style={{ height: 200, position: 'relative' }}>
+                <ResponsiveContainer width="100%" height="100%">
+                  <AreaChart data={priceTrendData} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
+                    <defs>
+                      <linearGradient id="historyGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor={COLOR} stopOpacity={0.2} />
+                        <stop offset="100%" stopColor={COLOR} stopOpacity={0.0} />
+                      </linearGradient>
+                      <linearGradient id="forecastGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#ea580c" stopOpacity={0.2} />
+                        <stop offset="100%" stopColor="#ea580c" stopOpacity={0.0} />
+                      </linearGradient>
+                    </defs>
+                    <CartesianGrid strokeDasharray="3 3" stroke="var(--glass-border-strong)" vertical={false} />
+                    <XAxis dataKey="month" stroke="var(--text-muted)" fontSize={11} tickLine={false} axisLine={false} />
+                    <YAxis stroke="var(--text-muted)" fontSize={11} tickLine={false} axisLine={false} domain={['auto', 'auto']} />
+                    <Tooltip
+                      contentStyle={{ background: 'var(--bg-elevated)', border: '1px solid var(--glass-border-strong)', borderRadius: 'var(--radius-md)' }}
+                      labelStyle={{ fontWeight: 'bold', color: 'var(--text-primary)' }}
+                      formatter={(value) => [`₹${value.toLocaleString('en-IN')}`, undefined]}
+                    />
+                    <Area
+                      type="monotone"
+                      dataKey="History"
+                      stroke={COLOR}
+                      strokeWidth={3.5}
+                      fillOpacity={1}
+                      fill="url(#historyGrad)"
+                      dot={{ r: 4, stroke: 'var(--bg-surface)', strokeWidth: 1.5 }}
+                      activeDot={{ r: 6 }}
+                      connectNulls={true}
+                    />
+                    <Area
+                      type="monotone"
+                      dataKey="Forecast"
+                      stroke="#ea580c"
+                      strokeWidth={3.5}
+                      strokeDasharray="6 4"
+                      fillOpacity={1}
+                      fill="url(#forecastGrad)"
+                      dot={{ r: 4, stroke: 'var(--bg-surface)', strokeWidth: 1.5 }}
+                      activeDot={{ r: 6 }}
+                      connectNulls={true}
+                    />
+                  </AreaChart>
+                </ResponsiveContainer>
                 
-                {/* Labels overlay */}
-                <div style={{ position: 'absolute', top: 12, right: 12, display: 'flex', gap: 12, fontSize: '0.66em', fontWeight: 700 }}>
+                {/* Custom Labels overlay to match original style */}
+                <div style={{ position: 'absolute', top: -12, right: 12, display: 'flex', gap: 12, fontSize: '0.66em', fontWeight: 700 }}>
                   <span style={{ color: COLOR, display: 'flex', alignItems: 'center', gap: 4 }}>● {t('market.chart.history')}</span>
                   <span style={{ color: '#ea580c', display: 'flex', alignItems: 'center', gap: 4 }}>-- {t('market.chart.forecast')}</span>
                 </div>
-              </div>
-
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 10 }}>
-                <span style={{ fontSize: '0.7em', color: 'var(--text-secondary)', fontWeight: 600 }}>{t('market.month.Jan')} ({t('market.chart.prev')})</span>
-                <span style={{ fontSize: '0.7em', color: 'var(--text-secondary)', fontWeight: 600 }}>{t('market.month.Jun')} ({t('market.chart.current')})</span>
-                <span style={{ fontSize: '0.7em', color: '#ea580c', fontWeight: 750 }}>{language === 'mr' ? 'सप्टें' : language === 'hi' ? 'सितंबर' : 'Sep'} ({t('market.chart.forecast')})</span>
               </div>
             </div>
 
@@ -259,28 +291,37 @@ export default function MarketIntelligence() {
                 🏬 {t('market.brandShareTitle')}
               </h3>
               
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-                {activeCategory.brands?.map((brand, i) => (
-                  <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 14 }} className="hover-scale">
-                    <span style={{ width: 68, fontSize: '0.8em', fontWeight: 700, color: 'var(--text-secondary)' }}>
-                      {brand.name}
-                    </span>
-                    <div style={{ flex: 1, height: 10, background: 'var(--bg-elevated)', borderRadius: 5, overflow: 'hidden', border: '1px solid var(--glass-border-strong)' }}>
-                      <div
-                        style={{
-                          height: '100%',
-                          width: `${brand.share}%`,
-                          background: `linear-gradient(to right, ${COLOR}, #68d391)`,
-                          borderRadius: 5,
-                          transition: 'width 0.8s cubic-bezier(0.16, 1, 0.3, 1)'
-                        }}
-                      />
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 200 }}>
+                <ResponsiveContainer width="50%" height="100%">
+                  <PieChart>
+                    <Pie
+                      data={brandData}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={45}
+                      outerRadius={65}
+                      paddingAngle={4}
+                      dataKey="share"
+                    >
+                      {brandData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={pieColors[index % pieColors.length]} />
+                      ))}
+                    </Pie>
+                    <Tooltip
+                      contentStyle={{ background: 'var(--bg-elevated)', border: '1px solid var(--glass-border-strong)', borderRadius: 'var(--radius-md)' }}
+                      formatter={(value) => [`${value}%`, 'Share']}
+                    />
+                  </PieChart>
+                </ResponsiveContainer>
+                <div style={{ width: '50%', display: 'flex', flexDirection: 'column', gap: 10, paddingLeft: 16 }}>
+                  {brandData.map((brand, i) => (
+                    <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.8em' }} className="hover-scale">
+                      <div style={{ width: 10, height: 10, borderRadius: '50%', background: pieColors[i % pieColors.length] }} />
+                      <span style={{ fontWeight: 700, color: 'var(--text-primary)' }} className="truncate">{brand.name}</span>
+                      <span style={{ marginLeft: 'auto', color: 'var(--text-secondary)', fontWeight: 800 }}>{brand.share}%</span>
                     </div>
-                    <span style={{ width: 42, fontSize: '0.8em', fontWeight: 800, color: 'var(--text-primary)', textAlign: 'right' }}>
-                      {brand.share}%
-                    </span>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
 

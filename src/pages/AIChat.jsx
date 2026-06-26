@@ -418,6 +418,68 @@ function AgentPanel({ activeAgent, onSelect }) {
 function ChatInput({ onSend, disabled, placeholder }) {
   const [text, setText] = useState('');
   const ref = useRef(null);
+  const [recording, setRecording] = useState(false);
+  const [supported, setSupported] = useState(false);
+  const recognitionRef = useRef(null);
+  const { language } = useApp();
+
+  useEffect(() => {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (SpeechRecognition) {
+      setSupported(true);
+      const rec = new SpeechRecognition();
+      rec.continuous = false;
+      rec.interimResults = false;
+      
+      rec.onstart = () => {
+        setRecording(true);
+      };
+      
+      rec.onresult = (event) => {
+        const transcript = event.results[0]?.[0]?.transcript;
+        if (transcript) {
+          setText(prev => (prev ? prev + ' ' : '') + transcript);
+          // auto-resize text area after inserting voice text
+          setTimeout(() => {
+            if (ref.current) {
+              ref.current.style.height = 'auto';
+              ref.current.style.height = Math.min(ref.current.scrollHeight, 120) + 'px';
+            }
+          }, 50);
+        }
+      };
+      
+      rec.onerror = (e) => {
+        console.error('Speech recognition error:', e.error);
+        setRecording(false);
+      };
+      
+      rec.onend = () => {
+        setRecording(false);
+      };
+      
+      recognitionRef.current = rec;
+    }
+  }, []);
+
+  useEffect(() => {
+    if (recognitionRef.current) {
+      recognitionRef.current.lang = language === 'mr' ? 'mr-IN' : language === 'hi' ? 'hi-IN' : 'en-IN';
+    }
+  }, [language]);
+
+  const toggleRecording = () => {
+    if (!recognitionRef.current) return;
+    if (recording) {
+      recognitionRef.current.stop();
+    } else {
+      try {
+        recognitionRef.current.start();
+      } catch (e) {
+        console.error('Failed to start speech recognition:', e.message);
+      }
+    }
+  };
 
   const submit = () => {
     const trimmed = text.trim();
@@ -473,6 +535,34 @@ function ChatInput({ onSend, disabled, placeholder }) {
           e.target.style.height = Math.min(e.target.scrollHeight, 120) + 'px';
         }}
       />
+      {supported && (
+        <button
+          onClick={toggleRecording}
+          disabled={disabled}
+          className={`hover-scale ${recording ? 'animate-pulse' : ''}`}
+          style={{
+            width: 44,
+            height: 44,
+            padding: 0,
+            borderRadius: 'var(--radius-lg)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexShrink: 0,
+            background: recording
+              ? '#ef4444'
+              : 'var(--bg-elevated)',
+            color: recording ? '#fff' : 'var(--text-secondary)',
+            border: '1.5px solid var(--glass-border-strong)',
+            cursor: 'pointer',
+            transition: 'var(--transition-fast)',
+            boxShadow: recording ? '0 0 12px rgba(239, 68, 68, 0.4)' : 'none',
+          }}
+          title={recording ? 'Stop Recording' : 'Start Voice Input'}
+        >
+          {recording ? '🛑' : '🎙️'}
+        </button>
+      )}
       <button
         onClick={submit}
         disabled={disabled || !text.trim()}

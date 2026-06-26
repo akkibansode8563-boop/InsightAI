@@ -19,9 +19,34 @@ export default async function handler(req, res) {
   const model = (req.query.model || '').trim();
   if (!model) return res.status(400).json({ error: 'model query param required' });
 
+  const redirectMode = req.query.redirect === '1' || req.query.redirect === 'true';
+
+  const sendImage = async (url) => {
+    try {
+      const imgRes = await fetch(url);
+      if (imgRes.ok) {
+        const contentType = imgRes.headers.get('Content-Type') || 'image/png';
+        const buffer = await imgRes.arrayBuffer();
+        res.setHeader('Content-Type', contentType);
+        res.setHeader('Cache-Control', 'public, max-age=86400');
+        res.status(200).end(Buffer.from(buffer));
+        return;
+      }
+    } catch (e) {
+      console.error(`Proxy fetch failed for ${url}:`, e.message);
+    }
+    // Fallback: 302 Redirect
+    res.status(302);
+    res.setHeader('Location', url);
+    res.end();
+  };
+
   // ── 1. Try local product image database ──────────────────────────
   const localMatch = findProductImage(model);
   if (localMatch) {
+    if (redirectMode) {
+      return sendImage(localMatch.url);
+    }
     return res.json({
       found: true,
       source: 'database',
@@ -50,13 +75,17 @@ export default async function handler(req, res) {
           img.width > 200 && img.height > 200
         );
         if (imgs.length > 0) {
+          const imageUrl = imgs[0].contentUrl;
+          if (redirectMode) {
+            return sendImage(imageUrl);
+          }
           return res.json({
             found: true,
             source: 'bing',
             name: model,
             brand: detectBrand(model),
             category: detectCategory(model),
-            imageUrl: imgs[0].contentUrl,
+            imageUrl,
             thumbnailUrl: imgs[0].thumbnailUrl,
             fallbackUrl: getCategoryImage(detectCategory(model)),
           });
@@ -70,6 +99,9 @@ export default async function handler(req, res) {
   // ── 3. Try manufacturer website pattern matching ──────────────────
   const patternUrl = getManufacturerPatternUrl(model);
   if (patternUrl) {
+    if (redirectMode) {
+      return sendImage(patternUrl);
+    }
     return res.json({
       found: true,
       source: 'manufacturer_pattern',
@@ -83,14 +115,21 @@ export default async function handler(req, res) {
 
   // ── 4. Final fallback: category image ─────────────────────────────
   const category = detectCategory(model);
+  const categoryUrl = getCategoryImage(category);
+  if (redirectMode) {
+    res.status(302);
+    res.setHeader('Location', categoryUrl);
+    res.end();
+    return;
+  }
   return res.json({
     found: false,
     source: 'fallback',
     name: model,
     brand: detectBrand(model),
     category,
-    imageUrl: getCategoryImage(category),
-    fallbackUrl: getCategoryImage(category),
+    imageUrl: categoryUrl,
+    fallbackUrl: categoryUrl,
   });
 }
 
