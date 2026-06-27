@@ -65,6 +65,7 @@ export default async function handler(req, res) {
       brand: localMatch.brand,
       category: localMatch.category,
       imageUrl: localMatch.url,
+      gallery: localMatch.gallery || [localMatch.url],
       fallbackUrl: localMatch.fallback || getCategoryImage(localMatch.category),
     });
   }

@@ -139,29 +139,42 @@ function tryParseProductBrief(text) {
     
     parts.forEach(part => {
       const lines = part.trim().split('\n');
-      const title = lines[0].trim();
+      if (lines.length === 0) return;
+      const title = lines[0].trim().toLowerCase();
       const content = lines.slice(1).join('\n').trim();
 
-      if (title.toLowerCase().includes('showcase')) {
+      if (title.includes('showcase')) {
         const match = content.match(/!\[(.*?)\]\((.*?)\)/);
         if (match) {
           sections.modelName = match[1].replace(' Showcase', '');
           sections.imageUrl = match[2];
         }
-      } else if (title.toLowerCase().includes('overview')) {
+      } else if (title.includes('overview')) {
         sections.overviewText = lines.slice(1).join(' ').trim();
-      } else if (title.toLowerCase().includes('specification')) {
+      } else if (title.includes('highlights')) {
+        sections.highlights = content.split('\n').map(l => l.replace(/^[\s*-+]+/g, '').trim()).filter(Boolean);
+      } else if (title.includes('technical specifications') || title.includes('specifications')) {
         sections.specs = parseMarkdownTable(content);
-      } else if (title.toLowerCase().includes('suited for')) {
-        sections.industries = parseMarkdownTable(content);
-      } else if (title.toLowerCase().includes('selling points')) {
-        sections.sellingPoints = content.split('\n').map(l => l.replace(/^[\s*-+]+/g, '').trim()).filter(Boolean);
-      } else if (title.toLowerCase().includes('sales pitch') || title.toLowerCase().includes('30-second')) {
-        sections.salesPitch = lines.slice(1).join(' ').trim();
-      } else if (title.toLowerCase().includes('benefits')) {
-        sections.benefits = parseMarkdownTable(content);
-      } else if (title.toLowerCase().includes('competitor')) {
+      } else if (title.includes('performance')) {
+        sections.performanceRatings = parseMarkdownTable(content);
+      } else if (title.includes('ports')) {
+        sections.ports = parseMarkdownTable(content);
+      } else if (title.includes('upgrade')) {
+        sections.upgradeOptions = parseMarkdownTable(content);
+      } else if (title.includes('ideal')) {
+        sections.idealUsers = content.split('\n').map(l => l.replace(/^[\s*-+]+/g, '').trim()).filter(Boolean);
+      } else if (title.includes('competitor')) {
         sections.competitors = parseMarkdownTable(content);
+      } else if (title.includes('recommended')) {
+        sections.recommendedConfigs = content.split('\n').map(l => {
+          const m = l.match(/^\s*[\*\-+]\s*\*\*(.*?)\*\*:\s*(.*)$/);
+          if (m) {
+            return { tier: m[1], details: m[2] };
+          }
+          return null;
+        }).filter(Boolean);
+      } else if (title.includes('sales pitch') || title.includes('pitch')) {
+        sections.salesPitch = lines.slice(1).join(' ').trim().replace(/^"/, '').replace(/"$/, '');
       }
     });
 
@@ -173,14 +186,19 @@ function tryParseProductBrief(text) {
       why: r[2] || 'Key feature'
     }));
 
-    const industriesMapped = (sections.industries || []).map(r => ({
-      industry: r[0] || 'User',
-      useCase: r[1] || 'General Workload'
+    const perfMapped = (sections.performanceRatings || []).map(r => ({
+      workload: r[0] || '',
+      rating: r[1] || '⭐⭐⭐⭐⭐'
     }));
 
-    const benefitsMapped = (sections.benefits || []).map(r => ({
-      customerType: r[0] || 'Customer',
-      benefit: r[1] || 'Work productivity'
+    const portsMapped = (sections.ports || []).map(r => ({
+      location: r[0] || '',
+      ports: r[1] || ''
+    }));
+
+    const upgradesMapped = (sections.upgradeOptions || []).map(r => ({
+      component: r[0] || '',
+      maxUpgrade: r[1] || ''
     }));
 
     const competitorsMapped = (sections.competitors || []).map(r => ({
@@ -194,8 +212,8 @@ function tryParseProductBrief(text) {
     let streetPrice = 0;
     const priceSpec = specsMapped.find(s => s.category.toLowerCase().includes('price') || s.category.toLowerCase().includes('mrp'));
     if (priceSpec) {
-      const match = priceSpec.spec.match(/(\d+)/);
-      if (match) mrp = parseInt(match[0]);
+      const match = priceSpec.spec.match(/(\d+(?:,\d+)*)/);
+      if (match) mrp = parseInt(match[0].replace(/,/g, ''));
     }
     const mrpMatch = text.match(/mrp[\s\S]{0,10}₹?\s*(\d+(?:,\d+)*)/i);
     if (mrpMatch) mrp = parseInt(mrpMatch[1].replace(/,/g, ''));
@@ -209,12 +227,15 @@ function tryParseProductBrief(text) {
       modelName: sections.modelName || 'IT Hardware Product',
       imageUrl: sections.imageUrl,
       overviewText: sections.overviewText,
+      highlights: sections.highlights || [],
       specs: specsMapped,
-      sellingPoints: sections.sellingPoints || [],
-      salesPitch: sections.salesPitch || '',
-      industries: industriesMapped,
-      benefits: benefitsMapped,
+      performanceRatings: perfMapped,
+      ports: portsMapped,
+      upgradeOptions: upgradesMapped,
+      idealUsers: sections.idealUsers || [],
       competitors: competitorsMapped,
+      recommendedConfigs: sections.recommendedConfigs || [],
+      salesPitch: sections.salesPitch || '',
       mrp,
       streetPrice
     };

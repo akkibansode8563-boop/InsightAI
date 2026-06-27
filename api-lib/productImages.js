@@ -124,6 +124,14 @@ export const PRODUCT_IMAGES = [
     brand: 'HP',
     category: 'desktop',
   },
+  {
+    keywords: ['hp pro tower 280 g9', 'pro tower 280 g9', 'hp 280 g9', 'pro tower 280'],
+    url: '/hp_pro_tower_showcase.png',
+    gallery: ['/hp_pro_tower_showcase.png', '/showcase-desktop.png'],
+    name: 'HP Pro Tower 280 G9',
+    brand: 'HP',
+    category: 'desktop',
+  },
 
   // ── HP SERVERS ─────────────────────────────────────────────────────────
   {
@@ -509,8 +517,25 @@ export function findProductImage(query) {
     }
   }
 
-  // Only return if there is a meaningful match
-  return bestScore > 3 ? bestMatch : null;
+  // If there is a meaningful match, return it
+  if (bestScore > 3 && bestMatch) {
+    return {
+      ...bestMatch,
+      gallery: bestMatch.gallery || [bestMatch.url]
+    };
+  }
+
+  // Dynamic fallback based on category
+  const cat = detectCategory(query);
+  const fallbackUrl = getCategoryImage(cat);
+  return {
+    keywords: [],
+    url: fallbackUrl,
+    gallery: [fallbackUrl],
+    name: query,
+    brand: 'IT Hardware',
+    category: cat
+  };
 }
 
 /**
