@@ -28,66 +28,43 @@ function ThinkingDots() {
 function ProductImageCard({ src, alt }) {
   const [imgSrc, setImgSrc] = useState(src);
   const [loaded, setLoaded] = useState(false);
-  const [error, setError] = useState(false);
   const [retryCount, setRetryCount] = useState(0);
 
-  // Fallback chain: original → /api/product-image proxy → category fallback
   const getCategoryFallback = (altText) => {
     const t = (altText || '').toLowerCase();
     if (t.includes('server') || t.includes('proliant') || t.includes('poweredge')) return '/showcase-server.png';
     if (t.includes('printer') || t.includes('laserjet') || t.includes('ecotank') || t.includes('pixma')) return '/showcase-printer.png';
     if (t.includes('switch') || t.includes('router') || t.includes('catalyst') || t.includes('networking')) return '/showcase-networking.png';
     if (t.includes('ssd') || t.includes('storage') || t.includes('hdd') || t.includes('nvme')) return '/showcase-storage.png';
-    if (t.includes('desktop') || t.includes('workstation') || t.includes('elitedesk')) return '/showcase-desktop.png';
+    if (t.includes('desktop') || t.includes('workstation') || t.includes('elitedesk') || t.includes('tower')) return '/showcase-desktop.png';
     return '/showcase-laptop.png';
   };
 
   const handleError = () => {
     if (retryCount === 0 && imgSrc && imgSrc.startsWith('https://')) {
-      // Try fetching via our backend proxy endpoint (avoids CORS/hotlink issues)
       const model = encodeURIComponent(alt || '');
       setImgSrc(`/api/product-image?model=${model}&redirect=1`);
       setRetryCount(1);
     } else {
-      // Use category fallback
-      const fallback = getCategoryFallback(alt);
-      setImgSrc(fallback);
-      setError(true);
+      setImgSrc(getCategoryFallback(alt));
       setRetryCount(2);
     }
   };
 
   return (
-    <div className="my-4 rounded-2xl overflow-hidden border border-[var(--glass-border-strong)] shadow-md bg-[var(--bg-elevated)]">
-      {/* Image */}
-      <div className="relative bg-gradient-to-br from-[var(--bg-elevated)] to-[var(--bg-surface)] flex items-center justify-center" style={{ minHeight: 200, maxHeight: 320 }}>
+    <div className="my-5 flex flex-col items-center justify-center p-4 bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm max-w-md mx-auto transition-all duration-300 hover:scale-[1.01]">
+      <div className="w-56 h-56 md:w-64 md:h-64 flex items-center justify-center relative">
         {!loaded && (
-          <div className="absolute inset-0 skeleton rounded-none" />
+          <div className="absolute inset-0 skeleton rounded-xl" />
         )}
         <img
           src={imgSrc}
           alt={alt}
           onLoad={() => setLoaded(true)}
           onError={handleError}
-          className="w-full object-contain transition-opacity duration-300"
-          style={{
-            maxHeight: 300,
-            padding: '12px',
-            opacity: loaded ? 1 : 0,
-            background: 'transparent',
-          }}
+          className="max-w-full max-h-full object-contain drop-shadow-md transition-opacity duration-300"
+          style={{ opacity: loaded ? 1 : 0 }}
         />
-      </div>
-      {/* Caption */}
-      <div className="px-4 py-2.5 border-t border-[var(--glass-border-strong)] bg-[var(--bg-surface)] flex items-center gap-2">
-        <span className="text-lg">🖼️</span>
-        <span className="text-sm font-semibold text-[var(--text-secondary)] truncate">{alt}</span>
-        {!error && imgSrc.startsWith('https://') && (
-          <span className="ml-auto text-[10px] font-bold px-2 py-0.5 rounded-full text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20">Official Image</span>
-        )}
-        {error && (
-          <span className="ml-auto text-[10px] font-bold px-2 py-0.5 rounded-full text-orange-500 bg-orange-50 dark:bg-orange-900/20">Category Preview</span>
-        )}
       </div>
     </div>
   );
@@ -249,11 +226,6 @@ function tryParseProductBrief(text) {
 function parseMarkdown(text) {
   if (!text) return null;
 
-  const parsedBrief = tryParseProductBrief(text);
-  if (parsedBrief) {
-    return <RichProductPage {...parsedBrief} />;
-  }
-
   const lines = text.split('\n');
   const elements = [];
   
@@ -372,10 +344,85 @@ function parseMarkdown(text) {
   return elements;
 }
 
+// Standalone Dealer Calculator
+function InlineDealerCalculator({ mrp, streetPrice, modelName }) {
+  const [purchaseCost, setPurchaseCost] = useState(Math.round(streetPrice * 0.9) || Math.round(mrp * 0.8));
+  const [quantity, setQuantity] = useState(10);
+  const gstRate = 18;
+
+  const sellPrice = streetPrice || mrp || 0;
+  const unitProfit = sellPrice - purchaseCost;
+  const totalProfit = unitProfit * quantity;
+  const marginPercent = sellPrice > 0 ? (unitProfit / sellPrice) * 100 : 0;
+  const gstAmount = Math.round(sellPrice * quantity * (gstRate / 100));
+  const grandTotal = (sellPrice * quantity) + gstAmount;
+
+  return (
+    <div className="mt-3 p-4 rounded-xl border border-[var(--glass-border-strong)] bg-[var(--bg-surface)] shadow-sm max-w-md">
+      <div className="flex items-center gap-2 border-b border-[var(--glass-border-strong)] pb-2 mb-3">
+        <span className="text-orange-500 font-bold">💰</span>
+        <span className="text-[10px] font-extrabold uppercase tracking-wider text-[var(--text-secondary)]">
+          Deal Margins Calculator ({modelName})
+        </span>
+      </div>
+      
+      <div className="grid grid-cols-3 gap-3 text-[11px] mb-3">
+        <div>
+          <span className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Selling Price</span>
+          <span className="font-bold text-[var(--text-primary)]">
+            ₹{sellPrice.toLocaleString('en-IN')}
+          </span>
+        </div>
+        <div>
+          <span className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Dealer Cost</span>
+          <input
+            type="number"
+            value={purchaseCost}
+            onChange={(e) => setPurchaseCost(Number(e.target.value))}
+            className="w-full bg-[var(--bg-elevated)] border border-[var(--glass-border-strong)] rounded px-1.5 py-0.5 font-bold focus:outline-none focus:border-orange-500 text-[var(--text-primary)]"
+          />
+        </div>
+        <div>
+          <span className="block text-[9px] font-bold text-[var(--text-muted)] uppercase mb-1">Qty</span>
+          <input
+            type="number"
+            value={quantity}
+            onChange={(e) => setQuantity(Number(e.target.value))}
+            className="w-full bg-[var(--bg-elevated)] border border-[var(--glass-border-strong)] rounded px-1.5 py-0.5 font-bold focus:outline-none focus:border-orange-500 text-[var(--text-primary)]"
+          />
+        </div>
+      </div>
+
+      <div className="p-2.5 rounded-lg bg-emerald-500/5 border border-emerald-500/10 grid grid-cols-3 gap-2 text-[11px] font-semibold text-[var(--text-primary)]">
+        <div>
+          <span className="block text-[8px] text-emerald-600 dark:text-emerald-400 uppercase tracking-wider mb-0.5">Margin</span>
+          <span className={`font-bold ${marginPercent >= 15 ? 'text-emerald-600' : 'text-orange-500'}`}>
+            {marginPercent.toFixed(1)}%
+          </span>
+        </div>
+        <div>
+          <span className="block text-[8px] text-emerald-600 dark:text-emerald-400 uppercase tracking-wider mb-0.5">Total Profit</span>
+          <span className="text-emerald-600">
+            ₹{totalProfit.toLocaleString('en-IN')}
+          </span>
+        </div>
+        <div>
+          <span className="block text-[8px] text-emerald-600 dark:text-emerald-400 uppercase tracking-wider mb-0.5 font-medium">Grand Total</span>
+          <span className="font-bold">
+            ₹{grandTotal.toLocaleString('en-IN')}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // Message Bubble
 function MessageBubble({ msg, onCopy }) {
   const { t } = useApp();
   const isUser = msg.role === 'user';
+  const parsedBrief = !isUser ? tryParseProductBrief(msg.content) : null;
+
   return (
     <div
       className="msg-anim"
@@ -427,6 +474,14 @@ function MessageBubble({ msg, onCopy }) {
         >
           {isUser ? msg.content : parseMarkdown(msg.content)}
         </div>
+
+        {parsedBrief && (
+          <InlineDealerCalculator
+            mrp={parsedBrief.mrp}
+            streetPrice={parsedBrief.streetPrice}
+            modelName={parsedBrief.modelName}
+          />
+        )}
 
         {/* Copy & Meta Actions */}
         <div
