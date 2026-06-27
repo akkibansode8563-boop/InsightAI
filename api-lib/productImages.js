@@ -126,8 +126,8 @@ export const PRODUCT_IMAGES = [
   },
   {
     keywords: ['hp pro tower 280 g9', 'pro tower 280 g9', 'hp 280 g9', 'pro tower 280'],
-    url: '/hp_pro_tower_showcase.png',
-    gallery: ['/hp_pro_tower_showcase.png'],
+    url: '/hp_pro_tower_front.png',
+    gallery: ['/hp_pro_tower_front.png', '/hp_pro_tower_side.png', '/hp_pro_tower_rear.png'],
     name: 'HP Pro Tower 280 G9',
     brand: 'HP',
     category: 'desktop',

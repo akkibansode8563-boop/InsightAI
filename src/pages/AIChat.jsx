@@ -226,7 +226,10 @@ function tryParseProductBrief(text) {
 function parseMarkdown(text) {
   if (!text) return null;
 
-  const lines = text.split('\n');
+  // Filter out any image markdown tags to prevent duplicate images inside the text flow
+  const cleanText = text.replace(/!\[.*?\]\(.*?\)/g, '').trim();
+
+  const lines = cleanText.split('\n');
   const elements = [];
   
   let currentTable = null;
@@ -344,6 +347,61 @@ function parseMarkdown(text) {
   return elements;
 }
 
+// Standalone Product Image Gallery
+function InlineProductGallery({ modelName }) {
+  const [gallery, setGallery] = useState([]);
+  const [activeImage, setActiveImage] = useState(null);
+
+  useEffect(() => {
+    const loadGallery = async () => {
+      try {
+        const res = await fetch(`/api/product-image?model=${encodeURIComponent(modelName)}`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data.found && data.gallery) {
+            setGallery(data.gallery);
+            setActiveImage(data.imageUrl);
+          }
+        }
+      } catch (e) {
+        console.error("Failed to load inline product gallery:", e);
+      }
+    };
+    loadGallery();
+  }, [modelName]);
+
+  if (gallery.length === 0) return null;
+
+  return (
+    <div className="my-3 flex flex-col gap-2.5 max-w-md">
+      {/* Expanded view */}
+      {activeImage && (
+        <div className="w-56 h-56 md:w-64 md:h-64 mx-auto flex items-center justify-center p-3 bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm transition-all duration-300">
+          <img src={activeImage} alt={modelName} className="max-w-full max-h-full object-contain drop-shadow-md" />
+        </div>
+      )}
+      {/* Thumbnail list */}
+      {gallery.length > 1 && (
+        <div className="flex gap-2 justify-center overflow-x-auto py-1">
+          {gallery.map((img, idx) => (
+            <button
+              key={idx}
+              onClick={() => setActiveImage(img)}
+              className={`w-11 h-11 rounded-xl border p-1 bg-white dark:bg-slate-900 transition-all ${
+                activeImage === img
+                  ? 'border-orange-500 ring-2 ring-orange-500/20 scale-105'
+                  : 'border-slate-200 dark:border-slate-800 hover:border-slate-400'
+              }`}
+            >
+              <img src={img} alt={`view ${idx}`} className="w-full h-full object-contain" />
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 // Standalone Dealer Calculator
 function InlineDealerCalculator({ mrp, streetPrice, modelName }) {
   const [purchaseCost, setPurchaseCost] = useState(Math.round(streetPrice * 0.9) || Math.round(mrp * 0.8));
@@ -456,6 +514,9 @@ function MessageBubble({ msg, onCopy }) {
 
       {/* Bubble Content */}
       <div style={{ maxWidth: '75%', minWidth: 0, display: 'flex', flexDirection: 'column', gap: 4 }}>
+        {!isUser && parsedBrief && (
+          <InlineProductGallery modelName={parsedBrief.modelName} />
+        )}
         <div
           style={{
             background: isUser
