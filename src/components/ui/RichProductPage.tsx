@@ -74,67 +74,73 @@ export default function RichProductPage({
   return (
     <div className="w-full my-6 overflow-hidden rounded-2xl border border-[var(--glass-border-strong)] bg-[var(--bg-surface)] shadow-lg transition-all duration-300 hover:shadow-xl">
       
-      {/* ── Dynamic Hero Header ── */}
+      {/* ── 1. Clean Product Showcase Gallery (Top Section) ── */}
+      <div className="bg-slate-50 dark:bg-slate-900/60 p-6 flex flex-col items-center justify-center border-b border-[var(--glass-border-strong)]">
+        <span className="text-orange-500 text-[10px] font-extrabold uppercase tracking-widest mb-3">
+          Product Gallery Showcase
+        </span>
+        
+        {/* Main Clean Image Viewport */}
+        <div className="w-60 h-60 md:w-72 md:h-72 flex items-center justify-center p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm transition-all duration-300 hover:scale-[1.02]">
+          {activeImage ? (
+            <img src={activeImage} alt={modelName} className="max-w-full max-h-full object-contain drop-shadow-md" />
+          ) : (
+            <span className="text-7xl">💻</span>
+          )}
+        </div>
+
+        {/* Gallery Thumbnails List */}
+        {gallery.length > 1 && (
+          <div className="flex gap-2 mt-4 overflow-x-auto py-1 max-w-full justify-center">
+            {gallery.map((img, idx) => (
+              <button
+                key={idx}
+                onClick={() => setActiveImage(img)}
+                className={`w-12 h-12 rounded-lg border p-1 bg-white dark:bg-slate-800 transition-all ${
+                  activeImage === img
+                    ? 'border-orange-500 ring-2 ring-orange-500/20 scale-105'
+                    : 'border-slate-200 dark:border-slate-700 hover:border-slate-400'
+                }`}
+              >
+                <img src={img} alt={`${modelName} thumbnail ${idx}`} className="w-full h-full object-contain" />
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* ── 2. Hero Info Banner ── */}
       <div className="relative bg-gradient-to-r from-slate-900 to-slate-800 p-6 md:p-8 text-white">
-        <div className="absolute top-4 right-4 bg-orange-500 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow">
+        <div className="absolute top-4 right-4 bg-orange-500 text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow">
           Hardware Intelligence Sheet
         </div>
         
-        <div className="flex flex-col md:flex-row items-center gap-6">
-          {/* Main Showcase Image & Gallery Thumbnails */}
-          <div className="flex flex-col items-center gap-2 shrink-0">
-            <div className="w-36 h-36 md:w-44 md:h-44 rounded-xl bg-white/10 backdrop-blur p-2 flex items-center justify-center border border-white/10 shadow-inner">
-              {activeImage ? (
-                <img src={activeImage} alt={modelName} className="max-w-full max-h-full object-contain" />
-              ) : (
-                <span className="text-5xl">💻</span>
+        <div className="text-center md:text-left flex-1 min-w-0">
+          <span className="text-orange-400 text-xs font-bold uppercase tracking-widest">Enterprise Specification Brief</span>
+          <h2 className="font-heading text-2xl md:text-3xl font-extrabold tracking-tight mt-1 mb-2">
+            {modelName}
+          </h2>
+          <p className="text-slate-300 text-sm leading-relaxed max-w-3xl">
+            {overviewText}
+          </p>
+          {(mrp > 0 || streetPrice > 0) && (
+            <div className="flex flex-wrap justify-center md:justify-start gap-4 mt-4 text-xs font-semibold">
+              {mrp > 0 && (
+                <span className="bg-white/10 px-3 py-1.5 rounded-lg border border-white/5">
+                  MRP: {formatINR(mrp)}
+                </span>
+              )}
+              {streetPrice > 0 && (
+                <span className="bg-orange-500/20 text-orange-300 px-3 py-1.5 rounded-lg border border-orange-500/30">
+                  Street Price: {formatINR(streetPrice)}
+                </span>
               )}
             </div>
-            {gallery.length > 1 && (
-              <div className="flex gap-1.5 mt-1 overflow-x-auto max-w-[180px] scrollbar-hide">
-                {gallery.map((img, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setActiveImage(img)}
-                    className={`w-9 h-9 rounded border p-0.5 bg-white/5 transition-all ${
-                      activeImage === img ? 'border-orange-500 scale-105 bg-white/15' : 'border-white/10 hover:border-white/30'
-                    }`}
-                  >
-                    <img src={img} alt={`${modelName} thumb ${idx}`} className="w-full h-full object-contain" />
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Product Info */}
-          <div className="text-center md:text-left flex-1 min-w-0">
-            <span className="text-orange-400 text-xs font-bold uppercase tracking-widest">Enterprise Specification Brief</span>
-            <h2 className="font-heading text-2xl md:text-3xl font-extrabold tracking-tight mt-1 mb-2 truncate">
-              {modelName}
-            </h2>
-            <p className="text-slate-300 text-sm leading-relaxed max-w-3xl">
-              {overviewText}
-            </p>
-            {(mrp > 0 || streetPrice > 0) && (
-              <div className="flex flex-wrap justify-center md:justify-start gap-4 mt-4 text-xs font-semibold">
-                {mrp > 0 && (
-                  <span className="bg-white/10 px-3 py-1.5 rounded-lg border border-white/5">
-                    MRP: {formatINR(mrp)}
-                  </span>
-                )}
-                {streetPrice > 0 && (
-                  <span className="bg-orange-500/20 text-orange-300 px-3 py-1.5 rounded-lg border border-orange-500/30">
-                    Street Price: {formatINR(streetPrice)}
-                  </span>
-                )}
-              </div>
-            )}
-          </div>
+          )}
         </div>
       </div>
 
-      {/* ── Document Flow ── */}
+      {/* ── 3. Document Flow ── */}
       <div className="p-6 md:p-8 space-y-8 bg-white dark:bg-slate-800/40 text-[var(--text-primary)]">
         
         {/* Row 1: Highlights & Specs */}
